@@ -8,20 +8,17 @@ public class Bot implements IBot {
 
     public final Vector2Dint coordinates;
 
-    public int energy;
-
-    private final Field field;
+    private int energy;
 
     private int index;
 
     private final ICommand[] commands;
 
-    public Bot(int x, int y, Field field, int energy) {
+    public Bot(int x, int y, int energy) {
         coordinates = new Vector2Dint(x, y);
-        this.field = field;
         this.energy = energy;
 
-        /**
+        /*
          * At the start each bot has photosynthesis commands only.
          */
         commands = new ICommand[64];
@@ -31,7 +28,7 @@ public class Bot implements IBot {
     }
 
     @Override
-    public void makeAMove() {
+    public void makeAMove(Field field) {
 
         index = (index + commands[index].run(this, field)) % commands.length;
         energy -= 4;

@@ -20,17 +20,17 @@ public class Field {
     }
 
     public void Start() {
-        var firstBot = new Bot(height / 2, weight / 2, this, 500);
+        var firstBot = new Bot(height / 2, weight / 2, 500);
         bots.add(firstBot);
 
-        while (true) {
+        for (var i = 0; i < 10; ++i) {
             Update();
         }
     }
 
     private void Update() {
         for (var bot : bots) {
-            bot.makeAMove();
+            bot.makeAMove(this);
         }
     }
 }
