@@ -1,6 +1,6 @@
-package Model.Bot;
+package model.bot;
 
-import Model.Field;
+import model.Field;
 
 import java.util.ArrayList;
 

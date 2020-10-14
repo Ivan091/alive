@@ -1,7 +1,8 @@
-package Model;
+package model;
 
-import Model.Bot.Bot;
-import Model.Bot.IBot;
+
+import model.bot.Bot;
+import model.bot.IBotMakeAMove;
 
 import java.util.ArrayList;
 
@@ -11,7 +12,7 @@ public class Field {
 
     public final int weight;
 
-    private final ArrayList<IBot> bots;
+    private final ArrayList<IBotMakeAMove> bots;
 
     public Field(int height , int weight ) {
         this.height = height;
@@ -20,8 +21,8 @@ public class Field {
     }
 
     public void Start() {
-        var firstBot = new Bot(height / 2, weight / 2, 500);
-        bots.add(firstBot);
+        var first = new Bot(height / 2, weight / 2, 500);
+        bots.add(first);
 
         for (var i = 0; i < 10; ++i) {
             Update();
