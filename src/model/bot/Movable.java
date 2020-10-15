@@ -2,10 +2,12 @@ package model.bot;
 
 import model.Field;
 
-public interface IBotMakeAMove {
+public interface Movable {
+
     /**
      * Calls when bot should make a move.
-     * @param field
+     *
+     * @param field main field
      */
     void makeAMove(Field field);
 }

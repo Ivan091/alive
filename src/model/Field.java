@@ -2,36 +2,39 @@ package model;
 
 
 import model.bot.Bot;
-import model.bot.IBotMakeAMove;
+import model.bot.Movable;
 
 import java.util.ArrayList;
+import java.util.List;
+
 
 public class Field {
 
     public final int height;
 
-    public final int weight;
+    public final int width;
 
-    private final ArrayList<IBotMakeAMove> bots;
+    private final List<Movable> bots;
 
-    public Field(int height , int weight ) {
+    public Field(int height, int width) {
+
         this.height = height;
-        this.weight = weight;
-        bots = new ArrayList<>(height * weight);
+        this.width = width;
+        bots = new ArrayList<>(height * width);
     }
 
     public void Start() {
-        var first = new Bot(height / 2, weight / 2, 500);
-        bots.add(first);
 
-        for (var i = 0; i < 10; ++i) {
+        var firstBot = new Bot(height / 2, width / 2, 500);
+        bots.add(firstBot);
+
+        for (var i = 0; i < 100; ++i) {
             Update();
         }
     }
 
     private void Update() {
-        for (var bot : bots) {
-            bot.makeAMove(this);
-        }
+
+        bots.forEach(bot -> bot.makeAMove(this));
     }
 }

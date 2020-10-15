@@ -1,12 +1,14 @@
-package model.bot.gen;
+package model.bot.genome.gen;
 
-import model.bot.Bot;
 import model.Field;
+import model.bot.Bot;
 
-public interface IGen {
+public interface Gen {
+
     /**
-     * Runs current gen. Btw the method changes bot.currentGenIdx.
-     * @param bot current bot
+     * Runs current gen.
+     *
+     * @param bot   current bot
      * @param field main field
      * @return if the command ends the turn returns <b>true</b>
      * else returns <b>false</b>
@@ -15,6 +17,7 @@ public interface IGen {
 
     /**
      * If bots differ in one gen only they will be friendly
+     *
      * @param obj another gen
      * @return result of genes comparison
      */

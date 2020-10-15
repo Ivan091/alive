@@ -1,8 +1,8 @@
-package model.bot.gen.conditional_gen;
+package model.bot.genome.gen.conditional;
 
-import model.bot.gen.IGen;
+import model.bot.genome.gen.Gen;
 
-public abstract class ConditionalGen implements IGen {
+public abstract class ConditionalGen implements Gen {
 
     /**
      * parameter for conditional jump
@@ -11,7 +11,6 @@ public abstract class ConditionalGen implements IGen {
 
     /**
      * @param key Using as a parameter for conditional jump.
-     *
      */
     public ConditionalGen(int key) {
 
@@ -20,6 +19,7 @@ public abstract class ConditionalGen implements IGen {
 
     @Override
     public boolean equals(Object obj) {
-        return (obj.getClass() == this.getClass()) && ((ConditionalGen)obj).key == this.key;
+
+        return (obj.getClass() == this.getClass()) && ((ConditionalGen) obj).key == this.key;
     }
 }

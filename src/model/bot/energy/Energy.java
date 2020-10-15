@@ -1,35 +1,10 @@
 package model.bot.energy;
 
-import model.bot.IBotReplicateAndDie;
+public interface Energy {
 
-public class Energy implements IEnergy {
+    int getEnergyValue();
 
-    private IBotReplicateAndDie bot;
-    private int energyValue;
+    void setEnergyValue(int newEnergyValue);
 
-    public Energy(IBotReplicateAndDie bot, int energyValue) {
-        this.energyValue = energyValue;
-        this.bot = bot;
-    }
-
-    @Override
-    public int getEnergyValue() {
-        return energyValue;
-    }
-
-    @Override
-    public void setEnergyValue(int newEnergyValue) {
-        energyValue = newEnergyValue;
-
-        if (energyValue <= 0)
-            bot.Die();
-
-        if (energyValue > 1000)
-            bot.Replicate();
-    }
-
-    @Override
-    public void changeEnergyValue(int changing) {
-        setEnergyValue(energyValue + changing);
-    }
+    void changeEnergyValue(int changing);
 }

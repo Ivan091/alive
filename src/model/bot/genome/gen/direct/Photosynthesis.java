@@ -1,17 +1,15 @@
-package model.bot.gen.direct_gen;
+package model.bot.genome.gen.direct;
 
-import model.bot.Bot;
 import model.Field;
+import model.bot.Bot;
 
 public class Photosynthesis extends DirectGen {
 
     @Override
     public boolean run(Bot bot, Field field) {
 
-        bot.addToCurrentGenIndexSave(1);
-
-        bot.getEnergy().changeEnergyValue(-100);
-
+        bot.genome.moveNext(1);
+        bot.energy.changeEnergyValue(10);
         return false;
     }
 }

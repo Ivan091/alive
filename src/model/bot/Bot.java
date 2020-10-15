@@ -1,64 +1,46 @@
 package model.bot;
 
 import model.Field;
+import model.bot.energy.BotEnergy;
 import model.bot.energy.Energy;
-import model.bot.gen.IGen;
-import model.bot.gen.direct_gen.Photosynthesis;
-import model.bot.energy.IEnergy;
+import model.bot.genome.BotGenome;
+import model.bot.genome.Genome;
+import model.bot.position.BotPosition;
 
-public class Bot implements IBotMakeAMove, IBotReplicateAndDie {
+public class Bot implements Movable, Mortal {
 
-    public final Vector2Dint coordinates;
+    public final BotPosition position;
 
-    private final IEnergy energy;
+    public final Energy energy;
 
-    private final IGen[] genome;
-
-    private int currentGenIdx;
+    public final Genome genome;
 
     private boolean isFinished;
 
     public Bot(int x, int y, int energy) {
-        coordinates = new Vector2Dint(x, y);
-        this.energy = new Energy(this, energy);
 
-        /*
-         * At the start each bot has photosynthesis genes only.
-         */
-        genome = new IGen[64];
-        for (var i = 0; i < genome.length; ++i) {
-            genome[i] = new Photosynthesis();
-        }
+        position = new BotPosition(x, y);
+        this.energy = new BotEnergy(this, energy);
+        genome = new BotGenome(64);
     }
 
     @Override
     public void makeAMove(Field field) {
 
-        while(!isFinished && genome[currentGenIdx].run(this, field)){
-
+        while (!isFinished && genome.getCurrentGen().run(this, field)) {
         }
 
-    }
-    /**
-     * Changes currentGenIndex looped
-     * @param addition added to currentGenIndex
-     */
-    public void addToCurrentGenIndexSave (int addition){
-        currentGenIdx += addition;
-        currentGenIdx %= genome.length;
+        isFinished = false;
     }
 
     @Override
     public void Replicate() {
+
     }
 
     @Override
-    public void Die() {
-        System.out.println("Bot is dead");
-        this.isFinished = true;
-    }
+    public void Destroy() {
 
-    public IEnergy getEnergy(){
-        return energy;
+        this.isFinished = true;
     }
 }
