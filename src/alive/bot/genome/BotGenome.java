@@ -24,7 +24,7 @@ public class BotGenome implements Genome {
     }
 
     @Override
-    public void moveNext(int countOfGenes) {
+    public void incrementGenIdx(int countOfGenes) {
 
         currentGenIdx = (currentGenIdx + countOfGenes) % genes.length;
     }

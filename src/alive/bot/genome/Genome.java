@@ -6,5 +6,11 @@ public interface Genome {
 
     Gen getCurrentGen();
 
-    void moveNext(int countOfGenes);
+    /**
+     * Genome is infinite looped sequence of genes,
+     * so index cannot be out of range.
+     *
+     * @param increment can be any negative or positive number.
+     */
+    void incrementGenIdx(int increment);
 }
