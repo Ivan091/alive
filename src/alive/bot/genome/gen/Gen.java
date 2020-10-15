@@ -1,14 +1,14 @@
-package model.bot.genome.gen;
+package alive.bot.genome.gen;
 
-import model.Field;
-import model.bot.Bot;
+import alive.Field;
+import alive.bot.model.Bot;
 
 public interface Gen {
 
     /**
      * Runs current gen.
      *
-     * @param bot   current bot
+     * @param bot   current alive.bot
      * @param field main field
      * @return if the command ends the turn returns <b>true</b>
      * else returns <b>false</b>

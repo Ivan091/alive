@@ -1,7 +1,7 @@
-package model.bot.genome;
+package alive.bot.genome;
 
-import model.bot.genome.gen.Gen;
-import model.bot.genome.gen.direct.Photosynthesis;
+import alive.bot.genome.gen.Gen;
+import alive.bot.genome.gen.direct.Photosynthesis;
 
 public class BotGenome implements Genome {
 

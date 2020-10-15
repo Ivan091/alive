@@ -1,8 +1,7 @@
-package model;
+package alive;
 
-
-import model.bot.Bot;
-import model.bot.Movable;
+import alive.bot.model.Bot;
+import alive.bot.model.Movable;
 
 import java.util.ArrayList;
 import java.util.List;

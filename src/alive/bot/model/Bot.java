@@ -1,15 +1,16 @@
-package model.bot;
+package alive.bot.model;
 
-import model.Field;
-import model.bot.energy.BotEnergy;
-import model.bot.energy.Energy;
-import model.bot.genome.BotGenome;
-import model.bot.genome.Genome;
-import model.bot.position.BotPosition;
+import alive.Field;
+import alive.bot.energy.BotEnergy;
+import alive.bot.energy.Energy;
+import alive.bot.genome.BotGenome;
+import alive.bot.genome.Genome;
+import alive.bot.position.BotPosition;
+import alive.bot.position.Position;
 
 public class Bot implements Movable, Mortal {
 
-    public final BotPosition position;
+    public final Position position;
 
     public final Energy energy;
 

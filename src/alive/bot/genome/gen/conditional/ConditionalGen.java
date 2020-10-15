@@ -1,6 +1,6 @@
-package model.bot.genome.gen.conditional;
+package alive.bot.genome.gen.conditional;
 
-import model.bot.genome.gen.Gen;
+import alive.bot.genome.gen.Gen;
 
 public abstract class ConditionalGen implements Gen {
 

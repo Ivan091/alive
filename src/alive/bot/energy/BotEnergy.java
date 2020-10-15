@@ -1,7 +1,7 @@
-package model.bot.energy;
+package alive.bot.energy;
 
 
-import model.bot.Bot;
+import alive.bot.model.Bot;
 
 public class BotEnergy implements Energy {
 

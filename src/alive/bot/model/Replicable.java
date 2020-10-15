@@ -1,4 +1,4 @@
-package model.bot;
+package alive.bot.model;
 
 public interface Replicable {
 

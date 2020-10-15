@@ -1,11 +1,11 @@
-package model.bot.position;
+package alive.bot.position;
 
-import model.Field;
+import alive.Field;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class BotPosition {
+public class BotPosition implements Position {
 
     public final int x;
     public final int y;
@@ -18,8 +18,9 @@ public class BotPosition {
 
     /**
      * @param field main field
-     * @return list of positions around the bot
+     * @return list of positions around the alive.bot
      */
+    @Override
     public List<BotPosition> getPositionsAround(Field field) {
 
         var positionsAround = new ArrayList<BotPosition>(8);

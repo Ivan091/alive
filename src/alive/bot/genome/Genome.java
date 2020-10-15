@@ -1,6 +1,6 @@
-package model.bot.genome;
+package alive.bot.genome;
 
-import model.bot.genome.gen.Gen;
+import alive.bot.genome.gen.Gen;
 
 public interface Genome {
 

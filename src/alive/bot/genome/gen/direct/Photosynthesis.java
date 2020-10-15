@@ -1,7 +1,7 @@
-package model.bot.genome.gen.direct;
+package alive.bot.genome.gen.direct;
 
-import model.Field;
-import model.bot.Bot;
+import alive.Field;
+import alive.bot.model.Bot;
 
 public class Photosynthesis extends DirectGen {
 

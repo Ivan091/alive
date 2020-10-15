@@ -1,4 +1,4 @@
-package model.bot.energy;
+package alive.bot.energy;
 
 public interface Energy {
 

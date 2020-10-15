@@ -1,4 +1,4 @@
-package model;
+package alive;
 
 public class Main {
 
