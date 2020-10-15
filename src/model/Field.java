@@ -23,17 +23,17 @@ public class Field {
         bots = new ArrayList<>(height * width);
     }
 
-    public void Start() {
+    public void start() {
 
         var firstBot = new Bot(height / 2, width / 2, 500);
         bots.add(firstBot);
 
         for (var i = 0; i < 100; ++i) {
-            Update();
+            update();
         }
     }
 
-    private void Update() {
+    private void update() {
 
         bots.forEach(bot -> bot.makeAMove(this));
     }
