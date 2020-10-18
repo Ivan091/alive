@@ -28,7 +28,7 @@ public class Field {
 
         var firstBot = new Bot(new BotPosition(width / 2, height / 2), 500,
                 new BotLookDirection(1, 0));
-        
+
         bots.add(firstBot);
 
         for (var i = 0; i < 100; ++i) {
