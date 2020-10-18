@@ -8,7 +8,7 @@ public interface Gen {
     /**
      * Runs current gen.
      *
-     * @param bot   current alive.bot
+     * @param bot   current bot
      * @param field main field
      * @return if the command ends the turn returns <b>true</b>
      * else returns <b>false</b>
@@ -16,7 +16,7 @@ public interface Gen {
     boolean run(Bot bot, Field field);
 
     /**
-     * If bots differ in one gen only they will be friendly
+     * If bots differ in one gen only they will be friendly.
      *
      * @param obj another gen
      * @return result of genes comparison

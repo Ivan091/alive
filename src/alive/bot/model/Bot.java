@@ -1,6 +1,8 @@
 package alive.bot.model;
 
 import alive.Field;
+import alive.bot.direction.look.BotLookDirection;
+import alive.bot.direction.look.LookDirection;
 import alive.bot.energy.BotEnergy;
 import alive.bot.energy.Energy;
 import alive.bot.genome.BotGenome;
@@ -16,13 +18,16 @@ public class Bot implements Movable, Mortal {
 
     public final Genome genome;
 
+    public final LookDirection lookDirection;
+
     private boolean isFinished;
 
-    public Bot(int x, int y, int energy) {
+    public Bot(Position position, int energyValue, LookDirection lookDirection) {
 
-        position = new BotPosition(x, y);
-        this.energy = new BotEnergy(this, energy);
-        genome = new BotGenome(64);
+        this.position = new BotPosition(position.getX(), position.getY());
+        this.energy = new BotEnergy(this, energyValue);
+        this.genome = new BotGenome(64);
+        this.lookDirection = new BotLookDirection(lookDirection.getX(), lookDirection.getY());
     }
 
     @Override

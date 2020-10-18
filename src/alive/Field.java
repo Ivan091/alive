@@ -1,7 +1,9 @@
 package alive;
 
+import alive.bot.direction.look.BotLookDirection;
 import alive.bot.model.Bot;
 import alive.bot.model.Movable;
+import alive.bot.position.BotPosition;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +26,9 @@ public class Field {
 
     public void start() {
 
-        var firstBot = new Bot(height / 2, width / 2, 500);
+        var firstBot = new Bot(new BotPosition(width / 2, height / 2), 500,
+                new BotLookDirection(1, 0));
+        
         bots.add(firstBot);
 
         for (var i = 0; i < 100; ++i) {

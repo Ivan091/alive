@@ -6,7 +6,7 @@ import alive.Field;
 public interface Movable {
 
     /**
-     * Calls when alive.bot should make a move.
+     * Calls when bot should make a move.
      *
      * @param field main field
      */

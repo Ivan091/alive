@@ -7,13 +7,25 @@ import java.util.List;
 
 public class BotPosition implements Position {
 
-    public final int x;
-    public final int y;
+    private int x;
+    private int y;
 
     public BotPosition(int x, int y) {
 
         this.x = x;
         this.y = y;
+    }
+
+    @Override
+    public int getX() {
+
+        return x;
+    }
+
+    @Override
+    public int getY() {
+
+        return y;
     }
 
     /**
