@@ -1,7 +1,7 @@
 package alive.bot.genome.gen;
 
-import alive.Field;
 import alive.bot.model.Bot;
+import alive.field.Field;
 
 public interface Gen {
 

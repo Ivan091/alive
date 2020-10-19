@@ -1,6 +1,6 @@
 package alive.bot.position;
 
-import alive.Field;
+import alive.field.Field;
 
 import java.util.List;
 
@@ -10,5 +10,5 @@ public interface Position {
 
     int getY();
 
-    List<BotPosition> getPositionsAround(Field field);
+    List<Position> getPositionsAround(Field field);
 }

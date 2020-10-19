@@ -1,6 +1,6 @@
 package alive.bot.position;
 
-import alive.Field;
+import alive.field.Field;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,20 +28,16 @@ public class BotPosition implements Position {
         return y;
     }
 
-    /**
-     * @param field main field
-     * @return list of positions around the alive.bot
-     */
     @Override
-    public List<BotPosition> getPositionsAround(Field field) {
+    public List<Position> getPositionsAround(Field field) {
 
-        var positionsAround = new ArrayList<BotPosition>(8);
+        var positionsAround = new ArrayList<Position>(8);
 
-        for (var i = x - 1; i <= x + 1; ++i) {
-            for (var j = y - 1; j <= y + 1; ++j) {
-                if (y > 0 && y < field.width) {
-                    if (i != x || j != y) {
-                        var newPosition = new BotPosition((i + field.width) % field.width, j);
+        for (var i = getX() - 1; i <= getX() + 1; ++i) {
+            for (var j = getY() - 1; j <= getY() + 1; ++j) {
+                if (getY() > 0 && getY() < field.getWidth()) {
+                    if (i != getX() || j != getY()) {
+                        var newPosition = new BotPosition((i + field.getWidth()) % field.getWidth(), j);
                         positionsAround.add(newPosition);
                     }
                 }

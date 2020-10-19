@@ -1,7 +1,7 @@
 package alive.bot.model;
 
 
-import alive.Field;
+import alive.field.Field;
 
 public interface Movable {
 
