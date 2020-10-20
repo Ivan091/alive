@@ -24,9 +24,9 @@ public class BotLookDirection implements LookDirection {
     }
 
     @Override
-    public void rotate(int rotationSteps) {
+    public void rotate(int rotationStepsCount) {
 
-        double angle = (rotationSteps * 45) * Math.PI / 180;
+        double angle = (rotationStepsCount * 45) * Math.PI / 180;
 
         var tx = x * Math.cos(angle) + y * Math.sin(angle);
         var ty = x * Math.sin(-angle) + y * Math.cos(angle);

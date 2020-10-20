@@ -46,4 +46,18 @@ public class BotPosition implements Position {
 
         return positionsAround;
     }
+
+    @Override
+    public boolean equals(Object o) {
+
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        BotPosition that = (BotPosition) o;
+        return x == that.x &&
+                y == that.y;
+    }
 }

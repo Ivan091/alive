@@ -8,8 +8,8 @@ public class Photosynthesis extends DirectGen {
     @Override
     public boolean run(Bot bot, Field field) {
 
-        bot.genome.incrementGenIdx(1);
-        bot.energy.changeEnergyValue(10);
+        bot.getGenome().incrementGenIdx(1);
+        bot.getEnergy().changeEnergyValue(10);
         return false;
     }
 }

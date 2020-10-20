@@ -1,4 +1,4 @@
-package alive.bot.model;
+package alive.bot.model.mortal;
 
 public interface Destroyable {
 

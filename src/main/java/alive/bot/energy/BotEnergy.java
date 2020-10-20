@@ -1,14 +1,13 @@
 package alive.bot.energy;
 
-
-import alive.bot.model.Bot;
+import alive.bot.model.mortal.Mortal;
 
 public class BotEnergy implements Energy {
 
-    private final Bot bot;
+    private final Mortal bot;
     private int energyValue;
 
-    public BotEnergy(Bot bot, int energyValue) {
+    public BotEnergy(Mortal bot, int energyValue) {
 
         this.energyValue = energyValue;
         this.bot = bot;
