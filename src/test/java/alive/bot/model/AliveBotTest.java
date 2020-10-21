@@ -12,7 +12,7 @@ class AliveBotTest {
     @Test
     void destroy() {
 
-        var bot = new AliveBot(new BotPosition(1, 1), 1, new BotLookDirection(1, 1));
+        var bot = new AliveBot(new BotPosition(1, 1), 1, new BotLookDirection());
 
         assertTrue(bot.isAlive());
 

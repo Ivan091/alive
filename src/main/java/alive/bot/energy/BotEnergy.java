@@ -1,5 +1,6 @@
 package alive.bot.energy;
 
+import alive.WorldConstants;
 import alive.bot.model.mortal.Mortal;
 
 public class BotEnergy implements Energy {
@@ -20,15 +21,15 @@ public class BotEnergy implements Energy {
     }
 
     @Override
-    public void setEnergyValue(int newEnergyValue) {
+    public void setEnergyValue(int newValue) {
 
-        energyValue = newEnergyValue;
+        energyValue = newValue;
 
-        if (energyValue <= 0) {
+        if (energyValue < WorldConstants.MIN_ENERGY_VALUE) {
             bot.Destroy();
         }
 
-        if (energyValue > 1000) {
+        if (energyValue > WorldConstants.MAX_ENERGY_VALUE) {
             bot.Replicate();
         }
     }

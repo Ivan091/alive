@@ -1,38 +1,57 @@
 package alive.bot.direction.look;
 
+import alive.bot.position.BotPosition;
+import alive.bot.position.Position;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class BotLookDirection implements LookDirection {
 
-    private double x;
-    private double y;
+    private static final List<Position> relativePositions = new ArrayList<>(8);
 
-    public BotLookDirection(double x, double y) {
+    static {
+        relativePositions.add(new BotPosition(1, 1));
+        relativePositions.add(new BotPosition(0, 1));
+        relativePositions.add(new BotPosition(-1, 1));
+        relativePositions.add(new BotPosition(-1, 0));
+        relativePositions.add(new BotPosition(-1, -1));
+        relativePositions.add(new BotPosition(0, -1));
+        relativePositions.add(new BotPosition(1, -1));
+        relativePositions.add(new BotPosition(1, 0));
+    }
 
-        this.x = x;
-        this.y = y;
+    private int directionNumber;
+
+
+    /**
+     * each look direction has unique number:
+     * <p>{@code 2 1 0}</p>
+     * <p>{@code 4 _ 8}</p>
+     * <p>{@code 5 6 7}</p>
+     */
+    public BotLookDirection(int directionNumber) {
+
+        this.directionNumber = directionNumber;
+    }
+
+    public BotLookDirection() {
+
     }
 
     @Override
-    public double getX() {
+    public void rotate(int rotationSteps) {
 
-        return x;
+        directionNumber = (directionNumber + rotationSteps) % 8;
     }
 
     @Override
-    public double getY() {
+    public Position getLookingPos(Position currentPosition) {
 
-        return y;
-    }
-
-    @Override
-    public void rotate(int rotationStepsCount) {
-
-        double angle = (rotationStepsCount * 45) * Math.PI / 180;
-
-        var tx = x * Math.cos(angle) + y * Math.sin(angle);
-        var ty = x * Math.sin(-angle) + y * Math.cos(angle);
-
-        x = tx;
-        y = ty;
+        var lookingRelativePos = relativePositions.get(directionNumber);
+        return new BotPosition(
+                currentPosition.getX() + lookingRelativePos.getX(),
+                currentPosition.getY() + lookingRelativePos.getY());
     }
 }
 

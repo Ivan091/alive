@@ -32,7 +32,7 @@ public class AliveBot implements Bot {
         this.position = new BotPosition(position.getX(), position.getY());
         this.energy = new BotEnergy(this, energyValue);
         this.genome = new BotGenome(64);
-        this.lookDirection = new BotLookDirection(lookDirection.getX(), lookDirection.getY());
+        this.lookDirection = new BotLookDirection();
         this.liveCondition = new BotCondition(new BotAliveCondition());
     }
 

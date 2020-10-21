@@ -41,7 +41,7 @@ public class MainField implements Field {
     public void start() {
 
         var firstBot = new AliveBot(new BotPosition(width / 2, height / 2), 500,
-                new BotLookDirection(1, 0));
+                new BotLookDirection());
 
         aliveBots.add(firstBot);
 

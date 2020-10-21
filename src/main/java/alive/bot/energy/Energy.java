@@ -4,7 +4,7 @@ public interface Energy {
 
     int getEnergyValue();
 
-    void setEnergyValue(int newEnergyValue);
+    void setEnergyValue(int newValue);
 
     void changeEnergyValue(int changing);
 }
