@@ -1,12 +1,12 @@
 package alive.bot.condition;
 
-import alive.bot.condition.live.LiveCondition;
+import alive.bot.condition.live.LiveConditions;
 
 public interface Condition {
 
-    LiveCondition getLiveCondition();
+    LiveConditions getLiveCondition();
 
-    void setLiveCondition(LiveCondition liveCondition);
+    void setLiveCondition(LiveConditions liveCondition);
 
     boolean isAlive();
 }

@@ -1,19 +1,17 @@
 package alive.bot.genome.gen;
 
 import alive.bot.model.Bot;
-import alive.field.Field;
 
 public interface Gen {
 
     /**
      * Runs current gen.
      *
-     * @param bot   current bot
-     * @param field main field
+     * @param bot current bot
      * @return if the command ends the turn returns <b>true</b>
      * else returns <b>false</b>
      */
-    boolean run(Bot bot, Field field);
+    boolean run(Bot bot);
 
     /**
      * If bots differ in one gen only they will be friendly.

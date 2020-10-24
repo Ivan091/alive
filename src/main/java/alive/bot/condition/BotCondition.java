@@ -1,25 +1,24 @@
 package alive.bot.condition;
 
-import alive.bot.condition.live.LiveCondition;
-import alive.bot.condition.live.alive.AliveCondition;
+import alive.bot.condition.live.LiveConditions;
 
 public class BotCondition implements Condition {
 
-    private LiveCondition liveCondition;
+    private LiveConditions liveCondition;
 
-    public BotCondition(LiveCondition liveCondition) {
+    public BotCondition(LiveConditions liveCondition) {
 
         this.liveCondition = liveCondition;
     }
 
     @Override
-    public LiveCondition getLiveCondition() {
+    public LiveConditions getLiveCondition() {
 
         return liveCondition;
     }
 
     @Override
-    public void setLiveCondition(LiveCondition liveCondition) {
+    public void setLiveCondition(LiveConditions liveCondition) {
 
         this.liveCondition = liveCondition;
     }
@@ -27,6 +26,6 @@ public class BotCondition implements Condition {
     @Override
     public boolean isAlive() {
 
-        return liveCondition instanceof AliveCondition;
+        return liveCondition == LiveConditions.ALIVE;
     }
 }

@@ -1,15 +1,14 @@
 package alive.bot.genome.gen.direct;
 
 import alive.bot.model.Bot;
-import alive.field.Field;
 
 public class Photosynthesis extends DirectGen {
 
     @Override
-    public boolean run(Bot bot, Field field) {
+    public boolean run(Bot bot) {
 
         bot.getGenome().incrementGenIdx(1);
-        bot.getEnergy().changeEnergyValue(10);
+        bot.getEnergy().changeEnergyValue(-100);
         return false;
     }
 }

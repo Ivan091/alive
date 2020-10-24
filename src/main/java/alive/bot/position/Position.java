@@ -1,7 +1,5 @@
 package alive.bot.position;
 
-import alive.field.Field;
-
 import java.util.List;
 
 public interface Position {
@@ -10,5 +8,9 @@ public interface Position {
 
     int getY();
 
-    List<Position> getPositionsAround(Field field);
+    void setX(int x);
+
+    void setY(int y);
+
+    List<Position> getPositionsAround();
 }

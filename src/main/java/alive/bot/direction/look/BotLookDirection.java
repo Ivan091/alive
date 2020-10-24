@@ -23,7 +23,6 @@ public class BotLookDirection implements LookDirection {
 
     private int directionNumber;
 
-
     /**
      * each look direction has unique number:
      * <p>{@code 2 1 0}</p>
@@ -53,13 +52,21 @@ public class BotLookDirection implements LookDirection {
                 currentPosition.getX() + lookingRelativePos.getX(),
                 currentPosition.getY() + lookingRelativePos.getY());
     }
+
+    @Override
+    public LookDirection getOpposite() {
+
+        var newDir = this.deepClone();
+        newDir.rotate(4);
+        return newDir;
+    }
+
+    @Override
+    public LookDirection deepClone() {
+
+        return new BotLookDirection(directionNumber);
+    }
 }
-
-
-
-
-
-
 
 
 

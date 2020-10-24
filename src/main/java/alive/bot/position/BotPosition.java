@@ -1,7 +1,5 @@
 package alive.bot.position;
 
-import alive.field.Field;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +15,23 @@ public class BotPosition implements Position {
     }
 
     @Override
+    public List<Position> getPositionsAround() {
+
+        var positionsAround = new ArrayList<Position>(8);
+
+        for (var i = getX() - 1; i <= getX() + 1; ++i) {
+            for (var j = getY() - 1; j <= getY() + 1; ++j) {
+                if (i != getX() || j != getY()) {
+                    var newPosition = new BotPosition(i, j);
+                    positionsAround.add(newPosition);
+                }
+            }
+        }
+
+        return positionsAround;
+    }
+
+    @Override
     public int getX() {
 
         return x;
@@ -29,22 +44,15 @@ public class BotPosition implements Position {
     }
 
     @Override
-    public List<Position> getPositionsAround(Field field) {
+    public void setX(int x) {
 
-        var positionsAround = new ArrayList<Position>(8);
+        this.x = x;
+    }
 
-        for (var i = getX() - 1; i <= getX() + 1; ++i) {
-            for (var j = getY() - 1; j <= getY() + 1; ++j) {
-                if (getY() > 0 && getY() < field.getWidth()) {
-                    if (i != getX() || j != getY()) {
-                        var newPosition = new BotPosition((i + field.getWidth()) % field.getWidth(), j);
-                        positionsAround.add(newPosition);
-                    }
-                }
-            }
-        }
+    @Override
+    public void setY(int y) {
 
-        return positionsAround;
+        this.y = y;
     }
 
     @Override

@@ -1,10 +1,9 @@
 package alive.bot.model;
 
+import alive.WorldConstants;
 import alive.bot.condition.BotCondition;
 import alive.bot.condition.Condition;
-import alive.bot.condition.live.alive.AliveCondition;
-import alive.bot.condition.live.alive.BotAliveCondition;
-import alive.bot.condition.live.dead.BotDeadCondition;
+import alive.bot.condition.live.LiveConditions;
 import alive.bot.direction.look.BotLookDirection;
 import alive.bot.direction.look.LookDirection;
 import alive.bot.energy.BotEnergy;
@@ -14,40 +13,66 @@ import alive.bot.genome.Genome;
 import alive.bot.position.BotPosition;
 import alive.bot.position.Position;
 import alive.field.Field;
+import alive.field.cell.content.DeadBotBody;
 
 public class AliveBot implements Bot {
+
+    private final Field field;
 
     private final Position position;
 
     private final Energy energy;
 
-    private final Genome genome;
-
     private final LookDirection lookDirection;
+
+    private final Genome genome;
 
     private final Condition liveCondition;
 
-    public AliveBot(Position position, int energyValue, LookDirection lookDirection) {
+    public AliveBot(Field field, Position position, int energyValue, LookDirection lookDirection) {
 
+        this.field = field;
         this.position = new BotPosition(position.getX(), position.getY());
         this.energy = new BotEnergy(this, energyValue);
         this.genome = new BotGenome(64);
         this.lookDirection = new BotLookDirection();
-        this.liveCondition = new BotCondition(new BotAliveCondition());
+        this.liveCondition = new BotCondition(LiveConditions.ALIVE);
     }
 
     @Override
-    public void makeAMove(Field field) {
+    public void makeAMove() {
 
-        while ((liveCondition.getLiveCondition() instanceof AliveCondition)
-                && genome.getCurrentGen().run(this, field)) {
+        while (isAlive() && genome.getCurrentGen().run(this)) {
+
+            energy.changeEnergyValue(-WorldConstants.BOT_RUN_GEN_COST);
         }
     }
 
     @Override
-    public Condition getLiveCondition() {
+    public void Replicate() {
 
-        return liveCondition;
+        Position newBotPos;
+
+        var lookingPos = lookDirection.getLookingPos(position);
+        if (field.getCells().isInBounds(lookingPos)) {
+            newBotPos = lookingPos;
+        } else {
+            var possiblePos = position.getPositionsAround()
+                    .stream().filter(x -> field.getCells().isInBounds(x));
+
+            if (possiblePos.count() == 0) {
+                Destroy();
+                return;
+            }
+        }
+    }
+
+    @Override
+    public void Destroy() {
+
+        liveCondition.setLiveCondition(LiveConditions.DEAD);
+        var deadBody = new DeadBotBody(getEnergyValue() + WorldConstants.DRIED_BODY_ENERGY_VALUE);
+        field.getCells().setCellContent(position, deadBody);
     }
 
     @Override
@@ -57,20 +82,21 @@ public class AliveBot implements Bot {
     }
 
     @Override
-    public void Replicate() {
+    public Condition getLiveCondition() {
 
-    }
-
-    @Override
-    public void Destroy() {
-
-        liveCondition.setLiveCondition(new BotDeadCondition());
+        return liveCondition;
     }
 
     @Override
     public Position getPosition() {
 
         return position;
+    }
+
+    @Override
+    public Field getField() {
+
+        return field;
     }
 
     @Override
@@ -89,5 +115,11 @@ public class AliveBot implements Bot {
     public LookDirection getLookDirection() {
 
         return lookDirection;
+    }
+
+    @Override
+    public int getEnergyValue() {
+
+        return energy.getEnergyValue();
     }
 }

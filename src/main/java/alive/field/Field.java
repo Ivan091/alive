@@ -1,8 +1,12 @@
 package alive.field;
 
+import alive.field.cell.Cells;
+
 public interface Field {
+
+    int getWidth();
 
     int getHeight();
 
-    int getWidth();
+    Cells getCells();
 }

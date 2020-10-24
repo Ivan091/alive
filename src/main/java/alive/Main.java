@@ -1,12 +1,11 @@
 package alive;
 
-import alive.field.MainField;
-
 public class Main {
 
     public static void main(String[] args) {
 
-        var field = new MainField(4, 4);
-        field.start();
+        for (var i = 0; i < 100; ++i) {
+            System.out.println(Randomize.next(1, 3));
+        }
     }
 }
