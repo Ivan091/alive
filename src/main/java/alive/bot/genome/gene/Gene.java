@@ -1,8 +1,9 @@
-package alive.bot.genome.gen;
+package alive.bot.genome.gene;
 
+import alive.bot.genome.Replicable;
 import alive.bot.model.Bot;
 
-public interface Gen {
+public interface Gene extends Replicable<Gene> {
 
     /**
      * Runs current gen.

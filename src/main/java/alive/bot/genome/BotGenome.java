@@ -1,24 +1,44 @@
 package alive.bot.genome;
 
-import alive.bot.genome.gen.Gen;
-import alive.bot.genome.gen.direct.Photosynthesis;
+import alive.Randomize;
+import alive.WorldConstants;
+import alive.bot.genome.fabric.GeneFabric;
+import alive.bot.genome.fabric.conditional.RotatingFabric;
+import alive.bot.genome.fabric.direct.PhotosynthesisFabric;
+import alive.bot.genome.gene.Gene;
+import alive.bot.genome.gene.direct.Photosynthesis;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class BotGenome implements Genome {
 
-    private final Gen[] genes;
+    private final Gene[] genes;
 
     private int currentGenIdx;
 
-    public BotGenome(int genomeLength) {
+    private static final List<GeneFabric> possibleGenes = new ArrayList<>();
 
-        genes = new Gen[genomeLength];
-        for (var i = 0; i < genomeLength; ++i) {
+    static {
+        possibleGenes.add(new PhotosynthesisFabric());
+        possibleGenes.add(new RotatingFabric());
+    }
+
+    public BotGenome() {
+
+        genes = new Gene[WorldConstants.GENOME_LENGTH];
+        for (var i = 0; i < genes.length; ++i) {
             genes[i] = new Photosynthesis();
         }
     }
 
+    public BotGenome(Gene[] genes) {
+
+        this.genes = genes;
+    }
+
     @Override
-    public Gen getCurrentGen() {
+    public Gene getCurrentGen() {
 
         return genes[currentGenIdx];
     }
@@ -27,5 +47,44 @@ public class BotGenome implements Genome {
     public void incrementGenIdx(int countOfGenes) {
 
         currentGenIdx = (currentGenIdx + countOfGenes) % genes.length;
+    }
+
+    @Override
+    public Genome replicate() {
+
+        if (Randomize.nextFloat() < 0.25) {
+            return getMutatedGenome();
+        }
+        return getExactCopyOfGenome();
+    }
+
+    private Genome getMutatedGenome() {
+
+        var mutatingIdx = Randomize.nextInt(genes.length);
+
+        var newGenes = new Gene[WorldConstants.GENOME_LENGTH];
+
+        for (var i = 0; i < newGenes.length; ++i) {
+
+            if (i == mutatingIdx) {
+                newGenes[i] = possibleGenes.get(Randomize.nextInt(possibleGenes.size()))
+                        .create(Randomize.nextInt(genes.length));
+            } else {
+                newGenes[i] = this.genes[i].replicate();
+            }
+        }
+
+        return new BotGenome(newGenes);
+    }
+
+    private Genome getExactCopyOfGenome() {
+
+        var newGenes = new Gene[WorldConstants.GENOME_LENGTH];
+
+        for (var i = 0; i < newGenes.length; ++i) {
+            newGenes[i] = this.genes[i].replicate();
+        }
+
+        return new BotGenome(newGenes);
     }
 }

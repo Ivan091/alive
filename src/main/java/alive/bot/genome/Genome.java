@@ -1,10 +1,10 @@
 package alive.bot.genome;
 
-import alive.bot.genome.gen.Gen;
+import alive.bot.genome.gene.Gene;
 
-public interface Genome {
+public interface Genome extends Replicable<Genome> {
 
-    Gen getCurrentGen();
+    Gene getCurrentGen();
 
     /**
      * Genome is infinite looped sequence of genes,

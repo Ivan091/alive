@@ -56,13 +56,13 @@ public class BotLookDirection implements LookDirection {
     @Override
     public LookDirection getOpposite() {
 
-        var newDir = this.deepClone();
+        var newDir = this.replicate();
         newDir.rotate(4);
         return newDir;
     }
 
     @Override
-    public LookDirection deepClone() {
+    public LookDirection replicate() {
 
         return new BotLookDirection(directionNumber);
     }

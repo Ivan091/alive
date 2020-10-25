@@ -1,5 +1,6 @@
 package alive.field;
 
+import alive.bot.model.Alive;
 import alive.field.cell.Cells;
 
 public interface Field {
@@ -9,4 +10,6 @@ public interface Field {
     int getHeight();
 
     Cells getCells();
+
+    void addNewAlive(Alive newAlive);
 }

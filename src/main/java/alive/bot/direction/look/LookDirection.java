@@ -1,9 +1,9 @@
 package alive.bot.direction.look;
 
-import alive.Cloneable;
+import alive.bot.genome.Replicable;
 import alive.bot.position.Position;
 
-public interface LookDirection extends Cloneable<LookDirection> {
+public interface LookDirection extends Replicable<LookDirection> {
 
     /**
      * @param rotationSteps 1 step is 45 degrees because bot can have 8 different directions only.

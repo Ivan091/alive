@@ -1,16 +1,14 @@
 package alive.bot.model;
 
+import alive.Randomize;
 import alive.WorldConstants;
 import alive.bot.condition.BotCondition;
 import alive.bot.condition.Condition;
 import alive.bot.condition.live.LiveConditions;
-import alive.bot.direction.look.BotLookDirection;
 import alive.bot.direction.look.LookDirection;
 import alive.bot.energy.BotEnergy;
 import alive.bot.energy.Energy;
-import alive.bot.genome.BotGenome;
 import alive.bot.genome.Genome;
-import alive.bot.position.BotPosition;
 import alive.bot.position.Position;
 import alive.field.Field;
 import alive.field.cell.content.DeadBotBody;
@@ -29,13 +27,13 @@ public class AliveBot implements Bot {
 
     private final Condition liveCondition;
 
-    public AliveBot(Field field, Position position, int energyValue, LookDirection lookDirection) {
+    public AliveBot(Field field, Position position, int energyValue, LookDirection lookDirection, Genome genome) {
 
         this.field = field;
-        this.position = new BotPosition(position.getX(), position.getY());
+        this.position = position;
         this.energy = new BotEnergy(this, energyValue);
-        this.genome = new BotGenome(64);
-        this.lookDirection = new BotLookDirection();
+        this.genome = genome;
+        this.lookDirection = lookDirection;
         this.liveCondition = new BotCondition(LiveConditions.ALIVE);
     }
 
@@ -49,30 +47,40 @@ public class AliveBot implements Bot {
     }
 
     @Override
-    public void Replicate() {
+    public void replicate() {
 
         Position newBotPos;
 
-        var lookingPos = lookDirection.getLookingPos(position);
-        if (field.getCells().isInBounds(lookingPos)) {
+        var lookingPos = this.lookDirection.getLookingPos(position);
+        if (field.getCells().isEmpty(lookingPos)) {
             newBotPos = lookingPos;
         } else {
             var possiblePos = position.getPositionsAround()
-                    .stream().filter(x -> field.getCells().isInBounds(x));
+                    .stream().filter(x -> field.getCells().isEmpty(x)).toArray();
 
-            if (possiblePos.count() == 0) {
-                Destroy();
+            if (possiblePos.length == 0) {
+                destroy();
                 return;
+            } else {
+                newBotPos = (Position) possiblePos[Randomize.nextInt(0, possiblePos.length)];
             }
         }
+
+        this.getEnergy().changeEnergyValue(x -> x >> 1);
+        var newBotEnergy = this.getEnergyValue();
+
+        var newBot = new AliveBot(field, newBotPos, newBotEnergy,
+                this.lookDirection.getOpposite(), genome.replicate());
+
+        field.addNewAlive(newBot);
     }
 
     @Override
-    public void Destroy() {
+    public void destroy() {
 
         liveCondition.setLiveCondition(LiveConditions.DEAD);
         var deadBody = new DeadBotBody(getEnergyValue() + WorldConstants.DRIED_BODY_ENERGY_VALUE);
-        field.getCells().setCellContent(position, deadBody);
+        field.getCells().trySetCellContent(position, deadBody);
     }
 
     @Override

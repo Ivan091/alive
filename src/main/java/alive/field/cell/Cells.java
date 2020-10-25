@@ -9,11 +9,11 @@ public interface Cells {
 
     int getHeight();
 
-    CellContent getCellContent(Position pos);
+    boolean tryGetCellContent(Position pos, CellContent output);
 
-    void setCellContent(Position pos, CellContent newCellContent);
+    boolean trySetCellContent(Position pos, CellContent newCellContent);
 
-    void setEmpty(Position pos);
+    boolean trySetEmpty(Position pos);
 
     boolean isEmpty(Position pos);
 

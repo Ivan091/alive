@@ -1,6 +1,7 @@
 package alive.field;
 
 import alive.bot.direction.look.BotLookDirection;
+import alive.bot.genome.BotGenome;
 import alive.bot.model.Alive;
 import alive.bot.model.AliveBot;
 import alive.bot.position.BotPosition;
@@ -16,18 +17,21 @@ public class MainField implements Field {
 
     private final List<Alive> aliveBots;
 
+    private final List<Alive> newAliveBots;
+
     public MainField(int height, int width) {
 
         cells = new FieldCells(height, width);
         aliveBots = new LinkedList<>();
+        newAliveBots = new LinkedList<>();
     }
 
     public void start() {
 
-        var firstBot = new AliveBot(this, new BotPosition(1, 2), 500,
-                new BotLookDirection());
+        var firstBot = new AliveBot(this, new BotPosition(1, 1), 500,
+                new BotLookDirection(), new BotGenome());
 
-        aliveBots.add(firstBot);
+        addNewAlive(firstBot);
 
         for (var i = 0; i < 100; ++i) {
             update();
@@ -48,6 +52,22 @@ public class MainField implements Field {
                 botsIt.remove();
             }
         }
+
+        var newBotsIt = newAliveBots.listIterator();
+
+        while (botsIt.hasNext()) {
+
+            var curBot = botsIt.next();
+
+            curBot.makeAMove();
+
+            if (!curBot.isAlive()) {
+                botsIt.remove();
+            }
+        }
+
+        aliveBots.addAll(newAliveBots);
+        newAliveBots.clear();
     }
 
     @Override
@@ -66,5 +86,13 @@ public class MainField implements Field {
     public Cells getCells() {
 
         return cells;
+    }
+
+    @Override
+    public void addNewAlive(Alive newAlive) {
+
+        if (cells.trySetCellContent(newAlive.getPosition(), newAlive)) {
+            newAliveBots.add(newAlive);
+        }
     }
 }

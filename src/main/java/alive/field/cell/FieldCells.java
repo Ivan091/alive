@@ -4,76 +4,91 @@ import alive.bot.position.Position;
 import alive.field.cell.content.CellContent;
 import alive.field.cell.content.Empty;
 
-import java.util.Arrays;
-
 public class FieldCells implements Cells {
 
     private static final CellContent empty = new Empty();
 
-    private CellContent[][] cellContents;
+    private final CellContent[][] cellsContent;
 
     public FieldCells(int height, int width) {
 
-        cellContents = new CellContent[height][width];
+        cellsContent = new CellContent[height][width];
 
-        Arrays.stream(cellContents).forEach(y -> Arrays.stream(y).forEach(x -> x = empty));
-    }
-
-    private CellContent getCellContentByPos(Position pos) {
-
-        Modulate(pos);
-
-        return cellContents[pos.getX()][pos.getY()];
-    }
-
-    private void Modulate(Position pos) {
-
-        pos.setX(pos.getX() % getWidth());
+        for (var i = 0; i < height; ++i) {
+            for (var j = 0; j < width; ++j) {
+                cellsContent[i][j] = empty;
+            }
+        }
     }
 
     @Override
-    public CellContent getCellContent(Position pos) {
+    public boolean tryGetCellContent(Position pos, CellContent output) {
 
-        return getCellContentByPos(pos);
+        if (isInBounds(pos)) {
+            output = getCellContentByPos(pos);
+            return true;
+        }
+        return false;
     }
 
     @Override
-    public void setCellContent(Position pos, CellContent newCellContent) {
+    public boolean trySetCellContent(Position pos, CellContent newCellContent) {
 
-        var cellContent = getCellContentByPos(pos);
-        cellContent = newCellContent;
+        if (isInBounds(pos)) {
+            cellsContent[pos.getX()][pos.getY()] = newCellContent;
+            return true;
+        }
+        return false;
     }
 
     @Override
-    public void setEmpty(Position pos) {
+    public boolean trySetEmpty(Position pos) {
 
-        var cellContent = getCellContentByPos(pos);
-        cellContent = empty;
+        if (isInBounds(pos)) {
+            cellsContent[pos.getX()][pos.getY()] = empty;
+            return true;
+        }
+        return false;
     }
 
     @Override
     public boolean isEmpty(Position pos) {
 
-        return getCellContentByPos(pos).equals(empty);
+        if (isInBounds(pos)) {
+            return getCellContentByPos(pos).equals(empty);
+        }
+        return false;
     }
 
     @Override
     public boolean isInBounds(Position pos) {
 
-        Modulate(pos);
+        if (pos.getY() >= 0 && pos.getY() < getHeight()) {
+            modulate(pos);
+            return true;
+        }
+        return false;
+    }
 
-        return pos.getY() >= 0 && pos.getY() < getHeight();
+    private CellContent getCellContentByPos(Position pos) {
+
+        return cellsContent[pos.getX()][pos.getY()];
+    }
+
+    private void modulate(Position pos) {
+
+        pos.setX((pos.getX() + getWidth()) % getWidth());
     }
 
     @Override
     public int getWidth() {
 
-        return cellContents[0].length;
+        return cellsContent[0].length;
     }
 
     @Override
     public int getHeight() {
 
-        return cellContents.length;
+        return cellsContent.length;
     }
 }
