@@ -3,8 +3,6 @@ package alive.bot.energy;
 import alive.WorldConstants;
 import alive.bot.model.mortal.Mortal;
 
-import java.util.function.Function;
-
 public class BotEnergy implements Energy {
 
     private final Mortal bot;
@@ -40,11 +38,5 @@ public class BotEnergy implements Energy {
     public void changeEnergyValue(int changing) {
 
         setEnergyValue(energyValue + changing);
-    }
-
-    @Override
-    public void changeEnergyValue(Function<Integer, Integer> function) {
-
-        setEnergyValue(function.apply(energyValue));
     }
 }

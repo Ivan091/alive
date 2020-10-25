@@ -66,8 +66,8 @@ public class AliveBot implements Bot {
             }
         }
 
-        this.getEnergy().changeEnergyValue(x -> x >> 1);
-        var newBotEnergy = this.getEnergyValue();
+        var newBotEnergy = this.getEnergyValue() >> 1;
+        this.energy.setEnergyValue(newBotEnergy);
 
         var newBot = new AliveBot(field, newBotPos, newBotEnergy,
                 this.lookDirection.getOpposite(), genome.replicate());
