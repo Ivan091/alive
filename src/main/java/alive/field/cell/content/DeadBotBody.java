@@ -2,7 +2,7 @@ package alive.field.cell.content;
 
 public class DeadBotBody implements CellContent {
 
-    private int energyValue;
+    private final int energyValue;
 
     /**
      *
@@ -15,7 +15,7 @@ public class DeadBotBody implements CellContent {
 
     @Override
     public void eraseFromField() {
-        
+
     }
 
     @Override

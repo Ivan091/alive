@@ -8,14 +8,17 @@ public class Eat extends DirectGene {
     @Override
     public boolean run(Bot bot) {
 
-        try {
-            var lookingPos = bot.getLookDirection().getLookingPos(bot.getPosition());
-            var eatingContent = bot.getField().getCells().
-                    getCellContent(lookingPos);
-            bot.getField().getCells().setEmpty(lookingPos);
+        var lookingPos = bot.getLookDirection().getLookingPos(bot.getPosition());
+        var cells = bot.getField().getCells();
+
+        if (cells.isInBounds(lookingPos)) {
+
+            var eatingContent = cells.getCellContent(lookingPos);
+            cells.setEmpty(lookingPos);
             bot.getEnergy().incrementEnergyValue(eatingContent.getEnergyValue() >> 1);
-        } catch (IllegalArgumentException e) {
-            //System.out.println(e.getMessage());
+        } else {
+
+            bot.getEnergy().incrementEnergyValue(-10);
         }
 
         bot.getGenome().incrementGenIdx(1);

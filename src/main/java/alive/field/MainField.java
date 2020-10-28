@@ -35,11 +35,12 @@ public class MainField implements Field {
         addNewAlive(firstBot);
 
         for (var i = 0; i < 1000000000; ++i) {
-            
+
             update();
 
             if (aliveBots.size() == 0) {
 
+                System.out.println("\nThe population is dead(((");
                 return;
             }
         }

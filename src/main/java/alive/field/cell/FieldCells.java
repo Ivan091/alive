@@ -22,42 +22,33 @@ public class FieldCells implements Cells {
     }
 
     @Override
-    public CellContent getCellContent(Position pos) throws IllegalArgumentException {
+    public CellContent getCellContent(Position pos) {
 
-        if (isInBounds(pos)) {
-            return getCellContentByPos(pos);
+        if (!isInBounds(pos)) {
+            throw new IllegalArgumentException(pos.toString() + " was out of bounds of the field");
         }
-
-        throw new IllegalArgumentException(pos.toString() + " was out of bounds of the field");
+        return getCellContentByPos(pos);
     }
 
     @Override
-    public void setCellContent(Position pos, CellContent newCellContent) throws IllegalArgumentException {
+    public void setCellContent(Position pos, CellContent newCellContent) {
 
-        if (isInBounds(pos)) {
-            cellsContent[pos.getX()][pos.getY()] = newCellContent;
-        } else {
+        if (!isInBounds(pos)) {
             throw new IllegalArgumentException(pos.toString() + " was out of bounds of the field");
         }
+        cellsContent[pos.getX()][pos.getY()] = newCellContent;
     }
 
     @Override
-    public void setEmpty(Position pos) throws IllegalArgumentException {
+    public void setEmpty(Position pos) {
 
-        if (isInBounds(pos)) {
-            cellsContent[pos.getX()][pos.getY()].eraseFromField();
-            cellsContent[pos.getX()][pos.getY()] = empty;
-        } else {
+        if (!isInBounds(pos)) {
             throw new IllegalArgumentException(pos.toString() + " was out of bounds of the field");
         }
+        cellsContent[pos.getX()][pos.getY()].eraseFromField();
+        cellsContent[pos.getX()][pos.getY()] = empty;
     }
 
-    /**
-     * Checks if the cell is in bounds and empty
-     * @param pos checking position on field
-     * @return <b>true</b> if position is {@link #empty} and
-     * <b>false</b> if position is out of bounds or not empty
-     */
     @Override
     public boolean isEmpty(Position pos) {
 
@@ -99,7 +90,7 @@ public class FieldCells implements Cells {
 
     @Override
     public int getHeight() {
-        
+
         return cellsContent[0].length;
     }
 }

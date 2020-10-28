@@ -1,4 +1,4 @@
-package alive.bot.genome.fabric;
+package alive.bot.genome.mutator.fabric;
 
 import alive.bot.genome.gene.Gene;
 
