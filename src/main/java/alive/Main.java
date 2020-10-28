@@ -5,8 +5,8 @@ import alive.field.MainField;
 public class Main {
 
     public static void main(String[] args) {
-        
-        var field = new MainField(2, 2);
+
+        var field = new MainField(10, 15);
         field.start();
     }
 }

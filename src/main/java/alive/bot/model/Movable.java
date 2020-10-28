@@ -1,10 +1,9 @@
 package alive.bot.model;
 
-
 public interface Movable {
 
     /**
-     * Calls when bot should make a move.
+     * Calls when bot makes a move.
      */
     void makeAMove();
 }

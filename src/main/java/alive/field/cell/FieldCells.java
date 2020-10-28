@@ -12,45 +12,52 @@ public class FieldCells implements Cells {
 
     public FieldCells(int height, int width) {
 
-        cellsContent = new CellContent[height][width];
+        cellsContent = new CellContent[width][height];
 
-        for (var i = 0; i < height; ++i) {
-            for (var j = 0; j < width; ++j) {
+        for (var i = 0; i < width; ++i) {
+            for (var j = 0; j < height; ++j) {
                 cellsContent[i][j] = empty;
             }
         }
     }
 
     @Override
-    public boolean tryGetCellContent(Position pos, CellContent output) {
+    public CellContent getCellContent(Position pos) throws IllegalArgumentException {
 
         if (isInBounds(pos)) {
-            output = getCellContentByPos(pos);
-            return true;
+            return getCellContentByPos(pos);
         }
-        return false;
+
+        throw new IllegalArgumentException(pos.toString() + " was out of bounds of the field");
     }
 
     @Override
-    public boolean trySetCellContent(Position pos, CellContent newCellContent) {
+    public void setCellContent(Position pos, CellContent newCellContent) throws IllegalArgumentException {
 
         if (isInBounds(pos)) {
             cellsContent[pos.getX()][pos.getY()] = newCellContent;
-            return true;
+        } else {
+            throw new IllegalArgumentException(pos.toString() + " was out of bounds of the field");
         }
-        return false;
     }
 
     @Override
-    public boolean trySetEmpty(Position pos) {
+    public void setEmpty(Position pos) throws IllegalArgumentException {
 
         if (isInBounds(pos)) {
+            cellsContent[pos.getX()][pos.getY()].eraseFromField();
             cellsContent[pos.getX()][pos.getY()] = empty;
-            return true;
+        } else {
+            throw new IllegalArgumentException(pos.toString() + " was out of bounds of the field");
         }
-        return false;
     }
 
+    /**
+     * Checks if the cell is in bounds and empty
+     * @param pos checking position on field
+     * @return <b>true</b> if position is {@link #empty} and
+     * <b>false</b> if position is out of bounds or not empty
+     */
     @Override
     public boolean isEmpty(Position pos) {
 
@@ -77,18 +84,22 @@ public class FieldCells implements Cells {
 
     private void modulate(Position pos) {
 
-        pos.setX((pos.getX() + getWidth()) % getWidth());
+        pos.setX((pos.getX()) % getWidth());
+
+        if (pos.getX() < 0) {
+            pos.setX(pos.getX() + getWidth());
+        }
     }
 
     @Override
     public int getWidth() {
 
-        return cellsContent[0].length;
+        return cellsContent.length;
     }
 
     @Override
     public int getHeight() {
-
-        return cellsContent.length;
+        
+        return cellsContent[0].length;
     }
 }

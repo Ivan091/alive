@@ -11,5 +11,7 @@ public interface Alive extends Mortal, Movable, CellContent {
 
     Position getPosition();
 
+    void setPosition(Position newPos);
+
     boolean isAlive();
 }

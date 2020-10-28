@@ -14,6 +14,11 @@ public class DeadBotBody implements CellContent {
     }
 
     @Override
+    public void eraseFromField() {
+        
+    }
+
+    @Override
     public int getEnergyValue() {
 
         return energyValue;

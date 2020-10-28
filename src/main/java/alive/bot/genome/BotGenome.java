@@ -3,8 +3,10 @@ package alive.bot.genome;
 import alive.Randomize;
 import alive.WorldConstants;
 import alive.bot.genome.fabric.GeneFabric;
-import alive.bot.genome.fabric.conditional.RotatingFabric;
-import alive.bot.genome.fabric.direct.PhotosynthesisFabric;
+import alive.bot.genome.fabric.conditional.RotatingGeneFabric;
+import alive.bot.genome.fabric.direct.EatGeneFabric;
+import alive.bot.genome.fabric.direct.GoGeneFabric;
+import alive.bot.genome.fabric.direct.PhotosynthesisGeneFabric;
 import alive.bot.genome.gene.Gene;
 import alive.bot.genome.gene.direct.Photosynthesis;
 
@@ -20,8 +22,10 @@ public class BotGenome implements Genome {
     private static final List<GeneFabric> possibleGenes = new ArrayList<>();
 
     static {
-        possibleGenes.add(new PhotosynthesisFabric());
-        possibleGenes.add(new RotatingFabric());
+        possibleGenes.add(new PhotosynthesisGeneFabric());
+        possibleGenes.add(new RotatingGeneFabric());
+        possibleGenes.add(new EatGeneFabric());
+        possibleGenes.add(new GoGeneFabric());
     }
 
     public BotGenome() {
@@ -47,6 +51,10 @@ public class BotGenome implements Genome {
     public void incrementGenIdx(int countOfGenes) {
 
         currentGenIdx = (currentGenIdx + countOfGenes) % genes.length;
+
+        if (currentGenIdx < 0) {
+            currentGenIdx += genes.length;
+        }
     }
 
     @Override

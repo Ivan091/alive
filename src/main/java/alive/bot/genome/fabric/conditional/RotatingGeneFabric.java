@@ -4,7 +4,7 @@ import alive.bot.genome.fabric.GeneFabric;
 import alive.bot.genome.gene.Gene;
 import alive.bot.genome.gene.conditional.Rotating;
 
-public class RotatingFabric implements GeneFabric {
+public class RotatingGeneFabric implements GeneFabric {
 
     @Override
     public Gene create(int key) {

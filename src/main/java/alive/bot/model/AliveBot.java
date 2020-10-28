@@ -17,7 +17,7 @@ public class AliveBot implements Bot {
 
     private final Field field;
 
-    private final Position position;
+    private Position position;
 
     private final Energy energy;
 
@@ -40,9 +40,11 @@ public class AliveBot implements Bot {
     @Override
     public void makeAMove() {
 
-        while (isAlive() && genome.getCurrentGen().run(this)) {
+        var isMoving = true;
+        for (int i = 0; isMoving && i < WorldConstants.BOT_MAX_GENES_PER_MOVE; ++i) {
 
-            energy.changeEnergyValue(-WorldConstants.BOT_RUN_GEN_COST);
+            isMoving = isAlive() && genome.getCurrentGen().run(this);
+            energy.incrementEnergyValue(-WorldConstants.BOT_RUN_GEN_COST);
         }
     }
 
@@ -55,14 +57,14 @@ public class AliveBot implements Bot {
         if (field.getCells().isEmpty(lookingPos)) {
             newBotPos = lookingPos;
         } else {
-            var possiblePos = position.getPositionsAround()
+            var possiblePositions = position.getPositionsAround()
                     .stream().filter(x -> field.getCells().isEmpty(x)).toArray();
 
-            if (possiblePos.length == 0) {
+            if (possiblePositions.length == 0) {
                 destroy();
                 return;
             } else {
-                newBotPos = (Position) possiblePos[Randomize.nextInt(0, possiblePos.length)];
+                newBotPos = (Position) possiblePositions[Randomize.nextInt(possiblePositions.length)];
             }
         }
 
@@ -80,7 +82,7 @@ public class AliveBot implements Bot {
 
         liveCondition.setLiveCondition(LiveConditions.DEAD);
         var deadBody = new DeadBotBody(getEnergyValue() + WorldConstants.DRIED_BODY_ENERGY_VALUE);
-        field.getCells().trySetCellContent(position, deadBody);
+        field.getCells().setCellContent(position, deadBody);
     }
 
     @Override
@@ -99,6 +101,12 @@ public class AliveBot implements Bot {
     public Position getPosition() {
 
         return position;
+    }
+
+    @Override
+    public void setPosition(Position newPos) {
+
+        position = newPos;
     }
 
     @Override
@@ -123,6 +131,12 @@ public class AliveBot implements Bot {
     public LookDirection getLookDirection() {
 
         return lookDirection;
+    }
+
+    @Override
+    public void eraseFromField() {
+
+        destroy();
     }
 
     @Override

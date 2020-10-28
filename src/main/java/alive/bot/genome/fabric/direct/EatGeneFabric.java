@@ -2,13 +2,13 @@ package alive.bot.genome.fabric.direct;
 
 import alive.bot.genome.fabric.GeneFabric;
 import alive.bot.genome.gene.Gene;
-import alive.bot.genome.gene.direct.Photosynthesis;
+import alive.bot.genome.gene.direct.Eat;
 
-public class PhotosynthesisFabric implements GeneFabric {
+public class EatGeneFabric implements GeneFabric {
 
     @Override
     public Gene create(int key) {
 
-        return new Photosynthesis();
+        return new Eat();
     }
 }

@@ -12,16 +12,16 @@ public class Rotating extends ConditionalGene {
 
         super(key);
 
-        key = Math.abs(key);
-        this.key = (key % 8) - 3;
+        this.key = (Math.abs(key) % 8) - 3;
     }
 
     @Override
     public boolean run(Bot bot) {
 
         bot.getLookDirection().rotate(key);
-        bot.getEnergy().changeEnergyValue(-5 * Math.abs(key));
-        return false;
+        bot.getEnergy().incrementEnergyValue(-5 * Math.abs(key));
+        bot.getGenome().incrementGenIdx(1);
+        return true;
     }
 
     @Override

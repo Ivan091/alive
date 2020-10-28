@@ -6,7 +6,7 @@ import alive.bot.model.Bot;
 public interface Gene extends Replicable<Gene> {
 
     /**
-     * Runs current gen.
+     * Runs current gen. This method <b>must</b> call {@link alive.bot.genome.Genome#incrementGenIdx(int)}
      *
      * @param bot current bot
      * @return if the command ends the turn returns <b>true</b>

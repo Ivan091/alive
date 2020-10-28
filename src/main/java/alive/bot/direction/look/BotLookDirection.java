@@ -42,6 +42,10 @@ public class BotLookDirection implements LookDirection {
     public void rotate(int rotationSteps) {
 
         directionNumber = (directionNumber + rotationSteps) % 8;
+
+        if (directionNumber < 0) {
+            directionNumber += 8;
+        }
     }
 
     @Override

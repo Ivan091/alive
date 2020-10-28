@@ -68,4 +68,13 @@ public class BotPosition implements Position {
         return x == that.x &&
                 y == that.y;
     }
+
+    @Override
+    public String toString() {
+
+        return "BotPosition {" +
+                " x = " + x +
+                ", y = " + y +
+                " }";
+    }
 }

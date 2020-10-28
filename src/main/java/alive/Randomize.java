@@ -24,7 +24,7 @@ public abstract class Randomize {
 
         incrementIdx();
 
-        return (int) (randNumbs[idx++] * (upperLimit - lowerLimit) + lowerLimit);
+        return (int) (randNumbs[idx] * (upperLimit - lowerLimit) + lowerLimit);
     }
 
     /**
@@ -45,7 +45,7 @@ public abstract class Randomize {
 
         incrementIdx();
 
-        return randNumbs[idx++];
+        return randNumbs[idx];
     }
 
     private static void incrementIdx() {

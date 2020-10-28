@@ -9,11 +9,11 @@ public interface Cells {
 
     int getHeight();
 
-    boolean tryGetCellContent(Position pos, CellContent output);
+    CellContent getCellContent(Position pos) throws IllegalArgumentException;
 
-    boolean trySetCellContent(Position pos, CellContent newCellContent);
+    void setCellContent(Position pos, CellContent newCellContent) throws IllegalArgumentException;
 
-    boolean trySetEmpty(Position pos);
+    void setEmpty(Position pos) throws IllegalArgumentException;
 
     boolean isEmpty(Position pos);
 

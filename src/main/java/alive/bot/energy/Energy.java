@@ -6,5 +6,10 @@ public interface Energy {
 
     void setEnergyValue(int newValue);
 
-    void changeEnergyValue(int changing);
+    /**
+     * Increments current energy value.
+     *
+     * @param increment the value of the energy increment.
+     */
+    void incrementEnergyValue(int increment);
 }

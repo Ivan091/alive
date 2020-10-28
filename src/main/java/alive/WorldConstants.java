@@ -11,5 +11,7 @@ public abstract class WorldConstants {
      */
     public static final int BOT_RUN_GEN_COST = 10;
 
-    public static final int GENOME_LENGTH = 64;
+    public static final int BOT_MAX_GENES_PER_MOVE = 10;
+
+    public static final int GENOME_LENGTH = 16;
 }

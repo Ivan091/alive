@@ -10,6 +10,7 @@ import alive.field.cell.FieldCells;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 public class MainField implements Field {
 
@@ -17,7 +18,7 @@ public class MainField implements Field {
 
     private final List<Alive> aliveBots;
 
-    private final List<Alive> newAliveBots;
+    private final Queue<Alive> newAliveBots;
 
     public MainField(int height, int width) {
 
@@ -33,14 +34,20 @@ public class MainField implements Field {
 
         addNewAlive(firstBot);
 
-        for (var i = 0; i < 100; ++i) {
+        for (var i = 0; i < 1000000000; ++i) {
+            
             update();
+
+            if (aliveBots.size() == 0) {
+
+                return;
+            }
         }
     }
 
     private void update() {
 
-        var botsIt = aliveBots.listIterator();
+        var botsIt = aliveBots.iterator();
 
         while (botsIt.hasNext()) {
 
@@ -53,21 +60,14 @@ public class MainField implements Field {
             }
         }
 
-        var newBotsIt = newAliveBots.listIterator();
-
-        while (botsIt.hasNext()) {
-
-            var curBot = botsIt.next();
-
+        while (!newAliveBots.isEmpty()) {
+            var curBot = newAliveBots.poll();
             curBot.makeAMove();
 
-            if (!curBot.isAlive()) {
-                botsIt.remove();
+            if (curBot.isAlive()) {
+                aliveBots.add(curBot);
             }
         }
-
-        aliveBots.addAll(newAliveBots);
-        newAliveBots.clear();
     }
 
     @Override
@@ -91,8 +91,11 @@ public class MainField implements Field {
     @Override
     public void addNewAlive(Alive newAlive) {
 
-        if (cells.trySetCellContent(newAlive.getPosition(), newAlive)) {
+        try {
+            cells.setCellContent(newAlive.getPosition(), newAlive);
             newAliveBots.add(newAlive);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
         }
     }
 }

@@ -35,8 +35,8 @@ public class BotEnergy implements Energy {
     }
 
     @Override
-    public void changeEnergyValue(int changing) {
+    public void incrementEnergyValue(int increment) {
 
-        setEnergyValue(energyValue + changing);
+        setEnergyValue(energyValue + increment);
     }
 }
