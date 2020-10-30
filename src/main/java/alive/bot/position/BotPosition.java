@@ -2,6 +2,7 @@ package alive.bot.position;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class BotPosition implements Position {
 
@@ -65,8 +66,13 @@ public class BotPosition implements Position {
             return false;
         }
         BotPosition that = (BotPosition) o;
-        return x == that.x &&
-                y == that.y;
+        return x == that.x && y == that.y;
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(x, y);
     }
 
     @Override
