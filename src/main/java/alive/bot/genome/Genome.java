@@ -10,7 +10,7 @@ public interface Genome extends Replicable<Genome> {
      *
      * @param increment can be any negative or positive int.
      */
-    void incrementGenIdx(int increment);
+    void incrementGeneIdx(int increment);
 
-    Gene getCurrentGen();
+    Gene getCurrentGene();
 }

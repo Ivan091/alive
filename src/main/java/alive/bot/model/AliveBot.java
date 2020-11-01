@@ -1,17 +1,16 @@
 package alive.bot.model;
 
-import alive.Randomize;
 import alive.WorldConstants;
-import alive.bot.condition.BotCondition;
-import alive.bot.condition.Condition;
+import alive.bot.condition.*;
 import alive.bot.condition.live.LiveConditions;
 import alive.bot.direction.look.LookDirection;
-import alive.bot.energy.BotEnergy;
-import alive.bot.energy.Energy;
+import alive.bot.energy.*;
 import alive.bot.genome.Genome;
 import alive.bot.position.Position;
 import alive.field.Field;
 import alive.field.cell.content.DeadBotBody;
+
+import java.util.Random;
 
 public class AliveBot implements Bot {
 
@@ -43,7 +42,7 @@ public class AliveBot implements Bot {
         var isMoving = true;
         for (int i = 0; isMoving && i < WorldConstants.BOT_MAX_GENES_PER_MOVE; ++i) {
 
-            isMoving = isAlive() && genome.getCurrentGen().run(this);
+            isMoving = isAlive() && genome.getCurrentGene().run(this);
             energy.incrementEnergyValue(-WorldConstants.BOT_RUN_GEN_COST);
         }
     }
@@ -64,7 +63,7 @@ public class AliveBot implements Bot {
                 destroy();
                 return;
             } else {
-                newBotPos = (Position) possiblePositions[Randomize.nextInt(possiblePositions.length)];
+                newBotPos = (Position) possiblePositions[new Random().nextInt(possiblePositions.length)];
             }
         }
 

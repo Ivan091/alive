@@ -16,8 +16,8 @@ public abstract class Randomize {
     /**
      *
      * @param lowerLimit lower randomization limit
-     * @param upperLimit upper randomization limit
-     * @return random int from (lowerLimit, upperLimit).
+     * @param upperLimit upper randomization limit (not including)
+     * @return random int from [lowerLimit, upperLimit).
      */
 
     public static int nextInt(int lowerLimit, int upperLimit) {
@@ -39,7 +39,7 @@ public abstract class Randomize {
 
     /**
      *
-     * @return random flot from [0.0, 1.0].
+     * @return random float from [0.0, 1.0).
      */
     public static float nextFloat() {
 

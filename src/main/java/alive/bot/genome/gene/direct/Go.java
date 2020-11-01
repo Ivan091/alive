@@ -17,7 +17,7 @@ public class Go extends DirectGene {
             cells.setCellContent(bot.getPosition(), bot);
         }
 
-        bot.getGenome().incrementGenIdx(1);
+        bot.getGenome().incrementGeneIdx(1);
         bot.getEnergy().incrementEnergyValue(-5);
         return false;
     }

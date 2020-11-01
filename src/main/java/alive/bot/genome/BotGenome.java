@@ -1,11 +1,9 @@
 package alive.bot.genome;
 
-import alive.Randomize;
-import alive.WorldConstants;
+import alive.*;
 import alive.bot.genome.gene.Gene;
 import alive.bot.genome.gene.direct.Photosynthesis;
-import alive.bot.genome.mutator.GenomeMutator;
-import alive.bot.genome.mutator.Mutator;
+import alive.bot.genome.mutator.*;
 
 public class BotGenome implements Genome {
 
@@ -29,13 +27,13 @@ public class BotGenome implements Genome {
     }
 
     @Override
-    public Gene getCurrentGen() {
+    public Gene getCurrentGene() {
 
         return genes[currentGenIdx];
     }
 
     @Override
-    public void incrementGenIdx(int countOfGenes) {
+    public void incrementGeneIdx(int countOfGenes) {
 
         currentGenIdx = (currentGenIdx + countOfGenes) % genes.length;
 
@@ -48,7 +46,7 @@ public class BotGenome implements Genome {
     public Genome replicate() {
 
         if (Randomize.nextFloat() < 0.25) {
-            return new BotGenome(genomeMutator.mutate(genes, Randomize.nextInt(1, 4)));
+            return new BotGenome(genomeMutator.mutate(genes));
         }
         return getExactCopyOfGenome();
     }

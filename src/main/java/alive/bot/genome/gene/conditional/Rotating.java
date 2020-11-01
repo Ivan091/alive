@@ -20,7 +20,7 @@ public class Rotating extends ConditionalGene {
 
         bot.getLookDirection().rotate(key);
         bot.getEnergy().incrementEnergyValue(-5 * Math.abs(key));
-        bot.getGenome().incrementGenIdx(1);
+        bot.getGenome().incrementGeneIdx(1);
         return true;
     }
 

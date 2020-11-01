@@ -9,7 +9,7 @@ public class Photosynthesis extends DirectGene {
     public boolean run(Bot bot) {
 
         bot.getEnergy().incrementEnergyValue(100);
-        bot.getGenome().incrementGenIdx(1);
+        bot.getGenome().incrementGeneIdx(1);
         return false;
     }
 

@@ -21,7 +21,7 @@ public class Eat extends DirectGene {
             bot.getEnergy().incrementEnergyValue(-10);
         }
 
-        bot.getGenome().incrementGenIdx(1);
+        bot.getGenome().incrementGeneIdx(1);
         return false;
     }
 

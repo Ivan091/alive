@@ -25,12 +25,10 @@ public class GenomeMutator implements Mutator<Gene[]> {
     }
 
     @Override
-    public Gene[] mutate(Gene[] mutatingItem, int mutationsCount) {
+    public Gene[] mutate(Gene[] mutatingItem) {
 
-        if (mutationsCount < 1) {
-            throw new IllegalArgumentException();
-        }
-        
+        var mutationsCount = Randomize.nextInt(1, 4);
+
         var mutatingIndexes = new HashSet<Integer>();
         for (var i = 0; i < mutationsCount; ++i) {
             mutatingIndexes.add(Randomize.nextInt(mutatingItem.length));
