@@ -15,6 +15,7 @@ public class Eat extends DirectGene {
 
             var eatingContent = cells.getCellContent(lookingPos);
             cells.setEmpty(lookingPos);
+
             bot.getEnergy().incrementEnergyValue(eatingContent.getEnergyValue() >> 1);
         } else {
 

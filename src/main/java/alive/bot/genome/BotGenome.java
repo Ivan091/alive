@@ -16,12 +16,21 @@ public class BotGenome implements Genome {
     public BotGenome() {
 
         genes = new Gene[WorldConstants.GENOME_LENGTH];
+
+        if (genes.length < 1) {
+            throw new IllegalArgumentException("genome length was less than 1");
+        }
+
         for (var i = 0; i < genes.length; ++i) {
             genes[i] = new Photosynthesis();
         }
     }
 
     public BotGenome(Gene[] genes) {
+
+        if (genes.length < 1) {
+            throw new IllegalArgumentException("genome length was less than 1");
+        }
 
         this.genes = genes;
     }

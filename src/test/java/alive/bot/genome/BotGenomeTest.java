@@ -1,21 +1,23 @@
 package alive.bot.genome;
 
 import alive.bot.genome.gene.Gene;
-import alive.bot.genome.gene.direct.Photosynthesis;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 class BotGenomeTest {
 
-    private Gene[] genes = new Gene[]{
+    private final Gene[] genes = new Gene[]{
 
-            new Photosynthesis(),
-            new Photosynthesis(),
-            new Photosynthesis(),
+            mock(Gene.class),
+            mock(Gene.class),
+            mock(Gene.class),
     };
 
-    private Genome genome = new BotGenome(genes);
+    private final Genome genome = new BotGenome(genes);
 
     @Test
     void incrementGenIdx() {
@@ -41,6 +43,8 @@ class BotGenomeTest {
     @Test
     void allReplicatedGenesNotNull() {
 
+        Arrays.stream(genes).forEach(x -> when(x.replicate()).thenReturn(mock(Gene.class)));
+
         var newGenome = genome.replicate();
 
         var gene0 = newGenome.getCurrentGene();
@@ -48,7 +52,16 @@ class BotGenomeTest {
 
         do {
             newGenome.incrementGeneIdx(1);
+
             assertNotNull(newGenome.getCurrentGene());
         } while (gene0 != newGenome.getCurrentGene());
+    }
+
+    @Test
+    void throwsExceptionIfGenesCountLessThan1() {
+
+        var genes0 = new Gene[]{};
+
+        assertThrows(IllegalArgumentException.class, () -> new BotGenome(genes0));
     }
 }
