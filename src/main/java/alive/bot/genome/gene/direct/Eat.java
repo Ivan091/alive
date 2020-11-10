@@ -3,7 +3,7 @@ package alive.bot.genome.gene.direct;
 import alive.bot.genome.gene.Gene;
 import alive.bot.model.Bot;
 
-public class Eat extends DirectGene {
+public class Eat extends AbstractDirectGene {
 
     @Override
     public boolean run(Bot bot) {

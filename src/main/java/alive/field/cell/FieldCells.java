@@ -1,8 +1,7 @@
 package alive.field.cell;
 
 import alive.bot.position.Position;
-import alive.field.cell.content.CellContent;
-import alive.field.cell.content.Empty;
+import alive.field.cell.content.*;
 
 public class FieldCells implements Cells {
 

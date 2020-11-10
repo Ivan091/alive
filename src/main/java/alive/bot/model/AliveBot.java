@@ -48,7 +48,7 @@ public class AliveBot implements Bot {
     }
 
     @Override
-    public void replicate() {
+    public Void replicate() {
 
         Position newBotPos;
 
@@ -59,9 +59,9 @@ public class AliveBot implements Bot {
             var possiblePositions = position.getPositionsAround()
                     .stream().filter(x -> field.getCells().isEmpty(x)).toArray();
 
-            if (possiblePositions.length == 0) {
+            if (possiblePositions.length < 1) {
                 destroy();
-                return;
+                return null;
             } else {
                 newBotPos = (Position) possiblePositions[new Random().nextInt(possiblePositions.length)];
             }
@@ -74,6 +74,7 @@ public class AliveBot implements Bot {
                 this.lookDirection.getOpposite(), genome.replicate());
 
         field.addNewAlive(newBot);
+        return null;
     }
 
     @Override

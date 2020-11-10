@@ -1,5 +1,7 @@
 package alive.bot.model.mortal;
 
-public interface Mortal extends Replicable, Destroyable {
+import alive.bot.genome.Replicable;
+
+public interface Mortal extends Replicable<Void>, Destroyable {
 
 }

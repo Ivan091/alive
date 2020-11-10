@@ -1,9 +1,11 @@
 package alive.bot.genome;
 
-import alive.*;
+import alive.WorldConstants;
 import alive.bot.genome.gene.Gene;
 import alive.bot.genome.gene.direct.Photosynthesis;
 import alive.bot.genome.mutator.*;
+
+import java.util.Random;
 
 public class BotGenome implements Genome {
 
@@ -54,7 +56,7 @@ public class BotGenome implements Genome {
     @Override
     public Genome replicate() {
 
-        if (Randomize.nextFloat() < 0.25) {
+        if (new Random().nextFloat() < 0.25) {
             return new BotGenome(genomeMutator.mutate(genes));
         }
         return getExactCopyOfGenome();

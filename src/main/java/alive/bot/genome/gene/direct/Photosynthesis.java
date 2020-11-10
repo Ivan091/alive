@@ -3,7 +3,7 @@ package alive.bot.genome.gene.direct;
 import alive.bot.genome.gene.Gene;
 import alive.bot.model.Bot;
 
-public class Photosynthesis extends DirectGene {
+public class Photosynthesis extends AbstractDirectGene {
 
     @Override
     public boolean run(Bot bot) {

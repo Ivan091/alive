@@ -2,15 +2,12 @@ package alive.field;
 
 import alive.bot.direction.look.BotLookDirection;
 import alive.bot.genome.BotGenome;
-import alive.bot.model.Alive;
-import alive.bot.model.AliveBot;
+import alive.bot.genome.gene.Gene;
+import alive.bot.model.*;
 import alive.bot.position.BotPosition;
-import alive.field.cell.Cells;
-import alive.field.cell.FieldCells;
+import alive.field.cell.*;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
 public class MainField implements Field {
 
@@ -24,7 +21,8 @@ public class MainField implements Field {
 
         cells = new FieldCells(height, width);
         aliveBots = new LinkedList<>();
-        newAliveBots = new LinkedList<>();
+        newAliveBots = new ArrayDeque<>() {
+        };
     }
 
     public void start() {
@@ -38,7 +36,13 @@ public class MainField implements Field {
 
             update();
 
+            if (i % 100000 == 0) {
+                createGenesReport();
+                System.out.println('\n');
+            }
+
             if (aliveBots.size() == 0) {
+
 
                 System.out.println("\nThe population is dead(((");
                 return;
@@ -69,6 +73,31 @@ public class MainField implements Field {
                 aliveBots.add(curBot);
             }
         }
+    }
+
+    private void createGenesReport() {
+
+        var map = new HashMap<Class<? extends Gene>, Integer>();
+
+        try {
+            for (var alive : aliveBots) {
+                var bot = (Bot) alive;
+                var genome = bot.getGenome();
+
+                var f = genome.getClass().getDeclaredField("genes");
+                f.setAccessible(true);
+
+                var genes = (Gene[]) f.get(genome);
+
+                for (var gene : genes) {
+                    map.merge(gene.getClass(), 1, Integer::sum);
+                }
+            }
+        } catch (Exception ignored) {
+
+        }
+
+        map.forEach((x, y) -> System.out.format("%-5s%s", y.toString(), x.getSimpleName() + '\n'));
     }
 
     @Override

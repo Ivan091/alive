@@ -3,7 +3,7 @@ package alive.bot.genome.gene.direct;
 import alive.bot.genome.gene.Gene;
 import alive.bot.model.Bot;
 
-public class Go extends DirectGene {
+public class Go extends AbstractDirectGene {
 
     @Override
     public boolean run(Bot bot) {
@@ -17,8 +17,8 @@ public class Go extends DirectGene {
             cells.setCellContent(bot.getPosition(), bot);
         }
 
-        bot.getGenome().incrementGeneIdx(1);
-        bot.getEnergy().incrementEnergyValue(-5);
+        bot.getGenome().incrementGeneIdx(1000);
+        bot.getEnergy().incrementEnergyValue(10);
         return false;
     }
 
