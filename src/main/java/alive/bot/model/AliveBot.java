@@ -10,7 +10,7 @@ import alive.bot.energy.Energy;
 import alive.bot.genome.Genome;
 import alive.bot.position.Position;
 import alive.field.Field;
-import alive.field.cell.content.DeadBotBody;
+import alive.field.cells.content.DeadBotBody;
 
 public class AliveBot implements Bot {
 

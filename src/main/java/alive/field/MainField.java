@@ -3,15 +3,18 @@ package alive.field;
 import alive.bot.direction.look.BotLookDirection;
 import alive.bot.genome.BotGenome;
 import alive.bot.genome.gene.Gene;
-import alive.bot.model.*;
+import alive.bot.model.Alive;
+import alive.bot.model.AliveBot;
+import alive.bot.model.Bot;
 import alive.bot.position.BotPosition;
-import alive.field.cell.*;
+import alive.field.cells.CellsMatrix;
+import alive.field.cells.FieldCellsMatrix;
 
 import java.util.*;
 
 public class MainField implements Field {
 
-    private final Cells cells;
+    private final CellsMatrix cellsMatrix;
 
     private final List<Alive> aliveBots;
 
@@ -19,7 +22,7 @@ public class MainField implements Field {
 
     public MainField(int height, int width) {
 
-        cells = new FieldCells(height, width);
+        cellsMatrix = new FieldCellsMatrix(height, width);
         aliveBots = new LinkedList<>();
         newAliveBots = new ArrayDeque<>() {
         };
@@ -103,26 +106,26 @@ public class MainField implements Field {
     @Override
     public int getWidth() {
 
-        return cells.getWidth();
+        return cellsMatrix.getWidth();
     }
 
     @Override
     public int getHeight() {
 
-        return cells.getHeight();
+        return cellsMatrix.getHeight();
     }
 
     @Override
-    public Cells getCells() {
+    public CellsMatrix getCells() {
 
-        return cells;
+        return cellsMatrix;
     }
 
     @Override
     public void addNewAlive(Alive newAlive) {
 
         try {
-            cells.setCellContent(newAlive.getPosition(), newAlive);
+            cellsMatrix.setCellContent(newAlive.getPosition(), newAlive);
             newAliveBots.add(newAlive);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());

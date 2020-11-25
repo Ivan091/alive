@@ -1,10 +1,10 @@
-package alive.field.cell.content;
+package alive.field.cells.content;
 
 public class Empty implements CellContent {
 
     @Override
     public void eraseFromField() {
-        
+
     }
 
     @Override

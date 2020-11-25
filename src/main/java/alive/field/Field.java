@@ -1,7 +1,7 @@
 package alive.field;
 
 import alive.bot.model.Alive;
-import alive.field.cell.Cells;
+import alive.field.cells.CellsMatrix;
 
 public interface Field {
 
@@ -9,7 +9,7 @@ public interface Field {
 
     int getHeight();
 
-    Cells getCells();
+    CellsMatrix getCells();
 
     void addNewAlive(Alive newAlive);
 }

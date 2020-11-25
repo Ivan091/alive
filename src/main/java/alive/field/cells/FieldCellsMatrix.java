@@ -1,15 +1,16 @@
-package alive.field.cell;
+package alive.field.cells;
 
 import alive.bot.position.Position;
-import alive.field.cell.content.*;
+import alive.field.cells.content.CellContent;
+import alive.field.cells.content.Empty;
 
-public class FieldCells implements Cells {
+public class FieldCellsMatrix implements CellsMatrix {
 
     private static final CellContent empty = new Empty();
 
     private final CellContent[][] cellsContent;
 
-    public FieldCells(int height, int width) {
+    public FieldCellsMatrix(int height, int width) {
 
         cellsContent = new CellContent[width][height];
 

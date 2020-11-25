@@ -1,4 +1,4 @@
-package alive.field.cell.content;
+package alive.field.cells.content;
 
 public interface CellContent {
 
