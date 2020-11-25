@@ -1,22 +1,20 @@
 package alive.bot.model;
 
 import alive.WorldConstants;
-import alive.bot.condition.*;
+import alive.bot.condition.BotCondition;
+import alive.bot.condition.Condition;
 import alive.bot.condition.live.LiveConditions;
 import alive.bot.direction.look.LookDirection;
-import alive.bot.energy.*;
+import alive.bot.energy.BotEnergy;
+import alive.bot.energy.Energy;
 import alive.bot.genome.Genome;
 import alive.bot.position.Position;
 import alive.field.Field;
 import alive.field.cell.content.DeadBotBody;
 
-import java.util.Random;
-
 public class AliveBot implements Bot {
 
     private final Field field;
-
-    private Position position;
 
     private final Energy energy;
 
@@ -25,6 +23,8 @@ public class AliveBot implements Bot {
     private final Genome genome;
 
     private final Condition liveCondition;
+
+    private Position position;
 
     public AliveBot(Field field, Position position, int energyValue, LookDirection lookDirection, Genome genome) {
 
@@ -43,12 +43,12 @@ public class AliveBot implements Bot {
         for (int i = 0; isMoving && i < WorldConstants.BOT_MAX_GENES_PER_MOVE; ++i) {
 
             isMoving = isAlive() && genome.getCurrentGene().run(this);
-            energy.incrementEnergyValue(-WorldConstants.BOT_RUN_GEN_COST);
+            energy.incrementEnergyValue(-WorldConstants.BOT_RUN_GENE_COST);
         }
     }
 
     @Override
-    public Void replicate() {
+    public void replicate() {
 
         Position newBotPos;
 
@@ -56,14 +56,14 @@ public class AliveBot implements Bot {
         if (field.getCells().isEmpty(lookingPos)) {
             newBotPos = lookingPos;
         } else {
-            var possiblePositions = position.getPositionsAround()
-                    .stream().filter(x -> field.getCells().isEmpty(x)).toArray();
+            var possiblePosition = position.getPositionsAround()
+                    .stream().filter(x -> field.getCells().isEmpty(x)).findAny();
 
-            if (possiblePositions.length < 1) {
-                destroy();
-                return null;
+            if (possiblePosition.isPresent()) {
+                newBotPos = possiblePosition.get();
             } else {
-                newBotPos = (Position) possiblePositions[new Random().nextInt(possiblePositions.length)];
+                destroy();
+                return;
             }
         }
 
@@ -74,7 +74,6 @@ public class AliveBot implements Bot {
                 this.lookDirection.getOpposite(), genome.replicate());
 
         field.addNewAlive(newBot);
-        return null;
     }
 
     @Override
