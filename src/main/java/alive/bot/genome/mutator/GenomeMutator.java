@@ -11,6 +11,8 @@ public class GenomeMutator implements Mutator<Gene[]> {
 
     private final List<GeneFabric> possibleGenes = new ArrayList<>();
 
+    private final Random rnd = new Random();
+
     public GenomeMutator() {
 
         possibleGenes.add(new PhotosynthesisGeneFabric());
@@ -22,12 +24,13 @@ public class GenomeMutator implements Mutator<Gene[]> {
     @Override
     public Gene[] mutate(Gene[] mutatingItem) {
 
-        var rand = new Random();
-        var mutationsCount = rand.nextInt(4) + 1;
+        rnd.setSeed(System.currentTimeMillis());
+
+        var mutationsCount = rnd.nextInt(3) + 1;
 
         var mutatingIndexes = new HashSet<Integer>();
         for (var i = 0; i < mutationsCount; ++i) {
-            mutatingIndexes.add(rand.nextInt(mutatingItem.length));
+            mutatingIndexes.add(rnd.nextInt(mutatingItem.length));
         }
 
         var newGenes = new Gene[mutatingItem.length];
@@ -35,8 +38,8 @@ public class GenomeMutator implements Mutator<Gene[]> {
         for (var i = 0; i < newGenes.length; ++i) {
 
             if (mutatingIndexes.contains(i)) {
-                newGenes[i] = possibleGenes.get(rand.nextInt(possibleGenes.size()))
-                        .create(rand.nextInt(mutatingItem.length));
+                newGenes[i] = possibleGenes.get(rnd.nextInt(possibleGenes.size()))
+                        .create(rnd.nextInt(mutatingItem.length));
             } else {
                 newGenes[i] = mutatingItem[i].replicate();
             }

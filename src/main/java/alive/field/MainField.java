@@ -3,9 +3,7 @@ package alive.field;
 import alive.bot.direction.look.BotLookDirection;
 import alive.bot.genome.BotGenome;
 import alive.bot.genome.gene.Gene;
-import alive.bot.model.Alive;
-import alive.bot.model.AliveBot;
-import alive.bot.model.Bot;
+import alive.bot.model.*;
 import alive.bot.position.BotPosition;
 import alive.field.cells.CellsMatrix;
 import alive.field.cells.FieldCellsMatrix;
@@ -35,17 +33,20 @@ public class MainField implements Field {
 
         addNewAlive(firstBot);
 
-        for (var i = 0; i < 1000000000; ++i) {
+        for (var i = 0; ; ++i) {
 
             update();
 
             if (i % 100000 == 0) {
+                System.out.println('\n');
                 createGenesReport();
                 System.out.println('\n');
             }
+            if (i % 1000 == 0) {
+                System.out.print(aliveBots.size() + " ");
+            }
 
             if (aliveBots.size() == 0) {
-
 
                 System.out.println("\nThe population is dead(((");
                 return;
@@ -97,10 +98,9 @@ public class MainField implements Field {
                 }
             }
         } catch (Exception ignored) {
-
         }
 
-        map.forEach((x, y) -> System.out.format("%-5s%s", y.toString(), x.getSimpleName() + '\n'));
+        map.forEach((x, y) -> System.out.format("%-9s%s", y.toString(), x.getSimpleName() + '\n'));
     }
 
     @Override
@@ -124,11 +124,7 @@ public class MainField implements Field {
     @Override
     public void addNewAlive(Alive newAlive) {
 
-        try {
-            cellsMatrix.setCellContent(newAlive.getPosition(), newAlive);
-            newAliveBots.add(newAlive);
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-        }
+        cellsMatrix.setContent(newAlive.getPosition(), newAlive);
+        newAliveBots.add(newAlive);
     }
 }

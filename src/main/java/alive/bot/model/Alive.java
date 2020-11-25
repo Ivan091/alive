@@ -1,13 +1,13 @@
 package alive.bot.model;
 
-import alive.bot.condition.Condition;
+import alive.bot.condition.LiveCondition;
 import alive.bot.model.mortal.Mortal;
 import alive.bot.position.Position;
-import alive.field.cells.content.CellContent;
+import alive.field.cells.content.Content;
 
-public interface Alive extends Mortal, Movable, CellContent {
+public interface Alive extends Mortal, Movable, Content {
 
-    Condition getLiveCondition();
+    LiveCondition getLiveCondition();
 
     Position getPosition();
 

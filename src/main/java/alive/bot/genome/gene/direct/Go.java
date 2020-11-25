@@ -11,14 +11,14 @@ public class Go extends AbstractDirectGene {
         var lookingPos = bot.getLookDirection().getLookingPos(bot.getPosition());
 
         var cells = bot.getField().getCells();
-        if (cells.isEmpty(lookingPos)) {
+        if (cells.isInBoundsAndEmpty(lookingPos)) {
             cells.setEmpty(bot.getPosition());
             bot.setPosition(lookingPos);
-            cells.setCellContent(bot.getPosition(), bot);
+            cells.setContent(bot.getPosition(), bot);
         }
 
-        bot.getGenome().incrementGeneIdx(1000);
-        bot.getEnergy().incrementEnergyValue(10);
+        bot.getEnergy().incrementEnergyValue(-2);
+        bot.getGenome().incrementGeneIdx(1);
         return false;
     }
 

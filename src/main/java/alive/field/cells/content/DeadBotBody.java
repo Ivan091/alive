@@ -1,6 +1,6 @@
 package alive.field.cells.content;
 
-public class DeadBotBody implements CellContent {
+public class DeadBotBody implements Content {
 
     private final int energyValue;
 

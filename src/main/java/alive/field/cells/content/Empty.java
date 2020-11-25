@@ -1,6 +1,6 @@
 package alive.field.cells.content;
 
-public class Empty implements CellContent {
+public class Empty implements Content {
 
     @Override
     public void eraseFromField() {

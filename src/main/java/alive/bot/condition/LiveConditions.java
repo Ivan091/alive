@@ -1,4 +1,4 @@
-package alive.bot.condition.live;
+package alive.bot.condition;
 
 public enum LiveConditions {
 

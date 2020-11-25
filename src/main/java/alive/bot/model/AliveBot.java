@@ -1,9 +1,8 @@
 package alive.bot.model;
 
 import alive.WorldConstants;
-import alive.bot.condition.BotCondition;
-import alive.bot.condition.Condition;
-import alive.bot.condition.live.LiveConditions;
+import alive.bot.condition.BotLiveCondition;
+import alive.bot.condition.LiveCondition;
 import alive.bot.direction.look.LookDirection;
 import alive.bot.energy.BotEnergy;
 import alive.bot.energy.Energy;
@@ -22,7 +21,7 @@ public class AliveBot implements Bot {
 
     private final Genome genome;
 
-    private final Condition liveCondition;
+    private final LiveCondition liveCondition;
 
     private Position position;
 
@@ -33,7 +32,7 @@ public class AliveBot implements Bot {
         this.energy = new BotEnergy(this, energyValue);
         this.genome = genome;
         this.lookDirection = lookDirection;
-        this.liveCondition = new BotCondition(LiveConditions.ALIVE);
+        this.liveCondition = new BotLiveCondition();
     }
 
     @Override
@@ -43,7 +42,7 @@ public class AliveBot implements Bot {
         for (int i = 0; isMoving && i < WorldConstants.BOT_MAX_GENES_PER_MOVE; ++i) {
 
             isMoving = isAlive() && genome.getCurrentGene().run(this);
-            energy.incrementEnergyValue(-WorldConstants.BOT_RUN_GENE_COST);
+            energy.incrementEnergyValue(WorldConstants.BOT_RUN_GENE_ENERGY_INCREMENT);
         }
     }
 
@@ -52,12 +51,12 @@ public class AliveBot implements Bot {
 
         Position newBotPos;
 
-        var lookingPos = this.lookDirection.getLookingPos(position);
-        if (field.getCells().isEmpty(lookingPos)) {
+        var lookingPos = this.lookDirection.getOpposite().getLookingPos(position);
+        if (field.getCells().isInBoundsAndEmpty(lookingPos)) {
             newBotPos = lookingPos;
         } else {
             var possiblePosition = position.getPositionsAround()
-                    .stream().filter(x -> field.getCells().isEmpty(x)).findAny();
+                    .stream().filter(field.getCells()::isInBoundsAndEmpty).findAny();
 
             if (possiblePosition.isPresent()) {
                 newBotPos = possiblePosition.get();
@@ -79,9 +78,9 @@ public class AliveBot implements Bot {
     @Override
     public void destroy() {
 
-        liveCondition.setLiveCondition(LiveConditions.DEAD);
+        liveCondition.makeDead();
         var deadBody = new DeadBotBody(getEnergyValue() + WorldConstants.DRIED_BODY_ENERGY_VALUE);
-        field.getCells().setCellContent(position, deadBody);
+        field.getCells().setContent(position, deadBody);
     }
 
     @Override
@@ -91,7 +90,7 @@ public class AliveBot implements Bot {
     }
 
     @Override
-    public Condition getLiveCondition() {
+    public LiveCondition getLiveCondition() {
 
         return liveCondition;
     }

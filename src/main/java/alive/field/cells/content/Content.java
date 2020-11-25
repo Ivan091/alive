@@ -1,6 +1,6 @@
 package alive.field.cells.content;
 
-public interface CellContent {
+public interface Content {
 
     void eraseFromField();
 

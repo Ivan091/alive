@@ -8,7 +8,7 @@ public class Photosynthesis extends AbstractDirectGene {
     @Override
     public boolean run(Bot bot) {
 
-        bot.getEnergy().incrementEnergyValue(100);
+        bot.getEnergy().incrementEnergyValue(27);
         bot.getGenome().incrementGeneIdx(1);
         return false;
     }

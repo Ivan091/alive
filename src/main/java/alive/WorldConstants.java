@@ -9,9 +9,11 @@ public abstract class WorldConstants {
     /**
      * The cost of using each gene.
      */
-    public static final int BOT_RUN_GENE_COST = 10;
+    public static final int BOT_RUN_GENE_ENERGY_INCREMENT = -10;
 
     public static final int BOT_MAX_GENES_PER_MOVE = 10;
 
     public static final int GENOME_LENGTH = 16;
+
+    public static final double MUTATION_PROBABILITY = 0.25;
 }

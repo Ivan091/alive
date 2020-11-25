@@ -1,61 +1,49 @@
 package alive.field.cells;
 
 import alive.bot.position.Position;
-import alive.field.cells.content.CellContent;
+import alive.field.cells.content.Content;
 import alive.field.cells.content.Empty;
 
 public class FieldCellsMatrix implements CellsMatrix {
 
-    private static final CellContent empty = new Empty();
+    private static final Content empty = new Empty();
 
-    private final CellContent[][] cellsContent;
+    private final Content[][] cellsMatrix;
 
     public FieldCellsMatrix(int height, int width) {
 
-        cellsContent = new CellContent[width][height];
+        cellsMatrix = new Content[width][height];
 
         for (var i = 0; i < width; ++i) {
             for (var j = 0; j < height; ++j) {
-                cellsContent[i][j] = empty;
+                cellsMatrix[i][j] = empty;
             }
         }
     }
 
     @Override
-    public CellContent getCellContent(Position pos) {
+    public Content getContent(Position pos) {
 
-        if (!isInBounds(pos)) {
-            throw new IllegalArgumentException(pos.toString() + " was out of bounds of the field");
-        }
-        return getCellContentByPos(pos);
+        return cellsMatrix[pos.getX()][pos.getY()];
     }
 
     @Override
-    public void setCellContent(Position pos, CellContent newCellContent) {
+    public void setContent(Position pos, Content newContent) {
 
-        if (!isInBounds(pos)) {
-            throw new IllegalArgumentException(pos.toString() + " was out of bounds of the field");
-        }
-        cellsContent[pos.getX()][pos.getY()] = newCellContent;
+        cellsMatrix[pos.getX()][pos.getY()] = newContent;
     }
 
     @Override
     public void setEmpty(Position pos) {
 
-        if (!isInBounds(pos)) {
-            throw new IllegalArgumentException(pos.toString() + " was out of bounds of the field");
-        }
-        cellsContent[pos.getX()][pos.getY()].eraseFromField();
-        cellsContent[pos.getX()][pos.getY()] = empty;
+        getContent(pos).eraseFromField();
+        setContent(pos, empty);
     }
 
     @Override
     public boolean isEmpty(Position pos) {
 
-        if (isInBounds(pos)) {
-            return getCellContentByPos(pos).equals(empty);
-        }
-        return false;
+        return getContent(pos).equals(empty);
     }
 
     @Override
@@ -68,9 +56,9 @@ public class FieldCellsMatrix implements CellsMatrix {
         return false;
     }
 
-    private CellContent getCellContentByPos(Position pos) {
-
-        return cellsContent[pos.getX()][pos.getY()];
+    @Override
+    public boolean isInBoundsAndEmpty(Position pos) {
+        return isInBounds(pos) && isEmpty(pos);
     }
 
     private void modulate(Position pos) {
@@ -85,12 +73,12 @@ public class FieldCellsMatrix implements CellsMatrix {
     @Override
     public int getWidth() {
 
-        return cellsContent.length;
+        return cellsMatrix.length;
     }
 
     @Override
     public int getHeight() {
 
-        return cellsContent[0].length;
+        return cellsMatrix[0].length;
     }
 }

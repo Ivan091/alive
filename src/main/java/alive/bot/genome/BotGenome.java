@@ -3,7 +3,8 @@ package alive.bot.genome;
 import alive.WorldConstants;
 import alive.bot.genome.gene.Gene;
 import alive.bot.genome.gene.direct.Photosynthesis;
-import alive.bot.genome.mutator.*;
+import alive.bot.genome.mutator.GenomeMutator;
+import alive.bot.genome.mutator.Mutator;
 
 import java.util.Random;
 
@@ -15,13 +16,10 @@ public class BotGenome implements Genome {
 
     private static final Mutator<Gene[]> genomeMutator = new GenomeMutator();
 
+
     public BotGenome() {
 
         genes = new Gene[WorldConstants.GENOME_LENGTH];
-
-        if (genes.length < 1) {
-            throw new IllegalArgumentException("genome length was less than 1");
-        }
 
         for (var i = 0; i < genes.length; ++i) {
             genes[i] = new Photosynthesis();
@@ -56,7 +54,7 @@ public class BotGenome implements Genome {
     @Override
     public Genome replicate() {
 
-        if (new Random().nextFloat() < 0.25) {
+        if (new Random().nextFloat() < WorldConstants.MUTATION_PROBABILITY) {
             return new BotGenome(genomeMutator.mutate(genes));
         }
         return getExactCopyOfGenome();

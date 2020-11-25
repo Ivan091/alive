@@ -13,15 +13,13 @@ public class Eat extends AbstractDirectGene {
 
         if (cells.isInBounds(lookingPos)) {
 
-            var eatingContent = cells.getCellContent(lookingPos);
+            var eatingContent = cells.getContent(lookingPos);
             cells.setEmpty(lookingPos);
 
             bot.getEnergy().incrementEnergyValue(eatingContent.getEnergyValue() >> 1);
-        } else {
-
-            bot.getEnergy().incrementEnergyValue(-10);
         }
 
+        bot.getEnergy().incrementEnergyValue(-2);
         bot.getGenome().incrementGeneIdx(1);
         return false;
     }

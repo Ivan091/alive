@@ -1,36 +1,29 @@
 package alive.field.cells;
 
 import alive.bot.position.Position;
-import alive.field.cells.content.CellContent;
+import alive.field.cells.content.Content;
 
 public interface CellsMatrix {
-
-    int getWidth();
-
-    int getHeight();
 
     /**
      * @param pos position of a cell on the field.
      * @return content in the cell at the position.
-     * @throws IllegalArgumentException throws if the position is out of bounds.
      */
-    CellContent getCellContent(Position pos) throws IllegalArgumentException;
+    Content getContent(Position pos);
 
     /**
-     * @param pos            position of a cell on the field.
-     * @param newCellContent will be assigned to the cell at the position
-     * @throws IllegalArgumentException throws if the position is out of bounds.
+     * @param pos        position of a cell on the field.
+     * @param newContent will be assigned to the cell at the position
      */
-    void setCellContent(Position pos, CellContent newCellContent) throws IllegalArgumentException;
+    void setContent(Position pos, Content newContent);
 
     /**
      * Sets a content in the cell empty.
      *
      * @param pos position of a cell on field.
-     * @throws IllegalArgumentException throws if the position is out of bounds.
      * @see alive.field.cells.content.Empty
      */
-    void setEmpty(Position pos) throws IllegalArgumentException;
+    void setEmpty(Position pos);
 
     /**
      * Checks if the cell is in bounds and empty
@@ -43,4 +36,10 @@ public interface CellsMatrix {
     boolean isEmpty(Position pos);
 
     boolean isInBounds(Position pos);
+
+    boolean isInBoundsAndEmpty(Position pos);
+
+    int getWidth();
+
+    int getHeight();
 }
