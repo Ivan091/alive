@@ -16,7 +16,7 @@ public class Rotating extends AbstractConditionalGene {
     }
 
     @Override
-    public boolean run(Bot bot) {
+    public Boolean run(Bot bot) {
 
         bot.getLookDirection().rotate(key);
 

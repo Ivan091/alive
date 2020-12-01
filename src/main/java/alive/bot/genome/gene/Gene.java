@@ -12,7 +12,7 @@ public interface Gene extends Replicable<Gene> {
      * @return if the command ends the turn returns <b>true</b>
      * else returns <b>false</b>
      */
-    boolean run(Bot bot);
+    Boolean run(Bot bot);
 
     /**
      * If bots differ in one gen only they will be friendly.

@@ -6,9 +6,9 @@ import alive.bot.model.Bot;
 public class Photosynthesis extends AbstractDirectGene {
 
     @Override
-    public boolean run(Bot bot) {
+    public Boolean run(Bot bot) {
 
-        bot.getEnergy().incrementEnergyValue(27);
+        bot.getEnergy().incrementEnergyValue(57);
         bot.getGenome().incrementGeneIdx(1);
         return false;
     }

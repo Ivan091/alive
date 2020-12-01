@@ -5,6 +5,7 @@ import alive.bot.genome.gene.Gene;
 import alive.bot.genome.gene.direct.Photosynthesis;
 import alive.bot.genome.mutator.GenomeMutator;
 import alive.bot.genome.mutator.Mutator;
+import alive.bot.model.Bot;
 
 import java.util.Random;
 
@@ -36,12 +37,6 @@ public class BotGenome implements Genome {
     }
 
     @Override
-    public Gene getCurrentGene() {
-
-        return genes[currentGenIdx];
-    }
-
-    @Override
     public void incrementGeneIdx(int countOfGenes) {
 
         currentGenIdx = (currentGenIdx + countOfGenes) % genes.length;
@@ -49,6 +44,17 @@ public class BotGenome implements Genome {
         if (currentGenIdx < 0) {
             currentGenIdx += genes.length;
         }
+    }
+
+    @Override
+    public boolean runCurrentGene(Bot bot) {
+
+        return genes[currentGenIdx].run(bot);
+    }
+
+    @Override
+    public Gene getCurrentGene() {
+        return genes[currentGenIdx];
     }
 
     @Override

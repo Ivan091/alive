@@ -1,6 +1,7 @@
 package alive.bot.genome;
 
 import alive.bot.genome.gene.Gene;
+import alive.bot.model.Bot;
 
 public interface Genome extends Replicable<Genome> {
 
@@ -11,6 +12,8 @@ public interface Genome extends Replicable<Genome> {
      * @param increment can be any negative or positive int.
      */
     void incrementGeneIdx(int increment);
+
+    boolean runCurrentGene(Bot bot);
 
     Gene getCurrentGene();
 }

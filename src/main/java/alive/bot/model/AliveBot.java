@@ -41,7 +41,7 @@ public class AliveBot implements Bot {
         var isMoving = true;
         for (int i = 0; isMoving && i < WorldConstants.BOT_MAX_GENES_PER_MOVE; ++i) {
 
-            isMoving = isAlive() && genome.getCurrentGene().run(this);
+            isMoving = isAlive() && genome.runCurrentGene(this);
             energy.incrementEnergyValue(WorldConstants.BOT_RUN_GENE_ENERGY_INCREMENT);
         }
     }
@@ -51,9 +51,9 @@ public class AliveBot implements Bot {
 
         Position newBotPos;
 
-        var lookingPos = this.lookDirection.getOpposite().getLookingPos(position);
-        if (field.getCells().isInBoundsAndEmpty(lookingPos)) {
-            newBotPos = lookingPos;
+        var positionBehindOfBot = lookDirection.getOpposite().getLookingPos(position);
+        if (field.getCells().isInBoundsAndEmpty(positionBehindOfBot)) {
+            newBotPos = positionBehindOfBot;
         } else {
             var possiblePosition = position.getPositionsAround()
                     .stream().filter(field.getCells()::isInBoundsAndEmpty).findAny();
@@ -83,16 +83,11 @@ public class AliveBot implements Bot {
         field.getCells().setContent(position, deadBody);
     }
 
+
     @Override
     public boolean isAlive() {
 
         return liveCondition.isAlive();
-    }
-
-    @Override
-    public LiveCondition getLiveCondition() {
-
-        return liveCondition;
     }
 
     @Override
@@ -130,6 +125,12 @@ public class AliveBot implements Bot {
 
         return lookDirection;
     }
+
+    @Override
+    public Position getLookingPos() {
+        return getLookDirection().getLookingPos(position);
+    }
+
 
     @Override
     public void eraseFromField() {

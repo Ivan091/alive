@@ -1,14 +1,15 @@
 package alive.bot.direction.look;
 
-import alive.bot.position.*;
+import alive.bot.position.BotPosition;
+import alive.bot.position.Position;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class BotLookDirectionTest {
 
     private final Position startPos = new BotPosition(0, 0);
-    private final LookDirection lookDir = new BotLookDirection(0);
+    private final LookDirection lookDir = new BotLookDirection(1);
 
     @Test
     void rotate() {

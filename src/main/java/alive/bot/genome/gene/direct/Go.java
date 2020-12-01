@@ -6,9 +6,9 @@ import alive.bot.model.Bot;
 public class Go extends AbstractDirectGene {
 
     @Override
-    public boolean run(Bot bot) {
+    public Boolean run(Bot bot) {
 
-        var lookingPos = bot.getLookDirection().getLookingPos(bot.getPosition());
+        var lookingPos = bot.getLookingPos();
 
         var cells = bot.getField().getCells();
         if (cells.isInBoundsAndEmpty(lookingPos)) {

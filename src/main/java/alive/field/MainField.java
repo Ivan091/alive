@@ -22,8 +22,7 @@ public class MainField implements Field {
 
         cellsMatrix = new FieldCellsMatrix(height, width);
         aliveBots = new LinkedList<>();
-        newAliveBots = new ArrayDeque<>() {
-        };
+        newAliveBots = new ArrayDeque<>();
     }
 
     public void start() {

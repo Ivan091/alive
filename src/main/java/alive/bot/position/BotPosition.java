@@ -1,8 +1,6 @@
 package alive.bot.position;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class BotPosition implements Position {
 
@@ -30,6 +28,8 @@ public class BotPosition implements Position {
         }
 
         return positionsAround;
+
+
     }
 
     @Override
