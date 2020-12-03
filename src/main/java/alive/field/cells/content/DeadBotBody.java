@@ -12,14 +12,15 @@ public class DeadBotBody implements Content {
         this.energyValue = energyValue;
     }
 
-    @Override
-    public void eraseFromField() {
-
-    }
 
     @Override
     public int getEnergyValue() {
 
         return energyValue;
+    }
+
+    @Override
+    public void finalizeBeforeErasingFromField() {
+
     }
 }

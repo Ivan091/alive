@@ -9,6 +9,6 @@ public class RotatingGeneFabric implements GeneFabric {
     @Override
     public Gene create(int key) {
 
-        return new Rotating(key);
+        return new Rotating((Math.abs(key) % 8) - 3);
     }
 }

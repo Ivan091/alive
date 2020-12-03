@@ -9,10 +9,7 @@ public class Rotating extends AbstractConditionalGene {
      * @param key Using as a parameter for conditional jump.
      */
     public Rotating(int key) {
-
         super(key);
-
-        this.key = (Math.abs(key) % 8) - 3;
     }
 
     @Override

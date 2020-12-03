@@ -5,21 +5,23 @@ import alive.bot.genome.mutator.fabric.GeneFabric;
 import alive.bot.genome.mutator.fabric.conditional.RotatingGeneFabric;
 import alive.bot.genome.mutator.fabric.direct.*;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.Random;
 
 public class GenomeMutator implements Mutator<Gene[]> {
 
-    private final List<GeneFabric> possibleGenes = new ArrayList<>();
-
-    private final Random rnd = new Random();
+    private final GeneFabric[] possibleGenes;
 
     public GenomeMutator() {
-
-        possibleGenes.add(new PhotosynthesisGeneFabric());
-        possibleGenes.add(new RotatingGeneFabric());
-        possibleGenes.add(new GoGeneFabric());
-        possibleGenes.add(new EatGeneFabric());
+        possibleGenes = new GeneFabric[]{
+                new PhotosynthesisGeneFabric(),
+                new RotatingGeneFabric(),
+                new GoGeneFabric(),
+                new EatGeneFabric(),
+        };
     }
+
+    private final Random rnd = new Random();
 
     @Override
     public Gene[] mutate(Gene[] mutatingItem) {
@@ -38,8 +40,8 @@ public class GenomeMutator implements Mutator<Gene[]> {
         for (var i = 0; i < newGenes.length; ++i) {
 
             if (mutatingIndexes.contains(i)) {
-                newGenes[i] = possibleGenes.get(rnd.nextInt(possibleGenes.size()))
-                        .create(rnd.nextInt(mutatingItem.length));
+                newGenes[i] = possibleGenes[(rnd.nextInt(possibleGenes.length))]
+                        .create(rnd.nextInt());
             } else {
                 newGenes[i] = mutatingItem[i].replicate();
             }

@@ -36,9 +36,16 @@ public class FieldCellsMatrix implements CellsMatrix {
     @Override
     public void setEmpty(Position pos) {
 
-        getContent(pos).eraseFromField();
+        destroy(pos);
         setContent(pos, empty);
     }
+
+    @Override
+    public void destroy(Position pos) {
+
+        getContent(pos).finalizeBeforeErasingFromField();
+    }
+
 
     @Override
     public boolean isEmpty(Position pos) {

@@ -7,6 +7,7 @@ import alive.bot.model.*;
 import alive.bot.position.BotPosition;
 import alive.field.cells.CellsMatrix;
 import alive.field.cells.FieldCellsMatrix;
+import alive.field.cells.content.Content;
 
 import java.util.*;
 
@@ -27,12 +28,9 @@ public class MainField implements Field {
 
     public void start() {
 
-        var firstBot = new AliveBot(this, new BotPosition(1, 1), 500,
-                new BotLookDirection(), new BotGenome());
+        addNewAlive(new AliveBot(this, new BotPosition(0, 0), 500, new BotLookDirection(), new BotGenome()));
 
-        addNewAlive(firstBot);
-
-        for (var i = 0; ; ++i) {
+        for (var i = 0; i < Integer.MAX_VALUE; ++i) {
 
             update();
 
@@ -40,15 +38,14 @@ public class MainField implements Field {
                 System.out.println('\n');
                 createGenesReport();
                 System.out.println('\n');
-            }
-            if (i % 1000 == 0) {
-                System.out.print(aliveBots.size() + " ");
+                createFieldReport();
+                System.out.println('\n');
             }
 
             if (aliveBots.size() == 0) {
 
                 System.out.println("\nThe population is dead(((");
-                return;
+                //return;
             }
         }
     }
@@ -97,6 +94,18 @@ public class MainField implements Field {
                 }
             }
         } catch (Exception ignored) {
+        }
+
+        map.forEach((x, y) -> System.out.format("%-9s%s", y.toString(), x.getSimpleName() + '\n'));
+    }
+
+    private void createFieldReport() {
+        var map = new HashMap<Class<? extends Content>, Integer>();
+        var pos = new BotPosition(0, 0);
+        for (var i = 0; i < getHeight(); pos.setX(i), ++i) {
+            for (var j = 0; j < getWidth(); pos.setY(j), ++j) {
+                map.merge(cellsMatrix.getContent(pos).getClass(), 1, Integer::sum);
+            }
         }
 
         map.forEach((x, y) -> System.out.format("%-9s%s", y.toString(), x.getSimpleName() + '\n'));

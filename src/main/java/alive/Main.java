@@ -6,8 +6,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        var field = new MainField(30, 30);
+        var field = new MainField(70, 70);
         field.start();
-
     }
 }

@@ -1,8 +1,6 @@
 package alive.bot.model;
 
 import alive.WorldConstants;
-import alive.bot.condition.BotLiveCondition;
-import alive.bot.condition.LiveCondition;
 import alive.bot.direction.look.LookDirection;
 import alive.bot.energy.BotEnergy;
 import alive.bot.energy.Energy;
@@ -21,9 +19,9 @@ public class AliveBot implements Bot {
 
     private final Genome genome;
 
-    private final LiveCondition liveCondition;
-
     private Position position;
+
+    private boolean isAlive = true;
 
     public AliveBot(Field field, Position position, int energyValue, LookDirection lookDirection, Genome genome) {
 
@@ -32,7 +30,6 @@ public class AliveBot implements Bot {
         this.energy = new BotEnergy(this, energyValue);
         this.genome = genome;
         this.lookDirection = lookDirection;
-        this.liveCondition = new BotLiveCondition();
     }
 
     @Override
@@ -78,7 +75,7 @@ public class AliveBot implements Bot {
     @Override
     public void destroy() {
 
-        liveCondition.makeDead();
+        isAlive = false;
         var deadBody = new DeadBotBody(getEnergyValue() + WorldConstants.DRIED_BODY_ENERGY_VALUE);
         field.getCells().setContent(position, deadBody);
     }
@@ -87,7 +84,7 @@ public class AliveBot implements Bot {
     @Override
     public boolean isAlive() {
 
-        return liveCondition.isAlive();
+        return isAlive;
     }
 
     @Override
@@ -131,16 +128,14 @@ public class AliveBot implements Bot {
         return getLookDirection().getLookingPos(position);
     }
 
-
-    @Override
-    public void eraseFromField() {
-
-        destroy();
-    }
-
     @Override
     public int getEnergyValue() {
 
         return energy.getEnergyValue();
+    }
+
+    @Override
+    public void finalizeBeforeErasingFromField() {
+        isAlive = false;
     }
 }

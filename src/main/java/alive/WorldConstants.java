@@ -1,6 +1,6 @@
 package alive;
 
-public abstract class WorldConstants {
+public final class WorldConstants {
 
     public static final int MAX_ENERGY_VALUE = 1000;
     public static final int MIN_ENERGY_VALUE = 1;
@@ -15,5 +15,5 @@ public abstract class WorldConstants {
 
     public static final int GENOME_LENGTH = 16;
 
-    public static final double MUTATION_PROBABILITY = 0.25;
+    public static final double MUTATION_PROBABILITY = 0.5;
 }

@@ -12,6 +12,7 @@ public class Go extends AbstractDirectGene {
 
         var cells = bot.getField().getCells();
         if (cells.isInBoundsAndEmpty(lookingPos)) {
+
             cells.setEmpty(bot.getPosition());
             bot.setPosition(lookingPos);
             cells.setContent(bot.getPosition(), bot);

@@ -18,12 +18,20 @@ public interface CellsMatrix {
     void setContent(Position pos, Content newContent);
 
     /**
+     * Calls eraseFromField method from cell's content.
      * Sets a content in the cell empty.
      *
      * @param pos position of a cell on field.
      * @see alive.field.cells.content.Empty
      */
     void setEmpty(Position pos);
+
+    /**
+     * Calls eraseFromField method from cell's content.
+     *
+     * @param pos position on field
+     */
+    void destroy(Position pos);
 
     /**
      * Checks if the cell is in bounds and empty

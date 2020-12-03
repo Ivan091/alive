@@ -22,4 +22,11 @@ public abstract class AbstractConditionalGene implements Gene {
 
         return (obj.getClass() == this.getClass()) && ((AbstractConditionalGene) obj).key == this.key;
     }
+
+    @Override
+    public String toString() {
+        return "AbstractConditionalGene{" +
+                "key=" + key +
+                '}';
+    }
 }
