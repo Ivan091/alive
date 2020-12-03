@@ -2,7 +2,7 @@ package alive.bot.genome.gene.conditional;
 
 import alive.bot.genome.gene.Gene;
 
-public abstract class AbstractConditionalGene implements Gene {
+public abstract class ConditionalGene implements Gene {
 
     /**
      * parameter for conditional jump
@@ -12,7 +12,7 @@ public abstract class AbstractConditionalGene implements Gene {
     /**
      * @param key Using as a parameter for conditional jump.
      */
-    public AbstractConditionalGene(int key) {
+    public ConditionalGene(int key) {
 
         this.key = key;
     }
@@ -20,12 +20,12 @@ public abstract class AbstractConditionalGene implements Gene {
     @Override
     public boolean equals(Object obj) {
 
-        return (obj.getClass() == this.getClass()) && ((AbstractConditionalGene) obj).key == this.key;
+        return (obj.getClass() == this.getClass()) && ((ConditionalGene) obj).key == this.key;
     }
 
     @Override
     public String toString() {
-        return "AbstractConditionalGene{" +
+        return "ConditionalGene{" +
                 "key=" + key +
                 '}';
     }

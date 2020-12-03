@@ -3,7 +3,7 @@ package alive.bot.genome.gene.conditional;
 import alive.bot.genome.gene.Gene;
 import alive.bot.model.Bot;
 
-public class Rotating extends AbstractConditionalGene {
+public class Rotating extends ConditionalGene {
 
     /**
      * @param key Using as a parameter for conditional jump.
