@@ -9,7 +9,7 @@ public interface Field {
 
     int getHeight();
 
-    CellsMatrix getCells();
+    CellsMatrix getCellsMatrix();
 
     void addNewAlive(Alive newAlive);
 }

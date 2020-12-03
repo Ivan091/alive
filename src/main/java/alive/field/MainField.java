@@ -52,16 +52,15 @@ public class MainField implements Field {
 
     private void update() {
 
-        var botsIt = aliveBots.iterator();
+        var aliveBotsIt = aliveBots.iterator();
+        while (aliveBotsIt.hasNext()) {
 
-        while (botsIt.hasNext()) {
-
-            var curBot = botsIt.next();
+            var curBot = aliveBotsIt.next();
 
             curBot.makeAMove();
 
             if (!curBot.isAlive()) {
-                botsIt.remove();
+                aliveBotsIt.remove();
             }
         }
 
@@ -124,7 +123,7 @@ public class MainField implements Field {
     }
 
     @Override
-    public CellsMatrix getCells() {
+    public CellsMatrix getCellsMatrix() {
 
         return cellsMatrix;
     }

@@ -49,11 +49,11 @@ public class AliveBot implements Bot {
         Position newBotPos;
 
         var positionBehindOfBot = lookDirection.getOpposite().getLookingPos(position);
-        if (field.getCells().isInBoundsAndEmpty(positionBehindOfBot)) {
+        if (field.getCellsMatrix().isInBoundsAndEmpty(positionBehindOfBot)) {
             newBotPos = positionBehindOfBot;
         } else {
             var possiblePosition = position.getPositionsAround()
-                    .stream().filter(field.getCells()::isInBoundsAndEmpty).findAny();
+                    .stream().filter(field.getCellsMatrix()::isInBoundsAndEmpty).findAny();
 
             if (possiblePosition.isPresent()) {
                 newBotPos = possiblePosition.get();
@@ -77,7 +77,7 @@ public class AliveBot implements Bot {
 
         isAlive = false;
         var deadBody = new DeadBotBody(getEnergyValue() + WorldConstants.DRIED_BODY_ENERGY_VALUE);
-        field.getCells().setContent(position, deadBody);
+        field.getCellsMatrix().setContent(position, deadBody);
     }
 
 

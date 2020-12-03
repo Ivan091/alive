@@ -18,7 +18,7 @@ import static org.mockito.Mockito.*;
 public abstract class GeneTest {
 
     protected Field field = new MainField(3, 3);
-    protected CellsMatrix cellsMatrix = field.getCells();
+    protected CellsMatrix cellsMatrix = field.getCellsMatrix();
     protected Gene gene;
     protected Bot bot = createBotSpy();
 

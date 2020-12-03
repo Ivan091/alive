@@ -10,7 +10,7 @@ public class Go extends DirectGene {
 
         var lookingPos = bot.getLookingPos();
 
-        var cells = bot.getField().getCells();
+        var cells = bot.getField().getCellsMatrix();
         if (cells.isInBoundsAndEmpty(lookingPos)) {
 
             cells.setEmpty(bot.getPosition());

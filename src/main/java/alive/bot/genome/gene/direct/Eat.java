@@ -9,7 +9,7 @@ public class Eat extends DirectGene {
     public Boolean run(Bot bot) {
 
         var lookingPos = bot.getLookingPos();
-        var cells = bot.getField().getCells();
+        var cells = bot.getField().getCellsMatrix();
 
         if (cells.isInBounds(lookingPos)) {
 
