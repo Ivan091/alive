@@ -9,4 +9,9 @@ public abstract class DirectGene implements Gene {
 
         return obj.getClass() == this.getClass();
     }
+
+    @Override
+    public String toString() {
+        return this.getClass().getSimpleName();
+    }
 }

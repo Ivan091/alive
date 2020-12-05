@@ -28,7 +28,7 @@ public class MainField implements Field {
 
     public void start() {
 
-        addNewAlive(new AliveBot(this, new BotPosition(0, 0), 500, new BotLookDirection(), new BotGenome()));
+        addNewAlive(new AliveBot(this, new BotPosition(0, 0), 500, new BotLookDirection(), BotGenome.createFirstBotGenome()));
 
         for (var i = 0; i < Integer.MAX_VALUE; ++i) {
 

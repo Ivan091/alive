@@ -28,4 +28,11 @@ public class Rotating extends ConditionalGene {
 
         return new Rotating(key);
     }
+
+    @Override
+    public String toString() {
+        return "Rotating{" +
+                "key=" + key +
+                '}';
+    }
 }

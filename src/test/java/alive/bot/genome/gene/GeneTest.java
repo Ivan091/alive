@@ -2,7 +2,6 @@ package alive.bot.genome.gene;
 
 import alive.bot.direction.look.BotLookDirection;
 import alive.bot.energy.Energy;
-import alive.bot.genome.BotGenome;
 import alive.bot.genome.Genome;
 import alive.bot.model.AliveBot;
 import alive.bot.model.Bot;
@@ -25,7 +24,7 @@ public abstract class GeneTest {
     public GeneTest(Gene gene) {
         this.gene = gene;
     }
-
+    
     @Test
     public void replicateTest() {
         var newGene = gene.replicate();
@@ -77,9 +76,8 @@ public abstract class GeneTest {
 
     private Bot createBotSpy() {
 
-
         bot = spy(new AliveBot(new MainField(3, 3),
-                new BotPosition(1, 1), 0, new BotLookDirection(0), new BotGenome()));
+                new BotPosition(1, 1), 0, new BotLookDirection(0), mock(Genome.class)));
 
         return bot;
     }

@@ -7,7 +7,7 @@ import alive.bot.genome.mutator.fabric.GeneFabric;
 public class PhotosynthesisGeneFabric implements GeneFabric {
 
     @Override
-    public Gene create(int key) {
+    public Gene create(int key, int genomeLength) {
 
         return new Photosynthesis();
     }

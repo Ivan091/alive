@@ -17,14 +17,14 @@ public class BotGenome implements Genome {
 
     private static final Mutator<Gene[]> genomeMutator = new GenomeMutator();
 
+    public static Genome createFirstBotGenome() {
 
-    public BotGenome() {
-
-        genes = new Gene[WorldConstants.GENOME_LENGTH];
+        var genes = new Gene[WorldConstants.START_GENOME_LENGTH];
 
         for (var i = 0; i < genes.length; ++i) {
             genes[i] = new Photosynthesis();
         }
+        return new BotGenome(genes);
     }
 
     public BotGenome(Gene[] genes) {

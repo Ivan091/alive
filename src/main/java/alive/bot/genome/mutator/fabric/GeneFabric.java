@@ -11,8 +11,9 @@ public interface GeneFabric {
     /**
      * Creates new gene.
      *
-     * @param key necessary to create {@link ConditionalGene}.
+     * @param key          necessary to create {@link ConditionalGene}.
+     * @param genomeLength
      * @return create gene.
      */
-    Gene create(int key);
+    Gene create(int key, int genomeLength);
 }

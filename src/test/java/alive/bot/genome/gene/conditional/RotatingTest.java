@@ -18,7 +18,7 @@ class RotatingTest extends GeneTest {
 
     private void setup(int geneArg) {
 
-        gene = new Rotating(geneArg + 3);
+        gene = new Rotating(geneArg);
         bot = spy(new AliveBot(field, new BotPosition(1, 1), 0, new BotLookDirection(0), mock(Genome.class)));
 
         doNothing().when(bot).destroy();
