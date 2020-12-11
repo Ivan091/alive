@@ -35,7 +35,7 @@ public class AliveBot implements Bot {
     @Override
     public void makeAMove() {
 
-        var isMoving = true;
+        var isMoving = isAlive();
         for (int i = 0; isMoving && i < WorldConstants.BOT_MAX_GENES_PER_MOVE; ++i) {
 
             isMoving = isAlive() && genome.runCurrentGene(this);
@@ -45,6 +45,10 @@ public class AliveBot implements Bot {
 
     @Override
     public void replicate() {
+
+        if (!isAlive()) {
+            return;
+        }
 
         Position newBotPos;
 
@@ -62,9 +66,10 @@ public class AliveBot implements Bot {
                 return;
             }
         }
-
+        this.energy.setEnergyValue(energy.getEnergyValue() - genome.length() * WorldConstants.GENE_REPLICATION_COST);
         var newBotEnergy = this.getEnergyValue() >> 1;
         this.energy.setEnergyValue(newBotEnergy);
+        energy.notifyAlive();
 
         var newBot = new AliveBot(field, newBotPos, newBotEnergy,
                 this.lookDirection.getOpposite(), genome.replicate());

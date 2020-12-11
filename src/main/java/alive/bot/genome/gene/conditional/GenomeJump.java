@@ -9,6 +9,7 @@ public class GenomeJump extends ConditionalGene {
      */
     public GenomeJump(int key) {
         super(key);
+        this.key = key == 0 ? 1 : key;
     }
 
     @Override
@@ -18,7 +19,7 @@ public class GenomeJump extends ConditionalGene {
 
     @Override
     public Boolean run(Bot bot) {
-        bot.getEnergy().incrementEnergyValue(-1);
+        bot.getEnergy().incrementEnergyValue(Math.abs(key) / -2);
         bot.getGenome().incrementGeneIdx(key);
         return true;
     }

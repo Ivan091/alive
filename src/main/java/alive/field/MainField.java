@@ -45,7 +45,7 @@ public class MainField implements Field {
             if (aliveBots.size() == 0) {
 
                 System.out.println("\nThe population is dead(((");
-                //return;
+                return;
             }
         }
     }
@@ -66,9 +66,9 @@ public class MainField implements Field {
 
         while (!newAliveBots.isEmpty()) {
             var curBot = newAliveBots.poll();
-            curBot.makeAMove();
 
             if (curBot.isAlive()) {
+                curBot.makeAMove();
                 aliveBots.add(curBot);
             }
         }

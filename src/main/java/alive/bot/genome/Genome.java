@@ -16,4 +16,6 @@ public interface Genome extends Replicable<Genome> {
     boolean runCurrentGene(Bot bot);
 
     Gene getCurrentGene();
+
+    int length();
 }

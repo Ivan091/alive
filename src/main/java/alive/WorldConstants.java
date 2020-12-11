@@ -19,6 +19,8 @@ public final class WorldConstants {
      */
     public static final int DRIED_BODY_ENERGY_VALUE = 300;
 
+    public static final int GENE_REPLICATION_COST = 10;
+
     /**
      * The cost of using each gene.
      */
@@ -36,7 +38,7 @@ public final class WorldConstants {
 
     public static final int MIN_GENOME_LENGTH = 8;
 
-    public static final int MAX_GENOME_LENGTH = 128;
+    public static final int MAX_GENOME_LENGTH = 32;
 
     /**
      * Probability of mutation during bot's replication.

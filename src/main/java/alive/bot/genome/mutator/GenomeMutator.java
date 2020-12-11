@@ -14,16 +14,23 @@ public class GenomeMutator implements Mutator<Gene[]> {
 
     private final GeneFabric[] possibleGenes;
 
-    private final double changeGenomeLengthProbability = 0.1;
+    private final double changingGenomeLengthProbability = 0.1;
+
+    private final int maxGenomeLengthChanging = 3;
+
+    private final int maxMutationsCount = 4;
 
     private final Random rnd = new Random();
 
     public GenomeMutator() {
         possibleGenes = new GeneFabric[]
                 {
+                        // Direct.
                         new PhotosynthesisGeneFabric(),
                         new GoGeneFabric(),
                         new EatGeneFabric(),
+
+                        // Conditional.
                         new RotatingGeneFabric(),
                         new GenomeJumpFabric(),
                 };
@@ -33,48 +40,62 @@ public class GenomeMutator implements Mutator<Gene[]> {
     public Gene[] mutate(Gene[] mutatingGenes) {
 
         rnd.setSeed(System.currentTimeMillis());
-        var newGenes = cloneGenes(mutatingGenes, generateNewGenesLength(mutatingGenes.length));
 
-        var mutationsCount = rnd.nextInt(4) + 1;
+        var newGenes = replicateGenes(mutatingGenes, generateNewGenomeLength(mutatingGenes.length));
+
+        var mutationsCount = getRandomInt(1, maxMutationsCount);
         IntStream.range(0, mutationsCount)
                 .forEach(i -> newGenes[rnd.nextInt(newGenes.length)] = generateRandomGene(newGenes.length));
 
         return newGenes;
     }
 
-    private Gene[] cloneGenes(Gene[] mutatingGenes, int newGenesCount) {
+    private Gene[] replicateGenes(Gene[] mutatingGenes, int newGenomeLength) {
 
-        var newGenes = new Gene[newGenesCount];
+        var newGenes = new Gene[newGenomeLength];
 
-        if (newGenesCount > mutatingGenes.length) {
+        if (newGenomeLength > mutatingGenes.length) {
             IntStream.range(0, mutatingGenes.length).forEach(i -> newGenes[i] = mutatingGenes[i].replicate());
-            IntStream.range(mutatingGenes.length, newGenesCount)
-                    .forEach(i -> newGenes[i] = generateRandomGene(newGenesCount));
+            IntStream.range(mutatingGenes.length, newGenomeLength)
+                    .forEach(i -> newGenes[i] = generateRandomGene(newGenomeLength));
         } else {
-            IntStream.range(0, newGenesCount).forEach(i -> newGenes[i] = mutatingGenes[i].replicate());
+            IntStream.range(0, newGenomeLength).forEach(i -> newGenes[i] = mutatingGenes[i].replicate());
         }
         return newGenes;
     }
 
-    private int generateNewGenesLength(int mutatingGenesCount) {
+    private Gene generateRandomGene(int genomeLength) {
+        return possibleGenes[(rnd.nextInt(possibleGenes.length))].create(rnd.nextInt(), genomeLength);
+    }
 
-        if (rnd.nextDouble() < changeGenomeLengthProbability) {
-            int key;
+    private int generateNewGenomeLength(int currentGenomeLength) {
 
-            do {
-                key = rnd.nextInt(mutatingGenesCount / 10 + 1) - mutatingGenesCount / 20;
-            } while (Math.abs(key) < 1);
+        if (rnd.nextDouble() < changingGenomeLengthProbability) {
+            var genomeLengthIncrement = generateGenomeLengthIncrement();
 
-            if (mutatingGenesCount + key < WorldConstants.MIN_GENOME_LENGTH ||
-                    mutatingGenesCount + key > WorldConstants.MAX_GENOME_LENGTH) {
-                return mutatingGenesCount;
+            if (isPossibleGenomeLength(currentGenomeLength + genomeLengthIncrement)) {
+                return currentGenomeLength + genomeLengthIncrement;
             }
-            return mutatingGenesCount + key;
         }
-        return mutatingGenesCount;
+        return currentGenomeLength;
     }
 
-    private Gene generateRandomGene(int genesCount) {
-        return possibleGenes[(rnd.nextInt(possibleGenes.length))].create(rnd.nextInt(), genesCount);
+    private int generateGenomeLengthIncrement() {
+        int genomeLengthIncrement;
+        do {
+            genomeLengthIncrement = getRandomInt(-maxGenomeLengthChanging, maxGenomeLengthChanging);
+
+        } while (genomeLengthIncrement == 0);
+        return genomeLengthIncrement;
     }
+
+    private boolean isPossibleGenomeLength(int genesCount) {
+        return genesCount > WorldConstants.MIN_GENOME_LENGTH && genesCount < WorldConstants.MAX_GENOME_LENGTH;
+    }
+
+    private int getRandomInt(int lowerBound, int higherBound) {
+
+        return rnd.nextInt(higherBound - lowerBound + 1) + lowerBound;
+    }
+
 }

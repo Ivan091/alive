@@ -8,12 +8,13 @@ import alive.bot.genome.mutator.Mutator;
 import alive.bot.model.Bot;
 
 import java.util.Random;
+import java.util.stream.IntStream;
 
 public class BotGenome implements Genome {
 
     private final Gene[] genes;
 
-    private int currentGenIdx;
+    private int currentGeneIdx;
 
     private static final Mutator<Gene[]> genomeMutator = new GenomeMutator();
 
@@ -21,9 +22,8 @@ public class BotGenome implements Genome {
 
         var genes = new Gene[WorldConstants.START_GENOME_LENGTH];
 
-        for (var i = 0; i < genes.length; ++i) {
-            genes[i] = new Photosynthesis();
-        }
+        IntStream.range(0, genes.length).forEach(i -> genes[i] = new Photosynthesis());
+
         return new BotGenome(genes);
     }
 
@@ -39,23 +39,29 @@ public class BotGenome implements Genome {
     @Override
     public void incrementGeneIdx(int countOfGenes) {
 
-        currentGenIdx = (currentGenIdx + countOfGenes) % genes.length;
+        currentGeneIdx = (currentGeneIdx + countOfGenes) % genes.length;
 
-        if (currentGenIdx < 0) {
-            currentGenIdx += genes.length;
+        if (currentGeneIdx < 0) {
+            currentGeneIdx += genes.length;
         }
     }
 
     @Override
     public boolean runCurrentGene(Bot bot) {
 
-        return genes[currentGenIdx].run(bot);
+        return genes[currentGeneIdx].run(bot);
     }
 
     @Override
     public Gene getCurrentGene() {
-        return genes[currentGenIdx];
+        return genes[currentGeneIdx];
     }
+
+    @Override
+    public int length() {
+        return genes.length;
+    }
+
 
     @Override
     public Genome replicate() {

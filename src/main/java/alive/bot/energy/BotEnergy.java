@@ -10,8 +10,8 @@ public class BotEnergy implements Energy {
 
     public BotEnergy(Mortal bot, int energyValue) {
 
-        this.energyValue = energyValue;
         this.bot = bot;
+        this.energyValue = energyValue;
     }
 
     @Override
@@ -24,7 +24,21 @@ public class BotEnergy implements Energy {
     public void setEnergyValue(int newValue) {
 
         energyValue = newValue;
+    }
 
+    @Override
+    public void incrementEnergyValue(int increment) {
+
+        energyValue += increment;
+        notifyBot();
+    }
+
+    @Override
+    public void notifyAlive() {
+        notifyBot();
+    }
+
+    private void notifyBot() {
         if (energyValue < WorldConstants.MIN_ENERGY_VALUE) {
             bot.destroy();
         }
@@ -34,9 +48,4 @@ public class BotEnergy implements Energy {
         }
     }
 
-    @Override
-    public void incrementEnergyValue(int increment) {
-
-        setEnergyValue(energyValue + increment);
-    }
 }

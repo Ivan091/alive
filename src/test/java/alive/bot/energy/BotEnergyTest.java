@@ -5,7 +5,7 @@ import alive.bot.model.mortal.Mortal;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 class BotEnergyTest {
@@ -31,7 +31,7 @@ class BotEnergyTest {
         energy.setEnergyValue(WorldConstants.MAX_ENERGY_VALUE + 1);
         energy.incrementEnergyValue(0);
 
-        Mockito.verify(alive, times(2)).replicate();
+        Mockito.verify(alive, times(1)).replicate();
     }
 
     @Test
@@ -40,7 +40,7 @@ class BotEnergyTest {
         energy.setEnergyValue(WorldConstants.MIN_ENERGY_VALUE - 1);
         energy.incrementEnergyValue(0);
 
-        verify(alive, times(2)).destroy();
+        verify(alive, times(1)).destroy();
     }
 
     @Test

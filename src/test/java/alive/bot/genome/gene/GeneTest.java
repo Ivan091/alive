@@ -24,7 +24,7 @@ public abstract class GeneTest {
     public GeneTest(Gene gene) {
         this.gene = gene;
     }
-    
+
     @Test
     public void replicateTest() {
         var newGene = gene.replicate();
@@ -63,6 +63,11 @@ public abstract class GeneTest {
             @Override
             public void incrementEnergyValue(int increment) {
                 setEnergyValue(0);
+            }
+
+            @Override
+            public void notifyAlive() {
+
             }
         };
 
