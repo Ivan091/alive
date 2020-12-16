@@ -31,7 +31,7 @@ class RotatingTest extends GeneTest {
 
         setup(0);
         gene.run(bot);
-        Assertions.assertEquals(new EntityPosition(2, 1), bot.getLookingPos().get());
+        Assertions.assertEquals(new EntityPosition(2, 1), bot.getLookingPos().orElseThrow());
 
     }
 
@@ -41,11 +41,11 @@ class RotatingTest extends GeneTest {
         setup(-1);
 
         gene.run(bot);
-        Assertions.assertEquals(new EntityPosition(2, 0), bot.getLookingPos().get());
+        Assertions.assertEquals(new EntityPosition(2, 0), bot.getLookingPos().orElseThrow());
         gene.run(bot);
-        Assertions.assertEquals(new EntityPosition(1, 0), bot.getLookingPos().get());
+        Assertions.assertEquals(new EntityPosition(1, 0), bot.getLookingPos().orElseThrow());
         gene.run(bot);
-        Assertions.assertEquals(new EntityPosition(0, 0), bot.getLookingPos().get());
+        Assertions.assertEquals(new EntityPosition(0, 0), bot.getLookingPos().orElseThrow());
     }
 
     @Test
@@ -53,11 +53,11 @@ class RotatingTest extends GeneTest {
 
         setup(-2);
         gene.run(bot);
-        Assertions.assertEquals(new EntityPosition(1, 0), bot.getLookingPos().get());
+        Assertions.assertEquals(new EntityPosition(1, 0), bot.getLookingPos().orElseThrow());
         gene.run(bot);
-        Assertions.assertEquals(new EntityPosition(0, 1), bot.getLookingPos().get());
+        Assertions.assertEquals(new EntityPosition(0, 1), bot.getLookingPos().orElseThrow());
         gene.run(bot);
-        Assertions.assertEquals(new EntityPosition(1, 2), bot.getLookingPos().get());
+        Assertions.assertEquals(new EntityPosition(1, 2), bot.getLookingPos().orElseThrow());
     }
 
     @Test
@@ -65,11 +65,11 @@ class RotatingTest extends GeneTest {
 
         setup(-3);
         gene.run(bot);
-        Assertions.assertEquals(new EntityPosition(0, 0), bot.getLookingPos().get());
+        Assertions.assertEquals(new EntityPosition(0, 0), bot.getLookingPos().orElseThrow());
         gene.run(bot);
-        Assertions.assertEquals(new EntityPosition(1, 2), bot.getLookingPos().get());
+        Assertions.assertEquals(new EntityPosition(1, 2), bot.getLookingPos().orElseThrow());
         gene.run(bot);
-        Assertions.assertEquals(new EntityPosition(2, 0), bot.getLookingPos().get());
+        Assertions.assertEquals(new EntityPosition(2, 0), bot.getLookingPos().orElseThrow());
     }
 
     @Test
@@ -77,11 +77,11 @@ class RotatingTest extends GeneTest {
 
         setup(1);
         gene.run(bot);
-        Assertions.assertEquals(new EntityPosition(2, 2), bot.getLookingPos().get());
+        Assertions.assertEquals(new EntityPosition(2, 2), bot.getLookingPos().orElseThrow());
         gene.run(bot);
-        Assertions.assertEquals(new EntityPosition(1, 2), bot.getLookingPos().get());
+        Assertions.assertEquals(new EntityPosition(1, 2), bot.getLookingPos().orElseThrow());
         gene.run(bot);
-        Assertions.assertEquals(new EntityPosition(0, 2), bot.getLookingPos().get());
+        Assertions.assertEquals(new EntityPosition(0, 2), bot.getLookingPos().orElseThrow());
     }
 
     @Test
@@ -89,11 +89,11 @@ class RotatingTest extends GeneTest {
 
         setup(2);
         gene.run(bot);
-        Assertions.assertEquals(new EntityPosition(1, 2), bot.getLookingPos().get());
+        Assertions.assertEquals(new EntityPosition(1, 2), bot.getLookingPos().orElseThrow());
         gene.run(bot);
-        Assertions.assertEquals(new EntityPosition(0, 1), bot.getLookingPos().get());
+        Assertions.assertEquals(new EntityPosition(0, 1), bot.getLookingPos().orElseThrow());
         gene.run(bot);
-        Assertions.assertEquals(new EntityPosition(1, 0), bot.getLookingPos().get());
+        Assertions.assertEquals(new EntityPosition(1, 0), bot.getLookingPos().orElseThrow());
     }
 
     @Test
@@ -101,10 +101,10 @@ class RotatingTest extends GeneTest {
 
         setup(3);
         gene.run(bot);
-        Assertions.assertEquals(new EntityPosition(0, 2), bot.getLookingPos().get());
+        Assertions.assertEquals(new EntityPosition(0, 2), bot.getLookingPos().orElseThrow());
         gene.run(bot);
-        Assertions.assertEquals(new EntityPosition(1, 0), bot.getLookingPos().get());
+        Assertions.assertEquals(new EntityPosition(1, 0), bot.getLookingPos().orElseThrow());
         gene.run(bot);
-        Assertions.assertEquals(new EntityPosition(2, 2), bot.getLookingPos().get());
+        Assertions.assertEquals(new EntityPosition(2, 2), bot.getLookingPos().orElseThrow());
     }
 }
