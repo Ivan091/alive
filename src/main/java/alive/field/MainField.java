@@ -4,10 +4,10 @@ import alive.bot.direction.look.BotLookDirection;
 import alive.bot.genome.BotGenome;
 import alive.bot.genome.gene.Gene;
 import alive.bot.model.*;
-import alive.bot.position.BotPosition;
+import alive.bot.position.EntityPosition;
 import alive.field.cells.CellsMatrix;
 import alive.field.cells.FieldCellsMatrix;
-import alive.field.cells.content.Content;
+import alive.field.cells.content.Entity;
 
 import java.util.*;
 
@@ -28,7 +28,7 @@ public class MainField implements Field {
 
     public void start() {
 
-        addNewAlive(new AliveBot(this, new BotPosition(0, 0), 500, new BotLookDirection(), BotGenome.createFirstBotGenome()));
+        addNewAlive(new AliveBot(this, new EntityPosition(0, 0), 500, new BotLookDirection(), BotGenome.createFirstBotGenome()));
 
         for (var i = 0; i < Integer.MAX_VALUE; ++i) {
 
@@ -99,11 +99,11 @@ public class MainField implements Field {
     }
 
     private void createFieldReport() {
-        var map = new HashMap<Class<? extends Content>, Integer>();
-        var pos = new BotPosition(0, 0);
-        for (var i = 0; i < getHeight(); pos.setX(i), ++i) {
-            for (var j = 0; j < getWidth(); pos.setY(j), ++j) {
-                map.merge(cellsMatrix.getContent(pos).getClass(), 1, Integer::sum);
+        var map = new HashMap<Class<? extends Entity>, Integer>();
+        for (var i = 0; i < getHeight(); ++i) {
+            for (var j = 0; j < getWidth(); ++j) {
+                var pos = new EntityPosition(i, j);
+                map.merge(cellsMatrix.getEntity(pos).getClass(), 1, Integer::sum);
             }
         }
 
@@ -131,7 +131,7 @@ public class MainField implements Field {
     @Override
     public void addNewAlive(Alive newAlive) {
 
-        cellsMatrix.setContent(newAlive.getPosition(), newAlive);
+        cellsMatrix.addEntity(newAlive);
         newAliveBots.add(newAlive);
     }
 }

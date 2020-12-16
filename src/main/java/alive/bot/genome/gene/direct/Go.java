@@ -9,14 +9,14 @@ public class Go extends DirectGene {
     public Boolean run(Bot bot) {
 
         var lookingPos = bot.getLookingPos();
-
         var cells = bot.getField().getCellsMatrix();
-        if (cells.isInBoundsAndEmpty(lookingPos)) {
-
-            cells.setEmpty(bot.getPosition());
-            bot.setPosition(lookingPos);
-            cells.setContent(bot.getPosition(), bot);
-        }
+        lookingPos.ifPresent(pos -> {
+            if (cells.isEmpty(pos)) {
+                cells.addEmpty(bot.getPosition());
+                bot.setPosition(pos);
+                cells.addEntity(bot);
+            }
+        });
 
         bot.getEnergy().incrementEnergyValue(-2);
         bot.getGenome().incrementGeneIdx(1);

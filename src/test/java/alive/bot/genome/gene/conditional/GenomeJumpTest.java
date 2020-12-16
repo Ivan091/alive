@@ -1,11 +1,10 @@
 package alive.bot.genome.gene.conditional;
 
-import alive.bot.energy.Energy;
+import alive.bot.energy.BotEnergy;
 import alive.bot.genome.BotGenome;
 import alive.bot.genome.gene.Gene;
 import alive.bot.genome.gene.GeneTest;
 import alive.bot.model.Bot;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.mockito.Mockito.*;
@@ -26,20 +25,25 @@ class GenomeJumpTest extends GeneTest {
         };
 
         var genome = new BotGenome(genes);
-        var bot = mock(Bot.class);
-        when(bot.getGenome()).thenReturn(genome);
-        when(bot.getEnergy()).thenReturn(mock(Energy.class));
+        var botMock = mock(Bot.class);
+        when(botMock.getGenome()).thenReturn(genome);
+        when(botMock.getEnergy()).thenReturn(mock(BotEnergy.class));
 
         gene = new GenomeJump(3);
-        gene.run(bot);
-        Assertions.assertSame(genes[0], genome.getCurrentGene());
+        gene.run(botMock);
+
+        genome.runCurrentGene(botMock);
+        verify(genes[0]).run(botMock);
 
         gene = new GenomeJump(1);
-        
-        gene.run(bot);
-        Assertions.assertSame(genes[1], genome.getCurrentGene());
-        gene.run(bot);
-        Assertions.assertSame(genes[2], genome.getCurrentGene());
+
+        gene.run(botMock);
+        genome.runCurrentGene(botMock);
+        verify(genes[1]).run(botMock);
+
+        gene.run(botMock);
+        genome.runCurrentGene(botMock);
+        verify(genes[2]).run(botMock);
 
     }
 }

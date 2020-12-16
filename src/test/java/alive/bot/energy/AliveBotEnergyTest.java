@@ -8,10 +8,10 @@ import org.mockito.Mockito;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
-class BotEnergyTest {
+class AliveBotEnergyTest {
 
     Mortal alive = mock(Mortal.class);
-    BotEnergy energy = new BotEnergy(alive, 500);
+    AliveBotEnergy energy = new AliveBotEnergy(alive, 500);
 
     @Test
     void getAndSetEnergyValue() {

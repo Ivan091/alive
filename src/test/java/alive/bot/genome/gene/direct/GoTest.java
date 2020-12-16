@@ -1,11 +1,13 @@
 package alive.bot.genome.gene.direct;
 
 import alive.bot.direction.look.BotLookDirection;
+import alive.bot.energy.BotEnergy;
+import alive.bot.energy.EntityEnergy;
 import alive.bot.genome.Genome;
 import alive.bot.genome.gene.GeneTest;
 import alive.bot.model.AliveBot;
 import alive.bot.model.Bot;
-import alive.bot.position.BotPosition;
+import alive.bot.position.EntityPosition;
 import alive.field.cells.content.DeadBotBody;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -21,7 +23,9 @@ public class GoTest extends GeneTest {
 
     private void setup(int x, int y, int lookDirNum) {
 
-        bot = spy(new AliveBot(field, new BotPosition(x, y), 0, new BotLookDirection(lookDirNum), mock(Genome.class)));
+        bot = spy(new AliveBot(field, new EntityPosition(x, y), 0, new BotLookDirection(lookDirNum), mock(Genome.class)));
+        field.getCellsMatrix().addEntity(bot);
+        when(bot.getEnergy()).thenReturn(mock(BotEnergy.class));
     }
 
 
@@ -32,7 +36,7 @@ public class GoTest extends GeneTest {
 
         gene.run(bot);
 
-        Assertions.assertEquals(new BotPosition(2, 1), bot.getPosition());
+        Assertions.assertEquals(new EntityPosition(2, 1), bot.getPosition());
     }
 
     @Test
@@ -42,7 +46,7 @@ public class GoTest extends GeneTest {
 
         gene.run(bot);
 
-        Assertions.assertEquals(new BotPosition(2, 2), bot.getPosition());
+        Assertions.assertEquals(new EntityPosition(2, 2), bot.getPosition());
     }
 
     @Test
@@ -52,7 +56,7 @@ public class GoTest extends GeneTest {
 
         gene.run(bot);
 
-        Assertions.assertEquals(new BotPosition(0, 1), bot.getPosition());
+        Assertions.assertEquals(new EntityPosition(0, 1), bot.getPosition());
     }
 
     @Test
@@ -62,7 +66,7 @@ public class GoTest extends GeneTest {
 
         gene.run(bot);
 
-        Assertions.assertEquals(new BotPosition(0, 2), bot.getPosition());
+        Assertions.assertEquals(new EntityPosition(0, 2), bot.getPosition());
     }
 
     @Test
@@ -72,7 +76,7 @@ public class GoTest extends GeneTest {
 
         gene.run(bot);
 
-        Assertions.assertEquals(new BotPosition(0, 1), bot.getPosition());
+        Assertions.assertEquals(new EntityPosition(0, 1), bot.getPosition());
     }
 
     @Test
@@ -82,7 +86,7 @@ public class GoTest extends GeneTest {
 
         gene.run(bot);
 
-        Assertions.assertEquals(new BotPosition(0, 0), bot.getPosition());
+        Assertions.assertEquals(new EntityPosition(0, 0), bot.getPosition());
     }
 
     @Test
@@ -92,7 +96,7 @@ public class GoTest extends GeneTest {
 
         gene.run(bot);
 
-        Assertions.assertEquals(new BotPosition(1, 0), bot.getPosition());
+        Assertions.assertEquals(new EntityPosition(1, 0), bot.getPosition());
     }
 
     @Test
@@ -102,7 +106,7 @@ public class GoTest extends GeneTest {
 
         gene.run(bot);
 
-        Assertions.assertEquals(new BotPosition(2, 0), bot.getPosition());
+        Assertions.assertEquals(new EntityPosition(2, 0), bot.getPosition());
     }
 
 
@@ -113,7 +117,7 @@ public class GoTest extends GeneTest {
 
         gene.run(bot);
 
-        Assertions.assertEquals(new BotPosition(2, 2), bot.getPosition());
+        Assertions.assertEquals(new EntityPosition(2, 2), bot.getPosition());
     }
 
     @Test
@@ -123,7 +127,7 @@ public class GoTest extends GeneTest {
 
         gene.run(bot);
 
-        Assertions.assertEquals(new BotPosition(0, 0), bot.getPosition());
+        Assertions.assertEquals(new EntityPosition(0, 0), bot.getPosition());
     }
 
     @Test
@@ -131,12 +135,14 @@ public class GoTest extends GeneTest {
 
         setup(1, 1, 0);
 
-        cellsMatrix.setContent(new BotPosition(2, 1), new DeadBotBody(0));
+        cellsMatrix.addEntity(new DeadBotBody(new EntityPosition(2, 1), new EntityEnergy(0)));
         gene.run(bot);
-        Assertions.assertEquals(new BotPosition(1, 1), bot.getPosition());
+        Assertions.assertEquals(new EntityPosition(1, 1), bot.getPosition());
 
-        cellsMatrix.setContent(new BotPosition(2, 1), mock(Bot.class));
+        var botMock = mock(Bot.class);
+        when(botMock.getPosition()).thenReturn(new EntityPosition(2, 1));
+        cellsMatrix.addEntity(botMock);
         gene.run(bot);
-        Assertions.assertEquals(new BotPosition(1, 1), bot.getPosition());
+        Assertions.assertEquals(new EntityPosition(1, 1), bot.getPosition());
     }
 }

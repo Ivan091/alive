@@ -1,5 +1,7 @@
 package alive.bot.position;
 
+import alive.field.cells.CellsMatrix;
+
 import java.util.List;
 
 public interface Position {
@@ -8,9 +10,5 @@ public interface Position {
 
     int getY();
 
-    void setX(int x);
-
-    void setY(int y);
-
-    List<Position> getPositionsAround();
+    List<Position> getPositionsAround(CellsMatrix cellsMatrix);
 }

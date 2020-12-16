@@ -1,80 +1,75 @@
 package alive.field.cells;
 
+import alive.bot.energy.EntityEnergy;
+import alive.bot.position.EntityPosition;
 import alive.bot.position.Position;
-import alive.field.cells.content.Content;
-import alive.field.cells.content.Empty;
+import alive.field.cells.content.*;
+
+import java.util.Optional;
 
 public class FieldCellsMatrix implements CellsMatrix {
 
-    private static final Content empty = new Empty();
-
-    private final Content[][] cellsMatrix;
+    private final Entity[][] cellsMatrix;
 
     public FieldCellsMatrix(int height, int width) {
 
-        cellsMatrix = new Content[width][height];
-
+        cellsMatrix = new Entity[width][height];
         for (var i = 0; i < width; ++i) {
             for (var j = 0; j < height; ++j) {
-                cellsMatrix[i][j] = empty;
+                var pos = createPositionOnField(i, j);
+                if (pos.isPresent()) {
+                    cellsMatrix[i][j] = new EmptyEntity(pos.get(), new EntityEnergy(0));
+                }
             }
         }
     }
 
-    @Override
-    public Content getContent(Position pos) {
+    public Optional<Position> createPositionOnField(int x, int y) {
 
+        if (y < 0 || y >= getHeight()) {
+            return Optional.empty();
+        }
+
+        if (x < 0 || x >= getWidth()) {
+            x %= getWidth();
+            x = x >= 0 ? x : x + getWidth();
+        }
+
+        return Optional.of(new EntityPosition(x, y));
+    }
+
+    @Override
+    public Optional<Position> createPositionOnField(Position pos) {
+        return createPositionOnField(pos.getX(), pos.getY());
+    }
+
+    @Override
+    public Entity getEntity(Position pos) {
         return cellsMatrix[pos.getX()][pos.getY()];
     }
 
     @Override
-    public void setContent(Position pos, Content newContent) {
-
-        cellsMatrix[pos.getX()][pos.getY()] = newContent;
+    public void addEntity(Entity newEntity) {
+        var pos = newEntity.getPosition();
+        cellsMatrix[pos.getX()][pos.getY()] = newEntity;
     }
 
     @Override
-    public void setEmpty(Position pos) {
+    public void addEmpty(Position pos) {
 
-        destroy(pos);
-        setContent(pos, empty);
+        getEntity(pos).finalizeBeforeErasingFromField();
+        addEntity(new EmptyEntity(new EntityPosition(pos), new EntityEnergy(0)));
     }
 
     @Override
-    public void destroy(Position pos) {
-
-        getContent(pos).finalizeBeforeErasingFromField();
+    public void finalizeEntity(Position pos) {
+        getEntity(pos).finalizeBeforeErasingFromField();
     }
-
 
     @Override
     public boolean isEmpty(Position pos) {
 
-        return getContent(pos).equals(empty);
-    }
-
-    @Override
-    public boolean isInBounds(Position pos) {
-
-        if (pos.getY() >= 0 && pos.getY() < getHeight()) {
-            modulate(pos);
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean isInBoundsAndEmpty(Position pos) {
-        return isInBounds(pos) && isEmpty(pos);
-    }
-
-    private void modulate(Position pos) {
-
-        pos.setX((pos.getX()) % getWidth());
-
-        if (pos.getX() < 0) {
-            pos.setX(pos.getX() + getWidth());
-        }
+        return getEntity(pos) instanceof Empty;
     }
 
     @Override

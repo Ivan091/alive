@@ -1,19 +1,19 @@
 package alive.bot.direction.look;
 
-import alive.bot.position.BotPosition;
+import alive.bot.position.EntityPosition;
 import alive.bot.position.Position;
 
 public class BotLookDirection implements LookDirection {
 
     private static final Position[] relativePositions = new Position[]{
-            new BotPosition(1, 0),
-            new BotPosition(1, 1),
-            new BotPosition(0, 1),
-            new BotPosition(-1, 1),
-            new BotPosition(-1, 0),
-            new BotPosition(-1, -1),
-            new BotPosition(0, -1),
-            new BotPosition(1, -1),
+            new EntityPosition(1, 0),
+            new EntityPosition(1, 1),
+            new EntityPosition(0, 1),
+            new EntityPosition(-1, 1),
+            new EntityPosition(-1, 0),
+            new EntityPosition(-1, -1),
+            new EntityPosition(0, -1),
+            new EntityPosition(1, -1),
     };
 
     private int directionNumber;
@@ -47,7 +47,7 @@ public class BotLookDirection implements LookDirection {
     public Position getLookingPos(Position currentPosition) {
 
         var lookingRelativePos = relativePositions[directionNumber];
-        return new BotPosition(
+        return new EntityPosition(
                 currentPosition.getX() + lookingRelativePos.getX(),
                 currentPosition.getY() + lookingRelativePos.getY());
     }

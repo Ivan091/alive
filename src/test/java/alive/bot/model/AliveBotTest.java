@@ -3,9 +3,9 @@ package alive.bot.model;
 import alive.WorldConstants;
 import alive.bot.direction.look.BotLookDirection;
 import alive.bot.direction.look.LookDirection;
-import alive.bot.energy.Energy;
+import alive.bot.energy.BotEnergy;
 import alive.bot.genome.Genome;
-import alive.bot.position.BotPosition;
+import alive.bot.position.EntityPosition;
 import alive.bot.position.Position;
 import alive.field.Field;
 import alive.field.MainField;
@@ -19,7 +19,7 @@ class AliveBotTest {
 
     Field field = new MainField(1, 2);
 
-    Position botPos = new BotPosition(0, 0);
+    Position botPos = new EntityPosition(0, 0);
 
     LookDirection botLookDir = new BotLookDirection();
 
@@ -27,23 +27,24 @@ class AliveBotTest {
     Genome genomeMock = mock(Genome.class);
 
     @Mock
-    Energy energyMock = mock(Energy.class);
+    BotEnergy energyMock = mock(BotEnergy.class);
 
 
     private Bot getBotSpy() {
         Bot bot = spy(new AliveBot(field, botPos, 0, botLookDir, genomeMock));
         addEnergyMockToBot(bot);
+        field.getCellsMatrix().addEntity(bot);
         return bot;
     }
 
     private Bot getBotSpy(Genome genome) {
         Bot bot = spy(new AliveBot(field, botPos, 0, botLookDir, genome));
         addEnergyMockToBot(bot);
+        field.getCellsMatrix().addEntity(bot);
         return bot;
     }
 
     private void addEnergyMockToBot(Bot bot) {
-        when(energyMock.getEnergyValue()).thenReturn(0);
         when(bot.getEnergy()).thenReturn(energyMock);
     }
 
@@ -54,7 +55,7 @@ class AliveBotTest {
         var bot = getBotSpy();
         field.addNewAlive(bot);
         bot.replicate();
-        Assertions.assertTrue(field.getCellsMatrix().getContent(new BotPosition(1, 0)) instanceof Alive);
+        Assertions.assertTrue(field.getCellsMatrix().getEntity(new EntityPosition(1, 0)) instanceof Alive);
         bot.replicate();
         Assertions.assertFalse(bot.isAlive());
     }

@@ -8,7 +8,7 @@ import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class AliveCellPositionTest {
+class EntityPositionTest {
 
     private final Position pos = new EntityPosition(3, 3);
 

@@ -48,13 +48,7 @@ public class BotGenome implements Genome {
 
     @Override
     public boolean runCurrentGene(Bot bot) {
-
         return genes[currentGeneIdx].run(bot);
-    }
-
-    @Override
-    public Gene getCurrentGene() {
-        return genes[currentGeneIdx];
     }
 
     @Override

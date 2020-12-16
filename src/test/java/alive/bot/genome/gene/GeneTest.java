@@ -1,11 +1,11 @@
 package alive.bot.genome.gene;
 
 import alive.bot.direction.look.BotLookDirection;
-import alive.bot.energy.Energy;
+import alive.bot.energy.BotEnergy;
 import alive.bot.genome.Genome;
 import alive.bot.model.AliveBot;
 import alive.bot.model.Bot;
-import alive.bot.position.BotPosition;
+import alive.bot.position.EntityPosition;
 import alive.field.Field;
 import alive.field.MainField;
 import alive.field.cells.CellsMatrix;
@@ -36,7 +36,7 @@ public abstract class GeneTest {
 
         var genome = mock(Genome.class);
         when(bot.getGenome()).thenReturn(genome);
-        when(bot.getEnergy()).thenReturn(mock(Energy.class));
+        when(bot.getEnergy()).thenReturn(mock(BotEnergy.class));
 
         gene.run(bot);
 
@@ -46,7 +46,7 @@ public abstract class GeneTest {
     @Test
     public void isEnergyChangingCalled() {
 
-        var energy = new Energy() {
+        var energy = new BotEnergy() {
 
             public boolean isEnergyValueChanged = false;
 
@@ -82,7 +82,7 @@ public abstract class GeneTest {
     private Bot createBotSpy() {
 
         bot = spy(new AliveBot(new MainField(3, 3),
-                new BotPosition(1, 1), 0, new BotLookDirection(0), mock(Genome.class)));
+                new EntityPosition(1, 1), 0, new BotLookDirection(0), mock(Genome.class)));
 
         return bot;
     }

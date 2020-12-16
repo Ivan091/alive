@@ -1,7 +1,10 @@
 package alive.field.cells;
 
 import alive.bot.position.Position;
-import alive.field.cells.content.Content;
+import alive.field.cells.content.EmptyEntity;
+import alive.field.cells.content.Entity;
+
+import java.util.Optional;
 
 public interface CellsMatrix {
 
@@ -9,29 +12,28 @@ public interface CellsMatrix {
      * @param pos position of a cell on the field.
      * @return content in the cell at the position.
      */
-    Content getContent(Position pos);
+    Entity getEntity(Position pos);
 
     /**
-     * @param pos        position of a cell on the field.
-     * @param newContent will be assigned to the cell at the position
+     * @param newEntity will be assigned to the cell at the position
      */
-    void setContent(Position pos, Content newContent);
+    void addEntity(Entity newEntity);
 
     /**
      * Calls eraseFromField method from cell's content.
      * Sets a content in the cell empty.
      *
      * @param pos position of a cell on field.
-     * @see alive.field.cells.content.Empty
+     * @see EmptyEntity
      */
-    void setEmpty(Position pos);
+    void addEmpty(Position pos);
 
     /**
      * Calls eraseFromField method from cell's content.
      *
      * @param pos position on field
      */
-    void destroy(Position pos);
+    void finalizeEntity(Position pos);
 
     /**
      * Checks if the cell is in bounds and empty
@@ -39,13 +41,13 @@ public interface CellsMatrix {
      * @param pos checking position on field
      * @return <b>true</b> if position is empty and
      * <b>false</b> if position is out of bounds or not empty
-     * @see alive.field.cells.content.Empty
+     * @see EmptyEntity
      */
     boolean isEmpty(Position pos);
 
-    boolean isInBounds(Position pos);
+    Optional<Position> createPositionOnField(int x, int y);
 
-    boolean isInBoundsAndEmpty(Position pos);
+    Optional<Position> createPositionOnField(Position pos);
 
     int getWidth();
 

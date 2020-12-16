@@ -2,18 +2,22 @@ package alive.bot.model;
 
 import alive.WorldConstants;
 import alive.bot.direction.look.LookDirection;
-import alive.bot.energy.BotEnergy;
-import alive.bot.energy.Energy;
+import alive.bot.energy.*;
 import alive.bot.genome.Genome;
+import alive.bot.position.EntityPosition;
 import alive.bot.position.Position;
 import alive.field.Field;
 import alive.field.cells.content.DeadBotBody;
+
+import java.util.Optional;
+import java.util.concurrent.ThreadLocalRandom;
+import java.util.stream.Collectors;
 
 public class AliveBot implements Bot {
 
     private final Field field;
 
-    private final Energy energy;
+    private final BotEnergy energy;
 
     private final LookDirection lookDirection;
 
@@ -27,7 +31,7 @@ public class AliveBot implements Bot {
 
         this.field = field;
         this.position = position;
-        this.energy = new BotEnergy(this, energyValue);
+        this.energy = new AliveBotEnergy(this, energyValue);
         this.genome = genome;
         this.lookDirection = lookDirection;
     }
@@ -46,33 +50,35 @@ public class AliveBot implements Bot {
     @Override
     public void replicate() {
 
-        if (!isAlive()) {
+        if (!isAlive) {
             return;
         }
 
         Position newBotPos;
 
-        var positionBehindOfBot = lookDirection.getOpposite().getLookingPos(position);
-        if (field.getCellsMatrix().isInBoundsAndEmpty(positionBehindOfBot)) {
-            newBotPos = positionBehindOfBot;
-        } else {
-            var possiblePosition = position.getPositionsAround()
-                    .stream().filter(field.getCellsMatrix()::isInBoundsAndEmpty).findAny();
+        var positionBehindOfBot = field.getCellsMatrix().createPositionOnField(lookDirection.getOpposite().getLookingPos(position));
 
-            if (possiblePosition.isPresent()) {
-                newBotPos = possiblePosition.get();
-            } else {
+        if (positionBehindOfBot.isPresent() && field.getCellsMatrix().isEmpty(positionBehindOfBot.get())) {
+            newBotPos = positionBehindOfBot.get();
+        } else {
+            var possiblePositions = position.getPositionsAround(field.getCellsMatrix())
+                    .stream()
+                    .filter(field.getCellsMatrix()::isEmpty)
+                    .collect(Collectors.toList());
+            if (possiblePositions.size() == 0) {
                 destroy();
                 return;
+            } else {
+                newBotPos = possiblePositions.get(ThreadLocalRandom.current().nextInt(possiblePositions.size()));
             }
+
         }
-        this.energy.setEnergyValue(energy.getEnergyValue() - genome.length() * WorldConstants.GENE_REPLICATION_COST);
-        var newBotEnergy = this.getEnergyValue() >> 1;
-        this.energy.setEnergyValue(newBotEnergy);
-        energy.notifyAlive();
+        energy.setEnergyValue(energy.getEnergyValue() - genome.length() * WorldConstants.GENE_REPLICATION_COST);
+        var newBotEnergy = energy.getEnergyValue() >> 1;
+        energy.setEnergyValue(newBotEnergy);
 
         var newBot = new AliveBot(field, newBotPos, newBotEnergy,
-                this.lookDirection.getOpposite(), genome.replicate());
+                lookDirection.getOpposite(), genome.replicate());
 
         field.addNewAlive(newBot);
     }
@@ -81,8 +87,8 @@ public class AliveBot implements Bot {
     public void destroy() {
 
         isAlive = false;
-        var deadBody = new DeadBotBody(getEnergyValue() + WorldConstants.DRIED_BODY_ENERGY_VALUE);
-        field.getCellsMatrix().setContent(position, deadBody);
+        var deadBody = new DeadBotBody(new EntityPosition(position), new EntityEnergy(energy));
+        field.getCellsMatrix().addEntity(deadBody);
     }
 
 
@@ -111,7 +117,7 @@ public class AliveBot implements Bot {
     }
 
     @Override
-    public Energy getEnergy() {
+    public BotEnergy getEnergy() {
 
         return energy;
     }
@@ -129,14 +135,8 @@ public class AliveBot implements Bot {
     }
 
     @Override
-    public Position getLookingPos() {
-        return getLookDirection().getLookingPos(position);
-    }
-
-    @Override
-    public int getEnergyValue() {
-
-        return energy.getEnergyValue();
+    public Optional<Position> getLookingPos() {
+        return field.getCellsMatrix().createPositionOnField(lookDirection.getLookingPos(position));
     }
 
     @Override

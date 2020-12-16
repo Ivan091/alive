@@ -1,22 +1,12 @@
 package alive.field.cells.content;
 
-public class DeadBotBody implements Content {
+import alive.bot.energy.Energy;
+import alive.bot.position.Position;
 
-    private final int energyValue;
+public class DeadBotBody extends DeadEntity {
 
-    /**
-     * @param energyValue energy value that a bot gets when it eats the dead body.
-     */
-    public DeadBotBody(int energyValue) {
-
-        this.energyValue = energyValue;
-    }
-
-
-    @Override
-    public int getEnergyValue() {
-
-        return energyValue;
+    public DeadBotBody(Position position, Energy energy) {
+        super(position, energy);
     }
 
     @Override

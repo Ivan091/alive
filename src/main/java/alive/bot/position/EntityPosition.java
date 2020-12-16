@@ -1,28 +1,34 @@
 package alive.bot.position;
 
+import alive.field.cells.CellsMatrix;
+
 import java.util.*;
 
-public class BotPosition implements Position {
+public class EntityPosition implements Position {
 
-    private int x;
-    private int y;
+    private final int x;
+    private final int y;
 
-    public BotPosition(int x, int y) {
+    public EntityPosition(int x, int y) {
 
         this.x = x;
         this.y = y;
     }
 
+    public EntityPosition(Position pos) {
+        this.x = pos.getX();
+        this.y = pos.getY();
+    }
+
     @Override
-    public List<Position> getPositionsAround() {
+    public List<Position> getPositionsAround(CellsMatrix cellsMatrix) {
 
         var positionsAround = new ArrayList<Position>(8);
 
         for (var i = getX() - 1; i <= getX() + 1; ++i) {
             for (var j = getY() - 1; j <= getY() + 1; ++j) {
                 if (i != getX() || j != getY()) {
-                    var newPosition = new BotPosition(i, j);
-                    positionsAround.add(newPosition);
+                    cellsMatrix.createPositionOnField(i, j).ifPresent(positionsAround::add);
                 }
             }
         }
@@ -45,18 +51,6 @@ public class BotPosition implements Position {
     }
 
     @Override
-    public void setX(int x) {
-
-        this.x = x;
-    }
-
-    @Override
-    public void setY(int y) {
-
-        this.y = y;
-    }
-
-    @Override
     public boolean equals(Object o) {
 
         if (this == o) {
@@ -65,7 +59,7 @@ public class BotPosition implements Position {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        BotPosition that = (BotPosition) o;
+        EntityPosition that = (EntityPosition) o;
         return x == that.x && y == that.y;
     }
 

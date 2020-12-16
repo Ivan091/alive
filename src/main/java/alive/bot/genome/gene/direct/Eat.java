@@ -11,13 +11,11 @@ public class Eat extends DirectGene {
         var lookingPos = bot.getLookingPos();
         var cells = bot.getField().getCellsMatrix();
 
-        if (cells.isInBounds(lookingPos)) {
-
-            var eatingContent = cells.getContent(lookingPos);
-            cells.setEmpty(lookingPos);
-
-            bot.getEnergy().incrementEnergyValue(eatingContent.getEnergyValue() >> 1);
-        }
+        lookingPos.ifPresent(pos -> {
+            var eatingContent = cells.getEntity(pos);
+            cells.addEmpty(pos);
+            bot.getEnergy().incrementEnergyValue(eatingContent.getEnergy().getEnergyValue() >> 1);
+        });
 
         bot.getEnergy().incrementEnergyValue(-2);
         bot.getGenome().incrementGeneIdx(1);

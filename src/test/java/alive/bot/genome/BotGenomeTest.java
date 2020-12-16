@@ -1,11 +1,10 @@
 package alive.bot.genome;
 
 import alive.bot.genome.gene.Gene;
+import alive.bot.model.Bot;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 class BotGenomeTest {
@@ -17,44 +16,32 @@ class BotGenomeTest {
             mock(Gene.class),
     };
 
+    private final Bot botMock = mock(Bot.class);
+
+
     private final Genome genome = new BotGenome(genes);
 
     @Test
     void incrementGenIdx() {
-
-        var gene0 = genome.getCurrentGene();
-
         genome.incrementGeneIdx(1);
-        assertSame(genes[1], genome.getCurrentGene());
+        genome.runCurrentGene(botMock);
+        verify(genes[1]).run(botMock);
 
         genome.incrementGeneIdx(-1);
-        assertSame(gene0, genome.getCurrentGene());
+        genome.runCurrentGene(botMock);
+        verify(genes[0]).run(botMock);
 
         genome.incrementGeneIdx(genes.length);
-        assertSame(gene0, genome.getCurrentGene());
+        genome.runCurrentGene(botMock);
+        verify(genes[0], times(2)).run(botMock);
 
         genome.incrementGeneIdx(-1);
-        assertSame(genes[genes.length - 1], genome.getCurrentGene());
+        genome.runCurrentGene(botMock);
+        verify(genes[genes.length - 1]).run(botMock);
 
         genome.incrementGeneIdx(1);
-        assertSame(gene0, genome.getCurrentGene());
-    }
-
-    @Test
-    void allReplicatedGenesNotNull() {
-
-        Arrays.stream(genes).forEach(x -> when(x.replicate()).thenReturn(mock(Gene.class)));
-
-        var newGenome = genome.replicate();
-
-        var gene0 = newGenome.getCurrentGene();
-        assertNotNull(gene0);
-
-        do {
-            newGenome.incrementGeneIdx(1);
-
-            assertNotNull(newGenome.getCurrentGene());
-        } while (gene0 != newGenome.getCurrentGene());
+        genome.runCurrentGene(botMock);
+        verify(genes[0], times(3)).run(botMock);
     }
 
     @Test
