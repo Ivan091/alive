@@ -1,9 +1,11 @@
 package alive.field.cells;
 
-import alive.bot.energy.EntityEnergy;
-import alive.bot.position.EntityPosition;
-import alive.bot.position.Position;
-import alive.field.cells.content.*;
+import alive.entities.Entity;
+import alive.entities.dead.Empty;
+import alive.entities.dead.EmptyEntity;
+import alive.entities.qualities.energy.EnergyEntity;
+import alive.entities.qualities.position.Position;
+import alive.entities.qualities.position.PositionEntity;
 
 import java.util.Optional;
 
@@ -18,7 +20,7 @@ public class FieldCellsMatrix implements CellsMatrix {
             for (var j = 0; j < height; ++j) {
                 var pos = createPositionOnField(i, j);
                 if (pos.isPresent()) {
-                    cellsMatrix[i][j] = new EmptyEntity(pos.get(), new EntityEnergy(0));
+                    cellsMatrix[i][j] = new EmptyEntity(pos.get(), new EnergyEntity(0));
                 }
             }
         }
@@ -35,7 +37,7 @@ public class FieldCellsMatrix implements CellsMatrix {
             x = x >= 0 ? x : x + getWidth();
         }
 
-        return Optional.of(new EntityPosition(x, y));
+        return Optional.of(new PositionEntity(x, y));
     }
 
     @Override
@@ -58,7 +60,7 @@ public class FieldCellsMatrix implements CellsMatrix {
     public void addEmpty(Position pos) {
 
         getEntity(pos).finalizeBeforeErasingFromField();
-        addEntity(new EmptyEntity(new EntityPosition(pos), new EntityEnergy(0)));
+        addEntity(new EmptyEntity(new PositionEntity(pos), new EnergyEntity(0)));
     }
 
     @Override

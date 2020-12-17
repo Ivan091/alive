@@ -1,6 +1,6 @@
 package alive.field;
 
-import alive.bot.model.Alive;
+import alive.entities.Entity;
 import alive.field.cells.CellsMatrix;
 
 public interface Field {
@@ -11,5 +11,9 @@ public interface Field {
 
     CellsMatrix getCellsMatrix();
 
-    void addNewAlive(Alive newAlive);
+    void putEntity(Entity puttingEntity);
+
+    void update();
+
+    int aliveCount();
 }

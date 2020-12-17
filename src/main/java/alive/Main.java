@@ -1,5 +1,6 @@
 package alive;
 
+import alive.field.LiveSimulation;
 import alive.field.MainField;
 
 public class Main {
@@ -9,7 +10,7 @@ public class Main {
     }
 
     public static void start() {
-        var field = new MainField(30, 30);
-        field.start();
+        var simulation = new LiveSimulation(new MainField(30, 30));
+        simulation.start();
     }
 }

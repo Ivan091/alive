@@ -1,8 +1,8 @@
 package alive.field.cells;
 
-import alive.bot.position.Position;
-import alive.field.cells.content.EmptyEntity;
-import alive.field.cells.content.Entity;
+import alive.entities.Entity;
+import alive.entities.dead.EmptyEntity;
+import alive.entities.qualities.position.Position;
 
 import java.util.Optional;
 
