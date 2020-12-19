@@ -13,12 +13,6 @@ class AliveCellPositionTest {
     private final Position pos = new PositionEntity(3, 3);
 
     @Test
-    void getPositionsAround() {
-
-
-    }
-
-    @Test
     void getX() {
 
         assertEquals(3, pos.getX());

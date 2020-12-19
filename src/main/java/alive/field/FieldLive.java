@@ -1,24 +1,49 @@
 package alive.field;
 
 import alive.entities.Entity;
-import alive.field.cells.CellsMatrix;
-import alive.field.cells.FieldCellsMatrix;
+import alive.field.cells.CellMatrix;
+import alive.field.cells.CellMatrixLive;
 
 import java.util.*;
 
-public class MainField implements Field {
+public class FieldLive implements Field {
 
-    private final CellsMatrix cellsMatrix;
+    private final CellMatrix cellMatrix;
 
     private final List<Entity> aliveEntities;
 
     private final Queue<Entity> aliveEntitiesPutThisTurn;
 
-    public MainField(int height, int width) {
+    public FieldLive(int height, int width) {
 
-        cellsMatrix = new FieldCellsMatrix(height, width);
+        cellMatrix = new CellMatrixLive(height, width);
         aliveEntities = new LinkedList<>();
         aliveEntitiesPutThisTurn = new ArrayDeque<>();
+    }
+
+    @Override
+    public int getWidth() {
+
+        return cellMatrix.getWidth();
+    }
+
+    @Override
+    public int getHeight() {
+
+        return cellMatrix.getHeight();
+    }
+
+    @Override
+    public CellMatrix getCellsMatrix() {
+
+        return cellMatrix;
+    }
+
+    @Override
+    public void putEntity(Entity puttingEntity) {
+
+        cellMatrix.putEntity(puttingEntity);
+        aliveEntitiesPutThisTurn.add(puttingEntity);
     }
 
     @Override
@@ -49,30 +74,5 @@ public class MainField implements Field {
     @Override
     public int aliveCount() {
         return aliveEntities.size() + aliveEntitiesPutThisTurn.size();
-    }
-
-    @Override
-    public int getWidth() {
-
-        return cellsMatrix.getWidth();
-    }
-
-    @Override
-    public int getHeight() {
-
-        return cellsMatrix.getHeight();
-    }
-
-    @Override
-    public CellsMatrix getCellsMatrix() {
-
-        return cellsMatrix;
-    }
-
-    @Override
-    public void putEntity(Entity puttingEntity) {
-
-        cellsMatrix.addEntity(puttingEntity);
-        aliveEntitiesPutThisTurn.add(puttingEntity);
     }
 }

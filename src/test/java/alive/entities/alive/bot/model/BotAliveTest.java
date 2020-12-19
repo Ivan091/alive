@@ -1,26 +1,25 @@
 package alive.entities.alive.bot.model;
 
 import alive.WorldConstants;
-import alive.entities.alive.Alive;
-import alive.entities.alive.bot.AliveBot;
 import alive.entities.alive.bot.Bot;
+import alive.entities.alive.bot.BotAlive;
 import alive.entities.alive.bot.direction.BotLookDirection;
-import alive.entities.alive.bot.energy.BotEnergy;
+import alive.entities.alive.bot.energy.EnergyBot;
 import alive.entities.alive.bot.genome.Genome;
 import alive.entities.qualities.direction.LookDirection;
 import alive.entities.qualities.position.Position;
 import alive.entities.qualities.position.PositionEntity;
 import alive.field.Field;
-import alive.field.MainField;
+import alive.field.FieldLive;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 
 import static org.mockito.Mockito.*;
 
-class AliveBotTest {
+class BotAliveTest {
 
-    Field field = new MainField(1, 2);
+    Field field = new FieldLive(1, 2);
 
     Position botPos = new PositionEntity(0, 0);
 
@@ -30,25 +29,16 @@ class AliveBotTest {
     Genome genomeMock = mock(Genome.class);
 
     @Mock
-    BotEnergy energyMock = mock(BotEnergy.class);
-
-
-    private Bot getBotSpy() {
-        Bot bot = spy(new AliveBot(field, botPos, 0, botLookDir, genomeMock));
-        addEnergyMockToBot(bot);
-        field.getCellsMatrix().addEntity(bot);
-        return bot;
-    }
+    EnergyBot energyMock = mock(EnergyBot.class);
 
     private Bot getBotSpy(Genome genome) {
-        Bot bot = spy(new AliveBot(field, botPos, 0, botLookDir, genome));
-        addEnergyMockToBot(bot);
-        field.getCellsMatrix().addEntity(bot);
+        Bot bot = spy(new BotAlive(field, botPos, energyMock, botLookDir, genome));
+        field.getCellsMatrix().putEntity(bot);
         return bot;
     }
 
-    private void addEnergyMockToBot(Bot bot) {
-        when(bot.getEnergy()).thenReturn(energyMock);
+    private Bot getBotSpy() {
+        return getBotSpy(genomeMock);
     }
 
 
@@ -56,9 +46,8 @@ class AliveBotTest {
     void createsNewBotDuringReplication() {
 
         var bot = getBotSpy();
-        field.putEntity(bot);
         bot.replicate();
-        Assertions.assertTrue(field.getCellsMatrix().getEntity(new PositionEntity(1, 0)) instanceof Alive);
+        Assertions.assertTrue(field.getCellsMatrix().getEntity(new PositionEntity(1, 0)) instanceof Bot);
         bot.replicate();
         Assertions.assertFalse(bot.isAlive());
     }

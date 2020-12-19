@@ -7,13 +7,13 @@ import alive.entities.qualities.energy.EnergyEntity;
 import alive.entities.qualities.position.Position;
 import alive.entities.qualities.position.PositionEntity;
 
-import java.util.Optional;
+import java.util.*;
 
-public class FieldCellsMatrix implements CellsMatrix {
+public class CellMatrixLive implements CellMatrix {
 
     private final Entity[][] cellsMatrix;
 
-    public FieldCellsMatrix(int height, int width) {
+    public CellMatrixLive(int height, int width) {
 
         cellsMatrix = new Entity[width][height];
         for (var i = 0; i < width; ++i) {
@@ -46,26 +46,42 @@ public class FieldCellsMatrix implements CellsMatrix {
     }
 
     @Override
+    public List<Position> findEmptyPositionsAround(Position pos) {
+        var positionsAround = new ArrayList<Position>(8);
+
+        var x = pos.getX();
+        var y = pos.getY();
+
+        for (var i = x - 1; i <= x + 1; ++i) {
+            for (var j = y - 1; j <= y + 1; ++j) {
+                if (i != x || j != y) {
+                    createPositionOnField(i, j).ifPresent(foundPos -> {
+                        if (isEmpty(foundPos)) {
+                            positionsAround.add(foundPos);
+                        }
+                    });
+                }
+            }
+        }
+
+        return positionsAround;
+    }
+
+    @Override
     public Entity getEntity(Position pos) {
         return cellsMatrix[pos.getX()][pos.getY()];
     }
 
     @Override
-    public void addEntity(Entity newEntity) {
+    public void putEntity(Entity newEntity) {
         var pos = newEntity.getPosition();
+        getEntity(pos).finalizeBeforeErasingFromField();
         cellsMatrix[pos.getX()][pos.getY()] = newEntity;
     }
 
     @Override
-    public void addEmpty(Position pos) {
-
-        getEntity(pos).finalizeBeforeErasingFromField();
-        addEntity(new EmptyEntity(new PositionEntity(pos), new EnergyEntity(0)));
-    }
-
-    @Override
-    public void finalizeEntity(Position pos) {
-        getEntity(pos).finalizeBeforeErasingFromField();
+    public void putEmpty(Position pos) {
+        putEntity(new EmptyEntity(new PositionEntity(pos), new EnergyEntity(0)));
     }
 
     @Override

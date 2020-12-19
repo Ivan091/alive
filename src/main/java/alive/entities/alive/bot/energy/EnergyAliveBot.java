@@ -4,35 +4,34 @@ import alive.WorldConstants;
 import alive.entities.alive.Mortal;
 import alive.entities.qualities.energy.EnergyEntity;
 
-public class AliveBotEnergy extends EnergyEntity implements BotEnergy {
+public class EnergyAliveBot extends EnergyEntity implements EnergyBot {
 
-    private final Mortal bot;
+    private Mortal mortal;
 
-    public AliveBotEnergy(Mortal bot, int energyValue) {
+    public EnergyAliveBot(int energyValue) {
         super(energyValue);
-        this.bot = bot;
+    }
+
+    @Override
+    public void subscribeMortal(Mortal mortal) {
+        this.mortal = mortal;
     }
 
     @Override
     public void incrementEnergyValue(int increment) {
 
         energyValue += increment;
-        notifyBot();
+        notifyMortal();
     }
 
     @Override
-    public void notifyAlive() {
-        notifyBot();
-    }
-
-    private void notifyBot() {
+    public void notifyMortal() {
         if (energyValue < WorldConstants.MIN_ENERGY_VALUE) {
-            bot.destroy();
+            mortal.destroy();
         }
 
         if (energyValue > WorldConstants.MAX_ENERGY_VALUE) {
-            bot.replicate();
+            mortal.replicate();
         }
     }
-
 }

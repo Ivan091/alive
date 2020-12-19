@@ -2,7 +2,6 @@ package alive.entities.qualities.energy;
 
 public interface Energy {
 
-
     int getEnergyValue();
 
     /**

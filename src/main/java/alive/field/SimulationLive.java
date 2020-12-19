@@ -1,9 +1,10 @@
 package alive.field;
 
 import alive.entities.Entity;
-import alive.entities.alive.bot.AliveBot;
 import alive.entities.alive.bot.Bot;
+import alive.entities.alive.bot.BotAlive;
 import alive.entities.alive.bot.direction.BotLookDirection;
+import alive.entities.alive.bot.energy.EnergyAliveBot;
 import alive.entities.alive.bot.genome.BotGenome;
 import alive.entities.alive.bot.genome.gene.Gene;
 import alive.entities.qualities.position.PositionEntity;
@@ -11,23 +12,24 @@ import alive.entities.qualities.position.PositionEntity;
 import java.util.HashMap;
 import java.util.List;
 
-public class LiveSimulation implements Simulation {
+public class SimulationLive implements Simulation {
 
     private final Field field;
 
-    public LiveSimulation(Field field) {
+    public SimulationLive(Field field) {
         this.field = field;
     }
 
     public void start() {
 
-        field.putEntity(new AliveBot(field, new PositionEntity(0, 0), 500, new BotLookDirection(), BotGenome.createFirstBotGenome()));
+        field.putEntity(new BotAlive(field, new PositionEntity(0, 0),
+                new EnergyAliveBot(500), new BotLookDirection(), BotGenome.createFirstBotGenome()));
 
         for (var i = 0; i < Integer.MAX_VALUE; ++i) {
 
             field.update();
 
-            if (i % 100000 == 0) {
+            if (i % 1 == 0) {
                 System.out.println('\n');
                 createGenesReport();
                 System.out.println('\n');

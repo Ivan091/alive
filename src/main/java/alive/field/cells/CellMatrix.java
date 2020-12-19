@@ -4,9 +4,16 @@ import alive.entities.Entity;
 import alive.entities.dead.EmptyEntity;
 import alive.entities.qualities.position.Position;
 
+import java.util.List;
 import java.util.Optional;
 
-public interface CellsMatrix {
+public interface CellMatrix {
+
+    Optional<Position> createPositionOnField(int x, int y);
+
+    Optional<Position> createPositionOnField(Position pos);
+
+    List<Position> findEmptyPositionsAround(Position pos);
 
     /**
      * @param pos position of a cell on the field.
@@ -17,7 +24,7 @@ public interface CellsMatrix {
     /**
      * @param newEntity will be assigned to the cell at the position
      */
-    void addEntity(Entity newEntity);
+    void putEntity(Entity newEntity);
 
     /**
      * Calls eraseFromField method from cell's content.
@@ -26,14 +33,8 @@ public interface CellsMatrix {
      * @param pos position of a cell on field.
      * @see EmptyEntity
      */
-    void addEmpty(Position pos);
+    void putEmpty(Position pos);
 
-    /**
-     * Calls eraseFromField method from cell's content.
-     *
-     * @param pos position on field
-     */
-    void finalizeEntity(Position pos);
 
     /**
      * Checks if the cell is in bounds and empty
@@ -44,10 +45,6 @@ public interface CellsMatrix {
      * @see EmptyEntity
      */
     boolean isEmpty(Position pos);
-
-    Optional<Position> createPositionOnField(int x, int y);
-
-    Optional<Position> createPositionOnField(Position pos);
 
     int getWidth();
 

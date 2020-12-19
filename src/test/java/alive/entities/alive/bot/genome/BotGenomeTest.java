@@ -22,7 +22,7 @@ class BotGenomeTest {
     private final Genome genome = new BotGenome(genes);
 
     @Test
-    void incrementGenIdx() {
+    void incrementGeneIdx() {
         genome.incrementGeneIdx(1);
         genome.runCurrentGene(botMock);
         verify(genes[1]).run(botMock);

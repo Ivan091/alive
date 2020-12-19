@@ -1,7 +1,8 @@
 package alive.entities.alive.bot.genome.gene.conditional;
 
-import alive.entities.alive.bot.AliveBot;
+import alive.entities.alive.bot.BotAlive;
 import alive.entities.alive.bot.direction.BotLookDirection;
+import alive.entities.alive.bot.energy.EnergyBot;
 import alive.entities.alive.bot.genome.Genome;
 import alive.entities.alive.bot.genome.gene.GeneTest;
 import alive.entities.qualities.position.PositionEntity;
@@ -19,10 +20,8 @@ class RotatingTest extends GeneTest {
     private void setup(int geneArg) {
 
         gene = new Rotating(geneArg);
-        bot = spy(new AliveBot(field, new PositionEntity(1, 1), 0, new BotLookDirection(0), mock(Genome.class)));
-
-        doNothing().when(bot).destroy();
-        doNothing().when(bot).replicate();
+        bot = spy(new BotAlive(field, new PositionEntity(1, 1),
+                mock(EnergyBot.class), new BotLookDirection(0), mock(Genome.class)));
         when(bot.isAlive()).thenReturn(true);
     }
 

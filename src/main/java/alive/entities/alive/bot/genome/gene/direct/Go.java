@@ -12,9 +12,9 @@ public class Go extends DirectGene {
         var cells = bot.getField().getCellsMatrix();
         lookingPos.ifPresent(pos -> {
             if (cells.isEmpty(pos)) {
-                cells.addEmpty(bot.getPosition());
+                cells.putEmpty(bot.getPosition());
                 bot.setPosition(pos);
-                cells.addEntity(bot);
+                cells.putEntity(bot);
             }
         });
 

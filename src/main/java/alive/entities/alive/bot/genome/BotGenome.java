@@ -12,20 +12,9 @@ import java.util.stream.IntStream;
 
 public class BotGenome implements Genome {
 
-    private final Gene[] genes;
-
-    private int currentGeneIdx;
-
     private static final Mutator<Gene[]> genomeMutator = new GenomeMutator();
-
-    public static Genome createFirstBotGenome() {
-
-        var genes = new Gene[WorldConstants.START_GENOME_LENGTH];
-
-        IntStream.range(0, genes.length).forEach(i -> genes[i] = new Photosynthesis());
-
-        return new BotGenome(genes);
-    }
+    private final Gene[] genes;
+    private int currentGeneIdx;
 
     public BotGenome(Gene[] genes) {
 
@@ -34,6 +23,15 @@ public class BotGenome implements Genome {
         }
 
         this.genes = genes;
+    }
+
+    public static Genome createFirstBotGenome() {
+
+        var genes = new Gene[WorldConstants.START_GENOME_LENGTH];
+
+        IntStream.range(0, genes.length).forEach(i -> genes[i] = new Photosynthesis());
+
+        return new BotGenome(genes);
     }
 
     @Override

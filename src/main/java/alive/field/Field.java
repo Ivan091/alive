@@ -1,7 +1,7 @@
 package alive.field;
 
 import alive.entities.Entity;
-import alive.field.cells.CellsMatrix;
+import alive.field.cells.CellMatrix;
 
 public interface Field {
 
@@ -9,7 +9,7 @@ public interface Field {
 
     int getHeight();
 
-    CellsMatrix getCellsMatrix();
+    CellMatrix getCellsMatrix();
 
     void putEntity(Entity puttingEntity);
 

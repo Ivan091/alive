@@ -35,6 +35,6 @@ public abstract class DeadEntity implements Entity {
 
     @Override
     public void makeAMove() {
-        
+
     }
 }

@@ -13,7 +13,7 @@ public class Eat extends DirectGene {
 
         lookingPos.ifPresent(pos -> {
             var eatingContent = cells.getEntity(pos);
-            cells.addEmpty(pos);
+            cells.putEmpty(pos);
             bot.getEnergy().incrementEnergyValue(eatingContent.getEnergy().getEnergyValue() >> 1);
         });
 

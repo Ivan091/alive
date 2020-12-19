@@ -1,8 +1,6 @@
 package alive.entities.qualities.position;
 
-import alive.field.cells.CellsMatrix;
-
-import java.util.*;
+import java.util.Objects;
 
 public class PositionEntity implements Position {
 
@@ -21,24 +19,6 @@ public class PositionEntity implements Position {
     }
 
     @Override
-    public List<Position> getPositionsAround(CellsMatrix cellsMatrix) {
-
-        var positionsAround = new ArrayList<Position>(8);
-
-        for (var i = getX() - 1; i <= getX() + 1; ++i) {
-            for (var j = getY() - 1; j <= getY() + 1; ++j) {
-                if (i != getX() || j != getY()) {
-                    cellsMatrix.createPositionOnField(i, j).ifPresent(positionsAround::add);
-                }
-            }
-        }
-
-        return positionsAround;
-
-
-    }
-
-    @Override
     public int getX() {
 
         return x;
@@ -48,6 +28,12 @@ public class PositionEntity implements Position {
     public int getY() {
 
         return y;
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(x, y);
     }
 
     @Override
@@ -61,12 +47,6 @@ public class PositionEntity implements Position {
         }
         PositionEntity that = (PositionEntity) o;
         return x == that.x && y == that.y;
-    }
-
-    @Override
-    public int hashCode() {
-
-        return Objects.hash(x, y);
     }
 
     @Override

@@ -1,8 +1,8 @@
 package alive.entities.alive.bot;
 
 import alive.WorldConstants;
-import alive.entities.alive.bot.energy.AliveBotEnergy;
-import alive.entities.alive.bot.energy.BotEnergy;
+import alive.entities.alive.bot.energy.EnergyAliveBot;
+import alive.entities.alive.bot.energy.EnergyBot;
 import alive.entities.alive.bot.genome.Genome;
 import alive.entities.dead.DeadBotBody;
 import alive.entities.qualities.direction.LookDirection;
@@ -13,13 +13,12 @@ import alive.field.Field;
 
 import java.util.Optional;
 import java.util.concurrent.ThreadLocalRandom;
-import java.util.stream.Collectors;
 
-public class AliveBot implements Bot {
+public class BotAlive implements Bot {
 
     private final Field field;
 
-    private final BotEnergy energy;
+    private final EnergyBot energy;
 
     private final LookDirection lookDirection;
 
@@ -29,11 +28,14 @@ public class AliveBot implements Bot {
 
     private boolean isAlive = true;
 
-    public AliveBot(Field field, Position position, int energyValue, LookDirection lookDirection, Genome genome) {
+    public BotAlive(Field field, Position position, EnergyBot energy, LookDirection lookDirection, Genome genome) {
 
         this.field = field;
         this.position = position;
-        this.energy = new AliveBotEnergy(this, energyValue);
+
+        energy.subscribeMortal(this);
+        this.energy = energy;
+
         this.genome = genome;
         this.lookDirection = lookDirection;
     }
@@ -63,23 +65,20 @@ public class AliveBot implements Bot {
         if (positionBehindOfBot.isPresent() && field.getCellsMatrix().isEmpty(positionBehindOfBot.get())) {
             newBotPos = positionBehindOfBot.get();
         } else {
-            var possiblePositions = position.getPositionsAround(field.getCellsMatrix())
-                    .stream()
-                    .filter(field.getCellsMatrix()::isEmpty)
-                    .collect(Collectors.toList());
-            if (possiblePositions.size() == 0) {
+            var possiblePositions = field.getCellsMatrix().findEmptyPositionsAround(position);
+            if (possiblePositions.isEmpty()) {
                 destroy();
                 return;
             } else {
                 newBotPos = possiblePositions.get(ThreadLocalRandom.current().nextInt(possiblePositions.size()));
             }
-
         }
         energy.setEnergyValue(energy.getEnergyValue() - genome.length() * WorldConstants.GENE_REPLICATION_COST);
-        var newBotEnergy = energy.getEnergyValue() >> 1;
-        energy.setEnergyValue(newBotEnergy);
+        var newBotEnergyValue = energy.getEnergyValue() >> 1;
+        var newBotEnergy = new EnergyAliveBot(newBotEnergyValue);
+        energy.setEnergyValue(newBotEnergyValue);
 
-        var newBot = new AliveBot(field, newBotPos, newBotEnergy,
+        var newBot = new BotAlive(field, newBotPos, newBotEnergy,
                 lookDirection.getOpposite(), genome.replicate());
 
         field.putEntity(newBot);
@@ -90,14 +89,7 @@ public class AliveBot implements Bot {
 
         isAlive = false;
         var deadBody = new DeadBotBody(new PositionEntity(position), new EnergyEntity(energy));
-        field.getCellsMatrix().addEntity(deadBody);
-    }
-
-
-    @Override
-    public boolean isAlive() {
-
-        return isAlive;
+        field.getCellsMatrix().putEntity(deadBody);
     }
 
     @Override
@@ -113,13 +105,19 @@ public class AliveBot implements Bot {
     }
 
     @Override
+    public boolean isAlive() {
+
+        return isAlive;
+    }
+
+    @Override
     public Field getField() {
 
         return field;
     }
 
     @Override
-    public BotEnergy getEnergy() {
+    public EnergyBot getEnergy() {
 
         return energy;
     }

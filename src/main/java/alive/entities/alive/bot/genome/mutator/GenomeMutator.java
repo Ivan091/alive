@@ -64,10 +64,6 @@ public class GenomeMutator implements Mutator<Gene[]> {
         return newGenes;
     }
 
-    private Gene generateRandomGene(int genomeLength) {
-        return possibleGenes[(rnd.nextInt(possibleGenes.length))].create(rnd.nextInt(), genomeLength);
-    }
-
     private int generateNewGenomeLength(int currentGenomeLength) {
 
         if (rnd.nextDouble() < changingGenomeLengthProbability) {
@@ -80,11 +76,19 @@ public class GenomeMutator implements Mutator<Gene[]> {
         return currentGenomeLength;
     }
 
+    private int getRandomInt(int lowerBound, int higherBound) {
+
+        return rnd.nextInt(higherBound - lowerBound + 1) + lowerBound;
+    }
+
+    private Gene generateRandomGene(int genomeLength) {
+        return possibleGenes[(rnd.nextInt(possibleGenes.length))].create(rnd.nextInt(), genomeLength);
+    }
+
     private int generateGenomeLengthIncrement() {
         int genomeLengthIncrement;
         do {
             genomeLengthIncrement = getRandomInt(-maxGenomeLengthChanging, maxGenomeLengthChanging);
-
         } while (genomeLengthIncrement == 0);
         return genomeLengthIncrement;
     }
@@ -92,10 +96,4 @@ public class GenomeMutator implements Mutator<Gene[]> {
     private boolean isPossibleGenomeLength(int genesCount) {
         return genesCount > WorldConstants.MIN_GENOME_LENGTH && genesCount < WorldConstants.MAX_GENOME_LENGTH;
     }
-
-    private int getRandomInt(int lowerBound, int higherBound) {
-
-        return rnd.nextInt(higherBound - lowerBound + 1) + lowerBound;
-    }
-
 }
