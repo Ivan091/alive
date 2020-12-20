@@ -29,7 +29,7 @@ public class SimulationLive implements Simulation {
 
             field.update();
 
-            if (i % 1 == 0) {
+            if (i % 10000 == 0) {
                 System.out.println('\n');
                 createGenesReport();
                 System.out.println('\n');

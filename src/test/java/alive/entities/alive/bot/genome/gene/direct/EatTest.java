@@ -7,7 +7,6 @@ import alive.entities.alive.bot.energy.EnergyAliveBot;
 import alive.entities.alive.bot.genome.Genome;
 import alive.entities.alive.bot.genome.gene.GeneTest;
 import alive.entities.dead.DeadBotBody;
-import alive.entities.dead.Empty;
 import alive.entities.qualities.energy.EnergyEntity;
 import alive.entities.qualities.position.PositionEntity;
 import org.junit.jupiter.api.Assertions;
@@ -46,12 +45,11 @@ class EatTest extends GeneTest {
     public void eatingIncreasesEnergyValue() {
 
         var bot = botSetup(0, 0, 0);
-        var testEmpty = mock(Empty.class);
-
-        when(testEmpty.getEnergy()).thenReturn(new EnergyEntity(100));
+        var bot2 = botSetup(1, 0, 0);
+        when(bot2.getEnergy()).thenReturn(new EnergyAliveBot(100));
 
         cellMatrix.putEntity(bot);
-        cellMatrix.putEntity(testEmpty);
+        cellMatrix.putEntity(bot2);
 
         gene.run(bot);
         Assertions.assertTrue(bot.getEnergy().getEnergyValue() > 0);

@@ -2,9 +2,9 @@ package alive.entities.alive.bot.genome.mutator.fabric.conditional;
 
 import alive.entities.alive.bot.genome.gene.Gene;
 import alive.entities.alive.bot.genome.gene.conditional.GenomeJump;
-import alive.entities.alive.bot.genome.mutator.fabric.GeneFabric;
+import alive.entities.alive.bot.genome.mutator.fabric.GeneFactory;
 
-public class GenomeJumpFabric implements GeneFabric {
+public class GenomeJumpFactory implements GeneFactory {
     @Override
     public Gene create(int key, int genomeLength) {
         if (genomeLength < 4) {

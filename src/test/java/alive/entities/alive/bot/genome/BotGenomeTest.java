@@ -2,6 +2,7 @@ package alive.entities.alive.bot.genome;
 
 import alive.entities.alive.bot.Bot;
 import alive.entities.alive.bot.genome.gene.Gene;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -50,5 +51,10 @@ class BotGenomeTest {
         var genes0 = new Gene[]{};
 
         assertThrows(IllegalArgumentException.class, () -> new BotGenome(genes0));
+    }
+
+    @Test
+    void length() {
+        Assertions.assertEquals(genes.length, genome.length());
     }
 }

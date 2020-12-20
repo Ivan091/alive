@@ -6,7 +6,7 @@ import alive.entities.alive.bot.genome.gene.conditional.ConditionalGene;
 /**
  * Fabric for {@link Gene}.
  */
-public interface GeneFabric {
+public interface GeneFactory {
 
     /**
      * Creates new gene.

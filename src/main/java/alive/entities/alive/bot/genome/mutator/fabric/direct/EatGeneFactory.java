@@ -2,9 +2,9 @@ package alive.entities.alive.bot.genome.mutator.fabric.direct;
 
 import alive.entities.alive.bot.genome.gene.Gene;
 import alive.entities.alive.bot.genome.gene.direct.Eat;
-import alive.entities.alive.bot.genome.mutator.fabric.GeneFabric;
+import alive.entities.alive.bot.genome.mutator.fabric.GeneFactory;
 
-public class EatGeneFabric implements GeneFabric {
+public class EatGeneFactory implements GeneFactory {
 
     @Override
     public Gene create(int key, int genomeLength) {

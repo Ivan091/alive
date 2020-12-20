@@ -2,9 +2,9 @@ package alive.entities.alive.bot.genome.mutator;
 
 import alive.WorldConstants;
 import alive.entities.alive.bot.genome.gene.Gene;
-import alive.entities.alive.bot.genome.mutator.fabric.GeneFabric;
-import alive.entities.alive.bot.genome.mutator.fabric.conditional.GenomeJumpFabric;
-import alive.entities.alive.bot.genome.mutator.fabric.conditional.RotatingGeneFabric;
+import alive.entities.alive.bot.genome.mutator.fabric.GeneFactory;
+import alive.entities.alive.bot.genome.mutator.fabric.conditional.GenomeJumpFactory;
+import alive.entities.alive.bot.genome.mutator.fabric.conditional.RotatingGeneFactory;
 import alive.entities.alive.bot.genome.mutator.fabric.direct.*;
 
 import java.util.Random;
@@ -12,7 +12,7 @@ import java.util.stream.IntStream;
 
 public class GenomeMutator implements Mutator<Gene[]> {
 
-    private final GeneFabric[] possibleGenes;
+    private final GeneFactory[] possibleGenes;
 
     private final double changingGenomeLengthProbability = 0.1;
 
@@ -23,16 +23,16 @@ public class GenomeMutator implements Mutator<Gene[]> {
     private final Random rnd = new Random();
 
     public GenomeMutator() {
-        possibleGenes = new GeneFabric[]
+        possibleGenes = new GeneFactory[]
                 {
                         // Direct.
-                        new PhotosynthesisGeneFabric(),
-                        new GoGeneFabric(),
-                        new EatGeneFabric(),
+                        new PhotosynthesisGeneFactory(),
+                        new GoGeneFactory(),
+                        new EatGeneFactory(),
 
                         // Conditional.
-                        new RotatingGeneFabric(),
-                        new GenomeJumpFabric(),
+                        new RotatingGeneFactory(),
+                        new GenomeJumpFactory(),
                 };
     }
 
@@ -69,7 +69,7 @@ public class GenomeMutator implements Mutator<Gene[]> {
         if (rnd.nextDouble() < changingGenomeLengthProbability) {
             var genomeLengthIncrement = generateGenomeLengthIncrement();
 
-            if (isPossibleGenomeLength(currentGenomeLength + genomeLengthIncrement)) {
+            if (isGenomeLengthPossible(currentGenomeLength + genomeLengthIncrement)) {
                 return currentGenomeLength + genomeLengthIncrement;
             }
         }
@@ -93,7 +93,7 @@ public class GenomeMutator implements Mutator<Gene[]> {
         return genomeLengthIncrement;
     }
 
-    private boolean isPossibleGenomeLength(int genesCount) {
+    private boolean isGenomeLengthPossible(int genesCount) {
         return genesCount > WorldConstants.MIN_GENOME_LENGTH && genesCount < WorldConstants.MAX_GENOME_LENGTH;
     }
 }
