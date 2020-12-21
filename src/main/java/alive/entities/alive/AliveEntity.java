@@ -17,9 +17,4 @@ public abstract class AliveEntity extends PureEntity implements Alive {
     public final EnergyAlive getEnergy() {
         return energy;
     }
-
-    @Override
-    public final void setPosition(Position newPos) {
-        position = newPos;
-    }
 }

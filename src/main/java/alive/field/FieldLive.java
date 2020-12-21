@@ -1,6 +1,7 @@
 package alive.field;
 
 import alive.entities.Entity;
+import alive.entities.alive.Alive;
 import alive.field.cells.CellMatrix;
 import alive.field.cells.CellMatrixLive;
 
@@ -10,9 +11,9 @@ public class FieldLive implements Field {
 
     private final CellMatrix cellMatrix;
 
-    private final List<Entity> aliveEntities;
+    private final List<Alive> aliveEntities;
 
-    private final Queue<Entity> aliveEntitiesPutThisTurn;
+    private final Queue<Alive> aliveEntitiesPutThisTurn;
 
     public FieldLive(int height, int width) {
 
@@ -43,7 +44,9 @@ public class FieldLive implements Field {
     public void putEntity(Entity puttingEntity) {
 
         cellMatrix.putEntity(puttingEntity);
-        aliveEntitiesPutThisTurn.add(puttingEntity);
+        if (puttingEntity instanceof Alive) {
+            aliveEntitiesPutThisTurn.add((Alive) puttingEntity);
+        }
     }
 
     @Override

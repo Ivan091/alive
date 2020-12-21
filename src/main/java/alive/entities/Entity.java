@@ -6,6 +6,8 @@ import alive.entities.qualities.position.Position;
 public interface Entity {
 
     Position getPosition();
+    
+    void setPosition(Position newPos);
 
     Energy getEnergy();
 
