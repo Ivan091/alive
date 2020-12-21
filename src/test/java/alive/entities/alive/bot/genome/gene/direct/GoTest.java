@@ -4,7 +4,7 @@ import alive.entities.alive.bot.Bot;
 import alive.entities.alive.bot.BotAlive;
 import alive.entities.alive.bot.direction.BotLookDirection;
 import alive.entities.alive.bot.genome.gene.GeneTest;
-import alive.entities.alive.bot.genome.mutator.fabric.direct.GoGeneFactory;
+import alive.entities.alive.bot.genome.mutator.factory.direct.GoGeneFactory;
 import alive.entities.lifeless.LifelessBotBody;
 import alive.entities.qualities.energy.EnergyEntity;
 import alive.entities.qualities.position.PositionEntity;
@@ -23,7 +23,7 @@ public class GoTest extends GeneTest {
     private void setup(int x, int y, int lookDirNum) {
 
         botSpy = spy(new BotAlive(field, new PositionEntity(x, y), energyAliveMock, new BotLookDirection(lookDirNum), genomeMock));
-        field.getCellsMatrix().putEntity(botSpy);
+        field.getCellsMatrix().put(botSpy);
     }
 
 
@@ -133,13 +133,13 @@ public class GoTest extends GeneTest {
 
         setup(1, 1, 0);
 
-        cellMatrix.putEntity(new LifelessBotBody(new PositionEntity(2, 1), new EnergyEntity(0)));
+        matrixEntities.put(new LifelessBotBody(new PositionEntity(2, 1), new EnergyEntity(0)));
         gene.run(botSpy);
         Assertions.assertEquals(new PositionEntity(1, 1), botSpy.getPosition());
 
         var botMock = mock(Bot.class);
         when(botMock.getPosition()).thenReturn(new PositionEntity(2, 1));
-        cellMatrix.putEntity(botMock);
+        matrixEntities.put(botMock);
         gene.run(botSpy);
         Assertions.assertEquals(new PositionEntity(1, 1), botSpy.getPosition());
     }

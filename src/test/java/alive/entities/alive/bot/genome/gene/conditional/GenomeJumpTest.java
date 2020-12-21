@@ -3,7 +3,7 @@ package alive.entities.alive.bot.genome.gene.conditional;
 import alive.entities.alive.bot.genome.BotGenome;
 import alive.entities.alive.bot.genome.gene.Gene;
 import alive.entities.alive.bot.genome.gene.GeneTest;
-import alive.entities.alive.bot.genome.mutator.fabric.conditional.GenomeJumpFactory;
+import alive.entities.alive.bot.genome.mutator.factory.conditional.GenomeJumpFactory;
 import org.junit.jupiter.api.Test;
 
 import static org.mockito.Mockito.*;

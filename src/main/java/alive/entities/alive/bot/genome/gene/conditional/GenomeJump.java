@@ -5,16 +5,13 @@ import alive.entities.alive.bot.genome.gene.Gene;
 
 public class GenomeJump extends ConditionalGene {
     /**
-     * @param key Using as a parameter for conditional jump.
+     * @param initialKey Using as a parameter for conditional jump.
      */
-    public GenomeJump(int key) {
-        super(key);
-        this.key = key == 0 ? 1 : key;
-    }
-
-    @Override
-    public Gene replicate() {
-        return new GenomeJump(key);
+    public GenomeJump(int initialKey) {
+        super(initialKey);
+        if (key == 0) {
+            key = 1;
+        }
     }
 
     @Override
@@ -22,6 +19,11 @@ public class GenomeJump extends ConditionalGene {
         bot.getEnergy().incrementEnergyValue(Math.abs(key) / -2);
         bot.getGenome().incrementGeneIdx(key);
         return true;
+    }
+
+    @Override
+    public Gene replicate() {
+        return new GenomeJump(key);
     }
 
     @Override

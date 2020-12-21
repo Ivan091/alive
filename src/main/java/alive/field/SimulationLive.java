@@ -7,10 +7,14 @@ import alive.entities.alive.bot.direction.BotLookDirection;
 import alive.entities.alive.bot.energy.EnergyAliveAlive;
 import alive.entities.alive.bot.genome.BotGenome;
 import alive.entities.alive.bot.genome.gene.Gene;
+import alive.entities.lifeless.LifelessBotBody;
 import alive.entities.qualities.position.PositionEntity;
 
 import java.util.HashMap;
 import java.util.List;
+
+import static java.lang.System.out;
+
 
 public class SimulationLive implements Simulation {
 
@@ -23,23 +27,24 @@ public class SimulationLive implements Simulation {
     public void start() {
 
         field.putEntity(new BotAlive(field, new PositionEntity(0, 0),
-                new EnergyAliveAlive(500), new BotLookDirection(), BotGenome.createFirstBotGenome()));
+                new EnergyAliveAlive(500), new BotLookDirection(2), BotGenome.createFirstBotGenome()));
 
         for (var i = 0; i < Integer.MAX_VALUE; ++i) {
 
             field.update();
+            currentCondition();
 
             if (i % 10000 == 0) {
-                System.out.println('\n');
+                out.println('\n');
                 createGenesReport();
-                System.out.println('\n');
+                out.println('\n');
                 createFieldReport();
-                System.out.println('\n');
+                out.println('\n');
             }
 
             if (field.aliveEntitiesCount() == 0) {
 
-                System.out.println("\nThe population is dead(((");
+                out.println("\nThe population is dead(((");
                 return;
             }
         }
@@ -76,10 +81,30 @@ public class SimulationLive implements Simulation {
         for (var i = 0; i < field.getHeight(); ++i) {
             for (var j = 0; j < field.getWidth(); ++j) {
                 var pos = new PositionEntity(i, j);
-                map.merge(field.getCellsMatrix().getEntity(pos).getClass(), 1, Integer::sum);
+                map.merge(field.getCellsMatrix().get(pos).getClass(), 1, Integer::sum);
             }
         }
 
         map.forEach((x, y) -> System.out.format("%-9s%s", y.toString(), x.getSimpleName() + '\n'));
+    }
+
+    private void currentCondition() {
+        for (var j = field.getHeight() - 1; j > -1; --j) {
+            for (var i = 0; i < field.getWidth(); ++i) {
+                var pos = new PositionEntity(i, j);
+                var entity = field.getCellsMatrix().get(pos);
+                if (entity instanceof Bot) {
+                    out.print('b');
+                } else if (entity instanceof LifelessBotBody) {
+                    out.print('=');
+                } else {
+                    out.print('#');
+                }
+                out.print(' ');
+            }
+            out.println();
+        }
+        out.println();
+        out.println();
     }
 }

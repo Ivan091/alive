@@ -1,19 +1,19 @@
 package alive.field;
 
 import alive.entities.Entity;
-import alive.field.cells.CellMatrix;
+import alive.field.matrix.MatrixEntities;
 
 public interface Field {
+
+    void update();
+
+    void putEntity(Entity puttingEntity);
+
+    MatrixEntities getCellsMatrix();
+
+    int aliveEntitiesCount();
 
     int getWidth();
 
     int getHeight();
-
-    CellMatrix getCellsMatrix();
-
-    void putEntity(Entity puttingEntity);
-
-    void update();
-
-    int aliveEntitiesCount();
 }

@@ -8,13 +8,12 @@ public class Go extends DirectGene {
     @Override
     public Boolean run(Bot bot) {
 
-        var lookingPos = bot.getLookingPos();
-        var cells = bot.getField().getCellsMatrix();
-        lookingPos.ifPresent(pos -> {
-            if (cells.isEmpty(pos)) {
-                cells.putEmpty(bot.getPosition());
-                bot.setPosition(pos);
-                cells.putEntity(bot);
+        bot.getLookingPos().ifPresent(newPos -> {
+            var cells = bot.getField().getCellsMatrix();
+            if (cells.isEmpty(newPos)) {
+                cells.pull(bot.getPosition());
+                bot.getPosition().copyOf(newPos);
+                cells.put(bot);
             }
         });
 

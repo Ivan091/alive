@@ -10,7 +10,7 @@ public class Main {
     }
 
     public static void start() {
-        var simulation = new SimulationLive(new FieldLive(100, 100));
+        var simulation = new SimulationLive(new FieldLive(10, 10));
         simulation.start();
     }
 }

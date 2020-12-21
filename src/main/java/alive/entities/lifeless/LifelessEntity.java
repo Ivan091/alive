@@ -24,10 +24,6 @@ public abstract class LifelessEntity extends EntityAbstract {
     }
 
     @Override
-    public final void finalizeBeforeErasingFromField() {
-    }
-
-    @Override
     public final void makeAMove() {
     }
 }

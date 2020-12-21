@@ -1,14 +1,14 @@
 package alive.field;
 
 import alive.entities.Entity;
-import alive.field.cells.CellMatrix;
-import alive.field.cells.CellMatrixLive;
+import alive.field.matrix.MatrixEntities;
+import alive.field.matrix.MatrixLiveEntities;
 
 import java.util.*;
 
 public class FieldLive implements Field {
 
-    private final CellMatrix cellMatrix;
+    private final MatrixEntities matrixEntities;
 
     private final List<Entity> aliveEntities;
 
@@ -16,63 +16,63 @@ public class FieldLive implements Field {
 
     public FieldLive(int width, int height) {
 
-        cellMatrix = new CellMatrixLive(height, width);
+        matrixEntities = new MatrixLiveEntities(height, width);
         aliveEntities = new LinkedList<>();
-        entitiesPutThisTurn = new ArrayDeque<>();
-    }
-
-    @Override
-    public int getWidth() {
-
-        return cellMatrix.getWidth();
-    }
-
-    @Override
-    public int getHeight() {
-
-        return cellMatrix.getHeight();
-    }
-
-    @Override
-    public CellMatrix getCellsMatrix() {
-
-        return cellMatrix;
-    }
-
-    @Override
-    public void putEntity(Entity puttingEntity) {
-
-        cellMatrix.putEntity(puttingEntity);
-        entitiesPutThisTurn.add(puttingEntity);
+        entitiesPutThisTurn = new LinkedList<>();
     }
 
     @Override
     public void update() {
 
-        var aliveBotsIt = aliveEntities.iterator();
-        while (aliveBotsIt.hasNext()) {
+        var aliveEntitiesIt = aliveEntities.iterator();
+        while (aliveEntitiesIt.hasNext()) {
 
-            var curBot = aliveBotsIt.next();
+            var curEntity = aliveEntitiesIt.next();
 
-            curBot.makeAMove();
-
-            if (!curBot.isAlive()) {
-                aliveBotsIt.remove();
+            if (curEntity.isAlive() && matrixEntities.isInMatrix(curEntity)) {
+                curEntity.makeAMove();
+            } else {
+                aliveEntitiesIt.remove();
             }
         }
 
         while (!entitiesPutThisTurn.isEmpty()) {
-            var curBot = entitiesPutThisTurn.poll();
+            var curEntity = entitiesPutThisTurn.poll();
 
-            if (curBot.isAlive()) {
-                curBot.makeAMove();
-                aliveEntities.add(curBot);
+            if (curEntity.isAlive() && matrixEntities.isInMatrix(curEntity)) {
+                curEntity.makeAMove();
+                aliveEntities.add(curEntity);
             }
         }
     }
 
     @Override
+    public void putEntity(Entity puttingEntity) {
+
+        matrixEntities.put(puttingEntity);
+        entitiesPutThisTurn.add(puttingEntity);
+    }
+
+    @Override
+    public MatrixEntities getCellsMatrix() {
+
+        return matrixEntities;
+    }
+
+    @Override
     public int aliveEntitiesCount() {
         return aliveEntities.size() + entitiesPutThisTurn.size();
+    }
+
+    @Override
+    public int getWidth() {
+
+        return matrixEntities.getWidth();
+    }
+
+    @Override
+    public int getHeight() {
+
+        return matrixEntities.getHeight();
     }
 }

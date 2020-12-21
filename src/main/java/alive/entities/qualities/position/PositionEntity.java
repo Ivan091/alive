@@ -2,8 +2,8 @@ package alive.entities.qualities.position;
 
 public class PositionEntity implements Position {
 
-    private final int x;
-    private final int y;
+    private int x;
+    private int y;
 
     public PositionEntity(int x, int y) {
 
@@ -17,15 +17,31 @@ public class PositionEntity implements Position {
     }
 
     @Override
+    public void copyOf(Position other) {
+        x = other.getX();
+        y = other.getY();
+    }
+
+    @Override
     public final int getX() {
 
         return x;
     }
 
     @Override
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    @Override
     public final int getY() {
 
         return y;
+    }
+
+    @Override
+    public void setY(int y) {
+        this.y = y;
     }
 
     @Override

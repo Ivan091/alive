@@ -2,10 +2,10 @@ package alive.entities.alive.bot.genome.mutator;
 
 import alive.WorldConstants;
 import alive.entities.alive.bot.genome.gene.Gene;
-import alive.entities.alive.bot.genome.mutator.fabric.GeneFactory;
-import alive.entities.alive.bot.genome.mutator.fabric.conditional.GenomeJumpFactory;
-import alive.entities.alive.bot.genome.mutator.fabric.conditional.RotatingGeneFactory;
-import alive.entities.alive.bot.genome.mutator.fabric.direct.*;
+import alive.entities.alive.bot.genome.mutator.factory.GeneFactory;
+import alive.entities.alive.bot.genome.mutator.factory.conditional.GenomeJumpFactory;
+import alive.entities.alive.bot.genome.mutator.factory.conditional.RotatingGeneFactory;
+import alive.entities.alive.bot.genome.mutator.factory.direct.*;
 
 import java.util.Random;
 import java.util.stream.IntStream;

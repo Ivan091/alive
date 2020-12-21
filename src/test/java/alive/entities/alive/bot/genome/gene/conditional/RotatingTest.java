@@ -1,7 +1,7 @@
 package alive.entities.alive.bot.genome.gene.conditional;
 
 import alive.entities.alive.bot.genome.gene.GeneTest;
-import alive.entities.alive.bot.genome.mutator.fabric.conditional.RotatingGeneFactory;
+import alive.entities.alive.bot.genome.mutator.factory.conditional.RotatingGeneFactory;
 import alive.entities.qualities.position.PositionEntity;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

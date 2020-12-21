@@ -55,7 +55,7 @@ public class BotAlive extends AliveEntity implements Bot {
 
         Position newBotPos;
 
-        var positionBehindOfBot = field.getCellsMatrix().createPositionOnField(lookDirection.getOpposite().getLookingPos(position));
+        var positionBehindOfBot = field.getCellsMatrix().makePositionToBeInside(lookDirection.getOpposite().getLookingPos(position));
 
         if (positionBehindOfBot.isPresent() && field.getCellsMatrix().isEmpty(positionBehindOfBot.get())) {
             newBotPos = positionBehindOfBot.get();
@@ -84,7 +84,7 @@ public class BotAlive extends AliveEntity implements Bot {
 
         isAlive = false;
         var deadBody = new LifelessBotBody(new PositionEntity(position), new EnergyEntity(energy));
-        field.getCellsMatrix().putEntity(deadBody);
+        field.getCellsMatrix().put(deadBody);
     }
 
     @Override
@@ -113,11 +113,6 @@ public class BotAlive extends AliveEntity implements Bot {
 
     @Override
     public Optional<Position> getLookingPos() {
-        return field.getCellsMatrix().createPositionOnField(lookDirection.getLookingPos(position));
-    }
-
-    @Override
-    public void finalizeBeforeErasingFromField() {
-        isAlive = false;
+        return field.getCellsMatrix().makePositionToBeInside(lookDirection.getLookingPos(position));
     }
 }

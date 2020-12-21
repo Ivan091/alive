@@ -6,7 +6,7 @@ import alive.entities.lifeless.LifelessBotBody;
 import alive.entities.qualities.energy.EnergyEntity;
 import alive.entities.qualities.position.Position;
 import alive.entities.qualities.position.PositionEntity;
-import alive.field.cells.CellMatrix;
+import alive.field.matrix.MatrixEntities;
 import org.junit.jupiter.api.*;
 
 import static org.mockito.Mockito.*;
@@ -14,7 +14,7 @@ import static org.mockito.Mockito.*;
 class FieldLiveTest {
 
     private final Field field = new FieldLive(13, 11);
-    private final CellMatrix matrix = field.getCellsMatrix();
+    private final MatrixEntities matrix = field.getCellsMatrix();
     private Position positionEntity = new PositionEntity(1, 1);
     ;
     private Alive liveMock = mock(Alive.class);
@@ -47,7 +47,7 @@ class FieldLiveTest {
     void putEntity() {
         var body = new LifelessBotBody(positionEntity, new EnergyEntity(0));
         field.putEntity(body);
-        Assertions.assertSame(body, matrix.getEntity(positionEntity));
+        Assertions.assertSame(body, matrix.get(positionEntity));
     }
 
     @Test
@@ -66,8 +66,7 @@ class FieldLiveTest {
         field.putEntity(liveMock);
         field.putEntity(body);
         field.update();
-        verify(liveMock).finalizeBeforeErasingFromField();
-        Assertions.assertSame(matrix.getEntity(positionEntity), body);
+        Assertions.assertSame(matrix.get(positionEntity), body);
     }
 
     @Test

@@ -1,4 +1,4 @@
-package alive.field.cells;
+package alive.field.matrix;
 
 import alive.entities.Entity;
 import alive.entities.lifeless.Empty;
@@ -9,40 +9,45 @@ import alive.entities.qualities.position.PositionEntity;
 
 import java.util.*;
 
-public class CellMatrixLive implements CellMatrix {
+public class MatrixLiveEntities implements MatrixEntities {
 
-    private final Entity[][] cellsMatrix;
+    private final Entity[][] entities;
 
-    public CellMatrixLive(int height, int width) {
+    public MatrixLiveEntities(int height, int width) {
 
-        cellsMatrix = new Entity[width][height];
+        entities = new Entity[width][height];
         for (var i = 0; i < width; ++i) {
             for (var j = 0; j < height; ++j) {
-                var pos = createPositionOnField(i, j);
+                var pos = createPositionInside(i, j);
                 if (pos.isPresent()) {
-                    cellsMatrix[i][j] = new EmptyEntity(pos.get(), new EnergyEntity(0));
+                    entities[i][j] = new EmptyEntity(pos.get(), new EnergyEntity(0));
                 }
             }
         }
     }
 
-    public Optional<Position> createPositionOnField(int x, int y) {
+    @Override
+    public Optional<Position> createPositionInside(int x, int y) {
 
+        return makePositionToBeInside(new PositionEntity(x, y));
+    }
+
+    @Override
+    public Optional<Position> makePositionToBeInside(Position pos) {
+
+        var y = pos.getY();
         if (y < 0 || y >= getHeight()) {
             return Optional.empty();
         }
 
+        var x = pos.getX();
         if (x < 0 || x >= getWidth()) {
             x %= getWidth();
             x = x >= 0 ? x : x + getWidth();
         }
+        pos.setX(x);
 
-        return Optional.of(new PositionEntity(x, y));
-    }
-
-    @Override
-    public Optional<Position> createPositionOnField(Position pos) {
-        return createPositionOnField(pos.getX(), pos.getY());
+        return Optional.of(pos);
     }
 
     @Override
@@ -55,7 +60,7 @@ public class CellMatrixLive implements CellMatrix {
         for (var i = x - 1; i <= x + 1; ++i) {
             for (var j = y - 1; j <= y + 1; ++j) {
                 if (i != x || j != y) {
-                    createPositionOnField(i, j).ifPresent(foundPos -> {
+                    createPositionInside(i, j).ifPresent(foundPos -> {
                         if (isEmpty(foundPos)) {
                             positionsAround.add(foundPos);
                         }
@@ -68,37 +73,46 @@ public class CellMatrixLive implements CellMatrix {
     }
 
     @Override
-    public Entity getEntity(Position pos) {
-        return cellsMatrix[pos.getX()][pos.getY()];
+    public Entity get(Position pos) {
+        return entities[pos.getX()][pos.getY()];
     }
 
     @Override
-    public void putEntity(Entity newEntity) {
+    public Entity put(Entity newEntity) {
         var pos = newEntity.getPosition();
-        getEntity(pos).finalizeBeforeErasingFromField();
-        cellsMatrix[pos.getX()][pos.getY()] = newEntity;
+        var previousEntity = get(pos);
+        entities[pos.getX()][pos.getY()] = newEntity;
+        return previousEntity;
     }
 
     @Override
-    public void putEmpty(Position pos) {
-        putEntity(new EmptyEntity(new PositionEntity(pos), new EnergyEntity(0)));
+    public Entity pull(Position pos) {
+        if (!isEmpty(pos)) {
+            return put(new EmptyEntity(new PositionEntity(pos), new EnergyEntity(0)));
+        }
+        return get(pos);
     }
 
     @Override
     public boolean isEmpty(Position pos) {
 
-        return getEntity(pos) instanceof Empty;
+        return get(pos) instanceof Empty;
+    }
+
+    @Override
+    public boolean isInMatrix(Entity entity) {
+        return entity == get(entity.getPosition());
     }
 
     @Override
     public int getWidth() {
 
-        return cellsMatrix.length;
+        return entities.length;
     }
 
     @Override
     public int getHeight() {
 
-        return cellsMatrix[0].length;
+        return entities[0].length;
     }
 }

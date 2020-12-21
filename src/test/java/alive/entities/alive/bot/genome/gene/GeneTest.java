@@ -10,7 +10,7 @@ import alive.entities.qualities.position.Position;
 import alive.entities.qualities.position.PositionEntity;
 import alive.field.Field;
 import alive.field.FieldLive;
-import alive.field.cells.CellMatrix;
+import alive.field.matrix.MatrixEntities;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -19,7 +19,7 @@ import static org.mockito.Mockito.*;
 public abstract class GeneTest {
 
     protected Field field = new FieldLive(3, 3);
-    protected CellMatrix cellMatrix = field.getCellsMatrix();
+    protected MatrixEntities matrixEntities = field.getCellsMatrix();
     protected Gene gene;
 
     protected EnergyAlive energyAliveMock = mock(EnergyAlive.class);

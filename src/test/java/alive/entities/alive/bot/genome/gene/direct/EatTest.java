@@ -6,7 +6,7 @@ import alive.entities.alive.bot.direction.BotLookDirection;
 import alive.entities.alive.bot.energy.EnergyAliveAlive;
 import alive.entities.alive.bot.genome.Genome;
 import alive.entities.alive.bot.genome.gene.GeneTest;
-import alive.entities.alive.bot.genome.mutator.fabric.direct.EatGeneFactory;
+import alive.entities.alive.bot.genome.mutator.factory.direct.EatGeneFactory;
 import alive.entities.lifeless.LifelessBotBody;
 import alive.entities.qualities.energy.EnergyEntity;
 import alive.entities.qualities.position.PositionEntity;
@@ -33,13 +33,13 @@ class EatTest extends GeneTest {
         var bot = botSetup(0, 0, 0);
         var lookPos = bot.getLookDirection().getLookingPos(bot.getPosition());
 
-        cellMatrix.putEntity(new LifelessBotBody(lookPos, new EnergyEntity(0)));
+        matrixEntities.put(new LifelessBotBody(lookPos, new EnergyEntity(0)));
         gene.run(bot);
-        Assertions.assertTrue(cellMatrix.isEmpty(lookPos));
+        Assertions.assertTrue(matrixEntities.isEmpty(lookPos));
 
-        cellMatrix.putEntity(botSetup(2, 1, 0));
+        matrixEntities.put(botSetup(2, 1, 0));
         gene.run(bot);
-        Assertions.assertTrue(cellMatrix.isEmpty(lookPos));
+        Assertions.assertTrue(matrixEntities.isEmpty(lookPos));
     }
 
     @Test
@@ -48,8 +48,8 @@ class EatTest extends GeneTest {
         var bot = botSetup(0, 0, 0);
         var bot2 = botSetup(1, 0, 0);
 
-        cellMatrix.putEntity(bot);
-        cellMatrix.putEntity(bot2);
+        matrixEntities.put(bot);
+        matrixEntities.put(bot2);
 
         gene.run(bot);
         Assertions.assertTrue(bot.getEnergy().getEnergyValue() > 100);

@@ -33,7 +33,7 @@ class BotAliveTest {
 
     private Bot getBotSpy(Genome genome) {
         Bot bot = spy(new BotAlive(field, botPos, energyMock, botLookDir, genome));
-        field.getCellsMatrix().putEntity(bot);
+        field.getCellsMatrix().put(bot);
         return bot;
     }
 
@@ -47,7 +47,7 @@ class BotAliveTest {
 
         var bot = getBotSpy();
         bot.replicate();
-        Assertions.assertTrue(field.getCellsMatrix().getEntity(new PositionEntity(1, 0)) instanceof Bot);
+        Assertions.assertTrue(field.getCellsMatrix().get(new PositionEntity(1, 0)) instanceof Bot);
         bot.replicate();
         Assertions.assertFalse(bot.isAlive());
     }

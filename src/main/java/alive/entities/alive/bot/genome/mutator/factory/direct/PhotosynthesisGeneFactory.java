@@ -1,8 +1,8 @@
-package alive.entities.alive.bot.genome.mutator.fabric.direct;
+package alive.entities.alive.bot.genome.mutator.factory.direct;
 
 import alive.entities.alive.bot.genome.gene.Gene;
 import alive.entities.alive.bot.genome.gene.direct.Photosynthesis;
-import alive.entities.alive.bot.genome.mutator.fabric.GeneFactory;
+import alive.entities.alive.bot.genome.mutator.factory.GeneFactory;
 
 public class PhotosynthesisGeneFactory implements GeneFactory {
 

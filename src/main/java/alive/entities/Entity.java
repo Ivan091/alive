@@ -7,13 +7,9 @@ public interface Entity {
 
     Position getPosition();
 
-    void setPosition(Position newPos);
-
     Energy getEnergy();
 
     boolean isAlive();
-
-    void finalizeBeforeErasingFromField();
 
     /**
      * Calls when entity makes a move.

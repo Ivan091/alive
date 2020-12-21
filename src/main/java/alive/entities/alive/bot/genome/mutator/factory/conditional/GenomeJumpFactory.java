@@ -1,8 +1,8 @@
-package alive.entities.alive.bot.genome.mutator.fabric.conditional;
+package alive.entities.alive.bot.genome.mutator.factory.conditional;
 
 import alive.entities.alive.bot.genome.gene.Gene;
 import alive.entities.alive.bot.genome.gene.conditional.GenomeJump;
-import alive.entities.alive.bot.genome.mutator.fabric.GeneFactory;
+import alive.entities.alive.bot.genome.mutator.factory.GeneFactory;
 
 public class GenomeJumpFactory implements GeneFactory {
     @Override
