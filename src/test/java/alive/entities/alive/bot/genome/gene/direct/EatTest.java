@@ -22,7 +22,7 @@ class EatTest extends GeneTest {
 
     private Bot botSetup(int x, int y, int lookDirNum) {
 
-        var bot = spy(new BotAlive(field, new PositionEntity(x, y), new EnergyAliveAlive(0), new BotLookDirection(lookDirNum), mock(Genome.class)));
+        var bot = spy(new BotAlive(field, new PositionEntity(x, y), new EnergyAliveAlive(100), new BotLookDirection(lookDirNum), mock(Genome.class)));
         return bot;
     }
 
@@ -46,12 +46,11 @@ class EatTest extends GeneTest {
 
         var bot = botSetup(0, 0, 0);
         var bot2 = botSetup(1, 0, 0);
-        when(bot2.getEnergy()).thenReturn(new EnergyAliveAlive(100));
 
         cellMatrix.putEntity(bot);
         cellMatrix.putEntity(bot2);
 
         gene.run(bot);
-        Assertions.assertTrue(bot.getEnergy().getEnergyValue() > 0);
+        Assertions.assertTrue(bot.getEnergy().getEnergyValue() > 100);
     }
 }

@@ -1,10 +1,10 @@
 package alive.entities.alive;
 
-import alive.entities.PureEntity;
+import alive.entities.EntityAbstract;
 import alive.entities.alive.bot.energy.EnergyAlive;
 import alive.entities.qualities.position.Position;
 
-public abstract class AliveEntity extends PureEntity implements Alive {
+public abstract class AliveEntity extends EntityAbstract implements Alive {
 
     protected final EnergyAlive energy;
 

@@ -25,7 +25,7 @@ public class GoTest extends GeneTest {
 
         botSpy = spy(new BotAlive(field, new PositionEntity(x, y), mock(EnergyAlive.class), new BotLookDirection(lookDirNum), mock(Genome.class)));
         field.getCellsMatrix().putEntity(botSpy);
-        when(botSpy.getEnergy()).thenReturn(mock(EnergyAlive.class));
+        doReturn(mock(EnergyAlive.class)).when(botSpy).getEnergy();
     }
 
 

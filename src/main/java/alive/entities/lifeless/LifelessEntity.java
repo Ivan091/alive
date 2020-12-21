@@ -1,10 +1,10 @@
 package alive.entities.lifeless;
 
-import alive.entities.PureEntity;
+import alive.entities.EntityAbstract;
 import alive.entities.qualities.energy.Energy;
 import alive.entities.qualities.position.Position;
 
-public abstract class LifelessEntity extends PureEntity {
+public abstract class LifelessEntity extends EntityAbstract {
 
     private final Energy energy;
 
@@ -25,5 +25,10 @@ public abstract class LifelessEntity extends PureEntity {
 
     @Override
     public final void finalizeBeforeErasingFromField() {
+    }
+
+    @Override
+    public final void makeAMove() {
+
     }
 }

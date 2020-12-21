@@ -2,11 +2,11 @@ package alive.entities;
 
 import alive.entities.qualities.position.Position;
 
-public abstract class PureEntity implements Entity {
+public abstract class EntityAbstract implements Entity {
 
     protected Position position;
 
-    public PureEntity(Position position) {
+    public EntityAbstract(Position position) {
         this.position = position;
     }
 

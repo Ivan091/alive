@@ -6,7 +6,7 @@ import alive.entities.qualities.position.Position;
 public interface Entity {
 
     Position getPosition();
-    
+
     void setPosition(Position newPos);
 
     Energy getEnergy();
@@ -14,4 +14,9 @@ public interface Entity {
     boolean isAlive();
 
     void finalizeBeforeErasingFromField();
+
+    /**
+     * Calls when entity makes a move.
+     */
+    void makeAMove();
 }

@@ -1,7 +1,6 @@
 package alive.field;
 
 import alive.entities.Entity;
-import alive.entities.alive.Alive;
 import alive.field.cells.CellMatrix;
 import alive.field.cells.CellMatrixLive;
 
@@ -11,15 +10,15 @@ public class FieldLive implements Field {
 
     private final CellMatrix cellMatrix;
 
-    private final List<Alive> aliveEntities;
+    private final List<Entity> aliveEntities;
 
-    private final Queue<Alive> aliveEntitiesPutThisTurn;
+    private final Queue<Entity> entitiesPutThisTurn;
 
     public FieldLive(int height, int width) {
 
         cellMatrix = new CellMatrixLive(height, width);
         aliveEntities = new LinkedList<>();
-        aliveEntitiesPutThisTurn = new ArrayDeque<>();
+        entitiesPutThisTurn = new ArrayDeque<>();
     }
 
     @Override
@@ -44,9 +43,7 @@ public class FieldLive implements Field {
     public void putEntity(Entity puttingEntity) {
 
         cellMatrix.putEntity(puttingEntity);
-        if (puttingEntity instanceof Alive) {
-            aliveEntitiesPutThisTurn.add((Alive) puttingEntity);
-        }
+        entitiesPutThisTurn.add(puttingEntity);
     }
 
     @Override
@@ -64,8 +61,8 @@ public class FieldLive implements Field {
             }
         }
 
-        while (!aliveEntitiesPutThisTurn.isEmpty()) {
-            var curBot = aliveEntitiesPutThisTurn.poll();
+        while (!entitiesPutThisTurn.isEmpty()) {
+            var curBot = entitiesPutThisTurn.poll();
 
             if (curBot.isAlive()) {
                 curBot.makeAMove();
@@ -76,6 +73,6 @@ public class FieldLive implements Field {
 
     @Override
     public int aliveCount() {
-        return aliveEntities.size() + aliveEntitiesPutThisTurn.size();
+        return aliveEntities.size() + entitiesPutThisTurn.size();
     }
 }
