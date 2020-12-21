@@ -4,11 +4,11 @@ import alive.WorldConstants;
 import alive.entities.alive.Mortal;
 import alive.entities.qualities.energy.EnergyEntity;
 
-public class EnergyAliveBot extends EnergyEntity implements EnergyBot {
+public class EnergyAliveAlive extends EnergyEntity implements EnergyAlive {
 
     private Mortal mortal;
 
-    public EnergyAliveBot(int energyValue) {
+    public EnergyAliveAlive(int energyValue) {
         super(energyValue);
     }
 

@@ -1,40 +1,33 @@
 package alive.entities.dead;
 
-import alive.entities.Entity;
+import alive.entities.PureEntity;
 import alive.entities.qualities.energy.Energy;
 import alive.entities.qualities.position.Position;
 
-public abstract class DeadEntity implements Entity {
+public abstract class DeadEntity extends PureEntity {
 
     private final Energy energy;
 
-    private final Position position;
-
     public DeadEntity(Position position, Energy energy) {
-        this.position = position;
+        super(position);
         this.energy = energy;
     }
 
     @Override
-    public Position getPosition() {
-        return position;
-    }
-
-    @Override
-    public Energy getEnergy() {
-        return energy;
-    }
-
-    @Override
-    public boolean isAlive() {
+    public final boolean isAlive() {
         return false;
     }
 
     @Override
-    public abstract void finalizeBeforeErasingFromField();
+    public final Energy getEnergy() {
+        return energy;
+    }
 
     @Override
-    public void makeAMove() {
+    public final void finalizeBeforeErasingFromField() {
+    }
 
+    @Override
+    public final void makeAMove() {
     }
 }

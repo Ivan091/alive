@@ -3,7 +3,7 @@ package alive.entities.alive.bot.genome.gene.direct;
 import alive.entities.alive.bot.Bot;
 import alive.entities.alive.bot.BotAlive;
 import alive.entities.alive.bot.direction.BotLookDirection;
-import alive.entities.alive.bot.energy.EnergyBot;
+import alive.entities.alive.bot.energy.EnergyAlive;
 import alive.entities.alive.bot.genome.Genome;
 import alive.entities.alive.bot.genome.gene.GeneTest;
 import alive.entities.dead.DeadBotBody;
@@ -23,9 +23,9 @@ public class GoTest extends GeneTest {
 
     private void setup(int x, int y, int lookDirNum) {
 
-        botSpy = spy(new BotAlive(field, new PositionEntity(x, y), mock(EnergyBot.class), new BotLookDirection(lookDirNum), mock(Genome.class)));
+        botSpy = spy(new BotAlive(field, new PositionEntity(x, y), mock(EnergyAlive.class), new BotLookDirection(lookDirNum), mock(Genome.class)));
         field.getCellsMatrix().putEntity(botSpy);
-        when(botSpy.getEnergy()).thenReturn(mock(EnergyBot.class));
+        when(botSpy.getEnergy()).thenReturn(mock(EnergyAlive.class));
     }
 
 

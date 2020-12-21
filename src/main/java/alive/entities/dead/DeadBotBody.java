@@ -8,9 +8,4 @@ public class DeadBotBody extends DeadEntity {
     public DeadBotBody(Position position, Energy energy) {
         super(position, energy);
     }
-
-    @Override
-    public void finalizeBeforeErasingFromField() {
-
-    }
 }

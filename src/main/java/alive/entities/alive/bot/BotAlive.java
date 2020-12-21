@@ -1,8 +1,9 @@
 package alive.entities.alive.bot;
 
 import alive.WorldConstants;
-import alive.entities.alive.bot.energy.EnergyAliveBot;
-import alive.entities.alive.bot.energy.EnergyBot;
+import alive.entities.alive.AliveEntity;
+import alive.entities.alive.bot.energy.EnergyAlive;
+import alive.entities.alive.bot.energy.EnergyAliveAlive;
 import alive.entities.alive.bot.genome.Genome;
 import alive.entities.dead.DeadBotBody;
 import alive.entities.qualities.direction.LookDirection;
@@ -14,27 +15,21 @@ import alive.field.Field;
 import java.util.Optional;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class BotAlive implements Bot {
+public class BotAlive extends AliveEntity implements Bot {
 
     private final Field field;
-
-    private final EnergyBot energy;
 
     private final LookDirection lookDirection;
 
     private final Genome genome;
 
-    private Position position;
-
     private boolean isAlive = true;
 
-    public BotAlive(Field field, Position position, EnergyBot energy, LookDirection lookDirection, Genome genome) {
+    public BotAlive(Field field, Position position, EnergyAlive energy, LookDirection lookDirection, Genome genome) {
+        super(position, energy);
 
         this.field = field;
-        this.position = position;
-
         energy.subscribeMortal(this);
-        this.energy = energy;
 
         this.genome = genome;
         this.lookDirection = lookDirection;
@@ -75,7 +70,7 @@ public class BotAlive implements Bot {
         }
         energy.setEnergyValue(energy.getEnergyValue() - genome.length() * WorldConstants.GENE_REPLICATION_COST);
         var newBotEnergyValue = energy.getEnergyValue() >> 1;
-        var newBotEnergy = new EnergyAliveBot(newBotEnergyValue);
+        var newBotEnergy = new EnergyAliveAlive(newBotEnergyValue);
         energy.setEnergyValue(newBotEnergyValue);
 
         var newBot = new BotAlive(field, newBotPos, newBotEnergy,
@@ -93,18 +88,6 @@ public class BotAlive implements Bot {
     }
 
     @Override
-    public Position getPosition() {
-
-        return position;
-    }
-
-    @Override
-    public void setPosition(Position newPos) {
-
-        position = newPos;
-    }
-
-    @Override
     public boolean isAlive() {
 
         return isAlive;
@@ -114,12 +97,6 @@ public class BotAlive implements Bot {
     public Field getField() {
 
         return field;
-    }
-
-    @Override
-    public EnergyBot getEnergy() {
-
-        return energy;
     }
 
     @Override

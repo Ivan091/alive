@@ -10,11 +10,6 @@ public class EmptyEntity extends DeadEntity implements Empty {
     }
 
     @Override
-    public void finalizeBeforeErasingFromField() {
-
-    }
-
-    @Override
     public boolean equals(Object obj) {
         return this.getClass() == obj.getClass();
     }

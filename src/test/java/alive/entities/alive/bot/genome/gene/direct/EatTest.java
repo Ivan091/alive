@@ -3,7 +3,7 @@ package alive.entities.alive.bot.genome.gene.direct;
 import alive.entities.alive.bot.Bot;
 import alive.entities.alive.bot.BotAlive;
 import alive.entities.alive.bot.direction.BotLookDirection;
-import alive.entities.alive.bot.energy.EnergyAliveBot;
+import alive.entities.alive.bot.energy.EnergyAliveAlive;
 import alive.entities.alive.bot.genome.Genome;
 import alive.entities.alive.bot.genome.gene.GeneTest;
 import alive.entities.dead.DeadBotBody;
@@ -22,7 +22,7 @@ class EatTest extends GeneTest {
 
     private Bot botSetup(int x, int y, int lookDirNum) {
 
-        var bot = spy(new BotAlive(field, new PositionEntity(x, y), new EnergyAliveBot(0), new BotLookDirection(lookDirNum), mock(Genome.class)));
+        var bot = spy(new BotAlive(field, new PositionEntity(x, y), new EnergyAliveAlive(0), new BotLookDirection(lookDirNum), mock(Genome.class)));
         return bot;
     }
 
@@ -46,7 +46,7 @@ class EatTest extends GeneTest {
 
         var bot = botSetup(0, 0, 0);
         var bot2 = botSetup(1, 0, 0);
-        when(bot2.getEnergy()).thenReturn(new EnergyAliveBot(100));
+        when(bot2.getEnergy()).thenReturn(new EnergyAliveAlive(100));
 
         cellMatrix.putEntity(bot);
         cellMatrix.putEntity(bot2);

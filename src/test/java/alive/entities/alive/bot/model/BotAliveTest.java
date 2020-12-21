@@ -4,7 +4,7 @@ import alive.WorldConstants;
 import alive.entities.alive.bot.Bot;
 import alive.entities.alive.bot.BotAlive;
 import alive.entities.alive.bot.direction.BotLookDirection;
-import alive.entities.alive.bot.energy.EnergyBot;
+import alive.entities.alive.bot.energy.EnergyAlive;
 import alive.entities.alive.bot.genome.Genome;
 import alive.entities.qualities.direction.LookDirection;
 import alive.entities.qualities.position.Position;
@@ -29,7 +29,7 @@ class BotAliveTest {
     Genome genomeMock = mock(Genome.class);
 
     @Mock
-    EnergyBot energyMock = mock(EnergyBot.class);
+    EnergyAlive energyMock = mock(EnergyAlive.class);
 
     private Bot getBotSpy(Genome genome) {
         Bot bot = spy(new BotAlive(field, botPos, energyMock, botLookDir, genome));

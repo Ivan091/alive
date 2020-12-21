@@ -9,10 +9,10 @@ import org.mockito.Mockito;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
-class EnergyBotAliveTest {
+class EnergyAliveAliveTest {
 
     Mortal mortalMock = mock(Mortal.class);
-    EnergyBot energy = new EnergyAliveBot(500);
+    EnergyAlive energy = new EnergyAliveAlive(500);
 
     @BeforeEach
     public void subscribe() {

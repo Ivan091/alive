@@ -4,7 +4,7 @@ import alive.entities.Entity;
 import alive.entities.alive.bot.Bot;
 import alive.entities.alive.bot.BotAlive;
 import alive.entities.alive.bot.direction.BotLookDirection;
-import alive.entities.alive.bot.energy.EnergyAliveBot;
+import alive.entities.alive.bot.energy.EnergyAliveAlive;
 import alive.entities.alive.bot.genome.BotGenome;
 import alive.entities.alive.bot.genome.gene.Gene;
 import alive.entities.qualities.position.PositionEntity;
@@ -23,7 +23,7 @@ public class SimulationLive implements Simulation {
     public void start() {
 
         field.putEntity(new BotAlive(field, new PositionEntity(0, 0),
-                new EnergyAliveBot(500), new BotLookDirection(), BotGenome.createFirstBotGenome()));
+                new EnergyAliveAlive(500), new BotLookDirection(), BotGenome.createFirstBotGenome()));
 
         for (var i = 0; i < Integer.MAX_VALUE; ++i) {
 

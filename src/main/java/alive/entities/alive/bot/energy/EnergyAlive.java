@@ -4,7 +4,7 @@ import alive.entities.alive.Alive;
 import alive.entities.alive.Mortal;
 import alive.entities.qualities.energy.Energy;
 
-public interface EnergyBot extends Energy {
+public interface EnergyAlive extends Energy {
 
     void subscribeMortal(Mortal mortal);
 
