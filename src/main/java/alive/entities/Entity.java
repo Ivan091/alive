@@ -3,7 +3,7 @@ package alive.entities;
 import alive.entities.qualities.energy.Energy;
 import alive.entities.qualities.position.Position;
 
-public interface Entity extends Movable {
+public interface Entity {
 
     Position getPosition();
 

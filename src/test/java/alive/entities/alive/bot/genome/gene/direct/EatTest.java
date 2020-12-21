@@ -6,7 +6,7 @@ import alive.entities.alive.bot.direction.BotLookDirection;
 import alive.entities.alive.bot.energy.EnergyAliveAlive;
 import alive.entities.alive.bot.genome.Genome;
 import alive.entities.alive.bot.genome.gene.GeneTest;
-import alive.entities.dead.DeadBotBody;
+import alive.entities.lifeless.LifelessBotBody;
 import alive.entities.qualities.energy.EnergyEntity;
 import alive.entities.qualities.position.PositionEntity;
 import org.junit.jupiter.api.Assertions;
@@ -32,7 +32,7 @@ class EatTest extends GeneTest {
         var bot = botSetup(0, 0, 0);
         var lookPos = bot.getLookDirection().getLookingPos(bot.getPosition());
 
-        cellMatrix.putEntity(new DeadBotBody(lookPos, new EnergyEntity(0)));
+        cellMatrix.putEntity(new LifelessBotBody(lookPos, new EnergyEntity(0)));
         gene.run(bot);
         Assertions.assertTrue(cellMatrix.isEmpty(lookPos));
 

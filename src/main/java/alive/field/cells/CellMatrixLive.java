@@ -1,8 +1,8 @@
 package alive.field.cells;
 
 import alive.entities.Entity;
-import alive.entities.dead.Empty;
-import alive.entities.dead.EmptyEntity;
+import alive.entities.lifeless.Empty;
+import alive.entities.lifeless.EmptyEntity;
 import alive.entities.qualities.energy.EnergyEntity;
 import alive.entities.qualities.position.Position;
 import alive.entities.qualities.position.PositionEntity;

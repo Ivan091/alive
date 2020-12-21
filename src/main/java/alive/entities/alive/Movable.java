@@ -1,4 +1,4 @@
-package alive.entities;
+package alive.entities.alive;
 
 public interface Movable {
 

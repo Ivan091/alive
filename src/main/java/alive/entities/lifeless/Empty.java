@@ -1,4 +1,4 @@
-package alive.entities.dead;
+package alive.entities.lifeless;
 
 import alive.entities.Entity;
 

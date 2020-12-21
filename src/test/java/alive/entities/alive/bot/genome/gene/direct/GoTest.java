@@ -6,7 +6,7 @@ import alive.entities.alive.bot.direction.BotLookDirection;
 import alive.entities.alive.bot.energy.EnergyAlive;
 import alive.entities.alive.bot.genome.Genome;
 import alive.entities.alive.bot.genome.gene.GeneTest;
-import alive.entities.dead.DeadBotBody;
+import alive.entities.lifeless.LifelessBotBody;
 import alive.entities.qualities.energy.EnergyEntity;
 import alive.entities.qualities.position.PositionEntity;
 import org.junit.jupiter.api.Assertions;
@@ -135,7 +135,7 @@ public class GoTest extends GeneTest {
 
         setup(1, 1, 0);
 
-        cellMatrix.putEntity(new DeadBotBody(new PositionEntity(2, 1), new EnergyEntity(0)));
+        cellMatrix.putEntity(new LifelessBotBody(new PositionEntity(2, 1), new EnergyEntity(0)));
         gene.run(botSpy);
         Assertions.assertEquals(new PositionEntity(1, 1), botSpy.getPosition());
 

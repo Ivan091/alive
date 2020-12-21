@@ -5,7 +5,7 @@ import alive.entities.alive.AliveEntity;
 import alive.entities.alive.bot.energy.EnergyAlive;
 import alive.entities.alive.bot.energy.EnergyAliveAlive;
 import alive.entities.alive.bot.genome.Genome;
-import alive.entities.dead.DeadBotBody;
+import alive.entities.lifeless.LifelessBotBody;
 import alive.entities.qualities.direction.LookDirection;
 import alive.entities.qualities.energy.EnergyEntity;
 import alive.entities.qualities.position.Position;
@@ -83,7 +83,7 @@ public class BotAlive extends AliveEntity implements Bot {
     public void destroy() {
 
         isAlive = false;
-        var deadBody = new DeadBotBody(new PositionEntity(position), new EnergyEntity(energy));
+        var deadBody = new LifelessBotBody(new PositionEntity(position), new EnergyEntity(energy));
         field.getCellsMatrix().putEntity(deadBody);
     }
 

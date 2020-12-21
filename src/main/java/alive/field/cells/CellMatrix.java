@@ -1,7 +1,7 @@
 package alive.field.cells;
 
 import alive.entities.Entity;
-import alive.entities.dead.EmptyEntity;
+import alive.entities.lifeless.EmptyEntity;
 import alive.entities.qualities.position.Position;
 
 import java.util.List;
