@@ -14,7 +14,7 @@ public class FieldLive implements Field {
 
     private final Queue<Entity> entitiesPutThisTurn;
 
-    public FieldLive(int height, int width) {
+    public FieldLive(int width, int height) {
 
         cellMatrix = new CellMatrixLive(height, width);
         aliveEntities = new LinkedList<>();
@@ -72,7 +72,7 @@ public class FieldLive implements Field {
     }
 
     @Override
-    public int aliveCount() {
+    public int aliveEntitiesCount() {
         return aliveEntities.size() + entitiesPutThisTurn.size();
     }
 }

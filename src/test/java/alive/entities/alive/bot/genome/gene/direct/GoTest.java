@@ -4,6 +4,7 @@ import alive.entities.alive.bot.Bot;
 import alive.entities.alive.bot.BotAlive;
 import alive.entities.alive.bot.direction.BotLookDirection;
 import alive.entities.alive.bot.genome.gene.GeneTest;
+import alive.entities.alive.bot.genome.mutator.fabric.direct.GoGeneFactory;
 import alive.entities.lifeless.LifelessBotBody;
 import alive.entities.qualities.energy.EnergyEntity;
 import alive.entities.qualities.position.PositionEntity;
@@ -16,7 +17,7 @@ public class GoTest extends GeneTest {
 
 
     public GoTest() {
-        super(new Go());
+        super(new GoGeneFactory().create(0, 0));
     }
 
     private void setup(int x, int y, int lookDirNum) {

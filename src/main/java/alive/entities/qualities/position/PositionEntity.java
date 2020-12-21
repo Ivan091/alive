@@ -1,7 +1,5 @@
 package alive.entities.qualities.position;
 
-import java.util.Objects;
-
 public class PositionEntity implements Position {
 
     private final int x;
@@ -19,13 +17,13 @@ public class PositionEntity implements Position {
     }
 
     @Override
-    public int getX() {
+    public final int getX() {
 
         return x;
     }
 
     @Override
-    public int getY() {
+    public final int getY() {
 
         return y;
     }
@@ -33,7 +31,7 @@ public class PositionEntity implements Position {
     @Override
     public int hashCode() {
 
-        return Objects.hash(x, y);
+        return x ^ y;
     }
 
     @Override
@@ -52,7 +50,7 @@ public class PositionEntity implements Position {
     @Override
     public String toString() {
 
-        return "BotPosition {" +
+        return "PositionEntity {" +
                 " x = " + x +
                 ", y = " + y +
                 " }";

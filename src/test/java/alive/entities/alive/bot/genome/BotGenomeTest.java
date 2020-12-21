@@ -2,15 +2,18 @@ package alive.entities.alive.bot.genome;
 
 import alive.entities.alive.bot.Bot;
 import alive.entities.alive.bot.genome.gene.Gene;
+import alive.entities.alive.bot.genome.gene.direct.Photosynthesis;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import java.util.stream.IntStream;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 class BotGenomeTest {
 
-    private final Gene[] genes = new Gene[]{
+    private Gene[] genes = new Gene[]{
 
             mock(Gene.class),
             mock(Gene.class),
@@ -20,7 +23,7 @@ class BotGenomeTest {
     private final Bot botMock = mock(Bot.class);
 
 
-    private final Genome genome = new BotGenome(genes);
+    private Genome genome = new BotGenome(genes);
 
     @Test
     void incrementGeneIdx() {
@@ -56,5 +59,15 @@ class BotGenomeTest {
     @Test
     void length() {
         Assertions.assertEquals(genes.length, genome.length());
+    }
+
+    @Test
+    void allReplicatedGenesNotNull() {
+
+        genes = new Gene[]{new Photosynthesis(), new Photosynthesis()};
+        genome = new BotGenome(genes);
+        IntStream.range(0, 200).forEach(i -> {
+            Assertions.assertDoesNotThrow(() -> genome = genome.replicate());
+        });
     }
 }

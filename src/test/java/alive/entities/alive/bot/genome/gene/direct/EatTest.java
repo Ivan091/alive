@@ -6,6 +6,7 @@ import alive.entities.alive.bot.direction.BotLookDirection;
 import alive.entities.alive.bot.energy.EnergyAliveAlive;
 import alive.entities.alive.bot.genome.Genome;
 import alive.entities.alive.bot.genome.gene.GeneTest;
+import alive.entities.alive.bot.genome.mutator.fabric.direct.EatGeneFactory;
 import alive.entities.lifeless.LifelessBotBody;
 import alive.entities.qualities.energy.EnergyEntity;
 import alive.entities.qualities.position.PositionEntity;
@@ -17,7 +18,7 @@ import static org.mockito.Mockito.*;
 class EatTest extends GeneTest {
 
     public EatTest() {
-        super(new Eat());
+        super(new EatGeneFactory().create(0, 0));
     }
 
     private Bot botSetup(int x, int y, int lookDirNum) {

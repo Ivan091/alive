@@ -37,7 +37,7 @@ public class SimulationLive implements Simulation {
                 System.out.println('\n');
             }
 
-            if (field.aliveCount() == 0) {
+            if (field.aliveEntitiesCount() == 0) {
 
                 System.out.println("\nThe population is dead(((");
                 return;

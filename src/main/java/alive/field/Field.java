@@ -15,5 +15,5 @@ public interface Field {
 
     void update();
 
-    int aliveCount();
+    int aliveEntitiesCount();
 }

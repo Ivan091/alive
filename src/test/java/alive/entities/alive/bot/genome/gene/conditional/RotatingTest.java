@@ -1,6 +1,7 @@
 package alive.entities.alive.bot.genome.gene.conditional;
 
 import alive.entities.alive.bot.genome.gene.GeneTest;
+import alive.entities.alive.bot.genome.mutator.fabric.conditional.RotatingGeneFactory;
 import alive.entities.qualities.position.PositionEntity;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -8,7 +9,7 @@ import org.junit.jupiter.api.Test;
 class RotatingTest extends GeneTest {
 
     public RotatingTest() {
-        super(new Rotating(0));
+        super(new RotatingGeneFactory().create(2, 0));
     }
 
     private void setup(int geneArg) {

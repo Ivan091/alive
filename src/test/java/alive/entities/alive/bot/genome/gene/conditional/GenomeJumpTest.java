@@ -3,6 +3,7 @@ package alive.entities.alive.bot.genome.gene.conditional;
 import alive.entities.alive.bot.genome.BotGenome;
 import alive.entities.alive.bot.genome.gene.Gene;
 import alive.entities.alive.bot.genome.gene.GeneTest;
+import alive.entities.alive.bot.genome.mutator.fabric.conditional.GenomeJumpFactory;
 import org.junit.jupiter.api.Test;
 
 import static org.mockito.Mockito.*;
@@ -10,7 +11,7 @@ import static org.mockito.Mockito.*;
 class GenomeJumpTest extends GeneTest {
 
     public GenomeJumpTest() {
-        super(new GenomeJump(3));
+        super(new GenomeJumpFactory().create(5, 10));
     }
 
     @Test

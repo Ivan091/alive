@@ -19,7 +19,7 @@ import static org.mockito.Mockito.*;
 
 class BotAliveTest {
 
-    Field field = new FieldLive(1, 2);
+    Field field = new FieldLive(2, 1);
 
     Position botPos = new PositionEntity(0, 0);
 

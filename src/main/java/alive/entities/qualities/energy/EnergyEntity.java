@@ -13,12 +13,12 @@ public class EnergyEntity implements Energy {
     }
 
     @Override
-    public int getEnergyValue() {
+    public final int getEnergyValue() {
         return energyValue;
     }
 
     @Override
-    public void setEnergyValue(int newValue) {
+    public final void setEnergyValue(int newValue) {
 
         energyValue = newValue;
     }
