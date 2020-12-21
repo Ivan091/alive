@@ -1,5 +1,8 @@
 package alive.entities.alive;
 
-public interface Mortal extends Replicable, Destroyable {
+public interface Mortal {
 
+    void destroy();
+
+    void replicate();
 }

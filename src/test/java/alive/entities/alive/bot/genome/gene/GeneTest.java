@@ -44,9 +44,7 @@ public abstract class GeneTest {
 
     @Test
     public void isGenomeIdxIncrementCalled() {
-
-        when(botMock.getGenome()).thenReturn(genomeMock);
-
+        
         gene.run(botMock);
 
         verify(genomeMock, atLeastOnce()).incrementGeneIdx(intThat(x -> x != 0));
