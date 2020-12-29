@@ -1,19 +1,18 @@
 package com.controllers;
 
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
-import java.util.concurrent.ThreadLocalRandom;
+import java.util.Map;
 
 @RestController
 public class HelloController {
 
     @RequestMapping("/")
-    public String greeting(
+    public ModelAndView greeting(
             @RequestParam(name = "name", required = false, defaultValue = "<blank>") String name,
-            Model model
-    ) {
-        model.addAttribute("name", name);
-        return String.valueOf(ThreadLocalRandom.current().nextInt());
+            @RequestParam(name = "greeting", required = false, defaultValue = "<blank greeting>") String greeting) {
+
+        return new ModelAndView("greeting", Map.of("name", name, "greeting", greeting));
     }
 }
