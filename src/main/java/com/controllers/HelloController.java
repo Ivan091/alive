@@ -1,18 +1,25 @@
 package com.controllers;
 
-import org.springframework.web.bind.annotation.*;
+import com.model.simulation.field.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
-
-import java.util.Map;
 
 @RestController
 public class HelloController {
 
-    @RequestMapping("/")
-    public ModelAndView greeting(
-            @RequestParam(name = "name", required = false, defaultValue = "<blank>") String name,
-            @RequestParam(name = "greeting", required = false, defaultValue = "<blank greeting>") String greeting) {
+    Field field = new FieldLive(10, 10);
+    Simulation simulation = new SimulationLive(field);
 
-        return new ModelAndView("greeting", Map.of("name", name, "greeting", greeting));
+    public HelloController() {
+        simulation.start();
+    }
+
+    @RequestMapping("/")
+    public ModelAndView gene() {
+        var mav = new ModelAndView("greeting");
+        mav.addObject("field", simulation.currentCondition());
+        simulation.nextMove();
+        return mav;
     }
 }
