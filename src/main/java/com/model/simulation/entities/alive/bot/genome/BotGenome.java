@@ -1,5 +1,6 @@
 package com.model.simulation.entities.alive.bot.genome;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.model.simulation.WorldConstants;
 import com.model.simulation.entities.alive.bot.Bot;
 import com.model.simulation.entities.alive.bot.genome.gene.Gene;
@@ -54,7 +55,6 @@ public class BotGenome implements Genome {
         return genes.length;
     }
 
-
     @Override
     public Genome replicate() {
 
@@ -64,6 +64,7 @@ public class BotGenome implements Genome {
         return getExactCopyOfGenome();
     }
 
+    @JsonIgnore
     private Genome getExactCopyOfGenome() {
 
         var newGenes = new Gene[genes.length];

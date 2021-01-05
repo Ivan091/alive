@@ -49,6 +49,8 @@ public interface MatrixEntities {
 
     boolean isInMatrix(Entity entity);
 
+    Entity[][] getEntities();
+
     int getWidth();
 
     int getHeight();

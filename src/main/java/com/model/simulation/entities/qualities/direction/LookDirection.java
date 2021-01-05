@@ -18,5 +18,5 @@ public interface LookDirection extends Replicable<LookDirection> {
      */
     Position getLookingPos(Position currentPosition);
 
-    LookDirection getOpposite();
+    LookDirection opposite();
 }

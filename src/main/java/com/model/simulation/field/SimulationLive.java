@@ -26,31 +26,32 @@ public class SimulationLive implements Simulation {
 
         field.putEntity(new BotAlive(field, new PositionEntity(0, 0),
                 new EnergyAliveAlive(500), new BotLookDirection(2), BotGenome.createFirstBotGenome()));
-
-//        for (var i = 0; i < Integer.MAX_VALUE; ++i) {
-//
-//            field.update();
-//            currentCondition();
-//
-//            if (i % 10000 == 0) {
-//                out.println('\n');
-//                createGenesReport();
-//                out.println('\n');
-//                createFieldReport();
-//                out.println('\n');
-//            }
-//
-//            if (field.aliveEntitiesCount() == 0) {
-//
-//                out.println("\nThe population is dead(((");
-//                return;
-//            }
-//        }
     }
 
     @Override
     public void nextMove() {
         field.update();
+    }
+
+    @Override
+    public String currentCondition() {
+        var sb = new StringBuilder();
+        for (var j = field.getHeight() - 1; j > -1; --j) {
+            for (var i = 0; i < field.getWidth(); ++i) {
+                var pos = new PositionEntity(i, j);
+                var entity = field.getCellsMatrix().get(pos);
+                if (entity instanceof Bot) {
+                    sb.append('b');
+                } else if (entity instanceof LifelessBotBody) {
+                    sb.append('=');
+                } else {
+                    sb.append('#');
+                }
+                sb.append(' ');
+            }
+            sb.append('\n');
+        }
+        return sb.toString();
     }
 
     public void createFieldReport() {
@@ -91,26 +92,5 @@ public class SimulationLive implements Simulation {
         }
 
         map.forEach((x, y) -> System.out.format("%-9s%s", y.toString(), x.getSimpleName() + '\n'));
-    }
-
-    @Override
-    public String currentCondition() {
-        var sb = new StringBuilder();
-        for (var j = field.getHeight() - 1; j > -1; --j) {
-            for (var i = 0; i < field.getWidth(); ++i) {
-                var pos = new PositionEntity(i, j);
-                var entity = field.getCellsMatrix().get(pos);
-                if (entity instanceof Bot) {
-                    sb.append('b');
-                } else if (entity instanceof LifelessBotBody) {
-                    sb.append('=');
-                } else {
-                    sb.append('#');
-                }
-                sb.append(' ');
-            }
-            sb.append('\n');
-        }
-        return sb.toString();
     }
 }

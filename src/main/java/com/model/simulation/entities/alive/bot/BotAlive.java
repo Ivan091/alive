@@ -6,6 +6,7 @@ import com.model.simulation.entities.alive.bot.energy.EnergyAlive;
 import com.model.simulation.entities.alive.bot.energy.EnergyAliveAlive;
 import com.model.simulation.entities.alive.bot.genome.Genome;
 import com.model.simulation.entities.lifeless.LifelessBotBody;
+import com.model.simulation.entities.qualities.color.ColorEntity;
 import com.model.simulation.entities.qualities.direction.LookDirection;
 import com.model.simulation.entities.qualities.energy.EnergyEntity;
 import com.model.simulation.entities.qualities.position.Position;
@@ -22,33 +23,17 @@ public class BotAlive extends AliveEntity implements Bot {
     private final LookDirection lookDirection;
 
     private final Genome genome;
+
     private boolean isAlive = true;
 
     public BotAlive(Field field, Position position, EnergyAlive energy, LookDirection lookDirection, Genome genome) {
-        super(position, energy);
+        super(position, energy, new ColorEntity(255, 0, 0));
 
         this.field = field;
         energy.subscribeMortal(this);
 
         this.genome = genome;
         this.lookDirection = lookDirection;
-    }
-
-    @Override
-    public boolean isAlive() {
-
-        return isAlive;
-    }
-
-    @Override
-    public void makeAMove() {
-
-        var isMoving = isAlive();
-        for (int i = 0; isMoving && i < WorldConstants.BOT_MAX_GENES_PER_MOVE; ++i) {
-
-            isMoving = isAlive() && genome.runCurrentGene(this);
-            energy.incrementEnergyValue(WorldConstants.BOT_RUN_GENE_ENERGY_INCREMENT);
-        }
     }
 
     @Override
@@ -60,7 +45,7 @@ public class BotAlive extends AliveEntity implements Bot {
 
         Position newBotPos;
 
-        var positionBehindOfBot = field.getCellsMatrix().makePositionToBeInside(lookDirection.getOpposite().getLookingPos(position));
+        var positionBehindOfBot = field.getCellsMatrix().makePositionToBeInside(lookDirection.opposite().getLookingPos(position));
 
         if (positionBehindOfBot.isPresent() && field.getCellsMatrix().isEmpty(positionBehindOfBot.get())) {
             newBotPos = positionBehindOfBot.get();
@@ -79,7 +64,7 @@ public class BotAlive extends AliveEntity implements Bot {
         energy.setEnergyValue(newBotEnergyValue);
 
         var newBot = new BotAlive(field, newBotPos, newBotEnergy,
-                lookDirection.getOpposite(), genome.replicate());
+                lookDirection.opposite(), genome.replicate());
 
         field.putEntity(newBot);
     }
@@ -90,6 +75,24 @@ public class BotAlive extends AliveEntity implements Bot {
         isAlive = false;
         var deadBody = new LifelessBotBody(new PositionEntity(position), new EnergyEntity(energy));
         field.getCellsMatrix().put(deadBody);
+    }
+
+    @Override
+    public void makeAMove() {
+
+        var isMoving = isAlive;
+        for (int i = 0; isMoving && i < WorldConstants.BOT_MAX_GENES_PER_MOVE; ++i) {
+
+            isMoving = isAlive && genome.runCurrentGene(this);
+
+            energy.incrementEnergyValue(WorldConstants.BOT_RUN_GENE_ENERGY_INCREMENT);
+        }
+    }
+
+    @Override
+    public boolean isAlive() {
+
+        return isAlive;
     }
 
     @Override

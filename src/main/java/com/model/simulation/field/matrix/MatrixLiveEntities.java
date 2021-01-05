@@ -15,10 +15,10 @@ public class MatrixLiveEntities implements MatrixEntities {
 
     public MatrixLiveEntities(int height, int width) {
 
-        entities = new Entity[width][height];
-        for (var i = 0; i < width; ++i) {
-            for (var j = 0; j < height; ++j) {
-                var pos = createPositionInside(i, j);
+        entities = new Entity[height][width];
+        for (var i = 0; i < height; ++i) {
+            for (var j = 0; j < width; ++j) {
+                var pos = createPositionInside(j, i);
                 if (pos.isPresent()) {
                     entities[i][j] = new EmptyEntity(pos.get(), new EnergyEntity(0));
                 }
@@ -74,14 +74,14 @@ public class MatrixLiveEntities implements MatrixEntities {
 
     @Override
     public Entity get(Position pos) {
-        return entities[pos.getX()][pos.getY()];
+        return entities[pos.getY()][pos.getX()];
     }
 
     @Override
     public Entity put(Entity newEntity) {
         var pos = newEntity.getPosition();
         var previousEntity = get(pos);
-        entities[pos.getX()][pos.getY()] = newEntity;
+        entities[pos.getY()][pos.getX()] = newEntity;
         return previousEntity;
     }
 
@@ -105,14 +105,19 @@ public class MatrixLiveEntities implements MatrixEntities {
     }
 
     @Override
+    public Entity[][] getEntities() {
+        return entities;
+    }
+
+    @Override
     public int getWidth() {
 
-        return entities.length;
+        return entities[0].length;
     }
 
     @Override
     public int getHeight() {
 
-        return entities[0].length;
+        return entities.length;
     }
 }

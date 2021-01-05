@@ -58,7 +58,7 @@ class BotLookDirectionTest {
     @Test
     void getOpposite() {
 
-        var opposite = lookDir.getOpposite().getLookingPos(startPos);
+        var opposite = lookDir.opposite().getLookingPos(startPos);
         lookDir.rotate(4);
         var opposite2 = lookDir.getLookingPos(startPos);
 
