@@ -16,10 +16,12 @@ public interface Entity {
     @JsonIgnore
     boolean isAlive();
 
+    @JsonIgnore
     Position getPosition();
 
     @JsonUnwrapped
     Energy getEnergy();
 
+    @JsonUnwrapped
     Color getColor();
 }

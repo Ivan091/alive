@@ -1,13 +1,32 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(function () {
+            $.getJSON("/field", function (data) {
+                $.each(data, function (index, value) {
+                    $('<tr>').append(
+                        $.each(value, function (j, item) {
+                            let color = item.color;
+                            console.log(color);
+                            $('<td>').css({
+                                    backgroundColor: color,
+                                    height: 50,
+                                    width: 50,
+                                }
+                            ).append('</td>').appendTo('#field')
+                        })
+                    ).append('</tr>').appendTo('#field')
+                })
+            })
+        })
+    </script>
     <meta charset="UTF-8"/>
+    <meta content="1" http-equiv="refresh"/>
     <title>Title</title>
 </head>
-
 <body>
-<div th:href="/field"></div>
-
+<table id="field"></table>
 </body>
 </html>

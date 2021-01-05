@@ -26,7 +26,7 @@ class RotatingTest extends GeneTest {
     }
 
     @Test
-    public void rotateRight1Step() {
+    public void rotateLeft1Step() {
 
         setup(-1);
 
@@ -39,7 +39,7 @@ class RotatingTest extends GeneTest {
     }
 
     @Test
-    public void rotateRight2Steps() {
+    public void rotateLeft2Steps() {
 
         setup(-2);
         gene.run(botSpy);
@@ -51,7 +51,7 @@ class RotatingTest extends GeneTest {
     }
 
     @Test
-    public void rotateRight3Steps() {
+    public void rotateLeft3Steps() {
 
         setup(-3);
         gene.run(botSpy);
@@ -63,7 +63,7 @@ class RotatingTest extends GeneTest {
     }
 
     @Test
-    public void rotateLeft1Step() {
+    public void rotateRight1Step() {
 
         setup(1);
         gene.run(botSpy);
@@ -75,7 +75,7 @@ class RotatingTest extends GeneTest {
     }
 
     @Test
-    public void rotateLeft2Steps() {
+    public void rotateRight2Steps() {
 
         setup(2);
         gene.run(botSpy);
@@ -87,7 +87,7 @@ class RotatingTest extends GeneTest {
     }
 
     @Test
-    public void rotateLeft3Steps() {
+    public void rotateRight3Steps() {
 
         setup(3);
         gene.run(botSpy);

@@ -2,6 +2,7 @@ package com.model.simulation.entities.qualities.color;
 
 public class ColorEntity implements Color {
 
+
     private int r;
     private int g;
     private int b;
@@ -13,10 +14,16 @@ public class ColorEntity implements Color {
     }
 
     @Override
+    public String toHexFormat() {
+        return String.format("#%02x%02x%02x", r, g, b);
+    }
+
+    @Override
     public int getR() {
         return r;
     }
 
+    @Override
     public void setR(int r) {
         this.r = validateColorComponentLimits(r);
     }
@@ -26,6 +33,7 @@ public class ColorEntity implements Color {
         return g;
     }
 
+    @Override
     public void setG(int g) {
         this.g = validateColorComponentLimits(g);
     }
@@ -35,6 +43,7 @@ public class ColorEntity implements Color {
         return b;
     }
 
+    @Override
     public void setB(int b) {
         this.b = validateColorComponentLimits(b);
     }
