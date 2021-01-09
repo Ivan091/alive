@@ -11,7 +11,7 @@ import java.util.stream.IntStream;
 @Controller
 public class FieldController {
 
-    Field field = new FieldLive(100, 60);
+    Field field = new FieldLive(200, 80);
     Simulation simulation = new SimulationLive(field);
 
     public FieldController() {
@@ -20,14 +20,19 @@ public class FieldController {
 
     @RequestMapping
     public String game() {
-        IntStream.range(0, 20).forEach(i -> simulation.nextMove());
         return "field";
+    }
+
+    @RequestMapping("/field-update")
+    @ResponseBody
+    public String update() {
+        IntStream.range(0, 20).forEach(i -> simulation.nextMove());
+        return "updated";
     }
 
     @ResponseBody
     @RequestMapping("/field")
     public Entity[][] field() {
-
         return field.getCellsMatrix().getEntities();
     }
 }

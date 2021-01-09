@@ -27,7 +27,7 @@ public class BotAlive extends AliveEntity implements Bot {
     private boolean isAlive = true;
 
     public BotAlive(Field field, Position position, EnergyAlive energy, LookDirection lookDirection, Genome genome) {
-        super(position, energy, new ColorEntity(255, 0, 0));
+        super(position, energy, new ColorEntity(200, 200, 0));
 
         this.field = field;
         energy.subscribeMortal(this);

@@ -5,28 +5,62 @@
     <script>
         $(function () {
             $.getJSON("/field", function (data) {
-                $.each(data, function (index, value) {
-                    $('<tr>').append(
-                        $.each(value, function (j, item) {
-                            let color = item.color;
-                            console.log(color);
-                            $('<td>').css({
-                                    backgroundColor: color,
-                                    height: 50,
-                                    width: 50,
-                                }
-                            ).append('</td>').appendTo('#field')
-                        })
-                    ).append('</tr>').appendTo('#field')
+                $.each(data, function (_, row) {
+                    $('#field').append(addColoredRow(row))
                 })
             })
         })
+
+        function addColoredRow(rowData) {
+            let tr;
+            tr = $('<tr>');
+            $.each(rowData, function (_, cell) {
+                $(tr).append(
+                    $('<td>').css({
+                        backgroundColor: cell.color,
+                        height: 10,
+                        width: 10,
+                        padding: 0,
+                        margin: 0,
+                    })
+                )
+            })
+            return tr;
+        }
+
+        function updateField() {
+            $.post("/field-update");
+            let field = "/field";
+            $.get(field, {success: update(field)});
+        }
+
+        function update(fieldUrl) {
+            $.getJSON(fieldUrl, function (data) {
+                let table = document.getElementById("field");
+                for (const [i, row] of Object.entries(table.rows)) {
+                    for (const [j, cell] of Object.entries(row.cells)) {
+                        cell.style.backgroundColor = data[i][j]['color'];
+                    }
+                }
+            })
+
+        }
+
+        function start() {
+            window.setInterval(updateField, 500)
+        }
+
+        function stop() {
+            window.setInterval(updateField, 0)
+        }
+
     </script>
     <meta charset="UTF-8"/>
-    <meta content="1" http-equiv="refresh"/>
     <title>Title</title>
 </head>
 <body>
-<table id="field"></table>
+<button id="reload" onclick="start()" style="font-size:30px">start</button>
+<button onclick="start"
+<table id="field" style="border-spacing: 0"></table>
 </body>
 </html>
