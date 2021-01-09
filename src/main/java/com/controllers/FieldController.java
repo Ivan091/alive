@@ -23,8 +23,8 @@ public class FieldController {
         return "field";
     }
 
-    @RequestMapping("/field-update")
     @ResponseBody
+    @RequestMapping("/field-update")
     public String update() {
         IntStream.range(0, 20).forEach(i -> simulation.nextMove());
         return "updated";

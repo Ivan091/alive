@@ -46,19 +46,23 @@
 
         }
 
+        let obj = true;
+
         function start() {
-            setInterval(updateField, 1000)
+            if (obj === true)
+                obj = setInterval(updateField, 1000)
         }
 
         function stop() {
-            setInterval(updateField, 10000000)
+            clearInterval(obj)
+            obj = true;
         }
 
     </script>
     <meta charset="UTF-8"/>
     <title>Title</title>
 </head>
-<body>
+<body style="background-color: green">
 <button onclick="start()" style="font-size:30px">start</button>
 <button onclick="stop()" style="font-size:30px">stop</button>
 <table id="field" style="border-spacing: 0"></table>
