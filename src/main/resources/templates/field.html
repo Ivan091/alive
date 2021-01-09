@@ -39,7 +39,7 @@
                 let table = document.getElementById("field");
                 for (const [i, row] of Object.entries(table.rows)) {
                     for (const [j, cell] of Object.entries(row.cells)) {
-                        cell.style.backgroundColor = data[i][j]['color'];
+                        cell.style.backgroundColor = data[i][j]['color']
                     }
                 }
             })
@@ -47,11 +47,11 @@
         }
 
         function start() {
-            window.setInterval(updateField, 500)
+            setInterval(updateField, 1000)
         }
 
         function stop() {
-            window.setInterval(updateField, 0)
+            setInterval(updateField, 10000000)
         }
 
     </script>
@@ -59,8 +59,8 @@
     <title>Title</title>
 </head>
 <body>
-<button id="reload" onclick="start()" style="font-size:30px">start</button>
-<button onclick="start"
+<button onclick="start()" style="font-size:30px">start</button>
+<button onclick="stop()" style="font-size:30px">stop</button>
 <table id="field" style="border-spacing: 0"></table>
 </body>
 </html>
