@@ -1,70 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script>
-        $(function () {
-            $.getJSON("/field", function (data) {
-                $.each(data, function (_, row) {
-                    $('#field').append(addColoredRow(row))
-                })
-            })
-        })
-
-        function addColoredRow(rowData) {
-            let tr;
-            tr = $('<tr>');
-            $.each(rowData, function (_, cell) {
-                $(tr).append(
-                    $('<td>').css({
-                        backgroundColor: cell.color,
-                        height: 10,
-                        width: 10,
-                        padding: 0,
-                        margin: 0,
-                    })
-                )
-            })
-            return tr;
-        }
-
-        function updateField() {
-            $.post("/field-update");
-            let field = "/field";
-            $.get(field, {success: update(field)});
-        }
-
-        function update(fieldUrl) {
-            $.getJSON(fieldUrl, function (data) {
-                let table = document.getElementById("field");
-                for (const [i, row] of Object.entries(table.rows)) {
-                    for (const [j, cell] of Object.entries(row.cells)) {
-                        cell.style.backgroundColor = data[i][j]['color']
-                    }
-                }
-            })
-
-        }
-
-        let obj = true;
-
-        function start() {
-            if (obj === true)
-                obj = setInterval(updateField, 1000)
-        }
-
-        function stop() {
-            clearInterval(obj)
-            obj = true;
-        }
-
-    </script>
     <meta charset="UTF-8"/>
-    <title>Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script th:src="@{/js/field.js}" type="text/javascript"></script>
+
+    <link rel="stylesheet" th:href="@{/css/field.css}">
+    <title>Alive</title>
 </head>
-<body style="background-color: green">
-<button onclick="start()" style="font-size:30px">start</button>
-<button onclick="stop()" style="font-size:30px">stop</button>
-<table id="field" style="border-spacing: 0"></table>
+<body>
+<button onclick="start()">start</button>
+<button onclick="stop()">stop</button>
+<table id="field"></table>
 </body>
 </html>

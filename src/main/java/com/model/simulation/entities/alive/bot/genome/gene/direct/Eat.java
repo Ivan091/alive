@@ -13,6 +13,7 @@ public class Eat extends DirectGene {
             var matrixEntities = bot.getField().getCellsMatrix();
             var eatingEntity = matrixEntities.pull(pos);
             bot.getEnergy().incrementEnergyValue(eatingEntity.getEnergy().getEnergyValue() >> 1);
+            bot.getColor().changeColor(100, -50, -50);
         });
 
         bot.getEnergy().incrementEnergyValue(-2);

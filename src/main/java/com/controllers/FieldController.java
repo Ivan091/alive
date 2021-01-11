@@ -1,38 +1,31 @@
 package com.controllers;
 
+import com.model.simulation.Simulation;
+import com.model.simulation.SimulationLive;
 import com.model.simulation.entities.Entity;
-import com.model.simulation.field.*;
-import org.springframework.stereotype.Controller;
+import com.model.simulation.field.FieldLive;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.stream.IntStream;
 
-@Controller
+@RestController
+@RequestMapping("/api/field")
 public class FieldController {
 
-    Field field = new FieldLive(200, 80);
-    Simulation simulation = new SimulationLive(field);
+    Simulation simulation = new SimulationLive(new FieldLive(200, 80));
 
     public FieldController() {
         simulation.start();
     }
 
-    @RequestMapping
-    public String game() {
-        return "field";
-    }
-
-    @ResponseBody
-    @RequestMapping("/field-update")
-    public String update() {
+    @RequestMapping("/update")
+    public void update() {
         IntStream.range(0, 20).forEach(i -> simulation.nextMove());
-        return "updated";
     }
 
-    @ResponseBody
-    @RequestMapping("/field")
+    @RequestMapping("/status")
     public Entity[][] field() {
-        return field.getCellsMatrix().getEntities();
+        return simulation.getField().getCellsMatrix().getEntities();
     }
 }

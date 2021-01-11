@@ -1,4 +1,4 @@
-package com.model.simulation.field;
+package com.model.simulation;
 
 import com.model.simulation.entities.Entity;
 import com.model.simulation.entities.alive.bot.Bot;
@@ -7,8 +7,8 @@ import com.model.simulation.entities.alive.bot.direction.BotLookDirection;
 import com.model.simulation.entities.alive.bot.energy.EnergyAliveAlive;
 import com.model.simulation.entities.alive.bot.genome.BotGenome;
 import com.model.simulation.entities.alive.bot.genome.gene.Gene;
-import com.model.simulation.entities.lifeless.LifelessBotBody;
 import com.model.simulation.entities.qualities.position.PositionEntity;
+import com.model.simulation.field.Field;
 
 import java.util.HashMap;
 import java.util.List;
@@ -34,24 +34,8 @@ public class SimulationLive implements Simulation {
     }
 
     @Override
-    public String currentCondition() {
-        var sb = new StringBuilder();
-        for (var j = field.getHeight() - 1; j > -1; --j) {
-            for (var i = 0; i < field.getWidth(); ++i) {
-                var pos = new PositionEntity(i, j);
-                var entity = field.getCellsMatrix().get(pos);
-                if (entity instanceof Bot) {
-                    sb.append('b');
-                } else if (entity instanceof LifelessBotBody) {
-                    sb.append('=');
-                } else {
-                    sb.append('#');
-                }
-                sb.append(' ');
-            }
-            sb.append('\n');
-        }
-        return sb.toString();
+    public Field getField() {
+        return field;
     }
 
     public void createFieldReport() {

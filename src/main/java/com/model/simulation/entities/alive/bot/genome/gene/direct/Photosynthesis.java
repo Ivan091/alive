@@ -10,6 +10,7 @@ public class Photosynthesis extends DirectGene {
 
         bot.getEnergy().incrementEnergyValue(57);
         bot.getGenome().incrementGeneIdx(1);
+        bot.getColor().changeColor(-50, 100, -50);
         return false;
     }
 

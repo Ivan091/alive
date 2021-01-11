@@ -1,7 +1,6 @@
 package com.model.simulation;
 
 import com.model.simulation.field.FieldLive;
-import com.model.simulation.field.SimulationLive;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
