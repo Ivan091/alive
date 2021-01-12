@@ -7,5 +7,5 @@ public interface Color {
     @JsonProperty("color")
     String toHexFormat();
 
-    void changeColor(int redIncrement, int greenIncrement, int blueIncrement);
+    void incrementColor(int redIncrement, int greenIncrement, int blueIncrement);
 }

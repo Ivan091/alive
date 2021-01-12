@@ -73,7 +73,8 @@ public class BotAlive extends AliveEntity implements Bot {
     public void destroy() {
 
         isAlive = false;
-        var deadBody = new LifelessBotBody(new PositionEntity(position), new EnergyEntity(energy));
+        var deadBody = new LifelessBotBody(new PositionEntity(position),
+                new EnergyEntity(energy.getEnergyValue() + WorldConstants.DRIED_BODY_ENERGY_VALUE));
         field.getCellsMatrix().put(deadBody);
     }
 

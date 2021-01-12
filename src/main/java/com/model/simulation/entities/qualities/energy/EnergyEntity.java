@@ -8,10 +8,6 @@ public class EnergyEntity implements Energy {
         this.energyValue = energyValue;
     }
 
-    public EnergyEntity(Energy energy) {
-        energyValue = energy.getEnergyValue();
-    }
-
     @Override
     public final int getEnergyValue() {
         return energyValue;

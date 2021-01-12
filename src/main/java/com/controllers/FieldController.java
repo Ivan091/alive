@@ -13,7 +13,7 @@ import java.util.stream.IntStream;
 @RequestMapping("/api/field")
 public class FieldController {
 
-    Simulation simulation = new SimulationLive(new FieldLive(200, 80));
+    Simulation simulation = new SimulationLive(new FieldLive(100, 40));
 
     public FieldController() {
         simulation.start();
@@ -21,7 +21,7 @@ public class FieldController {
 
     @RequestMapping("/update")
     public void update() {
-        IntStream.range(0, 20).forEach(i -> simulation.nextMove());
+        IntStream.range(0, 1).forEach(i -> simulation.nextMove());
     }
 
     @RequestMapping("/status")

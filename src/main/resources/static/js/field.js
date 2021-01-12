@@ -40,7 +40,7 @@ let obj = true;
 
 function start() {
     if (obj === true)
-        obj = setInterval(updateField, 1000)
+        obj = setInterval(updateField, 100)
 }
 
 function stop() {

@@ -2,47 +2,38 @@ package com.model.simulation.entities.qualities.color;
 
 public class ColorEntity implements Color {
 
-    private final ColorParameter red;
-    private final ColorParameter green;
-    private final ColorParameter blue;
+    private int color;
 
-    public ColorEntity(int r, int g, int b) {
-        red = new ColorParameter(r);
-        green = new ColorParameter(g);
-        blue = new ColorParameter(b);
+    public ColorEntity(int red, int green, int blue) {
+        setColor(red, green, blue);
     }
 
     @Override
     public String toHexFormat() {
-        return String.format("#%02x%02x%02x", red.colorParameter, green.colorParameter, blue.colorParameter);
+        return String.format("#%08x", color);
     }
 
     @Override
-    public void changeColor(int redIncrement, int greenIncrement, int blueIncrement) {
-        red.increaseParameter(redIncrement);
-        green.increaseParameter(greenIncrement);
-        blue.increaseParameter(blueIncrement);
+    public void incrementColor(int redIncrement, int greenIncrement, int blueIncrement) {
+        setColor(
+                (color >>> 24 & 255) + redIncrement,
+                (color >>> 16 & 255) + greenIncrement,
+                (color >>> 8 & 255) + blueIncrement
+        );
     }
 
+    public void setColor(int red, int green, int blue) {
+        color = 255;
+        color += validateColorParameter(red) << 24;
+        color += validateColorParameter(green) << 16;
+        color += validateColorParameter(blue) << 8;
+    }
 
-    private static class ColorParameter {
-
-        private int colorParameter;
-
-        private ColorParameter(int colorParameter) {
-            setParameter(colorParameter);
-        }
-
-        private void increaseParameter(int parameterIncrement) {
-            setParameter(colorParameter + parameterIncrement);
-        }
-
-        private void setParameter(int newValue) {
-            if (newValue < 0) {
-                colorParameter = 0;
-            } else {
-                colorParameter = Math.min(newValue, 255);
-            }
+    private int validateColorParameter(int colorParameter) {
+        if (colorParameter < 0) {
+            return 0;
+        } else {
+            return Math.min(colorParameter, 255);
         }
     }
 }

@@ -1,6 +1,7 @@
 package com.model.simulation.entities.alive.bot.genome;
 
 import com.model.simulation.entities.alive.bot.Bot;
+import com.model.simulation.entities.alive.bot.genome.gene.Gene;
 
 public interface Genome extends Replicable<Genome> {
 
@@ -13,6 +14,10 @@ public interface Genome extends Replicable<Genome> {
     void incrementGeneIdx(int increment);
 
     boolean runCurrentGene(Bot bot);
+
+    boolean isFriendly(Genome genome);
+
+    Gene[] getGenes();
 
     int length();
 }

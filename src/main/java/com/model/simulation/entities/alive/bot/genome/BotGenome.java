@@ -13,6 +13,8 @@ import java.util.stream.IntStream;
 
 public class BotGenome implements Genome {
 
+    private static final int maxDifferencesToBeFriendly = 2;
+
     private static final Mutator<Gene[]> genomeMutator = new GenomeMutator();
     private final Gene[] genes;
     private int currentGeneIdx;
@@ -28,7 +30,7 @@ public class BotGenome implements Genome {
 
     public static Genome createFirstBotGenome() {
 
-        var genes = new Gene[WorldConstants.START_GENOME_LENGTH];
+        var genes = new Gene[WorldConstants.GENOME_LENGTH];
 
         IntStream.range(0, genes.length).forEach(i -> genes[i] = new Photosynthesis());
 
@@ -51,6 +53,25 @@ public class BotGenome implements Genome {
     }
 
     @Override
+    public boolean isFriendly(Genome genome) {
+        var differencesCount = 0;
+        for (var i = 0; i < genes.length; ++i) {
+            if (!genes[i].equals(genome.getGenes()[i])) {
+                ++differencesCount;
+            }
+            if (differencesCount > maxDifferencesToBeFriendly) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public Gene[] getGenes() {
+        return genes;
+    }
+
+    @Override
     public int length() {
         return genes.length;
     }
@@ -61,11 +82,11 @@ public class BotGenome implements Genome {
         if (new Random().nextFloat() < WorldConstants.MUTATION_PROBABILITY) {
             return new BotGenome(genomeMutator.mutate(genes));
         }
-        return getExactCopyOfGenome();
+        return createExactCopyOfGenome();
     }
 
     @JsonIgnore
-    private Genome getExactCopyOfGenome() {
+    private Genome createExactCopyOfGenome() {
 
         var newGenes = new Gene[genes.length];
 

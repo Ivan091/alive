@@ -34,11 +34,7 @@ public final class WorldConstants {
     /**
      * Genome length of first bot. Genome length can be changed during simulation for any bot separately.
      */
-    public static final int START_GENOME_LENGTH = 16;
-
-    public static final int MIN_GENOME_LENGTH = 8;
-
-    public static final int MAX_GENOME_LENGTH = 32;
+    public static final int GENOME_LENGTH = 16;
 
     /**
      * Probability of mutation during replication of bot.
