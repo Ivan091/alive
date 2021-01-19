@@ -1,4 +1,4 @@
-package com.model.simulation.entities.qualities.position;
+package com.model.simulation.entities.alive.qualities.position;
 
 public interface Position {
 

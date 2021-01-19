@@ -1,4 +1,4 @@
-package com.model.simulation.entities.qualities.position;
+package com.model.simulation.entities.alive.qualities.position;
 
 import org.junit.jupiter.api.Test;
 
@@ -8,7 +8,7 @@ import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class PositionEntityTest {
+class AliveCellPositionTest {
 
     private final Position pos = new PositionEntity(3, 3);
 

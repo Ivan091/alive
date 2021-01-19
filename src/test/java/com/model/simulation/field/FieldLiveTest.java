@@ -2,10 +2,10 @@ package com.model.simulation.field;
 
 import com.model.simulation.entities.Entity;
 import com.model.simulation.entities.alive.Alive;
+import com.model.simulation.entities.alive.qualities.energy.EnergyEntity;
+import com.model.simulation.entities.alive.qualities.position.Position;
+import com.model.simulation.entities.alive.qualities.position.PositionEntity;
 import com.model.simulation.entities.lifeless.LifelessBotBody;
-import com.model.simulation.entities.qualities.energy.EnergyEntity;
-import com.model.simulation.entities.qualities.position.Position;
-import com.model.simulation.entities.qualities.position.PositionEntity;
 import com.model.simulation.field.matrix.MatrixEntities;
 import org.junit.jupiter.api.*;
 

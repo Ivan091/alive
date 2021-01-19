@@ -2,7 +2,7 @@ package com.model.simulation.entities.alive.bot.single.energy;
 
 import com.model.simulation.entities.alive.Alive;
 import com.model.simulation.entities.alive.Mortal;
-import com.model.simulation.entities.qualities.energy.Energy;
+import com.model.simulation.entities.alive.qualities.energy.Energy;
 
 public interface EnergyAlive extends Energy {
 

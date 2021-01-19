@@ -1,4 +1,4 @@
-package com.model.simulation.entities.qualities.color;
+package com.model.simulation.entities.alive.qualities.color;
 
 public class ColorEntity implements Color {
 

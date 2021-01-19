@@ -1,8 +1,8 @@
 package com.model.simulation.field.matrix;
 
 import com.model.simulation.entities.Entity;
+import com.model.simulation.entities.alive.qualities.position.Position;
 import com.model.simulation.entities.lifeless.Empty;
-import com.model.simulation.entities.qualities.position.Position;
 
 import java.util.List;
 import java.util.Optional;

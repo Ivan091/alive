@@ -7,9 +7,9 @@ import com.model.simulation.entities.alive.bot.single.energy.EnergyAliveAlive;
 import com.model.simulation.entities.alive.bot.single.genome.Genome;
 import com.model.simulation.entities.alive.bot.single.genome.gene.GeneTest;
 import com.model.simulation.entities.alive.bot.single.genome.mutator.factory.direct.EatGeneFactory;
+import com.model.simulation.entities.alive.qualities.energy.EnergyEntity;
+import com.model.simulation.entities.alive.qualities.position.PositionEntity;
 import com.model.simulation.entities.lifeless.LifelessBotBody;
-import com.model.simulation.entities.qualities.energy.EnergyEntity;
-import com.model.simulation.entities.qualities.position.PositionEntity;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

@@ -1,4 +1,4 @@
-package com.model.simulation.entities.qualities.color;
+package com.model.simulation.entities.alive.qualities.color;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

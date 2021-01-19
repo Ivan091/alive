@@ -5,9 +5,12 @@ import com.model.simulation.field.matrix.MatrixEntities;
 
 public interface Field {
 
+    /**
+     * Calls {@link Entity#makeAMove()} on each alive entity.
+     */
     void update();
 
-    void putEntity(Entity puttingEntity);
+    void putEntity(Entity entity);
 
     MatrixEntities getCellsMatrix();
 

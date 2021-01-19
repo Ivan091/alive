@@ -1,8 +1,8 @@
 package com.model.simulation.entities.alive.bot.single.direction;
 
-import com.model.simulation.entities.qualities.direction.LookDirection;
-import com.model.simulation.entities.qualities.position.Position;
-import com.model.simulation.entities.qualities.position.PositionEntity;
+import com.model.simulation.entities.alive.qualities.direction.LookDirection;
+import com.model.simulation.entities.alive.qualities.position.Position;
+import com.model.simulation.entities.alive.qualities.position.PositionEntity;
 
 public class BotLookDirection implements LookDirection {
 

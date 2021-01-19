@@ -2,8 +2,8 @@ package com.model.simulation.entities.alive;
 
 import com.model.simulation.entities.EntityAbstract;
 import com.model.simulation.entities.alive.bot.single.energy.EnergyAlive;
-import com.model.simulation.entities.qualities.color.Color;
-import com.model.simulation.entities.qualities.position.Position;
+import com.model.simulation.entities.alive.qualities.color.Color;
+import com.model.simulation.entities.alive.qualities.position.Position;
 
 public abstract class EntityAlive extends EntityAbstract implements Alive {
 

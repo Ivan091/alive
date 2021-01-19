@@ -1,11 +1,11 @@
 package com.model.simulation.field.matrix;
 
 import com.model.simulation.entities.Entity;
+import com.model.simulation.entities.alive.qualities.energy.EnergyEntity;
+import com.model.simulation.entities.alive.qualities.position.Position;
+import com.model.simulation.entities.alive.qualities.position.PositionEntity;
 import com.model.simulation.entities.lifeless.Empty;
 import com.model.simulation.entities.lifeless.EmptyEntity;
-import com.model.simulation.entities.qualities.energy.EnergyEntity;
-import com.model.simulation.entities.qualities.position.Position;
-import com.model.simulation.entities.qualities.position.PositionEntity;
 
 import java.util.*;
 

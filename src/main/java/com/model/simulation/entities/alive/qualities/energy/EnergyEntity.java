@@ -1,4 +1,4 @@
-package com.model.simulation.entities.qualities.energy;
+package com.model.simulation.entities.alive.qualities.energy;
 
 public class EnergyEntity implements Energy {
 

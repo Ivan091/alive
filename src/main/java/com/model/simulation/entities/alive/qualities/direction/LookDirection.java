@@ -1,7 +1,7 @@
-package com.model.simulation.entities.qualities.direction;
+package com.model.simulation.entities.alive.qualities.direction;
 
 import com.model.simulation.entities.alive.bot.single.genome.Replicable;
-import com.model.simulation.entities.qualities.position.Position;
+import com.model.simulation.entities.alive.qualities.position.Position;
 
 public interface LookDirection extends Replicable<LookDirection> {
 

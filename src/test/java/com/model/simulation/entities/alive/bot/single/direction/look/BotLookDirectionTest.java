@@ -1,9 +1,9 @@
 package com.model.simulation.entities.alive.bot.single.direction.look;
 
 import com.model.simulation.entities.alive.bot.single.direction.BotLookDirection;
-import com.model.simulation.entities.qualities.direction.LookDirection;
-import com.model.simulation.entities.qualities.position.Position;
-import com.model.simulation.entities.qualities.position.PositionEntity;
+import com.model.simulation.entities.alive.qualities.direction.LookDirection;
+import com.model.simulation.entities.alive.qualities.position.Position;
+import com.model.simulation.entities.alive.qualities.position.PositionEntity;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

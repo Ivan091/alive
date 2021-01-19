@@ -6,8 +6,8 @@ import com.model.simulation.entities.alive.bot.single.direction.BotLookDirection
 import com.model.simulation.entities.alive.bot.single.energy.EnergyAlive;
 import com.model.simulation.entities.alive.bot.single.energy.EnergyAliveAlive;
 import com.model.simulation.entities.alive.bot.single.genome.Genome;
-import com.model.simulation.entities.qualities.position.Position;
-import com.model.simulation.entities.qualities.position.PositionEntity;
+import com.model.simulation.entities.alive.qualities.position.Position;
+import com.model.simulation.entities.alive.qualities.position.PositionEntity;
 import com.model.simulation.field.Field;
 import com.model.simulation.field.FieldLive;
 import com.model.simulation.field.matrix.MatrixEntities;

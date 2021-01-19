@@ -2,7 +2,7 @@ package com.model.simulation.entities.alive.bot.single.genome.gene.conditional;
 
 import com.model.simulation.entities.alive.bot.single.genome.gene.GeneTest;
 import com.model.simulation.entities.alive.bot.single.genome.mutator.factory.conditional.RotatingGeneFactory;
-import com.model.simulation.entities.qualities.position.PositionEntity;
+import com.model.simulation.entities.alive.qualities.position.PositionEntity;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

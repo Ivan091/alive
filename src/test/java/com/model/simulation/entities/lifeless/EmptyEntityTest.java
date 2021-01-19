@@ -1,7 +1,7 @@
 package com.model.simulation.entities.lifeless;
 
-import com.model.simulation.entities.qualities.energy.EnergyEntity;
-import com.model.simulation.entities.qualities.position.PositionEntity;
+import com.model.simulation.entities.alive.qualities.energy.EnergyEntity;
+import com.model.simulation.entities.alive.qualities.position.PositionEntity;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

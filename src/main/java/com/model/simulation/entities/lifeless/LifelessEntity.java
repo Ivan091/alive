@@ -1,9 +1,9 @@
 package com.model.simulation.entities.lifeless;
 
 import com.model.simulation.entities.EntityAbstract;
-import com.model.simulation.entities.qualities.color.Color;
-import com.model.simulation.entities.qualities.energy.Energy;
-import com.model.simulation.entities.qualities.position.Position;
+import com.model.simulation.entities.alive.qualities.color.Color;
+import com.model.simulation.entities.alive.qualities.energy.Energy;
+import com.model.simulation.entities.alive.qualities.position.Position;
 
 public abstract class LifelessEntity extends EntityAbstract {
 

@@ -5,9 +5,9 @@ import com.model.simulation.entities.alive.bot.single.BotSingle;
 import com.model.simulation.entities.alive.bot.single.direction.BotLookDirection;
 import com.model.simulation.entities.alive.bot.single.genome.gene.GeneTest;
 import com.model.simulation.entities.alive.bot.single.genome.mutator.factory.direct.GoGeneFactory;
+import com.model.simulation.entities.alive.qualities.energy.EnergyEntity;
+import com.model.simulation.entities.alive.qualities.position.PositionEntity;
 import com.model.simulation.entities.lifeless.LifelessBotBody;
-import com.model.simulation.entities.qualities.energy.EnergyEntity;
-import com.model.simulation.entities.qualities.position.PositionEntity;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

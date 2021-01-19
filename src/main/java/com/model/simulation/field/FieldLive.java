@@ -21,6 +21,12 @@ public class FieldLive implements Field {
         entitiesPutThisTurn = new LinkedList<>();
     }
 
+    /**
+     * Calls {@link Entity#makeAMove()} on each object from {@link #aliveEntities}
+     * then from {@link #entitiesPutThisTurn}. If entity is dead or not in {@link #matrixEntities}
+     * it is removed.
+     */
+
     @Override
     public synchronized void update() {
 
@@ -46,11 +52,16 @@ public class FieldLive implements Field {
         }
     }
 
+    /**
+     * Puts entity into {@link #matrixEntities} and pushes it in {@link #entitiesPutThisTurn}
+     *
+     * @param entity new entity
+     */
     @Override
-    public void putEntity(Entity puttingEntity) {
+    public void putEntity(Entity entity) {
 
-        matrixEntities.put(puttingEntity);
-        entitiesPutThisTurn.add(puttingEntity);
+        matrixEntities.put(entity);
+        entitiesPutThisTurn.add(entity);
     }
 
     @Override

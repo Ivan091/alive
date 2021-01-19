@@ -1,8 +1,8 @@
 package com.model.simulation.entities.lifeless;
 
-import com.model.simulation.entities.qualities.color.ColorEntity;
-import com.model.simulation.entities.qualities.energy.Energy;
-import com.model.simulation.entities.qualities.position.Position;
+import com.model.simulation.entities.alive.qualities.color.ColorEntity;
+import com.model.simulation.entities.alive.qualities.energy.Energy;
+import com.model.simulation.entities.alive.qualities.position.Position;
 
 public class LifelessBotBody extends LifelessEntity {
 
