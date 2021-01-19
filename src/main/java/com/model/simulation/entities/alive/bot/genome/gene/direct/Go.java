@@ -8,7 +8,7 @@ public class Go extends DirectGene {
     @Override
     public Boolean run(Bot bot) {
 
-        bot.getLookingPos().ifPresent(newPos -> {
+        bot.getObservedPos().ifPresent(newPos -> {
             var cells = bot.getField().getCellsMatrix();
             if (cells.isEmpty(newPos)) {
                 cells.pull(bot.getPosition());

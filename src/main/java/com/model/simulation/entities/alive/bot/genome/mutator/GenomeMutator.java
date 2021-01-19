@@ -7,13 +7,10 @@ import com.model.simulation.entities.alive.bot.genome.mutator.factory.conditiona
 import com.model.simulation.entities.alive.bot.genome.mutator.factory.direct.*;
 
 import java.util.Random;
-import java.util.stream.Collectors;
 
 public class GenomeMutator implements Mutator<Gene[]> {
 
     private final GeneFactory[] possibleGenes;
-
-    private final int maxMutationsCount = 1;
 
     private final Random rnd = new Random();
 
@@ -38,13 +35,10 @@ public class GenomeMutator implements Mutator<Gene[]> {
 
         var newGenes = new Gene[mutatingGenes.length];
 
-        var mutatingIndexes = rnd
-                .ints(rnd.nextInt(maxMutationsCount) + 1, 0, newGenes.length)
-                .boxed()
-                .collect(Collectors.toSet());
+        var mutatingIndex = rnd.nextInt(mutatingGenes.length);
 
         for (var i = 0; i < newGenes.length; ++i) {
-            if (mutatingIndexes.contains(i)) {
+            if (mutatingIndex == i) {
                 newGenes[i] = generateRandomGene(newGenes.length);
             } else {
                 newGenes[i] = mutatingGenes[i].replicate();

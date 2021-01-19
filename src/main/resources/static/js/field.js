@@ -20,7 +20,7 @@ function addColoredRow(rowData) {
 }
 
 function updateField() {
-    $.post("/api/field/update");
+    $.ajax({url: "/api/field/update", type: "HEAD"});
     let field = "api/field/status";
     $.get(field, {success: update(field)});
 }
@@ -39,8 +39,10 @@ function update(fieldUrl) {
 let obj = true;
 
 function start() {
-    if (obj === true)
-        obj = setInterval(updateField, 100)
+    if (obj === true) {
+        updateField();
+        obj = setInterval(updateField, 50)
+    }
 }
 
 function stop() {

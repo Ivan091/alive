@@ -1,11 +1,9 @@
 package com.model.simulation.entities.alive.bot.direction;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.model.simulation.entities.qualities.direction.LookDirection;
 import com.model.simulation.entities.qualities.position.Position;
 import com.model.simulation.entities.qualities.position.PositionEntity;
 
-@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class BotLookDirection implements LookDirection {
 
     private static final Position[] relativePositions = new Position[]{

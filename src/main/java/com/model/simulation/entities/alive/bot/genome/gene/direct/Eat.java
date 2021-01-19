@@ -8,14 +8,13 @@ public class Eat extends DirectGene {
     @Override
     public Boolean run(Bot bot) {
 
-        bot.getLookingPos().ifPresent(pos -> {
-            var matrixEntities = bot.getField().getCellsMatrix();
-            var eatingEntity = matrixEntities.pull(pos);
-            if (eatingEntity instanceof Bot eatingBot) {
-                if (!eatingBot.getGenome().isFriendly(bot.getGenome())) {
-                    var receivingEnergy = eatingBot.getEnergy().getEnergyValue() >> 1;
+        bot.getObservedPos().ifPresent(pos -> {
+            var eatenEntity = bot.getField().getCellsMatrix().pull(pos);
+            if (eatenEntity instanceof Bot eatenBot) {
+                if (!eatenBot.isFriendly(bot)) {
+                    var receivingEnergy = eatenBot.getEnergy().getEnergyValue() >> 1;
+                    bot.getEnergy().incrementEnergyValue(receivingEnergy);
                     if (receivingEnergy > 0) {
-                        bot.getEnergy().incrementEnergyValue(receivingEnergy);
                         bot.getColor().incrementColor(100, -50, -50);
                     }
                 }

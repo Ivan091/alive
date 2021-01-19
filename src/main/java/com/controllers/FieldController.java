@@ -4,8 +4,7 @@ import com.model.simulation.Simulation;
 import com.model.simulation.SimulationLive;
 import com.model.simulation.entities.Entity;
 import com.model.simulation.field.FieldLive;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.stream.IntStream;
 
@@ -19,9 +18,9 @@ public class FieldController {
         simulation.start();
     }
 
-    @RequestMapping("/update")
+    @RequestMapping(value = "/update", method = RequestMethod.HEAD)
     public void update() {
-        IntStream.range(0, 1).forEach(i -> simulation.nextMove());
+        IntStream.range(0, 4).forEach(i -> simulation.nextMove());
     }
 
     @RequestMapping("/status")

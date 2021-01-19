@@ -17,7 +17,7 @@ public interface MatrixEntities {
 
     /**
      * @param pos position of a cell on the field.
-     * @return content in the cell at the position.
+     * @return entity in the cell at the position.
      */
     Entity get(Position pos);
 

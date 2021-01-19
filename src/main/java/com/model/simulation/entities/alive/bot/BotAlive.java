@@ -27,7 +27,7 @@ public class BotAlive extends AliveEntity implements Bot {
     private boolean isAlive = true;
 
     public BotAlive(Field field, Position position, EnergyAlive energy, LookDirection lookDirection, Genome genome) {
-        super(position, energy, new ColorEntity(200, 200, 0));
+        super(position, energy, new ColorEntity(0, 0, 0));
 
         this.field = field;
         energy.subscribeMortal(this);
@@ -97,6 +97,11 @@ public class BotAlive extends AliveEntity implements Bot {
     }
 
     @Override
+    public boolean isFriendly(Bot otherBot) {
+        return genome.isFriendly(otherBot.getGenome());
+    }
+
+    @Override
     public Field getField() {
 
         return field;
@@ -115,7 +120,7 @@ public class BotAlive extends AliveEntity implements Bot {
     }
 
     @Override
-    public Optional<Position> getLookingPos() {
+    public Optional<Position> getObservedPos() {
         return field.getCellsMatrix().makePositionToBeInside(lookDirection.getLookingPos(position));
     }
 }

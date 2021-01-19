@@ -22,7 +22,7 @@ public class FieldLive implements Field {
     }
 
     @Override
-    public void update() {
+    public synchronized void update() {
 
         var aliveEntitiesIt = aliveEntities.iterator();
         while (aliveEntitiesIt.hasNext()) {
