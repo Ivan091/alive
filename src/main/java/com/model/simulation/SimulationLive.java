@@ -2,11 +2,11 @@ package com.model.simulation;
 
 import com.model.simulation.entities.Entity;
 import com.model.simulation.entities.alive.bot.Bot;
-import com.model.simulation.entities.alive.bot.BotAlive;
-import com.model.simulation.entities.alive.bot.direction.BotLookDirection;
-import com.model.simulation.entities.alive.bot.energy.EnergyAliveAlive;
-import com.model.simulation.entities.alive.bot.genome.BotGenome;
-import com.model.simulation.entities.alive.bot.genome.gene.Gene;
+import com.model.simulation.entities.alive.bot.single.BotSingle;
+import com.model.simulation.entities.alive.bot.single.direction.BotLookDirection;
+import com.model.simulation.entities.alive.bot.single.energy.EnergyAliveAlive;
+import com.model.simulation.entities.alive.bot.single.genome.BotGenome;
+import com.model.simulation.entities.alive.bot.single.genome.gene.Gene;
 import com.model.simulation.entities.qualities.position.PositionEntity;
 import com.model.simulation.field.Field;
 
@@ -24,7 +24,7 @@ public class SimulationLive implements Simulation {
 
     public void start() {
 
-        field.putEntity(new BotAlive(field, new PositionEntity(0, 0),
+        field.putEntity(new BotSingle(field, new PositionEntity(0, 0),
                 new EnergyAliveAlive(500), new BotLookDirection(2), BotGenome.createFirstBotGenome()));
     }
 
