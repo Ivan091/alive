@@ -1,6 +1,6 @@
 package com;
 
-import com.model.simulation.entities.alive.qualities.color.ColorEntity;
+import com.domain.simulation.entities.alive.qualities.color.ColorEntity;
 
 public class Test {
     public static void main(String[] args) {

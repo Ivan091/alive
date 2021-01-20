@@ -1,9 +1,9 @@
 package com.controllers;
 
-import com.model.simulation.Simulation;
-import com.model.simulation.SimulationLive;
-import com.model.simulation.entities.Entity;
-import com.model.simulation.field.FieldLive;
+import com.domain.simulation.Simulation;
+import com.domain.simulation.SimulationLive;
+import com.domain.simulation.entities.Entity;
+import com.domain.simulation.field.FieldLive;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.stream.IntStream;
