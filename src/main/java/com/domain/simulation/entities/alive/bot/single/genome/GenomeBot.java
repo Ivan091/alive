@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.Random;
 import java.util.stream.IntStream;
 
-public class BotGenome implements Genome {
+public class GenomeBot implements Genome {
 
     private static final int maxDifferencesToBeFriendly = 2;
 
@@ -19,7 +19,7 @@ public class BotGenome implements Genome {
     private final Gene[] genes;
     private int currentGeneIdx;
 
-    public BotGenome(Gene[] genes) {
+    public GenomeBot(Gene[] genes) {
 
         if (genes.length < 1) {
             throw new IllegalArgumentException("genome length was less than 1");
@@ -34,7 +34,7 @@ public class BotGenome implements Genome {
 
         IntStream.range(0, genes.length).forEach(i -> genes[i] = new Photosynthesis());
 
-        return new BotGenome(genes);
+        return new GenomeBot(genes);
     }
 
     @Override
@@ -80,7 +80,7 @@ public class BotGenome implements Genome {
     public Genome replicate() {
 
         if (new Random().nextFloat() < WorldConstants.MUTATION_PROBABILITY) {
-            return new BotGenome(genomeMutator.mutate(genes));
+            return new GenomeBot(genomeMutator.mutate(genes));
         }
         return createExactCopyOfGenome();
     }
@@ -94,6 +94,6 @@ public class BotGenome implements Genome {
             newGenes[i] = this.genes[i].replicate();
         }
 
-        return new BotGenome(newGenes);
+        return new GenomeBot(newGenes);
     }
 }

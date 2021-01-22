@@ -1,6 +1,6 @@
 package com.domain.simulation.entities.alive.bot.single.genome.gene.conditional;
 
-import com.domain.simulation.entities.alive.bot.single.genome.BotGenome;
+import com.domain.simulation.entities.alive.bot.single.genome.GenomeBot;
 import com.domain.simulation.entities.alive.bot.single.genome.gene.Gene;
 import com.domain.simulation.entities.alive.bot.single.genome.gene.GeneTest;
 import com.domain.simulation.entities.alive.bot.single.genome.mutator.factory.conditional.GenomeJumpFactory;
@@ -23,7 +23,7 @@ class GenomeJumpTest extends GeneTest {
                 mock(Gene.class),
         };
 
-        var genome = new BotGenome(genes);
+        var genome = new GenomeBot(genes);
         when(botMock.getGenome()).thenReturn(genome);
 
         gene = new GenomeJump(3);

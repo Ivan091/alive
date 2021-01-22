@@ -11,7 +11,7 @@ import java.util.stream.IntStream;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
-class BotGenomeTest {
+class GenomeBotTest {
 
     private final Bot botMock = mock(Bot.class);
     private Gene[] genes = new Gene[]{
@@ -20,7 +20,7 @@ class BotGenomeTest {
             mock(Gene.class),
             mock(Gene.class),
     };
-    private Genome genome = new BotGenome(genes);
+    private Genome genome = new GenomeBot(genes);
 
     @Test
     void incrementGeneIdx() {
@@ -50,7 +50,7 @@ class BotGenomeTest {
 
         var genes0 = new Gene[]{};
 
-        assertThrows(IllegalArgumentException.class, () -> new BotGenome(genes0));
+        assertThrows(IllegalArgumentException.class, () -> new GenomeBot(genes0));
     }
 
     @Test
@@ -62,7 +62,7 @@ class BotGenomeTest {
     void allReplicatedGenesNotNull() {
 
         genes = new Gene[]{new Photosynthesis(), new Photosynthesis()};
-        genome = new BotGenome(genes);
+        genome = new GenomeBot(genes);
         IntStream.range(0, 200).forEach(i ->
                 Assertions.assertDoesNotThrow(() -> genome = genome.replicate()));
     }
