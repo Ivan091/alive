@@ -12,11 +12,11 @@ public interface Field {
 
     void putEntity(Entity entity);
 
-    MatrixEntities getCellsMatrix();
+    MatrixEntities cellsMatrix();
 
     int aliveEntitiesCount();
 
-    int getWidth();
+    int width();
 
-    int getHeight();
+    int height();
 }

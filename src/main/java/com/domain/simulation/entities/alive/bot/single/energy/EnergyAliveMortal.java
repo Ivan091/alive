@@ -10,6 +10,11 @@ public class EnergyAliveMortal extends EnergyEntity implements EnergyMortal {
 
     private Mortal mortal;
 
+    public EnergyAliveMortal(double initValue, Mortal mortal) {
+        super(initValue);
+        this.mortal = mortal;
+    }
+
     public EnergyAliveMortal(double initValue) {
         super(initValue);
     }

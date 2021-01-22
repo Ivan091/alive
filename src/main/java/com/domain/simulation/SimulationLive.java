@@ -3,7 +3,7 @@ package com.domain.simulation;
 import com.domain.simulation.entities.alive.bot.single.BotSingle;
 import com.domain.simulation.entities.alive.bot.single.direction.BotLookDirection;
 import com.domain.simulation.entities.alive.bot.single.energy.EnergyAliveMortal;
-import com.domain.simulation.entities.alive.bot.single.genome.GenomeBot;
+import com.domain.simulation.entities.alive.bot.single.genome.GenomeBuilder;
 import com.domain.simulation.entities.alive.qualities.position.PositionEntity;
 import com.domain.simulation.field.Field;
 
@@ -16,9 +16,8 @@ public class SimulationLive implements Simulation {
     }
 
     public void start() {
-
-        field.putEntity(new BotSingle(field, new PositionEntity(field.getWidth() / 2, field.getHeight() / 2),
-                new EnergyAliveMortal(500), new BotLookDirection(2), GenomeBot.createFirstBotGenome()));
+        field.putEntity(new BotSingle(field, new PositionEntity(field.width() / 2, field.height() / 2),
+                new EnergyAliveMortal(500), new BotLookDirection(2), new GenomeBuilder().buildDefault()));
     }
 
     @Override

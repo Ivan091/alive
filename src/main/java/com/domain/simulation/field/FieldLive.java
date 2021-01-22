@@ -15,7 +15,6 @@ public class FieldLive implements Field {
     private final Queue<Entity> entitiesPutThisTurn;
 
     public FieldLive(int width, int height) {
-
         matrixEntities = new MatrixLiveEntities(height, width);
         aliveEntities = new LinkedList<>();
         entitiesPutThisTurn = new LinkedList<>();
@@ -58,13 +57,12 @@ public class FieldLive implements Field {
      */
     @Override
     public void putEntity(Entity entity) {
-
         matrixEntities.put(entity);
         entitiesPutThisTurn.add(entity);
     }
 
     @Override
-    public MatrixEntities getCellsMatrix() {
+    public MatrixEntities cellsMatrix() {
 
         return matrixEntities;
     }
@@ -75,13 +73,12 @@ public class FieldLive implements Field {
     }
 
     @Override
-    public int getWidth() {
-
+    public int width() {
         return matrixEntities.getWidth();
     }
 
     @Override
-    public int getHeight() {
+    public int height() {
 
         return matrixEntities.getHeight();
     }

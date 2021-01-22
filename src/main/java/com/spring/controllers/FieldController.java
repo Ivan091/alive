@@ -25,6 +25,6 @@ public class FieldController {
 
     @RequestMapping("/status")
     public Entity[][] field() {
-        return simulation.getField().getCellsMatrix().getEntities();
+        return simulation.getField().cellsMatrix().getEntities();
     }
 }

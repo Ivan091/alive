@@ -38,7 +38,7 @@ public class Field extends Canvas {
     @Override
     public void paint(Graphics g) {
 
-        var ent = simulation.getField().getCellsMatrix().getEntities();
+        var ent = simulation.getField().cellsMatrix().getEntities();
         var yLen = ent.length;
         var xLen = ent[0].length;
         for (var i = 0; i < yLen; i++) {

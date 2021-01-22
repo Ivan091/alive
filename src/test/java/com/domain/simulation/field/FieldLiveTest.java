@@ -14,7 +14,7 @@ import static org.mockito.Mockito.*;
 class FieldLiveTest {
 
     private final Field field = new FieldLive(13, 11);
-    private final MatrixEntities matrix = field.getCellsMatrix();
+    private final MatrixEntities matrix = field.cellsMatrix();
     private Position positionEntity = new PositionEntity(1, 1);
     private Alive liveMock = mock(Alive.class);
     private Entity body = new LifelessBotBody(positionEntity, new EnergyEntity(0));
@@ -27,19 +27,19 @@ class FieldLiveTest {
 
     @Test
     void getWidth() {
-        Assertions.assertEquals(13, field.getWidth());
+        Assertions.assertEquals(13, field.width());
     }
 
     @Test
     void getHeight() {
-        Assertions.assertEquals(11, field.getHeight());
+        Assertions.assertEquals(11, field.height());
     }
 
     @Test
     void getCellsMatrix() {
         Assertions.assertNotNull(matrix);
-        Assertions.assertEquals(field.getWidth(), matrix.getWidth());
-        Assertions.assertEquals(field.getHeight(), matrix.getHeight());
+        Assertions.assertEquals(field.width(), matrix.getWidth());
+        Assertions.assertEquals(field.height(), matrix.getHeight());
     }
 
     @Test

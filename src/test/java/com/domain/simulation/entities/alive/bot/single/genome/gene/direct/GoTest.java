@@ -33,7 +33,7 @@ public class GoTest extends GeneTest {
     private void setup(int x, int y, int lookDirNum) {
 
         botSpy = spy(new BotSingle(field, new PositionEntity(x, y), energyMortalMock, new BotLookDirection(lookDirNum), genomeMock));
-        field.getCellsMatrix().put(botSpy);
+        field.cellsMatrix().put(botSpy);
     }
 
     @Test

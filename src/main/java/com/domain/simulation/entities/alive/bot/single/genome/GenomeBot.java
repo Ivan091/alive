@@ -3,13 +3,11 @@ package com.domain.simulation.entities.alive.bot.single.genome;
 import com.domain.simulation.WorldConstants;
 import com.domain.simulation.entities.alive.bot.Bot;
 import com.domain.simulation.entities.alive.bot.single.genome.gene.Gene;
-import com.domain.simulation.entities.alive.bot.single.genome.gene.direct.Photosynthesis;
 import com.domain.simulation.entities.alive.bot.single.genome.mutator.GenomeMutator;
 import com.domain.simulation.entities.alive.bot.single.genome.mutator.Mutator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.Random;
-import java.util.stream.IntStream;
 
 public class GenomeBot implements Genome {
 
@@ -26,15 +24,6 @@ public class GenomeBot implements Genome {
         }
 
         this.genes = genes;
-    }
-
-    public static Genome createFirstBotGenome() {
-
-        var genes = new Gene[WorldConstants.GENOME_LENGTH];
-
-        IntStream.range(0, genes.length).forEach(i -> genes[i] = new Photosynthesis());
-
-        return new GenomeBot(genes);
     }
 
     @Override

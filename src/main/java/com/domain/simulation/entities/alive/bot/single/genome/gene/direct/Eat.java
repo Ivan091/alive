@@ -8,7 +8,7 @@ public class Eat extends DirectGene {
     @Override
     public boolean run(Bot bot) {
         bot.observedPos().ifPresent(pos -> {
-            var eatenEntity = bot.field().getCellsMatrix().pull(pos);
+            var eatenEntity = bot.field().cellsMatrix().pull(pos);
 
             if (new VisitorIsFriendlyBot(bot).response(eatenEntity)) {
                 return;

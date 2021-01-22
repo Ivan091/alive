@@ -19,7 +19,7 @@ import static org.mockito.Mockito.*;
 public abstract class GeneTest {
 
     protected Field field = new FieldLive(3, 3);
-    protected MatrixEntities matrixEntities = field.getCellsMatrix();
+    protected MatrixEntities matrixEntities = field.cellsMatrix();
     protected Gene gene;
 
     protected EnergyMortal energyMortalMock = mock(EnergyMortal.class);
