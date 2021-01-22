@@ -51,6 +51,6 @@ class EatTest extends GeneTest {
         matrixEntities.put(bot2);
 
         gene.run(bot);
-        Assertions.assertTrue(bot.energy().getEnergyValue() > 100);
+        Assertions.assertTrue(bot.energy().value() > 100);
     }
 }

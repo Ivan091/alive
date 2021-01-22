@@ -1,21 +1,22 @@
 package com.domain.simulation.entities.alive.qualities.energy;
 
+import java.util.function.Function;
+
 public class EnergyEntity implements Energy {
 
-    protected int energyValue;
+    protected double energyValue;
 
-    public EnergyEntity(int energyValue) {
+    public EnergyEntity(double energyValue) {
         this.energyValue = energyValue;
     }
 
     @Override
-    public final int getEnergyValue() {
+    public final double value() {
         return energyValue;
     }
 
     @Override
-    public final void setEnergyValue(int newValue) {
-
-        energyValue = newValue;
+    public void changeValue(Function<Double, Double> function) {
+        energyValue = function.apply(energyValue);
     }
 }

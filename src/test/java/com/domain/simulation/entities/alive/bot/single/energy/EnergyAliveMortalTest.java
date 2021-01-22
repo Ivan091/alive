@@ -22,20 +22,20 @@ class EnergyAliveMortalTest {
     @Test
     void getAndSetEnergyValue() {
 
-        energy.setEnergyValue(600);
+        energy.changeValue(v -> 600d);
 
-        assertEquals(600, energy.getEnergyValue());
+        assertEquals(600, energy.value());
 
-        energy.setEnergyValue(0);
+        energy.changeValue(v -> 0d);
 
-        assertEquals(0, energy.getEnergyValue());
+        assertEquals(0, energy.value());
     }
 
     @Test
     void isAliveReplicated() {
 
-        energy.setEnergyValue(WorldConstants.MAX_ENERGY_VALUE + 1);
-        energy.incrementValue(0);
+        energy.changeValue(v -> v + WorldConstants.MAX_ENERGY_VALUE + 1);
+        energy.changeValue(v -> 0d);
 
         Mockito.verify(mortalMock, times(1)).replicate();
     }
@@ -43,8 +43,8 @@ class EnergyAliveMortalTest {
     @Test
     void isAliveDestroyed() {
 
-        energy.setEnergyValue(WorldConstants.MIN_ENERGY_VALUE - 1);
-        energy.incrementValue(0);
+        energy.changeValue(v -> v + WorldConstants.MIN_ENERGY_VALUE - 1);
+        energy.changeValue(v -> 0d);
 
         verify(mortalMock, times(1)).destroy();
     }
@@ -52,16 +52,16 @@ class EnergyAliveMortalTest {
     @Test
     void incrementEnergyValue() {
 
-        energy.setEnergyValue(0);
+        energy.changeValue(v -> 0d);
 
-        assertEquals(0, energy.getEnergyValue());
+        assertEquals(0, energy.value());
 
-        energy.incrementValue(1000);
+        energy.changeValue(v -> v + 1000);
 
-        assertEquals(1000, energy.getEnergyValue());
+        assertEquals(1000, energy.value());
 
-        energy.incrementValue(-999);
+        energy.changeValue(v -> v - 999);
 
-        assertEquals(1, energy.getEnergyValue());
+        assertEquals(1, energy.value());
     }
 }

@@ -26,7 +26,6 @@ public class FieldLive implements Field {
      * then from {@link #entitiesPutThisTurn}. If entity is dead or not in {@link #matrixEntities}
      * it is removed.
      */
-
     @Override
     public synchronized void update() {
 

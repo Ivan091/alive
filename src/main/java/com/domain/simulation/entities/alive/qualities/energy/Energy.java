@@ -1,13 +1,13 @@
 package com.domain.simulation.entities.alive.qualities.energy;
 
+import java.util.function.Function;
+
 public interface Energy {
 
-    int getEnergyValue();
+    double value();
 
     /**
-     * Sets new energy value. <b>Doesn't notify alive</b>.
-     *
-     * @param newValue new energy value
+     * @param function function applied to current value.
      */
-    void setEnergyValue(int newValue);
+    void changeValue(Function<Double, Double> function);
 }

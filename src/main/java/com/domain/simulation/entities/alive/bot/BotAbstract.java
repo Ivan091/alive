@@ -46,8 +46,13 @@ public class BotAbstract extends EntityAlive implements Bot {
 
             isMoving = isAlive && genome.runCurrentGene(this);
 
-            energy.incrementValue(WorldConstants.BOT_RUN_GENE_ENERGY_INCREMENT);
+            energy.changeValue(v -> v + WorldConstants.BOT_RUN_GENE_ENERGY_INCREMENT);
         }
+    }
+
+    @Override
+    public void accept(Visitor visitor) {
+        visitor.visit(this);
     }
 
     @Override
@@ -78,10 +83,10 @@ public class BotAbstract extends EntityAlive implements Bot {
                 newBotPos = possiblePositions.get(ThreadLocalRandom.current().nextInt(possiblePositions.size()));
             }
         }
-        energy.setEnergyValue(energy.getEnergyValue() - genome.length() * WorldConstants.GENE_REPLICATION_COST);
-        var newBotEnergyValue = energy.getEnergyValue() >> 1;
+        energy.changeValue(v -> v - genome.length() * WorldConstants.GENE_REPLICATION_COST);
+        var newBotEnergyValue = energy.value() * 0.5;
         var newBotEnergy = new EnergyAliveMortal(newBotEnergyValue);
-        energy.setEnergyValue(newBotEnergyValue);
+        energy.changeValue(v -> newBotEnergyValue);
 
         var newBot = new BotSingle(field, newBotPos, newBotEnergy,
                 lookDirection.opposite(), genome.replicate());
@@ -94,13 +99,8 @@ public class BotAbstract extends EntityAlive implements Bot {
 
         isAlive = false;
         var deadBody = new LifelessBotBody(new PositionEntity(position),
-                new EnergyEntity(energy.getEnergyValue() + WorldConstants.DRIED_BODY_ENERGY_VALUE));
+                new EnergyEntity(energy.value() + WorldConstants.DRIED_BODY_ENERGY_VALUE));
         field.getCellsMatrix().put(deadBody);
-    }
-
-    @Override
-    public void accept(Visitor visitor) {
-        visitor.visit(this);
     }
 
     @Override

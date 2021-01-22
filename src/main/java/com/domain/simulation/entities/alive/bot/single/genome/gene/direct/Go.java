@@ -17,7 +17,7 @@ public class Go extends DirectGene {
             }
         });
 
-        bot.energy().incrementValue(-50);
+        bot.energy().changeValue(v -> v - 50);
         bot.genome().incrementGeneIdx(1);
         return false;
     }

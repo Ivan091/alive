@@ -55,6 +55,6 @@ public abstract class GeneTest {
 
         gene.run(botMock);
 
-        verify(energyMortalMock, atLeastOnce()).incrementValue(anyInt());
+        verify(energyMortalMock, atLeastOnce()).changeValue(any());
     }
 }

@@ -4,24 +4,19 @@ import com.domain.simulation.WorldConstants;
 import com.domain.simulation.entities.alive.Mortal;
 import com.domain.simulation.entities.alive.qualities.energy.EnergyEntity;
 
+import java.util.function.Function;
+
 public class EnergyAliveMortal extends EnergyEntity implements EnergyMortal {
 
     private Mortal mortal;
 
-    public EnergyAliveMortal(int energyValue) {
-        super(energyValue);
+    public EnergyAliveMortal(double initValue) {
+        super(initValue);
     }
 
     @Override
     public void subscribeMortal(Mortal mortal) {
         this.mortal = mortal;
-    }
-
-    @Override
-    public void incrementValue(int increment) {
-
-        energyValue += increment;
-        notifyMortal();
     }
 
     @Override
@@ -33,5 +28,11 @@ public class EnergyAliveMortal extends EnergyEntity implements EnergyMortal {
         if (energyValue > WorldConstants.MAX_ENERGY_VALUE) {
             mortal.replicate();
         }
+    }
+
+    @Override
+    public void changeValue(Function<Double, Double> function) {
+        super.changeValue(function);
+        notifyMortal();
     }
 }

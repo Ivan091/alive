@@ -14,14 +14,14 @@ public class Eat extends DirectGene {
                 return;
             }
 
-            var receivingEnergy = eatenEntity.energy().getEnergyValue() >> 1;
+            var receivingEnergy = eatenEntity.energy().value() * 0.5;
             if (receivingEnergy > 0) {
-                bot.energy().incrementValue(receivingEnergy);
+                bot.energy().changeValue(v -> v + receivingEnergy);
                 bot.repaint(bot.color().incrementValue(100, -50, -50));
             }
         });
 
-        bot.energy().incrementValue(-10);
+        bot.energy().changeValue(v -> v - 10);
         bot.genome().incrementGeneIdx(1);
         return false;
     }
