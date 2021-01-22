@@ -28,11 +28,11 @@ public class Field extends Canvas {
     private void startGame() {
         simulation.start();
 
-        var executor = Executors.newScheduledThreadPool(1);
-        executor.scheduleAtFixedRate(() -> {
-            IntStream.range(0, 4).forEach(i -> simulation.nextMove());
-            paint(getGraphics());
-        }, 0, 10, TimeUnit.MILLISECONDS);
+        Executors.newScheduledThreadPool(4).scheduleAtFixedRate(() ->
+                paint(getGraphics()), 0, 32, TimeUnit.MILLISECONDS);
+
+        Executors.newScheduledThreadPool(4).scheduleWithFixedDelay(() ->
+                IntStream.range(0, 100000).forEach(i -> simulation.nextMove()), 1000, 1, TimeUnit.MILLISECONDS);
     }
 
     @Override
@@ -44,7 +44,7 @@ public class Field extends Canvas {
         for (var i = 0; i < yLen; i++) {
             for (var j = 0; j < xLen; j++) {
                 var entity = ent[i][j];
-                g.setColor(entity.getColor().color());
+                g.setColor(entity.color());
                 g.fillRect(j * 4, i * 4, 4, 4);
             }
         }

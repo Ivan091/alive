@@ -46,7 +46,7 @@ public class BotAbstract extends EntityAlive implements Bot {
 
             isMoving = isAlive && genome.runCurrentGene(this);
 
-            energy.incrementEnergyValue(WorldConstants.BOT_RUN_GENE_ENERGY_INCREMENT);
+            energy.incrementValue(WorldConstants.BOT_RUN_GENE_ENERGY_INCREMENT);
         }
     }
 
@@ -105,29 +105,29 @@ public class BotAbstract extends EntityAlive implements Bot {
 
     @Override
     public boolean isFriendly(Bot bot) {
-        return genome.isFriendly(bot.getGenome());
+        return genome.isFriendly(bot.genome());
     }
 
     @Override
-    public Field getField() {
+    public Field field() {
 
         return field;
     }
 
     @Override
-    public Genome getGenome() {
+    public Genome genome() {
 
         return genome;
     }
 
     @Override
-    public LookDirection getLookDirection() {
+    public LookDirection lookDirection() {
 
         return lookDirection;
     }
 
     @Override
-    public Optional<Position> getObservedPos() {
+    public Optional<Position> observedPos() {
         return field.getCellsMatrix().makePositionToBeInside(lookDirection.getLookingPos(position));
     }
 }

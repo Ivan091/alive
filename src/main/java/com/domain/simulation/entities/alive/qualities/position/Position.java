@@ -4,11 +4,7 @@ public interface Position {
 
     void copyOf(Position other);
 
-    int getX();
+    int x();
 
-    void setX(int x);
-
-    int getY();
-
-    void setY(int y);
+    int y();
 }

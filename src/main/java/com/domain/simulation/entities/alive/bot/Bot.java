@@ -15,14 +15,14 @@ public interface Bot extends Alive {
     boolean isFriendly(Bot bot);
 
     @JsonBackReference
-    Field getField();
+    Field field();
 
     @JsonIgnore
-    Genome getGenome();
+    Genome genome();
 
     @JsonIgnore
-    LookDirection getLookDirection();
+    LookDirection lookDirection();
 
     @JsonIgnore
-    Optional<Position> getObservedPos();
+    Optional<Position> observedPos();
 }

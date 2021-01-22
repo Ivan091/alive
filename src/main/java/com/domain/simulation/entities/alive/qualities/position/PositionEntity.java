@@ -12,36 +12,26 @@ public class PositionEntity implements Position {
     }
 
     public PositionEntity(Position pos) {
-        this.x = pos.getX();
-        this.y = pos.getY();
+        this.x = pos.x();
+        this.y = pos.y();
     }
 
     @Override
     public void copyOf(Position other) {
-        x = other.getX();
-        y = other.getY();
+        x = other.x();
+        y = other.y();
     }
 
     @Override
-    public final int getX() {
+    public final int x() {
 
         return x;
     }
 
     @Override
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    @Override
-    public final int getY() {
+    public final int y() {
 
         return y;
-    }
-
-    @Override
-    public void setY(int y) {
-        this.y = y;
     }
 
     @Override

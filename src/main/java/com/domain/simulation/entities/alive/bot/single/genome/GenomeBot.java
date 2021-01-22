@@ -13,7 +13,7 @@ import java.util.stream.IntStream;
 
 public class GenomeBot implements Genome {
 
-    private static final int maxDifferencesToBeFriendly = 2;
+    private static final int maxDifferencesToBeFriendly = (int) (WorldConstants.GENOME_LENGTH * 0.25);
 
     private static final Mutator<Gene[]> genomeMutator = new GenomeMutator();
     private final Gene[] genes;

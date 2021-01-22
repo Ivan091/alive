@@ -49,8 +49,8 @@ public class BotLookDirection implements LookDirection {
 
         var lookingRelativePos = relativePositions[directionNumber];
         return new PositionEntity(
-                currentPosition.getX() + lookingRelativePos.getX(),
-                currentPosition.getY() + lookingRelativePos.getY());
+                currentPosition.x() + lookingRelativePos.x(),
+                currentPosition.y() + lookingRelativePos.y());
     }
 
     @Override

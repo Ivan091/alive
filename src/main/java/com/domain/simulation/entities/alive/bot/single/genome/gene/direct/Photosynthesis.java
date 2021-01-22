@@ -8,9 +8,9 @@ public class Photosynthesis extends DirectGene {
     @Override
     public boolean run(Bot bot) {
 
-        bot.getEnergy().incrementEnergyValue(27);
-        bot.getGenome().incrementGeneIdx(1);
-        bot.getColor().incrementColor(-25, 50, -25);
+        bot.energy().incrementValue(25);
+        bot.genome().incrementGeneIdx(1);
+        bot.repaint(bot.color().incrementValue(-25, 50, -25));
         return false;
     }
 

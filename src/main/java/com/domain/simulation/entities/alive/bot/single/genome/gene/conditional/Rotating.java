@@ -15,11 +15,11 @@ public class Rotating extends ConditionalGene {
     @Override
     public boolean run(Bot bot) {
 
-        bot.getLookDirection().rotate(key);
+        bot.lookDirection().rotate(key);
 
 
-        bot.getEnergy().incrementEnergyValue(-4 * Math.abs(key));
-        bot.getGenome().incrementGeneIdx(1);
+        bot.energy().incrementValue(-4 * Math.abs(key));
+        bot.genome().incrementGeneIdx(1);
         return true;
     }
 

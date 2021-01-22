@@ -20,7 +20,7 @@ class LifelessEntityTest {
 
     @Test
     void getEnergy() {
-        Assertions.assertEquals(energy, body.getEnergy());
+        Assertions.assertEquals(energy, body.energy());
     }
 
     @Test

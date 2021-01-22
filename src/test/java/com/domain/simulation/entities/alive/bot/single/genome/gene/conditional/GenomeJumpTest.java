@@ -24,7 +24,7 @@ class GenomeJumpTest extends GeneTest {
         };
 
         var genome = new GenomeBot(genes);
-        when(botMock.getGenome()).thenReturn(genome);
+        when(botMock.genome()).thenReturn(genome);
 
         gene = new GenomeJump(3);
         gene.run(botMock);

@@ -1,22 +1,39 @@
 package com.domain.simulation.entities.alive.qualities.color;
 
-import java.awt.Color;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.jackson.ColorEntitySerializer;
 
-public class ColorEntity implements com.domain.simulation.entities.alive.qualities.color.Color {
+import java.awt.*;
 
-    private Color color;
+@JsonSerialize(using = ColorEntitySerializer.class)
+public class ColorEntity extends Color {
 
     public ColorEntity(int red, int green, int blue) {
-        setColor(red, green, blue);
+        super(red, green, blue);
     }
 
-    public void setColor(int red, int green, int blue) {
+    @JsonProperty
+    public String toHexFormat() {
+        return String.format("#%02x%02x%02x", getRed(), getGreen(), getBlue());
+    }
+
+    public ColorEntity incrementValue(int redIncrement, int greenIncrement, int blueIncrement) {
+        return setColor(
+                getRed() + redIncrement,
+                getGreen() + greenIncrement,
+                getBlue() + blueIncrement
+        );
+    }
+
+    public ColorEntity setColor(int red, int green, int blue) {
         var r = validateColorParameter(red);
         var g = validateColorParameter(green);
         var b = validateColorParameter(blue);
-        if (color == null || r != color.getRed() || g != color.getGreen() || b != color.getBlue()) {
-            color = new Color(r, g, b);
+        if (r != getRed() || g != getGreen() || b != getBlue()) {
+            return new ColorEntity(r, g, b);
         }
+        return this;
     }
 
     private int validateColorParameter(int colorParameter) {
@@ -25,24 +42,5 @@ public class ColorEntity implements com.domain.simulation.entities.alive.qualiti
         } else {
             return Math.min(colorParameter, 255);
         }
-    }
-
-    @Override
-    public String toHexFormat() {
-        return String.format("#%02x%02x%02x", color.getRed(), color.getGreen(), color.getBlue());
-    }
-
-    @Override
-    public void incrementColor(int redIncrement, int greenIncrement, int blueIncrement) {
-        setColor(
-                color.getRed() + redIncrement,
-                color.getGreen() + greenIncrement,
-                color.getBlue() + blueIncrement
-        );
-    }
-
-    @Override
-    public Color color() {
-        return color;
     }
 }

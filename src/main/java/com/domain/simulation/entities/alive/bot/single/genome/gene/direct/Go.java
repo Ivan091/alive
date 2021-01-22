@@ -8,17 +8,17 @@ public class Go extends DirectGene {
     @Override
     public boolean run(Bot bot) {
 
-        bot.getObservedPos().ifPresent(newPos -> {
-            var cells = bot.getField().getCellsMatrix();
+        bot.observedPos().ifPresent(newPos -> {
+            var cells = bot.field().getCellsMatrix();
             if (cells.isEmpty(newPos)) {
-                cells.pull(bot.getPosition());
-                bot.getPosition().copyOf(newPos);
+                cells.pull(bot.position());
+                bot.relocate(newPos);
                 cells.put(bot);
             }
         });
 
-        bot.getEnergy().incrementEnergyValue(-2);
-        bot.getGenome().incrementGeneIdx(1);
+        bot.energy().incrementValue(-50);
+        bot.genome().incrementGeneIdx(1);
         return false;
     }
 

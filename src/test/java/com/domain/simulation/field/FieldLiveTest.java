@@ -22,7 +22,7 @@ class FieldLiveTest {
     @BeforeEach
     void setBotMock() {
         when(liveMock.isAlive()).thenReturn(true);
-        when(liveMock.getPosition()).thenReturn(positionEntity);
+        when(liveMock.position()).thenReturn(positionEntity);
     }
 
     @Test
@@ -70,7 +70,7 @@ class FieldLiveTest {
 
     @Test
     void entitiesCount() {
-        when(liveMock.getPosition()).thenReturn(new PositionEntity(2, 1));
+        when(liveMock.position()).thenReturn(new PositionEntity(2, 1));
         field.putEntity(liveMock);
         field.putEntity(body);
 

@@ -25,7 +25,7 @@ class EatTest extends GeneTest {
     public void eatingEraseEntityFromField() {
 
         var bot = botSetup(0, 0, 0);
-        var lookPos = bot.getLookDirection().getLookingPos(bot.getPosition());
+        var lookPos = bot.lookDirection().getLookingPos(bot.position());
 
         matrixEntities.put(new LifelessBotBody(lookPos, new EnergyEntity(0)));
         gene.run(bot);
@@ -51,6 +51,6 @@ class EatTest extends GeneTest {
         matrixEntities.put(bot2);
 
         gene.run(bot);
-        Assertions.assertTrue(bot.getEnergy().getEnergyValue() > 100);
+        Assertions.assertTrue(bot.energy().getEnergyValue() > 100);
     }
 }

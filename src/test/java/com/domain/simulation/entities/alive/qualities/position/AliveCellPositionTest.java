@@ -15,13 +15,13 @@ class AliveCellPositionTest {
     @Test
     void getX() {
 
-        assertEquals(3, pos.getX());
+        assertEquals(3, pos.x());
     }
 
     @Test
     void getY() {
 
-        assertEquals(3, pos.getY());
+        assertEquals(3, pos.y());
     }
 
     @Test

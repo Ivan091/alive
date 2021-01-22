@@ -35,17 +35,19 @@ public class MatrixLiveEntities implements MatrixEntities {
     @Override
     public Optional<Position> makePositionToBeInside(Position pos) {
 
-        var y = pos.getY();
+        var y = pos.y();
         if (y < 0 || y >= getHeight()) {
             return Optional.empty();
         }
 
-        var x = pos.getX();
+        var x = pos.x();
         if (x < 0 || x >= getWidth()) {
             x %= getWidth();
-            x = x >= 0 ? x : x + getWidth();
+            if (x < 0) {
+                x = x + getWidth();
+            }
+            pos = new PositionEntity(x, y);
         }
-        pos.setX(x);
 
         return Optional.of(pos);
     }
@@ -54,8 +56,8 @@ public class MatrixLiveEntities implements MatrixEntities {
     public List<Position> findEmptyPositionsAround(Position pos) {
         var positionsAround = new ArrayList<Position>(8);
 
-        var x = pos.getX();
-        var y = pos.getY();
+        var x = pos.x();
+        var y = pos.y();
 
         for (var i = x - 1; i <= x + 1; ++i) {
             for (var j = y - 1; j <= y + 1; ++j) {
@@ -74,14 +76,14 @@ public class MatrixLiveEntities implements MatrixEntities {
 
     @Override
     public Entity get(Position pos) {
-        return entities[pos.getY()][pos.getX()];
+        return entities[pos.y()][pos.x()];
     }
 
     @Override
     public Entity put(Entity newEntity) {
-        var pos = newEntity.getPosition();
+        var pos = newEntity.position();
         var previousEntity = get(pos);
-        entities[pos.getY()][pos.getX()] = newEntity;
+        entities[pos.y()][pos.x()] = newEntity;
         return previousEntity;
     }
 
@@ -101,7 +103,7 @@ public class MatrixLiveEntities implements MatrixEntities {
 
     @Override
     public boolean isInMatrix(Entity entity) {
-        return entity == get(entity.getPosition());
+        return entity == get(entity.position());
     }
 
     @Override

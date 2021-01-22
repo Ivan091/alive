@@ -18,7 +18,7 @@ public class EnergyAliveMortal extends EnergyEntity implements EnergyMortal {
     }
 
     @Override
-    public void incrementEnergyValue(int increment) {
+    public void incrementValue(int increment) {
 
         energyValue += increment;
         notifyMortal();

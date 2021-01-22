@@ -27,7 +27,7 @@ public class GoTest extends GeneTest {
 
         gene.run(botSpy);
 
-        Assertions.assertEquals(new PositionEntity(2, 1), botSpy.getPosition());
+        Assertions.assertEquals(new PositionEntity(2, 1), botSpy.position());
     }
 
     private void setup(int x, int y, int lookDirNum) {
@@ -43,7 +43,7 @@ public class GoTest extends GeneTest {
 
         gene.run(botSpy);
 
-        Assertions.assertEquals(new PositionEntity(2, 2), botSpy.getPosition());
+        Assertions.assertEquals(new PositionEntity(2, 2), botSpy.position());
     }
 
     @Test
@@ -53,7 +53,7 @@ public class GoTest extends GeneTest {
 
         gene.run(botSpy);
 
-        Assertions.assertEquals(new PositionEntity(0, 1), botSpy.getPosition());
+        Assertions.assertEquals(new PositionEntity(0, 1), botSpy.position());
     }
 
     @Test
@@ -63,7 +63,7 @@ public class GoTest extends GeneTest {
 
         gene.run(botSpy);
 
-        Assertions.assertEquals(new PositionEntity(0, 2), botSpy.getPosition());
+        Assertions.assertEquals(new PositionEntity(0, 2), botSpy.position());
     }
 
     @Test
@@ -73,7 +73,7 @@ public class GoTest extends GeneTest {
 
         gene.run(botSpy);
 
-        Assertions.assertEquals(new PositionEntity(0, 1), botSpy.getPosition());
+        Assertions.assertEquals(new PositionEntity(0, 1), botSpy.position());
     }
 
     @Test
@@ -83,7 +83,7 @@ public class GoTest extends GeneTest {
 
         gene.run(botSpy);
 
-        Assertions.assertEquals(new PositionEntity(0, 0), botSpy.getPosition());
+        Assertions.assertEquals(new PositionEntity(0, 0), botSpy.position());
     }
 
     @Test
@@ -93,7 +93,7 @@ public class GoTest extends GeneTest {
 
         gene.run(botSpy);
 
-        Assertions.assertEquals(new PositionEntity(1, 0), botSpy.getPosition());
+        Assertions.assertEquals(new PositionEntity(1, 0), botSpy.position());
     }
 
     @Test
@@ -103,7 +103,7 @@ public class GoTest extends GeneTest {
 
         gene.run(botSpy);
 
-        Assertions.assertEquals(new PositionEntity(2, 0), botSpy.getPosition());
+        Assertions.assertEquals(new PositionEntity(2, 0), botSpy.position());
     }
 
 
@@ -114,7 +114,7 @@ public class GoTest extends GeneTest {
 
         gene.run(botSpy);
 
-        Assertions.assertEquals(new PositionEntity(2, 2), botSpy.getPosition());
+        Assertions.assertEquals(new PositionEntity(2, 2), botSpy.position());
     }
 
     @Test
@@ -124,7 +124,7 @@ public class GoTest extends GeneTest {
 
         gene.run(botSpy);
 
-        Assertions.assertEquals(new PositionEntity(0, 0), botSpy.getPosition());
+        Assertions.assertEquals(new PositionEntity(0, 0), botSpy.position());
     }
 
     @Test
@@ -134,12 +134,12 @@ public class GoTest extends GeneTest {
 
         matrixEntities.put(new LifelessBotBody(new PositionEntity(2, 1), new EnergyEntity(0)));
         gene.run(botSpy);
-        Assertions.assertEquals(new PositionEntity(1, 1), botSpy.getPosition());
+        Assertions.assertEquals(new PositionEntity(1, 1), botSpy.position());
 
         var botMock = mock(Bot.class);
-        when(botMock.getPosition()).thenReturn(new PositionEntity(2, 1));
+        when(botMock.position()).thenReturn(new PositionEntity(2, 1));
         matrixEntities.put(botMock);
         gene.run(botSpy);
-        Assertions.assertEquals(new PositionEntity(1, 1), botSpy.getPosition());
+        Assertions.assertEquals(new PositionEntity(1, 1), botSpy.position());
     }
 }

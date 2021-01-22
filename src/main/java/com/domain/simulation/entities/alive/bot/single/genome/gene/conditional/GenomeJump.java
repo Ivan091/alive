@@ -16,8 +16,8 @@ public class GenomeJump extends ConditionalGene {
 
     @Override
     public boolean run(Bot bot) {
-        bot.getEnergy().incrementEnergyValue(Math.abs(key) / -2);
-        bot.getGenome().incrementGeneIdx(key);
+        bot.energy().incrementValue(Math.abs(key) / -2);
+        bot.genome().incrementGeneIdx(key);
         return true;
     }
 

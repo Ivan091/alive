@@ -2,35 +2,24 @@ package com.domain.simulation.entities.visitor;
 
 import com.domain.simulation.entities.Entity;
 import com.domain.simulation.entities.alive.bot.Bot;
-import com.domain.simulation.entities.lifeless.Empty;
 
-public class VisitorIsFriendlyBot implements VisitorFriendly {
+public class VisitorIsFriendlyBot extends VisitorDefault<Boolean> implements Visitor {
 
-    private Bot bot;
-    private Boolean response;
+    private final Bot bot;
 
-    @Override
-    public void visit(Empty empty) {
-        response = false;
+    public VisitorIsFriendlyBot(Bot bot) {
+        super(false);
+        this.bot = bot;
     }
 
     @Override
-    public void visit(Bot bot) {
-        response = this.bot.isFriendly(bot);
+    public void visit(Bot otherBot) {
+        response = this.bot.isFriendly(otherBot);
     }
 
     @Override
-    public void visit(Entity entity) {
-        response = false;
-    }
-
-    @Override
-    public void assign(Bot newBot) {
-        bot = newBot;
-    }
-
-    @Override
-    public Boolean response() {
+    public Boolean response(Entity entity) {
+        entity.accept(this);
         return response;
     }
 }

@@ -1,4 +1,4 @@
-package com.controllers;
+package com.spring.controllers;
 
 import com.domain.simulation.Simulation;
 import com.domain.simulation.SimulationLive;

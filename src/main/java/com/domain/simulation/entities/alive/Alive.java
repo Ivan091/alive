@@ -5,5 +5,5 @@ import com.domain.simulation.entities.alive.bot.single.energy.EnergyMortal;
 
 public interface Alive extends Mortal, Entity {
 
-    EnergyMortal getEnergy();
+    EnergyMortal energy();
 }

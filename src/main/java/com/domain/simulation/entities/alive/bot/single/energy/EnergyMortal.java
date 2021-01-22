@@ -14,7 +14,7 @@ public interface EnergyMortal extends Energy {
      * @param increment the value of the energy increment.
      * @see #notifyMortal()
      */
-    void incrementEnergyValue(int increment);
+    void incrementValue(int increment);
 
     /**
      * Notifies alive if it must be replicated or destroyed.
