@@ -8,4 +8,6 @@ public interface Color {
     String toHexFormat();
 
     void incrementColor(int redIncrement, int greenIncrement, int blueIncrement);
+
+    java.awt.Color color();
 }

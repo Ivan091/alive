@@ -1,0 +1,52 @@
+package com.swing;
+
+import com.domain.simulation.Simulation;
+import com.domain.simulation.SimulationLive;
+import com.domain.simulation.field.FieldLive;
+
+import javax.swing.*;
+import java.awt.*;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+import java.util.stream.IntStream;
+
+public class Field extends Canvas {
+
+    Simulation simulation = new SimulationLive(new FieldLive(480, 251));
+
+    public static void main(String[] args) {
+        JFrame frame = new JFrame();
+        var c = new Field();
+        frame.add(c);
+        frame.setBackground(Color.BLACK);
+        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        frame.pack();
+        frame.setVisible(true);
+        c.startGame();
+    }
+
+    private void startGame() {
+        simulation.start();
+
+        var executor = Executors.newScheduledThreadPool(1);
+        executor.scheduleAtFixedRate(() -> {
+            IntStream.range(0, 4).forEach(i -> simulation.nextMove());
+            paint(getGraphics());
+        }, 0, 10, TimeUnit.MILLISECONDS);
+    }
+
+    @Override
+    public void paint(Graphics g) {
+
+        var ent = simulation.getField().getCellsMatrix().getEntities();
+        var yLen = ent.length;
+        var xLen = ent[0].length;
+        for (var i = 0; i < yLen; i++) {
+            for (var j = 0; j < xLen; j++) {
+                var entity = ent[i][j];
+                g.setColor(entity.getColor().color());
+                g.fillRect(j * 4, i * 4, 4, 4);
+            }
+        }
+    }
+}

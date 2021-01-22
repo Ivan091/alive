@@ -12,6 +12,7 @@ import com.domain.simulation.entities.alive.qualities.energy.EnergyEntity;
 import com.domain.simulation.entities.alive.qualities.position.Position;
 import com.domain.simulation.entities.alive.qualities.position.PositionEntity;
 import com.domain.simulation.entities.lifeless.LifelessBotBody;
+import com.domain.simulation.entities.visitor.Visitor;
 import com.domain.simulation.field.Field;
 
 import java.util.Optional;
@@ -98,8 +99,13 @@ public class BotAbstract extends EntityAlive implements Bot {
     }
 
     @Override
-    public boolean isFriendly(Bot otherBot) {
-        return genome.isFriendly(otherBot.getGenome());
+    public void accept(Visitor visitor) {
+        visitor.visit(this);
+    }
+
+    @Override
+    public boolean isFriendly(Bot bot) {
+        return genome.isFriendly(bot.getGenome());
     }
 
     @Override

@@ -12,7 +12,7 @@ import java.util.Optional;
 
 public interface Bot extends Alive {
 
-    boolean isFriendly(Bot otherBot);
+    boolean isFriendly(Bot bot);
 
     @JsonBackReference
     Field getField();

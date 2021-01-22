@@ -1,32 +1,22 @@
 package com.domain.simulation.entities.alive.qualities.color;
 
-public class ColorEntity implements Color {
+import java.awt.Color;
 
-    private int color;
+public class ColorEntity implements com.domain.simulation.entities.alive.qualities.color.Color {
+
+    private Color color;
 
     public ColorEntity(int red, int green, int blue) {
         setColor(red, green, blue);
     }
 
-    @Override
-    public String toHexFormat() {
-        return String.format("#%08x", color);
-    }
-
-    @Override
-    public void incrementColor(int redIncrement, int greenIncrement, int blueIncrement) {
-        setColor(
-                (color >>> 24 & 255) + redIncrement,
-                (color >>> 16 & 255) + greenIncrement,
-                (color >>> 8 & 255) + blueIncrement
-        );
-    }
-
     public void setColor(int red, int green, int blue) {
-        color = 255;
-        color += validateColorParameter(red) << 24;
-        color += validateColorParameter(green) << 16;
-        color += validateColorParameter(blue) << 8;
+        var r = validateColorParameter(red);
+        var g = validateColorParameter(green);
+        var b = validateColorParameter(blue);
+        if (color == null || r != color.getRed() || g != color.getGreen() || b != color.getBlue()) {
+            color = new Color(r, g, b);
+        }
     }
 
     private int validateColorParameter(int colorParameter) {
@@ -35,5 +25,24 @@ public class ColorEntity implements Color {
         } else {
             return Math.min(colorParameter, 255);
         }
+    }
+
+    @Override
+    public String toHexFormat() {
+        return String.format("#%02x%02x%02x", color.getRed(), color.getGreen(), color.getBlue());
+    }
+
+    @Override
+    public void incrementColor(int redIncrement, int greenIncrement, int blueIncrement) {
+        setColor(
+                color.getRed() + redIncrement,
+                color.getGreen() + greenIncrement,
+                color.getBlue() + blueIncrement
+        );
+    }
+
+    @Override
+    public Color color() {
+        return color;
     }
 }
