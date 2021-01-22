@@ -4,7 +4,7 @@ import com.domain.simulation.entities.alive.Alive;
 import com.domain.simulation.entities.alive.Mortal;
 import com.domain.simulation.entities.alive.qualities.energy.Energy;
 
-public interface EnergyAlive extends Energy {
+public interface EnergyMortal extends Energy {
 
     void subscribeMortal(Mortal mortal);
 

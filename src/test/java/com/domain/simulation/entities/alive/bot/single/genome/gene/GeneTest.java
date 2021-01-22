@@ -3,8 +3,8 @@ package com.domain.simulation.entities.alive.bot.single.genome.gene;
 import com.domain.simulation.entities.alive.bot.Bot;
 import com.domain.simulation.entities.alive.bot.single.BotSingle;
 import com.domain.simulation.entities.alive.bot.single.direction.BotLookDirection;
-import com.domain.simulation.entities.alive.bot.single.energy.EnergyAlive;
-import com.domain.simulation.entities.alive.bot.single.energy.EnergyAliveAlive;
+import com.domain.simulation.entities.alive.bot.single.energy.EnergyAliveMortal;
+import com.domain.simulation.entities.alive.bot.single.energy.EnergyMortal;
 import com.domain.simulation.entities.alive.bot.single.genome.Genome;
 import com.domain.simulation.entities.alive.qualities.position.Position;
 import com.domain.simulation.entities.alive.qualities.position.PositionEntity;
@@ -22,15 +22,15 @@ public abstract class GeneTest {
     protected MatrixEntities matrixEntities = field.getCellsMatrix();
     protected Gene gene;
 
-    protected EnergyAlive energyAliveMock = mock(EnergyAlive.class);
+    protected EnergyMortal energyMortalMock = mock(EnergyMortal.class);
     protected Position positionMock = mock(Position.class);
     protected Genome genomeMock = mock(Genome.class);
 
     protected Bot botSpy = spy(new BotSingle(field, new PositionEntity(1, 1),
-            new EnergyAliveAlive(0), new BotLookDirection(0), genomeMock));
+            new EnergyAliveMortal(0), new BotLookDirection(0), genomeMock));
 
     protected Bot botMock = spy(new BotSingle(field, positionMock,
-            energyAliveMock, new BotLookDirection(0), genomeMock));
+            energyMortalMock, new BotLookDirection(0), genomeMock));
 
     public GeneTest(Gene gene) {
         this.gene = gene;
@@ -55,6 +55,6 @@ public abstract class GeneTest {
 
         gene.run(botMock);
 
-        verify(energyAliveMock, atLeastOnce()).incrementEnergyValue(anyInt());
+        verify(energyMortalMock, atLeastOnce()).incrementEnergyValue(anyInt());
     }
 }

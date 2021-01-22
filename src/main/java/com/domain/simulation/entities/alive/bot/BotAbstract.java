@@ -3,8 +3,8 @@ package com.domain.simulation.entities.alive.bot;
 import com.domain.simulation.WorldConstants;
 import com.domain.simulation.entities.alive.EntityAlive;
 import com.domain.simulation.entities.alive.bot.single.BotSingle;
-import com.domain.simulation.entities.alive.bot.single.energy.EnergyAlive;
-import com.domain.simulation.entities.alive.bot.single.energy.EnergyAliveAlive;
+import com.domain.simulation.entities.alive.bot.single.energy.EnergyAliveMortal;
+import com.domain.simulation.entities.alive.bot.single.energy.EnergyMortal;
 import com.domain.simulation.entities.alive.bot.single.genome.Genome;
 import com.domain.simulation.entities.alive.qualities.color.ColorEntity;
 import com.domain.simulation.entities.alive.qualities.direction.LookDirection;
@@ -28,7 +28,7 @@ public class BotAbstract extends EntityAlive implements Bot {
 
     protected boolean isAlive = true;
 
-    public BotAbstract(Field field, Position position, EnergyAlive energy, LookDirection lookDirection, Genome genome) {
+    public BotAbstract(Field field, Position position, EnergyMortal energy, LookDirection lookDirection, Genome genome) {
         super(position, energy, new ColorEntity(0, 0, 0));
 
         this.field = field;
@@ -80,7 +80,7 @@ public class BotAbstract extends EntityAlive implements Bot {
         }
         energy.setEnergyValue(energy.getEnergyValue() - genome.length() * WorldConstants.GENE_REPLICATION_COST);
         var newBotEnergyValue = energy.getEnergyValue() >> 1;
-        var newBotEnergy = new EnergyAliveAlive(newBotEnergyValue);
+        var newBotEnergy = new EnergyAliveMortal(newBotEnergyValue);
         energy.setEnergyValue(newBotEnergyValue);
 
         var newBot = new BotSingle(field, newBotPos, newBotEnergy,

@@ -20,13 +20,6 @@ public class GoTest extends GeneTest {
         super(new GoGeneFactory().create(0, 0));
     }
 
-    private void setup(int x, int y, int lookDirNum) {
-
-        botSpy = spy(new BotSingle(field, new PositionEntity(x, y), energyAliveMock, new BotLookDirection(lookDirNum), genomeMock));
-        field.getCellsMatrix().put(botSpy);
-    }
-
-
     @Test
     public void isGoingRight() {
 
@@ -35,6 +28,12 @@ public class GoTest extends GeneTest {
         gene.run(botSpy);
 
         Assertions.assertEquals(new PositionEntity(2, 1), botSpy.getPosition());
+    }
+
+    private void setup(int x, int y, int lookDirNum) {
+
+        botSpy = spy(new BotSingle(field, new PositionEntity(x, y), energyMortalMock, new BotLookDirection(lookDirNum), genomeMock));
+        field.getCellsMatrix().put(botSpy);
     }
 
     @Test

@@ -4,7 +4,7 @@ import com.domain.simulation.WorldConstants;
 import com.domain.simulation.entities.alive.bot.Bot;
 import com.domain.simulation.entities.alive.bot.single.BotSingle;
 import com.domain.simulation.entities.alive.bot.single.direction.BotLookDirection;
-import com.domain.simulation.entities.alive.bot.single.energy.EnergyAlive;
+import com.domain.simulation.entities.alive.bot.single.energy.EnergyMortal;
 import com.domain.simulation.entities.alive.bot.single.genome.Genome;
 import com.domain.simulation.entities.alive.qualities.direction.LookDirection;
 import com.domain.simulation.entities.alive.qualities.position.Position;
@@ -29,18 +29,7 @@ class BotSingleTest {
     Genome genomeMock = mock(Genome.class);
 
     @Mock
-    EnergyAlive energyMock = mock(EnergyAlive.class);
-
-    private Bot getBotSpy(Genome genome) {
-        Bot bot = spy(new BotSingle(field, botPos, energyMock, botLookDir, genome));
-        field.getCellsMatrix().put(bot);
-        return bot;
-    }
-
-    private Bot getBotSpy() {
-        return getBotSpy(genomeMock);
-    }
-
+    EnergyMortal energyMock = mock(EnergyMortal.class);
 
     @Test
     void createsNewBotDuringReplication() {
@@ -50,6 +39,16 @@ class BotSingleTest {
         Assertions.assertTrue(field.getCellsMatrix().get(new PositionEntity(1, 0)) instanceof Bot);
         bot.replicate();
         Assertions.assertFalse(bot.isAlive());
+    }
+
+    private Bot getBotSpy() {
+        return getBotSpy(genomeMock);
+    }
+
+    private Bot getBotSpy(Genome genome) {
+        Bot bot = spy(new BotSingle(field, botPos, energyMock, botLookDir, genome));
+        field.getCellsMatrix().put(bot);
+        return bot;
     }
 
     @Test

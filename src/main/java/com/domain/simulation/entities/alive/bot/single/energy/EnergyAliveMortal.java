@@ -4,11 +4,11 @@ import com.domain.simulation.WorldConstants;
 import com.domain.simulation.entities.alive.Mortal;
 import com.domain.simulation.entities.alive.qualities.energy.EnergyEntity;
 
-public class EnergyAliveAlive extends EnergyEntity implements EnergyAlive {
+public class EnergyAliveMortal extends EnergyEntity implements EnergyMortal {
 
     private Mortal mortal;
 
-    public EnergyAliveAlive(int energyValue) {
+    public EnergyAliveMortal(int energyValue) {
         super(energyValue);
     }
 
