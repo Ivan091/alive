@@ -90,6 +90,7 @@ public class BotAbstract extends EntityAlive implements Bot {
 
         var newBot = new BotSingle(field, newBotPos, newBotEnergy,
                 lookDirection.opposite(), genome.replicate());
+        field.putEntity(newBot);
     }
 
     @Override
