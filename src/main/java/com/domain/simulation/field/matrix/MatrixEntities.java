@@ -16,7 +16,7 @@ public interface MatrixEntities {
     List<Position> findEmptyPositionsAround(Position pos);
 
     /**
-     * @param pos position of a cell on the field.
+     * @param pos position of a cell on the matrixEntities.
      * @return entity in the cell at the position.
      */
     Entity get(Position pos);
@@ -30,7 +30,7 @@ public interface MatrixEntities {
     /**
      * Makes the position {@link Empty}
      *
-     * @param pos position of a cell on field.
+     * @param pos position of a cell on matrixEntities.
      * @return the entity, which was in the position before pulling.
      * @see Entity
      * @see Empty
@@ -39,7 +39,7 @@ public interface MatrixEntities {
 
 
     /**
-     * @param pos checking position on field
+     * @param pos checking position on matrixEntities
      * @return <b>true</b> if the {@link Entity} in the position is instance of {@link Empty} and
      * <b>false</b> if not.
      * @see Entity

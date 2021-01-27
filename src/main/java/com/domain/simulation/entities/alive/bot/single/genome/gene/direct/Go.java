@@ -9,7 +9,7 @@ public class Go extends DirectGene {
     public boolean run(Bot bot) {
 
         bot.observedPos().ifPresent(newPos -> {
-            var cells = bot.field().cellsMatrix();
+            var cells = bot.matrixEntities();
             if (cells.isEmpty(newPos)) {
                 cells.pull(bot.position());
                 bot.relocate(newPos);

@@ -50,6 +50,22 @@ public class FieldLive implements Field {
         }
     }
 
+    @Override
+    public int aliveEntitiesCount() {
+        return aliveEntities.size() + entitiesPutThisTurn.size();
+    }
+
+    @Override
+    public int width() {
+        return matrixEntities.getWidth();
+    }
+
+    @Override
+    public int height() {
+
+        return matrixEntities.getHeight();
+    }
+
     /**
      * Puts entity into {@link #matrixEntities} and pushes it in {@link #entitiesPutThisTurn}
      *
@@ -65,21 +81,5 @@ public class FieldLive implements Field {
     public MatrixEntities cellsMatrix() {
 
         return matrixEntities;
-    }
-
-    @Override
-    public int aliveEntitiesCount() {
-        return aliveEntities.size() + entitiesPutThisTurn.size();
-    }
-
-    @Override
-    public int width() {
-        return matrixEntities.getWidth();
-    }
-
-    @Override
-    public int height() {
-
-        return matrixEntities.getHeight();
     }
 }

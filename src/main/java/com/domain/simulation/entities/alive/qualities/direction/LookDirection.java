@@ -1,6 +1,6 @@
 package com.domain.simulation.entities.alive.qualities.direction;
 
-import com.domain.simulation.entities.alive.bot.single.genome.Replicable;
+import com.domain.simulation.entities.alive.Replicable;
 import com.domain.simulation.entities.alive.qualities.position.Position;
 
 public interface LookDirection extends Replicable<LookDirection> {

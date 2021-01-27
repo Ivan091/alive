@@ -14,7 +14,7 @@ public final class WorldConstants {
 
 
     /**
-     * When bot dies he leave it's dead body on the field. The body is eatable entity.
+     * When bot dies he leave it's dead body on the matrixEntities. The body is eatable entity.
      * If another bot eats the dried body, it get the value as additional reward.
      */
     public static final int DRIED_BODY_ENERGY_VALUE = 300;

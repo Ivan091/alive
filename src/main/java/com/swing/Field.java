@@ -12,12 +12,13 @@ import java.util.stream.IntStream;
 
 public class Field extends Canvas {
 
-    Simulation simulation = new SimulationLive(new FieldLive(480, 251));
+    Simulation simulation = new SimulationLive(new FieldLive(320, 167));
 
     public static void main(String[] args) {
         JFrame frame = new JFrame();
         var c = new Field();
         frame.add(c);
+        c.setBackground(Color.BLACK);
         frame.setBackground(Color.BLACK);
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.pack();
@@ -45,7 +46,7 @@ public class Field extends Canvas {
             for (var j = 0; j < xLen; j++) {
                 var entity = ent[i][j];
                 g.setColor(entity.color());
-                g.fillRect(j * 4, i * 4, 4, 4);
+                g.fillRect(j * 6, i * 6, 6, 6);
             }
         }
     }

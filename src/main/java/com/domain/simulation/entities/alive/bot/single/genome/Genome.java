@@ -1,5 +1,6 @@
 package com.domain.simulation.entities.alive.bot.single.genome;
 
+import com.domain.simulation.entities.alive.Replicable;
 import com.domain.simulation.entities.alive.bot.Bot;
 import com.domain.simulation.entities.alive.bot.single.genome.gene.Gene;
 
@@ -17,7 +18,7 @@ public interface Genome extends Replicable<Genome> {
 
     boolean isFriendly(Genome genome);
 
-    Gene[] getGenes();
-
     int length();
+
+    Gene[] getGenes();
 }

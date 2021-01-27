@@ -1,4 +1,4 @@
-package com.domain.simulation.entities.alive.bot.single.genome;
+package com.domain.simulation.entities.alive;
 
 /**
  * Implemented by each class that is replicated during the replication of the bot.

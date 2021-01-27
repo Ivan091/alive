@@ -1,7 +1,7 @@
 package com.domain.simulation.entities.alive.bot.single.genome.gene;
 
+import com.domain.simulation.entities.alive.Replicable;
 import com.domain.simulation.entities.alive.bot.Bot;
-import com.domain.simulation.entities.alive.bot.single.genome.Replicable;
 
 public interface Gene extends Replicable<Gene> {
 

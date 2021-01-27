@@ -4,7 +4,7 @@ import com.domain.simulation.entities.alive.Alive;
 import com.domain.simulation.entities.alive.bot.single.genome.Genome;
 import com.domain.simulation.entities.alive.qualities.direction.LookDirection;
 import com.domain.simulation.entities.alive.qualities.position.Position;
-import com.domain.simulation.field.Field;
+import com.domain.simulation.field.matrix.MatrixEntities;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -15,7 +15,7 @@ public interface Bot extends Alive {
     boolean isFriendly(Bot bot);
 
     @JsonBackReference
-    Field field();
+    MatrixEntities matrixEntities();
 
     @JsonIgnore
     Genome genome();
