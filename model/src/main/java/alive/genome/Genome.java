@@ -1,5 +1,5 @@
 package alive.genome;
 
-public interface Genome {
+public interface Genome extends Mutable<Genome> {
 
 }
