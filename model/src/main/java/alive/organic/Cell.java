@@ -1,22 +1,21 @@
-package alive.organic.bot;
+package alive.organic;
 
-import alive.Healable;
 import alive.field.Field;
 import alive.field.PositionCartesian;
-import alive.organic.Alive;
-import alive.organic.Movable;
+import alive.organic.health.HealthOrganic;
 import java.util.function.Function;
 
 
-public class Bot implements Alive, Movable {
+public class Cell implements Alive, Movable {
 
     private final Field field;
 
-    private final Healable health;
+    private final HealthOrganic health;
 
-    private PositionCartesian position;
+    private final PositionCartesian position;
 
-    public Bot(Field field, Healable health, PositionCartesian position) {
+    public Cell(Field field, HealthOrganic health, PositionCartesian position) {
+        health.subscribe(this);
         this.field = field;
         this.health = health;
         this.position = position;
@@ -24,9 +23,7 @@ public class Bot implements Alive, Movable {
 
     @Override
     public void relocate(PositionCartesian newPosition) {
-        if (field.relocate(position, newPosition)) {
-            position = newPosition;
-        }
+        field.relocate(position, newPosition);
     }
 
     @Override

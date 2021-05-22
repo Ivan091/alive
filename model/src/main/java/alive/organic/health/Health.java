@@ -1,6 +1,5 @@
-package alive.organic;
+package alive.organic.health;
 
-import alive.Healable;
 import java.util.function.Function;
 
 

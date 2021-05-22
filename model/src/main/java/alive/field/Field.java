@@ -5,11 +5,11 @@ import alive.Entity;
 
 public interface Field {
 
-    Entity get(PositionCartesian position);
+    Entity search(PositionCartesian position);
 
-    boolean place(Entity entity, PositionCartesian position);
+    void place(Entity entity, PositionCartesian position);
 
-    boolean relocate(PositionCartesian oldPosition, PositionCartesian newPosition);
+    void relocate(PositionCartesian oldPosition, PositionCartesian newPosition);
 
     boolean isInBounds(PositionCartesian position);
 }

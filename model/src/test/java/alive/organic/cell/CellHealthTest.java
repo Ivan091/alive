@@ -1,12 +1,12 @@
-package alive.organic.bot;
+package alive.organic.cell;
 
-import alive.organic.Health;
+import alive.organic.health.Health;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
-class BotHealthTest {
+class CellHealthTest {
 
     Health health = new Health(100);
 
