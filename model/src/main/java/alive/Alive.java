@@ -1,5 +1,5 @@
 package alive;
 
-public interface Alive extends Mortal, Reproducible, Healable {
+public interface Alive extends Entity, Mortal, Reproducible, Healable, Movable {
 
 }
