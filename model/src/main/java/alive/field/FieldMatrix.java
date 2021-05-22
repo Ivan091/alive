@@ -14,23 +14,28 @@ public class FieldMatrix implements Field {
     }
 
     @Override
-    public Entity search(PositionCartesian position) {
+    public Entity search(Position position) {
         return entities[position.y()][position.x()];
     }
 
     @Override
-    public void place(Entity entity, PositionCartesian position) {
+    public void place(Entity entity, Position position) {
         entities[position.y()][position.x()] = entity;
     }
 
     @Override
-    public void relocate(PositionCartesian oldPosition, PositionCartesian newPosition) {
+    public void relocate(Position oldPosition, Position newPosition) {
         place(search(oldPosition), newPosition);
         place(hollow, oldPosition);
     }
 
     @Override
-    public boolean isInBounds(PositionCartesian position) {
+    public boolean isInBounds(Position position) {
         return position.x() >= 0 && position.x() < entities[0].length && position.y() >= 0 && position.y() < entities.length;
+    }
+
+    @Override
+    public boolean isHollow(Position position) {
+        return isInBounds(position) && search(position).equals(hollow);
     }
 }

@@ -4,6 +4,6 @@ import alive.Observer;
 import alive.organic.Organic;
 
 
-public interface HealthOrganic extends Observer<Organic>, Healable {
+public interface HealableObserver extends Observer<Organic>, Healable {
 
 }

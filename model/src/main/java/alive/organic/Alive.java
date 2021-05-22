@@ -3,7 +3,6 @@ package alive.organic;
 import alive.Entity;
 
 
-public interface Alive extends Entity, Organic {
+public interface Alive extends Entity, Organic, Movable {
 
-    void makeAMove();
 }

@@ -1,8 +1,8 @@
 package alive.field;
 
-import alive.Copiable;
+public interface Position {
 
+    int x();
 
-public interface Position<T> extends Copiable<T> {
-
+    int y();
 }

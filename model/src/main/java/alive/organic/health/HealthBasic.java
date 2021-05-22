@@ -3,11 +3,11 @@ package alive.organic.health;
 import java.util.function.Function;
 
 
-public class Health implements Healable {
+public class HealthBasic implements Healable {
 
     Integer health;
 
-    public Health(Integer initHealth) {
+    public HealthBasic(Integer initHealth) {
         health = initHealth;
     }
 

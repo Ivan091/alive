@@ -1,16 +1,18 @@
-package alive.organic.health;
+package alive.organic.cell;
 
 import alive.organic.Organic;
+import alive.organic.health.Healable;
+import alive.organic.health.HealableObserver;
 import java.util.function.Function;
 
 
-public class HealthCell implements HealthOrganic {
+public class CellHealth implements HealableObserver {
 
     private final Healable health;
 
     private Organic organic;
 
-    public HealthCell(Healable health) {
+    public CellHealth(Healable health) {
         this.health = health;
     }
 
