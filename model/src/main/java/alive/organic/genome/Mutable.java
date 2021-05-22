@@ -1,4 +1,4 @@
-package alive.genome;
+package alive.organic.genome;
 
 public interface Mutable<T> {
 

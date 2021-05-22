@@ -1,6 +1,6 @@
-package alive.genome;
+package alive.organic.genome;
 
-import alive.Alive;
+import alive.organic.Alive;
 
 
 public interface Gene {

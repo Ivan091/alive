@@ -1,4 +1,4 @@
-package alive.bot;
+package alive.organic;
 
 import alive.Healable;
 import java.util.function.Function;

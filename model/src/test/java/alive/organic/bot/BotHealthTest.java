@@ -1,5 +1,6 @@
-package alive.bot;
+package alive.organic.bot;
 
+import alive.organic.Health;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
