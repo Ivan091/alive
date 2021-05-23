@@ -1,6 +1,8 @@
-package alive.field;
+package alive.field.matrix;
 
 import alive.Entity;
+import alive.field.Field;
+import alive.field.Position;
 
 
 public class FieldMatrix implements Field {

@@ -3,7 +3,7 @@ package alive.organic.health;
 import java.util.function.Function;
 
 
-public class HealthBasic implements Healable {
+public class HealthBasic implements Health {
 
     Integer health;
 

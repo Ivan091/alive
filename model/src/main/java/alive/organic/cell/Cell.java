@@ -1,21 +1,21 @@
 package alive.organic.cell;
 
+import alive.config.HealthFactory;
 import alive.organic.Alive;
-import alive.organic.Navigable;
-import alive.organic.health.HealableObserver;
+import alive.organic.Navigator;
+import alive.organic.health.Health;
 import java.util.function.Function;
 
 
-public class Cell implements Alive, Navigable {
+public class Cell implements Alive, Navigator {
 
-    private final Navigable navigator;
+    private final Navigator navigator;
 
-    private final HealableObserver health;
+    private final Health health;
 
-    public Cell(Navigable navigator, HealableObserver health) {
+    public Cell(Navigator navigator, HealthFactory health) {
+        this.health = health.createCellHealth(100, this);
         this.navigator = navigator;
-        health.subscribe(this);
-        this.health = health;
     }
 
     @Override

@@ -1,9 +1,9 @@
-package alive.field;
+package alive.field.matrix;
 
-import alive.organic.Navigable;
+import alive.field.*;
 
 
-public class Navigator implements Navigable {
+public class Navigator implements alive.organic.Navigator {
 
     private final Field field;
 

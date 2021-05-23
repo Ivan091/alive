@@ -1,6 +1,6 @@
 package alive.organic;
 
-public interface Navigable {
+public interface Navigator {
 
     void goAhead();
 

@@ -1,4 +1,7 @@
-package alive.field;
+package alive.field.matrix;
+
+import alive.field.Position;
+
 
 public class PositionMatrix implements Position {
 

@@ -1,10 +1,13 @@
-package alive.field;
+package alive.field.matrix;
+
+import alive.field.*;
+
 
 public class DirectionInspectorMatrix implements DirectionInspector {
 
     private final DirectionModifier directionModifier;
 
-    int directionIdx;
+    private int directionIdx;
 
     public DirectionInspectorMatrix(int directionIdx, DirectionModifier directionModifier) {
         this.directionIdx = directionIdx;

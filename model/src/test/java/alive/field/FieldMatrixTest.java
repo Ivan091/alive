@@ -1,5 +1,7 @@
 package alive.field;
 
+import alive.field.matrix.FieldMatrix;
+import alive.field.matrix.PositionMatrix;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
