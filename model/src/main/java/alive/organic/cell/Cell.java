@@ -1,8 +1,8 @@
 package alive.organic.cell;
 
-import alive.config.HealthFactory;
+import alive.factories.ObserverFactory;
 import alive.organic.Alive;
-import alive.organic.Navigator;
+import alive.organic.Organic;
 import alive.organic.health.Health;
 import java.util.function.Function;
 
@@ -13,8 +13,8 @@ public class Cell implements Alive, Navigator {
 
     private final Health health;
 
-    public Cell(Navigator navigator, HealthFactory health) {
-        this.health = health.createCellHealth(100, this);
+    public Cell(Navigator navigator, ObserverFactory<Health, Organic> healthFactory) {
+        this.health = healthFactory.create(this);
         this.navigator = navigator;
     }
 
@@ -30,6 +30,12 @@ public class Cell implements Alive, Navigator {
 
     @Override
     public void die() {
+        navigator.die();
+    }
+
+    @Override
+    public boolean isAlive() {
+        return navigator.isAlive();
     }
 
     @Override

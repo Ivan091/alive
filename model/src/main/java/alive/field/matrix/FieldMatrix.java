@@ -38,6 +38,11 @@ public class FieldMatrix implements Field {
     }
 
     @Override
+    public void erase(Position position) {
+        place(hollow, position);
+    }
+
+    @Override
     public boolean isInBounds(Position position) {
         return position.x() >= 0 && position.x() < entities[0].length && position.y() >= 0 && position.y() < entities.length;
     }

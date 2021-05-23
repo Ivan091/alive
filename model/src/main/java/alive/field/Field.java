@@ -11,6 +11,8 @@ public interface Field {
 
     void relocate(Position oldPosition, Position newPosition);
 
+    void erase(Position position);
+
     boolean isInBounds(Position position);
 
     boolean isHollow(Position position);

@@ -1,4 +1,4 @@
-package alive;
+package alive.factories;
 
 public interface Factory<T> {
 
