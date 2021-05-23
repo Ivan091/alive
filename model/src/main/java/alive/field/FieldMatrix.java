@@ -5,12 +5,18 @@ import alive.Entity;
 
 public class FieldMatrix implements Field {
 
-    Entity[][] entities;
+    private final Entity[][] entities;
 
-    Hollow hollow = new Hollow();
+    private final Entity hollow;
 
-    public FieldMatrix(int width, int height) {
-        entities = new Entity[height][width];
+    public FieldMatrix(int width, int height, Entity hollow) {
+        this.hollow = hollow;
+        this.entities = new Entity[height][width];
+        for (int i = 0; i < entities.length; i++) {
+            for (int j = 0; j < entities[0].length; j++) {
+                entities[i][j] = hollow;
+            }
+        }
     }
 
     @Override

@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class FieldMatrixTest {
 
-    FieldMatrix fieldMatrix = new FieldMatrix(2, 2);
+    FieldMatrix fieldMatrix = new FieldMatrix(2, 2, null);
 
     @Test
     void checksIfIsInBounds() {
