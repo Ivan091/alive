@@ -1,6 +1,6 @@
-package alive.organic.cell;
+package alive.alive.cell;
 
-import alive.organic.health.HealthBasic;
+import alive.alive.health.HealthBasic;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

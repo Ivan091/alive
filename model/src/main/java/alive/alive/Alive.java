@@ -1,7 +1,6 @@
-package alive.organic;
+package alive.alive;
 
 import alive.Entity;
-import alive.organic.cell.Navigable;
 
 
 public interface Alive extends Entity, Organic, Movable, Navigable {

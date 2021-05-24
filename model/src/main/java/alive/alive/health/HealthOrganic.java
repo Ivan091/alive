@@ -1,7 +1,7 @@
-package alive.organic.health;
+package alive.alive.health;
 
 import alive.Observer;
-import alive.organic.Organic;
+import alive.alive.Organic;
 
 
 public interface HealthOrganic extends Observer<Organic>, Healable {

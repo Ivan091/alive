@@ -1,18 +1,19 @@
-package alive.organic.cell;
+package alive.alive.cell;
 
-import alive.organic.Alive;
-import alive.organic.health.Healable;
-import alive.organic.health.HealthOrganic;
+import alive.alive.Alive;
+import alive.alive.Navigable;
+import alive.alive.health.Healable;
+import alive.alive.health.HealthOrganic;
 import java.util.function.Function;
 
 
 public class Cell implements Alive {
 
-    private final Navigator navigator;
+    private final Navigable navigator;
 
     private final Healable health;
 
-    public Cell(Navigator navigator, HealthOrganic health) {
+    public Cell(Navigable navigator, HealthOrganic health) {
         health.subscribe(this);
         this.health = health;
         this.navigator = navigator;

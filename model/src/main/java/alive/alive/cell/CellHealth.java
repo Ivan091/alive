@@ -1,8 +1,8 @@
-package alive.organic.cell;
+package alive.alive.cell;
 
 import alive.Observer;
-import alive.organic.Organic;
-import alive.organic.health.Healable;
+import alive.alive.Organic;
+import alive.alive.health.Healable;
 import java.util.function.Function;
 
 

@@ -1,4 +1,4 @@
-package alive.organic;
+package alive.alive;
 
 public interface Mortal {
 

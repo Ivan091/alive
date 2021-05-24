@@ -1,9 +1,10 @@
-package alive.organic.cell;
+package alive.alive.cell;
 
+import alive.alive.Navigable;
 import alive.field.*;
 
 
-public class NavigatorMatrix implements Navigator {
+public class NavigatorMatrix implements Navigable {
 
     private final Field field;
 
