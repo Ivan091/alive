@@ -1,7 +1,6 @@
-package alive.field.matrix;
+package alive.organic.cell;
 
 import alive.field.*;
-import alive.organic.cell.Navigator;
 
 
 public class NavigatorMatrix implements Navigator {

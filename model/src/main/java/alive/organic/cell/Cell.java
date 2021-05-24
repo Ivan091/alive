@@ -1,20 +1,20 @@
 package alive.organic.cell;
 
-import alive.factories.ObserverFactory;
 import alive.organic.Alive;
-import alive.organic.Organic;
-import alive.organic.health.Health;
+import alive.organic.health.Healable;
+import alive.organic.health.HealthOrganic;
 import java.util.function.Function;
 
 
-public class Cell implements Alive, Navigator {
+public class Cell implements Alive {
 
     private final Navigator navigator;
 
-    private final Health health;
+    private final Healable health;
 
-    public Cell(Navigator navigator, ObserverFactory<Health, Organic> healthFactory) {
-        this.health = healthFactory.create(this);
+    public Cell(Navigator navigator, HealthOrganic health) {
+        health.subscribe(this);
+        this.health = health;
         this.navigator = navigator;
     }
 
@@ -39,11 +39,12 @@ public class Cell implements Alive, Navigator {
     }
 
     @Override
-    public void makeAMove() {
+    public Void reproduce() {
+        return null;
     }
 
     @Override
-    public void reproduce() {
+    public void makeAMove() {
     }
 
     @Override

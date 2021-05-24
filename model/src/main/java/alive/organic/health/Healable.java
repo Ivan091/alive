@@ -3,7 +3,7 @@ package alive.organic.health;
 import java.util.function.Function;
 
 
-public interface Health {
+public interface Healable {
 
     void heal(Function<Integer, Integer> healthModifier);
 

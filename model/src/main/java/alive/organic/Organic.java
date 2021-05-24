@@ -1,8 +1,8 @@
 package alive.organic;
 
-import alive.organic.health.Health;
+import alive.organic.health.Healable;
 
 
-public interface Organic extends Mortal, Reproducible, Health {
+public interface Organic extends Mortal, Reproducible<Void>, Healable {
 
 }

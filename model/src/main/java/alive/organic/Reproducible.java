@@ -1,6 +1,6 @@
 package alive.organic;
 
-public interface Reproducible {
+public interface Reproducible<T> {
 
-    void reproduce();
+    T reproduce();
 }

@@ -1,17 +1,18 @@
 package alive.organic.cell;
 
+import alive.Observer;
 import alive.organic.Organic;
-import alive.organic.health.Health;
+import alive.organic.health.Healable;
 import java.util.function.Function;
 
 
-public class CellHealth implements Health {
+public class CellHealth implements Observer<Organic>, Healable {
 
-    private final Health health;
+    private final Healable health;
 
-    private final Organic organic;
+    private Organic organic;
 
-    public CellHealth(Health health, Organic organicOwner) {
+    public CellHealth(Healable health, Organic organicOwner) {
         this.health = health;
         this.organic = organicOwner;
     }
@@ -29,5 +30,10 @@ public class CellHealth implements Health {
     @Override
     public Integer health() {
         return health.health();
+    }
+
+    @Override
+    public void subscribe(Organic observed) {
+        organic = observed;
     }
 }
