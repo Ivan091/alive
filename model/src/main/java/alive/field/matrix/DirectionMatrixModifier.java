@@ -26,4 +26,9 @@ public class DirectionMatrixModifier implements DirectionModifier {
     public Position modify(Position position, int index) {
         return modifiers.get(index).apply(position);
     }
+
+    @Override
+    public DirectionModifier reproduce() {
+        return this;
+    }
 }

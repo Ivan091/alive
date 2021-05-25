@@ -1,6 +1,7 @@
 package alive.field;
 
 import alive.Entity;
+import java.util.List;
 
 
 public interface Field {
@@ -16,4 +17,6 @@ public interface Field {
     boolean isInBounds(Position position);
 
     boolean isHollow(Position position);
+
+    List<Position> searchHollowAround(Position position);
 }

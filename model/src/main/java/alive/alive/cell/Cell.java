@@ -1,22 +1,26 @@
 package alive.alive.cell;
 
 import alive.alive.Alive;
-import alive.alive.Navigable;
-import alive.alive.health.Healable;
+import alive.alive.Navigator;
+import alive.alive.genome.Genome;
 import alive.alive.health.HealthOrganic;
 import java.util.function.Function;
 
 
 public class Cell implements Alive {
 
-    private final Navigable navigator;
+    private final Navigator navigator;
 
-    private final Healable health;
+    private final HealthOrganic health;
 
-    public Cell(Navigable navigator, HealthOrganic health) {
-        health.subscribe(this);
+    private final Genome genome;
+
+    public Cell(Navigator navigator, HealthOrganic health, Genome genome) {
+        this.genome = genome;
         this.health = health;
+        health.subscribe(this);
         this.navigator = navigator;
+        navigator.subscribe(this);
     }
 
     @Override
@@ -31,17 +35,11 @@ public class Cell implements Alive {
 
     @Override
     public void die() {
-        navigator.die();
+        navigator.subscribe();
     }
 
     @Override
-    public boolean isAlive() {
-        return navigator.isAlive();
-    }
-
-    @Override
-    public Void reproduce() {
-        return null;
+    public void reproduce() {
     }
 
     @Override

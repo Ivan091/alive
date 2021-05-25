@@ -3,12 +3,12 @@ package alive.alive.health;
 import java.util.function.Function;
 
 
-public class HealthBasic implements Healable {
+public class HealthBasic implements Health {
 
-    Integer health;
+    private Integer health;
 
-    public HealthBasic(Integer initHealth) {
-        health = initHealth;
+    public HealthBasic(Integer health) {
+        this.health = health;
     }
 
     @Override
@@ -19,5 +19,11 @@ public class HealthBasic implements Healable {
     @Override
     public Integer health() {
         return health;
+    }
+
+    @Override
+    public Health reproduce() {
+        health >>= 1;
+        return new HealthBasic(health);
     }
 }

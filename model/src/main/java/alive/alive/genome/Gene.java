@@ -5,5 +5,7 @@ import alive.alive.Alive;
 
 public interface Gene {
 
-    void affect(Alive alive);
+    void affect(Alive alive, Genome genome);
+
+    Gene reproduce();
 }

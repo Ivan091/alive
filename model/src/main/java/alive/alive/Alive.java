@@ -5,4 +5,5 @@ import alive.Entity;
 
 public interface Alive extends Entity, Organic, Movable, Navigable {
 
+    void reproduce();
 }

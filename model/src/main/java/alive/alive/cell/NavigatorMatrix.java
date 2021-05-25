@@ -1,10 +1,13 @@
 package alive.alive.cell;
 
-import alive.alive.Navigable;
+import alive.Entity;
+import alive.alive.Navigator;
 import alive.field.*;
+import java.util.Optional;
+import java.util.Random;
 
 
-public class NavigatorMatrix implements Navigable {
+public class NavigatorMatrix implements Navigator {
 
     private final Field field;
 
@@ -12,10 +15,9 @@ public class NavigatorMatrix implements Navigable {
 
     private Position position;
 
-    private boolean isAlive;
+    private Entity alive;
 
     public NavigatorMatrix(Field field, DirectionInspector directionInspector, Position position) {
-        isAlive = true;
         this.field = field;
         this.directionInspector = directionInspector;
         this.position = position;
@@ -36,13 +38,21 @@ public class NavigatorMatrix implements Navigable {
     }
 
     @Override
-    public void die() {
-        field.erase(position);
-        isAlive = false;
+    public Optional<Navigator> reproduce() {
+        var rnd = new Random();
+        var possiblePositions = field.searchHollowAround(position);
+        if (possiblePositions.isEmpty()) {
+            erase();
+            alive.die();
+            return Optional.empty();
+        } else {
+            var newPosition = possiblePositions.get(rnd.nextInt(possiblePositions.size()));
+            return Optional.of(new NavigatorMatrix(field, directionInspector.reproduce(), newPosition));
+        }
     }
 
     @Override
-    public boolean isAlive() {
-        return isAlive;
+    public void subscribe(Entity observed) {
+        alive = observed;
     }
 }

@@ -1,6 +1,6 @@
 package alive.alive;
 
-public interface Navigable extends Mortal {
+public interface Navigable {
 
     void goAhead();
 

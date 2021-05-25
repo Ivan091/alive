@@ -3,6 +3,8 @@ package alive.field.matrix;
 import alive.Entity;
 import alive.field.Field;
 import alive.field.Position;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class FieldMatrix implements Field {
@@ -50,5 +52,19 @@ public class FieldMatrix implements Field {
     @Override
     public boolean isHollow(Position position) {
         return isInBounds(position) && search(position).equals(hollow);
+    }
+
+    @Override
+    public List<Position> searchHollowAround(Position position) {
+        var result = new ArrayList<Position>();
+        for (int x = position.x() - 1; x <= position.x() + 1; x++) {
+            for (int y = position.y() - 1; y <= position.y() + 1; y++) {
+                var pos = new PositionMatrix(x, y);
+                if (isHollow(pos)) {
+                    result.add(pos);
+                }
+            }
+        }
+        return result;
     }
 }

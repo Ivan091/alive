@@ -1,6 +1,6 @@
 package alive.alive.genome;
 
-public interface Mutator {
+public interface Mutator<T> {
 
-    Genome mutate(Genome original);
+    T mutate(T original);
 }

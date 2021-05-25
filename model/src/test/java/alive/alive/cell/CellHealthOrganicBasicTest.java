@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
-class CellHealthBasicTest {
+class CellHealthOrganicBasicTest {
 
     HealthBasic healthBasic = new HealthBasic(100);
 
