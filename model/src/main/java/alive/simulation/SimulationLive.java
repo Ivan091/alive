@@ -1,13 +1,11 @@
 package alive.simulation;
 
 import alive.entity.Entity;
-import org.springframework.stereotype.Component;
 import java.util.LinkedList;
 import java.util.List;
 
 
-@Component
-public class SimulationLive implements Simulation, Field {
+public class SimulationLive implements SimulationField {
 
     private final Field field;
 
@@ -29,16 +27,30 @@ public class SimulationLive implements Simulation, Field {
 
     @Override
     public void update() {
-        for (Entity old : olds) {
-            old.makeAMoveIfAlive();
+        runOlds();
+        runNewComers();
+    }
+
+    private void runOlds() {
+        var it = olds.iterator();
+        while (it.hasNext()) {
+            var alive = it.next();
+            if (alive.isAlive()) {
+                alive.makeAMove();
+            } else {
+                it.remove();
+            }
         }
+    }
+
+    private void runNewComers() {
         var it = newcomers.iterator();
         while (it.hasNext()) {
-            var maybeAlive = it.next();
-            if (maybeAlive.isAlive()) {
-                maybeAlive.makeAMoveIfAlive();
+            var entity = it.next();
+            if (entity.isAlive()) {
+                entity.makeAMove();
+                olds.add(entity);
             }
-            olds.add(maybeAlive);
             it.remove();
         }
     }

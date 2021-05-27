@@ -2,7 +2,7 @@ package alive.entity;
 
 public interface Entity extends Visitable {
 
-    void makeAMoveIfAlive();
+    void makeAMove();
 
     boolean isAlive();
 }

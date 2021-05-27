@@ -10,22 +10,27 @@ public final class Cell implements Entity, Alive {
 
     private final Genome genome;
 
-    private Integer health;
+    private int health;
 
-    public Cell(Integer health, Navigator navigator, Genome genome) {
+    public Cell(Navigator navigator, Genome genome) {
+        this(500, navigator, genome);
+    }
+
+    public Cell(int health, Navigator navigator, Genome genome) {
         this.health = health;
         this.navigator = navigator;
+        navigator.register(this);
         this.genome = genome;
     }
 
     @Override
-    public void makeAMoveIfAlive() {
+    public void makeAMove() {
         genome.affect(this);
     }
 
     @Override
     public boolean isAlive() {
-        return navigator.isOnPosition(this);
+        return health > 0 && navigator.isOnPosition(this);
     }
 
     @Override

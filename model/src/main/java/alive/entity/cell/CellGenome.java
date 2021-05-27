@@ -3,18 +3,15 @@ package alive.entity.cell;
 import alive.entity.Alive;
 import alive.genome.Gene;
 import alive.genome.Genome;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Component;
 
 
-@Component
 public class CellGenome implements Genome {
 
     private final Gene[] genes;
 
     private int currentGeneIdx;
 
-    public CellGenome(@Qualifier("defaultGenes") Gene[] genes) {
+    public CellGenome(Gene[] genes) {
         this.genes = genes;
     }
 
@@ -28,6 +25,6 @@ public class CellGenome implements Genome {
 
     @Override
     public void incrementGeneIndex(int increment) {
-        currentGeneIdx = Math.floorMod(currentGeneIdx + increment, currentGeneIdx);
+        currentGeneIdx = Math.floorMod(currentGeneIdx + increment, genes.length);
     }
 }

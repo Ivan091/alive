@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.function.Function;
 
 
-public final class CellMatrixNavigator implements Navigator {
+public final class CellNavigator implements Navigator {
 
     private static final List<Function<Position, Position>> possibleDirs;
 
@@ -26,36 +26,46 @@ public final class CellMatrixNavigator implements Navigator {
 
     private final Field field;
 
-    private Position currentPos;
+    private Position pos;
 
     private int dirIdx;
 
-    public CellMatrixNavigator(Field field, Position currentPos) {
+    public CellNavigator(Field field, Position pos) {
+        this(field, pos, 0);
+    }
+
+    public CellNavigator(Field field, Position pos, int dirIdx) {
         this.field = field;
-        this.currentPos = currentPos;
+        this.pos = pos;
+        this.dirIdx = dirIdx;
     }
 
     @Override
     public void goAhead() {
-        var newPos = possibleDirs.get(dirIdx).apply(currentPos);
+        var newPos = possibleDirs.get(dirIdx).apply(pos);
         if (field.isEmpty(newPos)) {
-            field.relocate(currentPos, newPos);
-            currentPos = newPos;
+            field.relocate(pos, newPos);
+            pos = newPos;
         }
     }
 
     @Override
     public void rotate(int step) {
-        dirIdx = Math.floorMod(dirIdx + step, dirIdx);
+        dirIdx = Math.floorMod(dirIdx + step, possibleDirs.size());
     }
 
     @Override
     public void erase() {
-        field.empty(currentPos);
+        field.empty(pos);
+    }
+
+    @Override
+    public void register(Entity entity) {
+        field.place(entity, pos);
     }
 
     @Override
     public boolean isOnPosition(Entity entity) {
-        return field.search(currentPos).equals(entity);
+        return field.search(pos).equals(entity);
     }
 }

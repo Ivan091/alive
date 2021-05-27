@@ -8,5 +8,7 @@ public interface Navigator {
 
     void erase();
 
+    void register(Entity entity);
+
     boolean isOnPosition(Entity entity);
 }

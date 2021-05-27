@@ -9,16 +9,6 @@ public final class FieldMatrix implements Field {
 
     private final Entity empty;
 
-    public FieldMatrix(int height, int width) {
-        matrix = new Entity[height][width];
-        empty = new Empty();
-        for (var i = 0; i < matrix.length; i++) {
-            for (var j = 0; j < matrix[0].length; j++) {
-                matrix[i][j] = empty;
-            }
-        }
-    }
-
     public FieldMatrix(Entity[][] matrix, Entity empty) {
         this.matrix = matrix;
         this.empty = empty;
