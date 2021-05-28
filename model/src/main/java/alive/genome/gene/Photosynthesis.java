@@ -1,6 +1,7 @@
-package alive.genome;
+package alive.genome.gene;
 
 import alive.entity.Alive;
+import alive.genome.Genome;
 import org.springframework.stereotype.Component;
 
 
@@ -9,7 +10,7 @@ public final class Photosynthesis extends GeneBasic {
 
     @Override
     public void affect(Alive alive, Genome genome) {
-        alive.heal(10);
+        alive.heal(100);
         genome.incrementGeneIndex(1);
     }
 }

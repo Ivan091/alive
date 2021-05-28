@@ -2,6 +2,7 @@ package alive.entity.cell;
 
 import alive.entity.*;
 import alive.genome.Genome;
+import java.util.Random;
 
 
 public final class Cell implements Entity, Alive {
@@ -30,7 +31,7 @@ public final class Cell implements Entity, Alive {
 
     @Override
     public boolean isAlive() {
-        return health > 0 && navigator.isOnPosition(this);
+        return navigator.isOnPosition(this);
     }
 
     @Override
@@ -62,5 +63,15 @@ public final class Cell implements Entity, Alive {
 
     @Override
     public void replicate() {
+        var poss = navigator.findEmptyAround();
+        if (poss.size() == 0) {
+            die();
+            return;
+        }
+        var r = new Random();
+        health = (health * 9 / 10) >> 1;
+        var newPos = poss.get(r.nextInt(poss.size()));
+        var newNavigator = navigator.replicate(newPos);
+        newNavigator.register(new Cell(health, newNavigator, genome.replicate()));
     }
 }

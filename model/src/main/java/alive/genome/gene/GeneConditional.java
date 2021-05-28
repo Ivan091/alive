@@ -1,4 +1,4 @@
-package alive.genome;
+package alive.genome.gene;
 
 import java.util.Random;
 

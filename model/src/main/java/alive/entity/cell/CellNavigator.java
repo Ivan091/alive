@@ -3,6 +3,7 @@ package alive.entity.cell;
 import alive.entity.Entity;
 import alive.entity.Navigator;
 import alive.simulation.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 
@@ -60,6 +61,20 @@ public final class CellNavigator implements Navigator {
     }
 
     @Override
+    public List<Position> findEmptyAround() {
+        var oldDirIdx = dirIdx;
+        var possAround = new ArrayList<Position>(8);
+        do {
+            var possiblePos = possibleDirs.get(dirIdx).apply(pos);
+            if (field.isEmpty(possiblePos)) {
+                possAround.add(possiblePos);
+            }
+            rotate(1);
+        } while (oldDirIdx != dirIdx);
+        return possAround;
+    }
+
+    @Override
     public void register(Entity entity) {
         field.place(entity, pos);
     }
@@ -67,5 +82,10 @@ public final class CellNavigator implements Navigator {
     @Override
     public boolean isOnPosition(Entity entity) {
         return field.search(pos).equals(entity);
+    }
+
+    @Override
+    public Navigator replicate(Position position) {
+        return new CellNavigator(field, position);
     }
 }

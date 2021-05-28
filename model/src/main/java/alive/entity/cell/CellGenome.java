@@ -16,6 +16,11 @@ public class CellGenome implements Genome {
     }
 
     @Override
+    public Genome replicate() {
+        return this;
+    }
+
+    @Override
     public void affect(Alive alive) {
         alive.heal(-10);
         if (alive.isAlive()) {

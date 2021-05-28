@@ -1,5 +1,7 @@
-package alive.genome;
+package alive.genome.gene;
 
+import alive.genome.Gene;
+import alive.genome.Mutator;
 import org.springframework.stereotype.Component;
 import java.lang.reflect.Constructor;
 import java.util.*;
