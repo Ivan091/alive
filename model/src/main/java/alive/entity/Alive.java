@@ -1,16 +1,8 @@
 package alive.entity;
 
-public interface Alive extends Entity {
-
-    void die();
+public interface Alive extends Entity, Movable, Positionable, Organic {
 
     void replicate();
 
-    void goAhead();
-
-    void rotate(int step);
-
-    void heal(int healthIncrement);
-
-    int health();
+    void die();
 }

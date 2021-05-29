@@ -5,7 +5,7 @@ import alive.genome.Gene;
 import alive.genome.Genome;
 
 
-public class CellGenome implements Genome {
+public final class CellGenome implements Genome {
 
     private final Gene[] genes;
 
@@ -22,8 +22,8 @@ public class CellGenome implements Genome {
 
     @Override
     public void affect(Alive alive) {
-        alive.heal(-10);
-        if (alive.isAlive()) {
+        alive.heal(-5);
+        if (alive.isMoving()) {
             genes[currentGeneIdx].affect(alive, this);
         }
     }

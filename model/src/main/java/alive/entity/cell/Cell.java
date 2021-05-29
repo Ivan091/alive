@@ -2,10 +2,9 @@ package alive.entity.cell;
 
 import alive.entity.*;
 import alive.genome.Genome;
-import java.util.Random;
 
 
-public final class Cell implements Entity, Alive {
+public final class Cell implements Alive {
 
     private final Navigator navigator;
 
@@ -20,28 +19,18 @@ public final class Cell implements Entity, Alive {
     public Cell(int health, Navigator navigator, Genome genome) {
         this.health = health;
         this.navigator = navigator;
-        navigator.register(this);
         this.genome = genome;
     }
 
     @Override
     public void makeAMove() {
+        heal(-10);
         genome.affect(this);
     }
 
     @Override
-    public boolean isAlive() {
-        return navigator.isOnPosition(this);
-    }
-
-    @Override
-    public void goAhead() {
-        navigator.goAhead();
-    }
-
-    @Override
-    public void rotate(int step) {
-        navigator.rotate(step);
+    public boolean isMoving() {
+        return navigator.isRegistered(this);
     }
 
     @Override
@@ -52,26 +41,75 @@ public final class Cell implements Entity, Alive {
     }
 
     @Override
+    public void die() {
+        new CellDeadBody(health, navigator).register();
+    }
+
+    @Override
+    public void replicate() {
+        var newNavigator = navigator.replicate();
+        if (newNavigator.isEmpty()) {
+            die();
+            return;
+        }
+        health >>= 2;
+        new Cell(health, newNavigator.get(), genome.replicate()).register();
+    }
+
+    @Override
+    public void register() {
+        navigator.register(this);
+    }
+
+    @Override
+    public void unregister() {
+        navigator.unregister();
+    }
+
+    @Override
     public int health() {
         return health;
     }
 
     @Override
-    public void die() {
-        navigator.erase();
+    public void goAhead() {
+        navigator.goAhead(this);
     }
 
     @Override
-    public void replicate() {
-        var poss = navigator.findEmptyAround();
-        if (poss.size() == 0) {
-            die();
-            return;
+    public void rotate(int step) {
+        navigator.rotate(step);
+    }
+
+    private static class CellDeadBody implements Organic {
+
+        public final Navigator navigator;
+
+        public int health;
+
+        public CellDeadBody(int health, Navigator navigator) {
+            this.navigator = navigator;
         }
-        var r = new Random();
-        health = (health * 9 / 10) >> 1;
-        var newPos = poss.get(r.nextInt(poss.size()));
-        var newNavigator = navigator.replicate(newPos);
-        newNavigator.register(new Cell(health, newNavigator, genome.replicate()));
+
+        @Override
+        public void register() {
+            navigator.register(this);
+        }
+
+        @Override
+        public void heal(int healthIncrement) {
+            health += healthIncrement;
+            if (health <= 0) unregister();
+        }
+
+        @Override
+        public void unregister() {
+            navigator.unregister();
+        }
+
+        @Override
+        public int health() {
+            return health;
+        }
     }
 }

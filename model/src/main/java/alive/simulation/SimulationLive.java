@@ -1,17 +1,19 @@
 package alive.simulation;
 
-import alive.entity.Entity;
+import alive.entity.*;
 import java.util.LinkedList;
 import java.util.List;
 
 
-public class SimulationLive implements SimulationField {
+public final class SimulationLive implements SimulationField {
 
     private final Field field;
 
-    private final List<Entity> olds = new LinkedList<>();
+    private final List<Movable> olds = new LinkedList<>();
 
-    private final List<Entity> newcomers = new LinkedList<>();
+    private final List<Movable> newcomers = new LinkedList<>();
+
+    private final Visitor visitor = new AliveNewcomersVisitor(newcomers);
 
     public SimulationLive(Field field) {
         this.field = field;
@@ -19,48 +21,25 @@ public class SimulationLive implements SimulationField {
 
     @Override
     public void start() {
-        for (var i = 0; i < 1000; i++) {
+        for (var i = 0; i < 100000; i++) {
             update();
-            System.out.println(olds.size() + newcomers.size());
+            System.out.printf(" %s ", olds.size() + newcomers.size());
         }
     }
 
     @Override
     public void update() {
-        runOlds();
-        runNewComers();
-    }
-
-    private void runOlds() {
-        var it = olds.iterator();
-        while (it.hasNext()) {
-            var alive = it.next();
-            if (alive.isAlive()) {
-                alive.makeAMove();
-            } else {
-                it.remove();
-            }
-        }
-    }
-
-    private void runNewComers() {
-        var it = newcomers.iterator();
-        while (it.hasNext()) {
-            var entity = it.next();
-            if (entity.isAlive()) {
-                entity.makeAMove();
-                olds.add(entity);
-            }
-            it.remove();
-        }
+        olds.forEach(Movable::makeAMove);
+        newcomers.forEach(Movable::makeAMove);
+        olds.addAll(newcomers);
+        olds.removeIf(x -> !x.isMoving());
+        newcomers.clear();
     }
 
     @Override
     public void place(Entity entity, Position pos) {
         field.place(entity, pos);
-        if (entity.isAlive()) {
-            newcomers.add(entity);
-        }
+        entity.accept(visitor);
     }
 
     @Override
@@ -86,5 +65,15 @@ public class SimulationLive implements SimulationField {
     @Override
     public boolean isEmpty(Position pos) {
         return field.isEmpty(pos);
+    }
+
+    private record AliveNewcomersVisitor(List<Movable> newcomers) implements Visitor {
+
+        @Override
+        public void visit(Movable movable) {
+            if (movable.isMoving()) {
+                newcomers.add(movable);
+            }
+        }
     }
 }

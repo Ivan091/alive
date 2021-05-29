@@ -1,7 +1,7 @@
 package alive;
 
-import alive.entity.Alive;
 import alive.entity.Entity;
+import alive.entity.Movable;
 import alive.entity.cell.*;
 import alive.genome.Gene;
 import alive.genome.Genome;
@@ -36,7 +36,7 @@ public class Config {
     }
 
     @Bean
-    Alive createAdam(Field field, Genome genome) {
+    Movable createAdam(Field field, Genome genome) {
         return new Cell(
                 200,
                 new CellNavigator(

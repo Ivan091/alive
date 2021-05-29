@@ -1,11 +1,12 @@
 package alive.genome.gene;
 
-import java.util.Random;
-
-
 public abstract class GeneConditional extends GeneBasic {
 
-    protected int key = new Random().nextInt(256);
+    protected final int key;
+
+    public GeneConditional(int key) {
+        this.key = key;
+    }
 
     @Override
     public String toString() {

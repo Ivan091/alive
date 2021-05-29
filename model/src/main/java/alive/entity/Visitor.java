@@ -2,5 +2,9 @@ package alive.entity;
 
 public interface Visitor {
 
-    void visit(Visitable visitable);
+    default void visit(Visitable visitable) {
+    }
+
+    default void visit(Movable movable) {
+    }
 }

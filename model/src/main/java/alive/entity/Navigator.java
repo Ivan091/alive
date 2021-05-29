@@ -1,22 +1,19 @@
 package alive.entity;
 
-import alive.simulation.Position;
-import java.util.List;
+import java.util.Optional;
 
 
 public interface Navigator {
 
-    void goAhead();
+    void goAhead(Entity entity);
 
     void rotate(int step);
 
-    void erase();
-
-    List<Position> findEmptyAround();
-
     void register(Entity entity);
 
-    boolean isOnPosition(Entity entity);
+    void unregister();
 
-    Navigator replicate(Position position);
+    boolean isRegistered(Entity entity);
+
+    Optional<Navigator> replicate();
 }

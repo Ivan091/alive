@@ -1,6 +1,6 @@
 package alive;
 
-import alive.entity.Alive;
+import alive.entity.Entity;
 import alive.simulation.SimulationField;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -11,11 +11,9 @@ public class Application {
 
     private final SimulationField simulation;
 
-    private final Alive adam;
-
-    public Application(SimulationField simulation, Alive adam) {
+    public Application(SimulationField simulation, Entity adam) {
         this.simulation = simulation;
-        this.adam = adam;
+        adam.register();
     }
 
     public static void main(String[] args) {

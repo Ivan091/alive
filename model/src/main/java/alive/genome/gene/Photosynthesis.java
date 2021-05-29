@@ -10,7 +10,7 @@ public final class Photosynthesis extends GeneBasic {
 
     @Override
     public void affect(Alive alive, Genome genome) {
-        alive.heal(100);
+        alive.heal(20);
         genome.incrementGeneIndex(1);
     }
 }
