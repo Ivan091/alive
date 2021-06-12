@@ -2,13 +2,17 @@ package alive.entity.cell;
 
 import alive.entity.*;
 import alive.genome.Genome;
+import java.awt.*;
+import java.util.function.Function;
 
 
-public final class Cell implements Alive {
+public final class Cell extends EntityBase implements Alive {
 
     private final Navigator navigator;
 
     private final Genome genome;
+
+    private Color color;
 
     private int health;
 
@@ -17,9 +21,15 @@ public final class Cell implements Alive {
     }
 
     public Cell(int health, Navigator navigator, Genome genome) {
+        this(health, navigator, genome, Color.WHITE);
+    }
+
+    public Cell(int health, Navigator navigator, Genome genome, Color color) {
+        super(color);
         this.health = health;
         this.navigator = navigator;
         this.genome = genome;
+        this.color = color;
     }
 
     @Override
@@ -72,6 +82,11 @@ public final class Cell implements Alive {
     }
 
     @Override
+    public void repaint(Function<Color, Color> modifier) {
+        color = modifier.apply(color);
+    }
+
+    @Override
     public void goAhead() {
         navigator.goAhead(this);
     }
@@ -81,19 +96,20 @@ public final class Cell implements Alive {
         navigator.rotate(step);
     }
 
-    private static class CellDeadBody implements Organic {
+    private static class CellDeadBody extends EntityBase implements Organic {
 
         public final Navigator navigator;
 
         public int health;
 
         public CellDeadBody(int health, Navigator navigator) {
-            this.navigator = navigator;
+            this(health, navigator, Color.GRAY);
         }
 
-        @Override
-        public void register() {
-            navigator.register(this);
+        public CellDeadBody(int health, Navigator navigator, Color color) {
+            super(color);
+            this.health = health;
+            this.navigator = navigator;
         }
 
         @Override
@@ -103,13 +119,18 @@ public final class Cell implements Alive {
         }
 
         @Override
+        public int health() {
+            return health;
+        }
+
+        @Override
         public void unregister() {
             navigator.unregister();
         }
 
         @Override
-        public int health() {
-            return health;
+        public void register() {
+            navigator.register(this);
         }
     }
 }
