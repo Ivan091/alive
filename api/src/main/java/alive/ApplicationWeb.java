@@ -7,18 +7,18 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 
 @SpringBootApplication
-public class Application {
+public class ApplicationWeb {
 
     private final SimulationField simulation;
 
-    public Application(SimulationField simulation, Entity adam) {
+    public ApplicationWeb(SimulationField simulation, Entity adam) {
         this.simulation = simulation;
         adam.register();
     }
 
     public static void main(String[] args) {
-        var app = SpringApplication.run(Application.class, args);
-        var main = app.getBean(Application.class);
+        var context = SpringApplication.run(ApplicationWeb.class, args);
+        var main = context.getBean(ApplicationWeb.class);
         main.simulation.start();
     }
 }
