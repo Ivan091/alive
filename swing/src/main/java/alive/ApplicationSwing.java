@@ -9,6 +9,6 @@ public class ApplicationSwing {
 
     public static void main(String[] args) {
         var context = SpringApplication.run(ApplicationSwing.class, args);
-        var viw = context.getBean(View.class);
+        var view = context.getBean(View.class);
     }
 }
