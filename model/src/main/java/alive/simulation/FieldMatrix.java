@@ -44,4 +44,9 @@ public final class FieldMatrix implements Field {
     public boolean isEmpty(Position pos) {
         return isInBounds(pos) && search(pos).equals(empty);
     }
+
+    @Override
+    public Entity[][] state() {
+        return matrix;
+    }
 }

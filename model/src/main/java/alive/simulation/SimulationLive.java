@@ -67,6 +67,11 @@ public final class SimulationLive implements SimulationField {
         return field.isEmpty(pos);
     }
 
+    @Override
+    public Entity[][] state() {
+        return field.state();
+    }
+
     private record AliveNewcomersVisitor(List<Movable> newcomers) implements Visitor {
 
         @Override

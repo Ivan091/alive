@@ -16,4 +16,6 @@ public interface Field {
     boolean isInBounds(Position pos);
 
     boolean isEmpty(Position pos);
+
+    Entity[][] state();
 }
