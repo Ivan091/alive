@@ -3,23 +3,20 @@
          xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>by.organic</groupId>
-    <artifactId>organic</artifactId>
+    <groupId>by.alive</groupId>
+    <artifactId>alive</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
 
     <modules>
         <module>model</module>
         <module>api</module>
-        <module>swing</module>
     </modules>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-
         <maven.compiler.release>16</maven.compiler.release>
-
         <jackson-annotations.version>2.12.2</jackson-annotations.version>
         <junit-jupiter.version>5.7.1</junit-jupiter.version>
         <mockito.version>3.8.0</mockito.version>
@@ -30,6 +27,16 @@
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>by.alive</groupId>
+                <artifactId>model</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>by.alive</groupId>
+                <artifactId>api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
             <!-- Spring -->
             <dependency>
                 <groupId>org.springframework</groupId>
@@ -102,26 +109,27 @@
     </dependencyManagement>
 
     <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>2.4.4</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
         <plugins>
             <!-- Maven surefire plugin (junit tests) -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${maven-surefire-plugin.version}</version>
-                <configuration>
-                    <runOrder>alphabetical</runOrder>
-                </configuration>
             </plugin>
             <!-- Maven compiler plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version>
-            </plugin>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>2.4.4</version>
             </plugin>
         </plugins>
     </build>

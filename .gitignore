@@ -4,4 +4,4 @@
 .idea
 *.class
 *.iml
-target
+target/
