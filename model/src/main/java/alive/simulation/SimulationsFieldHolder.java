@@ -16,7 +16,6 @@ public class SimulationsFieldHolder implements SimulationsHolder {
         this(new HashMap<>(), 0);
     }
 
-    @Autowired(required = false)
     public SimulationsFieldHolder(Map<Integer, SimulationField> map, Integer id) {
         this.map = map;
         this.id = id;
