@@ -1,7 +1,7 @@
 package alive.entity.cell;
 
 import alive.entity.*;
-import alive.genome.Genome;
+import alive.entity.genome.Genome;
 import java.awt.*;
 import java.util.function.Function;
 

@@ -1,4 +1,4 @@
-package alive.genome.gene;
+package alive.entity.genome.gene;
 
 public abstract class GeneConditional extends GeneBasic {
 

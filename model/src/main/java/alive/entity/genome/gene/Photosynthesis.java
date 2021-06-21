@@ -1,7 +1,7 @@
-package alive.genome.gene;
+package alive.entity.genome.gene;
 
 import alive.entity.Alive;
-import alive.genome.Genome;
+import alive.entity.genome.Genome;
 import org.springframework.stereotype.Component;
 
 

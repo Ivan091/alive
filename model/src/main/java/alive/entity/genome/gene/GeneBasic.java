@@ -1,6 +1,6 @@
-package alive.genome.gene;
+package alive.entity.genome.gene;
 
-import alive.genome.Gene;
+import alive.entity.genome.Gene;
 import org.springframework.stereotype.Component;
 
 

@@ -1,4 +1,4 @@
-package alive.genome;
+package alive.entity.genome;
 
 import alive.entity.Alive;
 

@@ -1,8 +1,8 @@
 package alive.entity.cell;
 
 import alive.entity.Alive;
-import alive.genome.Gene;
-import alive.genome.Genome;
+import alive.entity.genome.Gene;
+import alive.entity.genome.Genome;
 
 
 public final class CellGenome implements Genome {

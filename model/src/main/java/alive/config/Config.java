@@ -1,22 +1,29 @@
-package alive;
+package alive.config;
 
 import alive.entity.Entity;
 import alive.entity.Movable;
 import alive.entity.cell.*;
-import alive.genome.Gene;
-import alive.genome.Genome;
-import alive.genome.gene.Photosynthesis;
+import alive.entity.genome.Gene;
+import alive.entity.genome.Genome;
+import alive.entity.genome.gene.Photosynthesis;
 import alive.simulation.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 
 @Configuration
-public class Config {
+public class Config implements SimulationFieldFactory {
 
     @Bean
     SimulationField field() {
-        var matrix = new Entity[200][100];
+        return createSimulation(200, 100);
+    }
+
+    @Override
+    @Autowired(required = false)
+    public SimulationField createSimulation(int width, int height) {
+        var matrix = new Entity[width][height];
         var empty = new Empty();
         for (var i = 0; i < matrix.length; i++) {
             for (var j = 0; j < matrix[0].length; j++) {
