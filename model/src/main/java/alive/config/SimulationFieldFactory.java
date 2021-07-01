@@ -1,5 +1,6 @@
 package alive.config;
 
+import alive.entity.Movable;
 import alive.simulation.SimulationField;
 
 

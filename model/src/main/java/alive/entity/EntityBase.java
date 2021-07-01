@@ -1,7 +1,11 @@
 package alive.entity;
 
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import java.awt.*;
 import java.util.function.Function;
+import java.util.function.UnaryOperator;
+
+import static com.fasterxml.jackson.annotation.JsonTypeInfo.Id.DEDUCTION;
 
 
 public abstract class EntityBase implements Entity {
@@ -13,7 +17,7 @@ public abstract class EntityBase implements Entity {
     }
 
     @Override
-    public void repaint(Function<Color, Color> modifier) {
+    public void repaint(UnaryOperator<Color> modifier) {
         color = modifier.apply(color);
     }
 

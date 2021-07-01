@@ -1,13 +1,18 @@
 package alive.entity;
 
-import java.awt.*;
-import java.util.function.Function;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonUnwrapped;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import java.util.function.UnaryOperator;
 
 
+@JsonSerialize(as = Entity.class)
 public interface Entity extends Visitable {
 
-    void repaint(Function<Color, Color> modifier);
+    void repaint(UnaryOperator<Color> modifier);
 
+    @JsonProperty
+    @JsonUnwrapped
     Color color();
 
     void register();

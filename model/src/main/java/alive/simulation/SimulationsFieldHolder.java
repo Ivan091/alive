@@ -1,20 +1,13 @@
 package alive.simulation;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import java.util.HashMap;
 import java.util.Map;
 
-@Component
-public class SimulationsFieldHolder implements SimulationsHolder {
+
+public final class SimulationsFieldHolder implements SimulationsHolder {
 
     private final Map<Integer, SimulationField> map;
 
     private Integer id;
-
-    public SimulationsFieldHolder() {
-        this(new HashMap<>(), 0);
-    }
 
     public SimulationsFieldHolder(Map<Integer, SimulationField> map, Integer id) {
         this.map = map;

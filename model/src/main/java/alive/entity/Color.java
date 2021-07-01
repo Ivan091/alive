@@ -1,0 +1,22 @@
+package alive.entity;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+
+@JsonSerialize(as = Color.class)
+public interface Color {
+
+    @JsonProperty("rgb")
+    String toHex();
+
+    void remix(int dR, int dG, int dB);
+
+    void reset(int r, int g, int b);
+
+    int r();
+
+    int g();
+
+    int b();
+}

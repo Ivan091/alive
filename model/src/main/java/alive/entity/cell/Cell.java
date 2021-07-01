@@ -2,8 +2,8 @@ package alive.entity.cell;
 
 import alive.entity.*;
 import alive.entity.genome.Genome;
-import java.awt.*;
 import java.util.function.Function;
+import java.util.function.UnaryOperator;
 
 
 public final class Cell extends EntityBase implements Alive {
@@ -12,7 +12,7 @@ public final class Cell extends EntityBase implements Alive {
 
     private final Genome genome;
 
-    private Color color;
+    private final Color color;
 
     private int health;
 
@@ -21,7 +21,7 @@ public final class Cell extends EntityBase implements Alive {
     }
 
     public Cell(int health, Navigator navigator, Genome genome) {
-        this(health, navigator, genome, Color.WHITE);
+        this(health, navigator, genome, new ColorRGB(255, 255, 255));
     }
 
     public Cell(int health, Navigator navigator, Genome genome, Color color) {
@@ -82,8 +82,8 @@ public final class Cell extends EntityBase implements Alive {
     }
 
     @Override
-    public void repaint(Function<Color, Color> modifier) {
-        color = modifier.apply(color);
+    public void repaint(UnaryOperator<Color> modifier) {
+        modifier.apply(color);
     }
 
     @Override
@@ -103,7 +103,7 @@ public final class Cell extends EntityBase implements Alive {
         public int health;
 
         public CellDeadBody(int health, Navigator navigator) {
-            this(health, navigator, Color.GRAY);
+            this(health, navigator, new ColorRGB(100, 100, 100));
         }
 
         public CellDeadBody(int health, Navigator navigator, Color color) {

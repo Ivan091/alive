@@ -1,14 +1,12 @@
 package alive.simulation;
 
-import alive.entity.Entity;
-import alive.entity.EntityBase;
-import java.awt.*;
+import alive.entity.*;
 
 
 public final class Empty extends EntityBase implements Entity {
 
     public Empty() {
-        this(Color.BLACK);
+        this(new ColorRGB(0, 0, 0));
     }
 
     public Empty(Color color) {
