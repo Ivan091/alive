@@ -25,6 +25,7 @@ public class SimulationController {
 
     @PutMapping
     public Entity[][] update(@RequestParam("count") Integer count){
+        count = Math.max(count, 0);
         for (int i = 0; i < count; i++){
             simulation.update();
         }

@@ -18,15 +18,16 @@ public class ColorRGB implements Color {
     }
 
     @Override
-    public void remix(int dR, int dG, int dB) {
-        reset(r + dR, g + dG, b + dB);
+    public Color remix(int dR, int dG, int dB) {
+        return reset(r + dR, g + dG, b + dB);
     }
 
     @Override
-    public void reset(int r, int g, int b) {
+    public Color reset(int r, int g, int b) {
         this.r = makeInRange(r);
         this.g = makeInRange(g);
         this.b = makeInRange(b);
+        return this;
     }
 
     @Override

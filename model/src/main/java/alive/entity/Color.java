@@ -10,9 +10,9 @@ public interface Color {
     @JsonProperty("rgb")
     String toHex();
 
-    void remix(int dR, int dG, int dB);
+    Color remix(int dR, int dG, int dB);
 
-    void reset(int r, int g, int b);
+    Color reset(int r, int g, int b);
 
     int r();
 
