@@ -1,45 +1,33 @@
 package alive.controllers;
 
-import alive.config.SimulationFieldFactory;
+import alive.config.SimulationFactory;
 import alive.entity.Entity;
-import alive.simulation.SimulationsHolder;
+import alive.simulation.Simulation;
 import org.springframework.web.bind.annotation.*;
 
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/simulation")
 public class SimulationController {
 
-    private final SimulationFieldFactory simulationFieldFactory;
+    private final SimulationFactory simulationFactory;
 
-    private final SimulationsHolder simulationsHolder;
+    private Simulation simulation;
 
-    public SimulationController(SimulationFieldFactory simulationFieldFactory, SimulationsHolder simulationsHolder) {
-        this.simulationFieldFactory = simulationFieldFactory;
-        this.simulationsHolder = simulationsHolder;
+    public SimulationController(SimulationFactory simulationFactory) {
+        this.simulationFactory = simulationFactory;
     }
 
-    @PostMapping("matrix/{width}x{height}")
-    public Integer createSimulation(@PathVariable("width") Integer width, @PathVariable("height") Integer height) {
-        var simulation = simulationFieldFactory.createSimulation(width, height);
-        simulation.start();
-        return simulationsHolder.put(simulation);
+    @PostMapping
+    public void create(@RequestParam("width") Integer width, @RequestParam("height") Integer height) {
+        this.simulation = simulationFactory.create(width, height);
     }
 
-    @GetMapping("matrix/{id}")
-    public Entity[][] getSimulation(@PathVariable("id") Integer id) {
-        return simulationsHolder.get(id).state();
-    }
-
-    @PutMapping("matrix/{id}/{count}")
-    public void nextTurn(@PathVariable("id") Integer id, @PathVariable("count") Integer count){
+    @PutMapping
+    public Entity[][] update(@RequestParam("count") Integer count){
         for (int i = 0; i < count; i++){
-            simulationsHolder.get(id).update();
+            simulation.update();
         }
-    }
-
-    @DeleteMapping("matrix/{id}")
-    public void removeSimulation(@PathVariable("id") Integer id) {
-        simulationsHolder.remove(id);
+        return simulation.state();
     }
 }

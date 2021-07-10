@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 
-public final class SimulationLive implements SimulationField {
+public final class SimulationLive implements Simulation {
 
     private final Field field;
 
@@ -17,14 +17,6 @@ public final class SimulationLive implements SimulationField {
 
     public SimulationLive(Field field) {
         this.field = field;
-    }
-
-    @Override
-    public void start() {
-        for (var i = 0; i < 100000; i++) {
-            update();
-            System.out.printf(" %s ", olds.size() + newcomers.size());
-        }
     }
 
     @Override

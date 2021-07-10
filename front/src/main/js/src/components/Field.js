@@ -1,7 +1,7 @@
 import React from 'react'
 import Cell from "./Cell";
 
-const FieldMatrix = ({field, height, width}) => (
+const Field = ({field, height, width}) => (
     <svg viewBox={`0 0 ${width} ${height}`}>
         {
             field.map((xAxis, i) =>
@@ -13,4 +13,4 @@ const FieldMatrix = ({field, height, width}) => (
     </svg>
 )
 
-export default FieldMatrix
+export default Field

@@ -2,9 +2,9 @@ package alive.simulation;
 
 public interface SimulationsHolder {
 
-    SimulationField get(Integer id);
+    Simulation get(Integer id);
 
-    Integer put(SimulationField simulationField);
+    Integer put(Simulation simulation);
 
     void remove(Integer id);
 }

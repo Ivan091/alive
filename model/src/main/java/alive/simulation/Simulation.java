@@ -1,8 +1,6 @@
 package alive.simulation;
 
-public interface Simulation {
-
-    void start();
+public interface Simulation extends Field {
 
     void update();
 }
