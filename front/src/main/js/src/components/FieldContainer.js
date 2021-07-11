@@ -11,23 +11,38 @@ const height = 9
 const width = 20
 
 const FieldContainer = () => {
-    function create(width, height){
+    function create(width, height) {
         axInstance.post('', null, {params: {width, height}})
-            .then(r => setField(r.data))
+            .then(_ => update(0))
     }
 
-    function update(count){
-        axInstance.put('', {count: count})
+    function update(count) {
+        axInstance.put('', null, {params: {count}})
             .then(r => setField(r.data))
     }
 
 
     const [field, setField] = useState([[]])
+    const [timerId, setTimerId] = useState(0)
+    const [isRunning, setIsRunning] = useState(false)
 
     return (
         <div>
             <button onClick={() => create(width, height)}>Create</button>
-            <button onClick={() => update(10)}>Update</button>
+            <button onClick={() => {
+                if (!isRunning){
+                    setIsRunning(true)
+                    setTimerId(setInterval(() => update(50), 200))
+                }
+            }}>Run
+            </button>
+            <button onClick={() => {
+                if (isRunning){
+                    clearInterval(timerId)
+                    setIsRunning(false)
+                }
+            }}>Stop
+            </button>
             <Field field={field} height={height} width={width}/>
         </div>
     )

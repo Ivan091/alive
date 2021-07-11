@@ -6,7 +6,7 @@ const Field = ({field, height, width}) => (
         {
             field.map((xAxis, i) =>
                 xAxis.map((entity, j) =>
-                    <Cell key={`x${i}y${j}`} size={1} fill={entity.fill} x={i} y={j}/>
+                    <Cell key={`x${i}y${j}`} size={1.1} fill={entity.color} x={i} y={j}/>
                 )
             )
         }
