@@ -4,18 +4,15 @@ import Field from "./Field";
 
 const axInstance = axios.create(
     {
-        baseURL: 'locanhost:8080/api/simulation',
-        headers: {
-            'Access-Control-Allow-Origin': '*',
-        }
+        baseURL: 'http://localhost:8080/api/simulation',
     }
 )
 const height = 9
 const width = 20
 
-const FieldContainer = (props) => {
+const FieldContainer = () => {
     function create(width, height){
-        axInstance.post('', {width: width, height: height})
+        axInstance.post('', null, {params: {width, height}})
             .then(r => setField(r.data))
     }
 
