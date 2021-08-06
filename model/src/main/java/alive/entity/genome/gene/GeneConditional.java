@@ -1,6 +1,9 @@
 package alive.entity.genome.gene;
 
-public abstract class GeneConditional extends GeneBasic {
+import alive.entity.genome.Gene;
+
+
+public abstract class GeneConditional implements Gene {
 
     protected final int key;
 

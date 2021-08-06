@@ -2,15 +2,12 @@ package alive.entity.genome.gene;
 
 import alive.entity.Alive;
 import alive.entity.genome.Genome;
-import org.springframework.stereotype.Component;
-import java.util.Random;
 
 
-@Component
 public final class IndexJump extends GeneConditional {
 
-    public IndexJump() {
-        super(new Random().nextInt(8) + 1);
+    public IndexJump(int key) {
+        super(key);
     }
 
     @Override
