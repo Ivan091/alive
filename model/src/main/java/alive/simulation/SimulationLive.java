@@ -1,7 +1,7 @@
 package alive.simulation;
 
 import alive.entity.*;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -9,9 +9,9 @@ public final class SimulationLive implements Simulation {
 
     private final Field field;
 
-    private final List<Movable> olds = new LinkedList<>();
+    private final List<Movable> olds = new ArrayList<>();
 
-    private final List<Movable> newcomers = new LinkedList<>();
+    private final List<Movable> newcomers = new ArrayList<>();
 
     private final Visitor visitor = new AliveNewcomersVisitor(newcomers);
 
@@ -24,7 +24,7 @@ public final class SimulationLive implements Simulation {
         olds.forEach(Movable::makeAMove);
         newcomers.forEach(Movable::makeAMove);
         olds.addAll(newcomers);
-        olds.removeIf(x -> !x.isMoving());
+        olds.removeIf(Movable::isStatic);
         newcomers.clear();
     }
 
@@ -68,7 +68,7 @@ public final class SimulationLive implements Simulation {
 
         @Override
         public void visit(Movable movable) {
-            if (movable.isMoving()) {
+            if (!movable.isStatic()) {
                 newcomers.add(movable);
             }
         }

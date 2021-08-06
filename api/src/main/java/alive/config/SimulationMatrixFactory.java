@@ -1,6 +1,5 @@
 package alive.config;
 
-import alive.entity.Entity;
 import alive.entity.Movable;
 import alive.entity.cell.*;
 import alive.entity.genome.Gene;
@@ -11,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 
 @Component
-public class SimulationMatrixFactory implements SimulationFactory{
+public class SimulationMatrixFactory implements SimulationFactory {
 
     private Genome defaultGenome() {
         var genes = new Gene[64];
@@ -34,14 +33,7 @@ public class SimulationMatrixFactory implements SimulationFactory{
 
     @Override
     public Simulation create(int width, int height) {
-        var matrix = new Entity[width][height];
-        var empty = new Empty();
-        for (var i = 0; i < matrix.length; i++) {
-            for (var j = 0; j < matrix[0].length; j++) {
-                matrix[i][j] = empty;
-            }
-        }
-        var sim =  new SimulationLive(new FieldMatrix(matrix, empty));
+        var sim = new SimulationLive(new FieldMatrix(width, height));
         var adam = createAdam(sim, defaultGenome());
         adam.register();
         return sim;

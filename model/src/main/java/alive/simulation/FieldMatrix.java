@@ -1,6 +1,8 @@
 package alive.simulation;
 
-import alive.entity.Entity;
+import alive.entity.*;
+import java.util.Arrays;
+import java.util.function.UnaryOperator;
 
 
 public final class FieldMatrix implements Field {
@@ -9,9 +11,12 @@ public final class FieldMatrix implements Field {
 
     private final Entity empty;
 
-    public FieldMatrix(Entity[][] matrix, Entity empty) {
-        this.matrix = matrix;
-        this.empty = empty;
+    public FieldMatrix(int width, int height) {
+        empty = new Empty();
+        matrix = new Entity[height][width];
+        for (var row : matrix) {
+            Arrays.fill(row, empty);
+        }
     }
 
     @Override
@@ -48,5 +53,41 @@ public final class FieldMatrix implements Field {
     @Override
     public Entity[][] state() {
         return matrix;
+    }
+
+    private static final class Empty implements Entity {
+
+        private final Color color;
+
+        public Empty() {
+            this(new ColorRGB(0, 0, 0));
+        }
+
+        public Empty(Color color) {
+            this.color = color;
+        }
+
+        @Override
+        public void repaint(UnaryOperator<Color> modifier) {
+            modifier.apply(color);
+        }
+
+        @Override
+        public Color color() {
+            return color;
+        }
+
+        @Override
+        public void register() {
+        }
+
+        @Override
+        public void unregister() {
+        }
+
+        @Override
+        public void accept(Visitor visitor) {
+            visitor.visit(this);
+        }
     }
 }

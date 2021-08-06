@@ -1,6 +1,6 @@
 package alive.entity;
 
-public class ColorRGB implements Color {
+public final class ColorRGB implements Color {
 
     private int r;
 

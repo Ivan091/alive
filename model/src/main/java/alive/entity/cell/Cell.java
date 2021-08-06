@@ -2,11 +2,10 @@ package alive.entity.cell;
 
 import alive.entity.*;
 import alive.entity.genome.Genome;
-import java.util.function.Function;
 import java.util.function.UnaryOperator;
 
 
-public final class Cell extends EntityBase implements Alive {
+public final class Cell implements Alive {
 
     private final Navigator navigator;
 
@@ -15,17 +14,12 @@ public final class Cell extends EntityBase implements Alive {
     private final Color color;
 
     private int health;
-
-    public Cell(Navigator navigator, Genome genome) {
-        this(500, navigator, genome);
-    }
-
+    
     public Cell(int health, Navigator navigator, Genome genome) {
         this(health, navigator, genome, new ColorRGB(255, 255, 255));
     }
 
     public Cell(int health, Navigator navigator, Genome genome, Color color) {
-        super(color);
         this.health = health;
         this.navigator = navigator;
         this.genome = genome;
@@ -39,8 +33,13 @@ public final class Cell extends EntityBase implements Alive {
     }
 
     @Override
-    public boolean isMoving() {
-        return navigator.isRegistered(this);
+    public void accept(Visitor visitor) {
+        visitor.visit(this);
+    }
+
+    @Override
+    public boolean isStatic() {
+        return !navigator.isRegistered(this);
     }
 
     @Override
@@ -87,6 +86,11 @@ public final class Cell extends EntityBase implements Alive {
     }
 
     @Override
+    public Color color() {
+        return color;
+    }
+
+    @Override
     public void goAhead() {
         navigator.goAhead(this);
     }
@@ -96,9 +100,11 @@ public final class Cell extends EntityBase implements Alive {
         navigator.rotate(step);
     }
 
-    private static class CellDeadBody extends EntityBase implements Organic {
+    private static class CellDeadBody implements Organic {
 
         public final Navigator navigator;
+
+        public final Color color;
 
         public int health;
 
@@ -107,9 +113,9 @@ public final class Cell extends EntityBase implements Alive {
         }
 
         public CellDeadBody(int health, Navigator navigator, Color color) {
-            super(color);
             this.health = health;
             this.navigator = navigator;
+            this.color = color;
         }
 
         @Override
@@ -129,8 +135,23 @@ public final class Cell extends EntityBase implements Alive {
         }
 
         @Override
+        public void repaint(UnaryOperator<Color> modifier) {
+            modifier.apply(color);
+        }
+
+        @Override
+        public Color color() {
+            return color;
+        }
+
+        @Override
         public void register() {
             navigator.register(this);
+        }
+
+        @Override
+        public void accept(Visitor visitor) {
+            visitor.visit(this);
         }
     }
 }

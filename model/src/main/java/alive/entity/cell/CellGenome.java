@@ -23,7 +23,7 @@ public final class CellGenome implements Genome {
     @Override
     public void affect(Alive alive) {
         alive.heal(-5);
-        if (alive.isMoving()) {
+        if (!alive.isStatic()) {
             genes[currentGeneIdx].affect(alive, this);
         }
     }

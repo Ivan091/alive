@@ -9,22 +9,18 @@ import java.util.function.Function;
 
 public final class CellNavigator implements Navigator {
 
-    private static final List<Function<Position, Position>> possibleDirs;
+    private static final List<Function<Position, Position>> possibleDirs = List.of(
+            p -> new PositionMatrix(p.x() + 1, p.y()),
+            p -> new PositionMatrix(p.x() + 1, p.y() + 1),
+            p -> new PositionMatrix(p.x(), p.y() + 1),
+            p -> new PositionMatrix(p.x() - 1, p.y() + 1),
+            p -> new PositionMatrix(p.x() - 1, p.y()),
+            p -> new PositionMatrix(p.x() - 1, p.y() - 1),
+            p -> new PositionMatrix(p.x(), p.y() - 1),
+            p -> new PositionMatrix(p.x() + 1, p.y() - 1)
+    );
 
-    static {
-        possibleDirs = List.of(
-                p -> new PositionMatrix(p.x() + 1, p.y()),
-                p -> new PositionMatrix(p.x() + 1, p.y() + 1),
-                p -> new PositionMatrix(p.x(), p.y() + 1),
-                p -> new PositionMatrix(p.x() - 1, p.y() + 1),
-                p -> new PositionMatrix(p.x() - 1, p.y()),
-                p -> new PositionMatrix(p.x() - 1, p.y() - 1),
-                p -> new PositionMatrix(p.x(), p.y() - 1),
-                p -> new PositionMatrix(p.x() + 1, p.y() - 1)
-        );
-    }
-
-    private Field field;
+    private final Field field;
 
     private Position pos;
 
@@ -76,7 +72,7 @@ public final class CellNavigator implements Navigator {
             }
             rotate(1);
         } while (oldDirIdx != dirIdx);
-        if (possAround.size() == 0) {
+        if (possAround.isEmpty()) {
             return Optional.empty();
         } else {
             return Optional.of(new CellNavigator(field, possAround.get(new Random().nextInt(possAround.size()))));
