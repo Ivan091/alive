@@ -14,7 +14,7 @@ public final class Cell implements Alive {
     private final Color color;
 
     private int health;
-    
+
     public Cell(int health, Navigator navigator, Genome genome) {
         this(health, navigator, genome, new ColorRGB(255, 255, 255));
     }

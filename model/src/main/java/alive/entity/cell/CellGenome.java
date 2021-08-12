@@ -11,6 +11,8 @@ public final class CellGenome implements Genome {
 
     private int currentGeneIdx;
 
+    private int countGenesAffectedInARow;
+
     public CellGenome(Gene[] genes) {
         this.genes = genes;
     }

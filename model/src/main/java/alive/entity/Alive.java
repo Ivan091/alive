@@ -1,6 +1,6 @@
 package alive.entity;
 
-public interface Alive extends Entity, Movable, Positionable, Organic {
+public interface Alive extends Movable, Positionable, Organic {
 
     void replicate();
 
