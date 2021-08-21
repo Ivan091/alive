@@ -1,6 +1,8 @@
 import React, {useState} from 'react'
 import axios from "axios";
 import Field from "./Field";
+import * as SockJS from 'sockjs-client';
+import * as Stomp from 'stompjs';
 
 const axInstance = axios.create(
     {
@@ -10,6 +12,8 @@ const axInstance = axios.create(
 const height = 9
 const width = 20
 
+const client = Stomp.over(new SockJS('http://localhost:8080/ws'))
+
 const FieldContainer = () => {
     function create(width, height) {
         axInstance.post('', null, {params: {width, height}})
@@ -17,10 +21,18 @@ const FieldContainer = () => {
     }
 
     function update(count) {
-        axInstance.put('', null, {params: {count}})
-            .then(r => setField(r.data))
+        client.send("app/simulation", {}, count)
     }
 
+    client.connect({}, () => {
+        client.subscribe(
+            "/topic/simulation",
+            (msg) => {
+                console.log(msg)
+                setField(msg)
+            }
+        )
+    })
 
     const [field, setField] = useState([[]])
     const [timerId, setTimerId] = useState(0)
@@ -30,14 +42,14 @@ const FieldContainer = () => {
         <div>
             <button onClick={() => create(width, height)}>Create</button>
             <button onClick={() => {
-                if (!isRunning){
+                if (!isRunning) {
                     setIsRunning(true)
                     setTimerId(setInterval(() => update(50), 200))
                 }
             }}>Run
             </button>
             <button onClick={() => {
-                if (isRunning){
+                if (isRunning) {
                     clearInterval(timerId)
                     setIsRunning(false)
                 }

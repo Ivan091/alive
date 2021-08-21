@@ -1,5 +1,5 @@
 import React from "react";
-import FieldContainer from "./components/FieldContainer";
+import FieldContainer from "./component/FieldContainer";
 
 const App = () => (
     <FieldContainer/>
