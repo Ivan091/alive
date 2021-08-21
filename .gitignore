@@ -1,6 +1,7 @@
 *.iml
+
 target
+build
+
 .idea
 .gradle
-node*
-build

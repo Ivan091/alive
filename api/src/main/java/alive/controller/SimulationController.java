@@ -5,11 +5,10 @@ import alive.entity.Entity;
 import alive.simulation.Simulation;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 
-@Controller
+@RestController
 @RequestMapping("/api/simulation")
 public class SimulationController {
 
@@ -22,24 +21,22 @@ public class SimulationController {
     }
 
     @PostMapping
-    @ResponseBody
-    public void create(@RequestParam("width") Integer width, @RequestParam("height") Integer height) {
+    public void create(@RequestParam Integer width, @RequestParam Integer height) {
         this.simulation = simulationFactory.create(width, height);
     }
 
     @PutMapping
-    @ResponseBody
-    public Entity[][] update(@RequestParam("count") Integer count) {
+    public Entity[][] update(@RequestParam Integer count) {
+        return update_socket(count);
+    }
+
+    @SendTo("/topic/simulation")
+    @MessageMapping("/app/simulation")
+    public Entity[][] update_socket(Integer count) {
         count = Math.max(count, 0);
         for (int i = 0; i < count; i++) {
             simulation.update();
         }
         return simulation.state();
-    }
-
-    @SendTo("/topic/simulation")
-    @MessageMapping("/simulation")
-    public Entity[][] update_ws(Integer count) {
-        return update(count);
     }
 }

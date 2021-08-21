@@ -5,7 +5,7 @@ import alive.entity.genome.Gene;
 import alive.entity.genome.Genome;
 
 
-public final class CellGenome implements Genome {
+public final class SequentialGenome implements Genome {
 
     private final Gene[] genes;
 
@@ -13,7 +13,7 @@ public final class CellGenome implements Genome {
 
     private int countGenesAffectedInARow;
 
-    public CellGenome(Gene[] genes) {
+    public SequentialGenome(Gene[] genes) {
         this.genes = genes;
     }
 

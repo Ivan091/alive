@@ -12,12 +12,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class SimulationMatrixFactory implements SimulationFactory {
 
-    private Genome defaultGenome() {
+    private Genome createDefaultGenome() {
         var genes = new Gene[64];
         for (int i = 0; i < genes.length; i++) {
             genes[i] = new Photosynthesis();
         }
-        return new CellGenome(genes);
+        return new SequentialGenome(genes);
     }
 
     private Movable createAdam(Field field, Genome genome) {
@@ -34,7 +34,7 @@ public class SimulationMatrixFactory implements SimulationFactory {
     @Override
     public Simulation create(int width, int height) {
         var sim = new SimulationLive(new FieldMatrix(width, height));
-        var adam = createAdam(sim, defaultGenome());
+        var adam = createAdam(sim, createDefaultGenome());
         adam.register();
         return sim;
     }

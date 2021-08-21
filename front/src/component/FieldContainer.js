@@ -4,15 +4,20 @@ import Field from "./Field";
 import * as SockJS from 'sockjs-client';
 import * as Stomp from 'stompjs';
 
+const url = 'http://localhost:8080/'
+
 const axInstance = axios.create(
     {
-        baseURL: 'http://localhost:8080/api/simulation',
+        baseURL: url + 'api/simulation',
     }
 )
-const height = 9
-const width = 20
 
-const client = Stomp.over(new SockJS('http://localhost:8080/ws'))
+
+const height = 19
+const width = 40
+
+const sock = Stomp.over(new SockJS(url + 'ws'))
+sock.debug = () => {}
 
 const FieldContainer = () => {
     function create(width, height) {
@@ -21,17 +26,13 @@ const FieldContainer = () => {
     }
 
     function update(count) {
-        client.send("app/simulation", {}, count)
+        sock.send('/app/simulation', {}, count)
     }
 
-    client.connect({}, () => {
-        client.subscribe(
-            "/topic/simulation",
-            (msg) => {
-                console.log(msg)
-                setField(msg)
-            }
-        )
+    sock.connect({}, () => {
+        sock.subscribe('/topic/simulation', (frame) => {
+            setField(JSON.parse(frame.body))
+        })
     })
 
     const [field, setField] = useState([[]])
@@ -44,7 +45,7 @@ const FieldContainer = () => {
             <button onClick={() => {
                 if (!isRunning) {
                     setIsRunning(true)
-                    setTimerId(setInterval(() => update(50), 200))
+                    setTimerId(setInterval(() => update(50), 50))
                 }
             }}>Run
             </button>
