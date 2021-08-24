@@ -8,8 +8,6 @@ public final class SequentialGenome implements Genome {
 
     private final Gene[] genes;
 
-    private final Mutator<Gene[]> mutator = MutatorProvider.mutator;
-
     private int currentGeneIdx;
 
     public SequentialGenome(Gene[] genes) {
@@ -18,7 +16,7 @@ public final class SequentialGenome implements Genome {
 
     @Override
     public Genome replicate() {
-        return new SequentialGenome(mutator.mutate(genes));
+        return new SequentialGenome(MutatorProvider.mutator.mutate(genes));
     }
 
     @Override

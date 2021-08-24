@@ -1,14 +1,14 @@
 package alive;
 
-import alive.fx.MainScene;
+import alive.fx.BootableJavaFxApplication;
 import javafx.application.Application;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 
 @SpringBootApplication
-public class FxApplication {
+public class JavaFxApplication {
 
     public static void main(String[] args) {
-        Application.launch(MainScene.class, args);
+        Application.launch(BootableJavaFxApplication.class, args);
     }
 }
