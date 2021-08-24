@@ -1,17 +1,16 @@
-package alive.entity.cell;
+package alive.entity.genome;
 
 import alive.entity.Alive;
-import alive.entity.genome.Gene;
-import alive.entity.genome.Genome;
+import org.springframework.stereotype.Component;
 
 
 public final class SequentialGenome implements Genome {
 
     private final Gene[] genes;
 
-    private int currentGeneIdx;
+    private final Mutator<Gene[]> mutator = MutatorProvider.mutator;
 
-    private int countGenesAffectedInARow;
+    private int currentGeneIdx;
 
     public SequentialGenome(Gene[] genes) {
         this.genes = genes;
@@ -19,7 +18,7 @@ public final class SequentialGenome implements Genome {
 
     @Override
     public Genome replicate() {
-        return this;
+        return new SequentialGenome(mutator.mutate(genes));
     }
 
     @Override
@@ -33,5 +32,15 @@ public final class SequentialGenome implements Genome {
     @Override
     public void incrementGeneIndex(int increment) {
         currentGeneIdx = Math.floorMod(currentGeneIdx + increment, genes.length);
+    }
+
+    @Component
+    public static class MutatorProvider {
+
+        private static Mutator<Gene[]> mutator;
+
+        public MutatorProvider(Mutator<Gene[]> mutator) {
+            MutatorProvider.mutator = mutator;
+        }
     }
 }

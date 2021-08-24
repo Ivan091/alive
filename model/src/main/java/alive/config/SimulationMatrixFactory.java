@@ -1,9 +1,9 @@
 package alive.config;
 
+import alive.entity.MatrixNavigator;
 import alive.entity.Movable;
-import alive.entity.cell.*;
-import alive.entity.genome.Gene;
-import alive.entity.genome.Genome;
+import alive.entity.cell.Cell;
+import alive.entity.genome.*;
 import alive.entity.genome.gene.Photosynthesis;
 import alive.simulation.*;
 import org.springframework.stereotype.Component;
@@ -23,7 +23,7 @@ public class SimulationMatrixFactory implements SimulationFactory {
     private Movable createAdam(Field field, Genome genome) {
         return new Cell(
                 200,
-                new CellNavigator(
+                new MatrixNavigator(
                         field,
                         new PositionMatrix(0, 0)
                 ),

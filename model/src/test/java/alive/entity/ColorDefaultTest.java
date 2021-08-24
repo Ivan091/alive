@@ -5,17 +5,17 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 
-class ColorRGBTest {
+public class ColorDefaultTest {
 
     @Test
     void toHexWorksCyan() {
-        var a = new ColorRGB(0, 255, 255);
+        var a = new ColorDefault(0, 255, 255);
         assertEquals("#00FFFF", a.toHex());
     }
 
     @Test
     void toHexWorksWhite() {
-        var a = new ColorRGB(255, 255, 255);
+        var a = new ColorDefault(255, 255, 255);
         assertEquals("#FFFFFF", a.toHex());
     }
 }

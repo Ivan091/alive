@@ -17,7 +17,8 @@ const height = 19
 const width = 40
 
 const sock = Stomp.over(new SockJS(url + 'ws'))
-sock.debug = () => {}
+sock.debug = () => {
+}
 
 const FieldContainer = () => {
     function create(width, height) {
@@ -45,7 +46,7 @@ const FieldContainer = () => {
             <button onClick={() => {
                 if (!isRunning) {
                     setIsRunning(true)
-                    setTimerId(setInterval(() => update(50), 50))
+                    setTimerId(setInterval(() => update(50), 20))
                 }
             }}>Run
             </button>

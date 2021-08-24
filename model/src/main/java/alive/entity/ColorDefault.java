@@ -1,6 +1,9 @@
 package alive.entity;
 
-public final class ColorRGB implements Color {
+import java.util.Objects;
+
+
+public final class ColorDefault implements Color {
 
     private int r;
 
@@ -8,7 +11,7 @@ public final class ColorRGB implements Color {
 
     private int b;
 
-    public ColorRGB(int r, int g, int b) {
+    public ColorDefault(int r, int g, int b) {
         reset(r, g, b);
     }
 
@@ -31,6 +34,11 @@ public final class ColorRGB implements Color {
     }
 
     @Override
+    public Color replicate() {
+        return new ColorDefault(r, g, b);
+    }
+
+    @Override
     public int r() {
         return r;
     }
@@ -43,6 +51,19 @@ public final class ColorRGB implements Color {
     @Override
     public int b() {
         return b;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(r, g, b);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ColorDefault that = (ColorDefault) o;
+        return r == that.r && g == that.g && b == that.b;
     }
 
     private int makeInRange(int x) {

@@ -15,5 +15,7 @@ public interface Navigator {
 
     boolean isRegistered(Entity entity);
 
+    Optional<Entity> look();
+
     Optional<Navigator> replicate();
 }

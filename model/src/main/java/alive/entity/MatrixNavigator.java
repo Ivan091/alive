@@ -1,13 +1,11 @@
-package alive.entity.cell;
+package alive.entity;
 
-import alive.entity.Entity;
-import alive.entity.Navigator;
 import alive.simulation.*;
 import java.util.*;
 import java.util.function.Function;
 
 
-public final class CellNavigator implements Navigator {
+public final class MatrixNavigator implements Navigator {
 
     private static final List<Function<Position, Position>> possibleDirs = List.of(
             p -> new PositionMatrix(p.x() + 1, p.y()),
@@ -26,11 +24,11 @@ public final class CellNavigator implements Navigator {
 
     private int dirIdx;
 
-    public CellNavigator(Field field, Position pos) {
+    public MatrixNavigator(Field field, Position pos) {
         this(field, pos, 0);
     }
 
-    public CellNavigator(Field field, Position pos, int dirIdx) {
+    public MatrixNavigator(Field field, Position pos, int dirIdx) {
         this.field = field;
         this.pos = pos;
         this.dirIdx = dirIdx;
@@ -47,8 +45,8 @@ public final class CellNavigator implements Navigator {
     }
 
     @Override
-    public void unregister() {
-        field.empty(pos);
+    public void rotate(int step) {
+        dirIdx = Math.floorMod(dirIdx + step, possibleDirs.size());
     }
 
     @Override
@@ -57,8 +55,22 @@ public final class CellNavigator implements Navigator {
     }
 
     @Override
+    public void unregister() {
+        field.empty(pos);
+    }
+
+    @Override
     public boolean isRegistered(Entity entity) {
         return field.search(pos).equals(entity);
+    }
+
+    @Override
+    public Optional<Entity> look() {
+        var lookedPos = possibleDirs.get(dirIdx).apply(pos);
+        if (field.isInBounds(lookedPos)) {
+            return Optional.of(field.search(lookedPos));
+        }
+        return Optional.empty();
     }
 
     @Override
@@ -75,12 +87,7 @@ public final class CellNavigator implements Navigator {
         if (possAround.isEmpty()) {
             return Optional.empty();
         } else {
-            return Optional.of(new CellNavigator(field, possAround.get(new Random().nextInt(possAround.size()))));
+            return Optional.of(new MatrixNavigator(field, possAround.get(new Random().nextInt(possAround.size()))));
         }
-    }
-
-    @Override
-    public void rotate(int step) {
-        dirIdx = Math.floorMod(dirIdx + step, possibleDirs.size());
     }
 }

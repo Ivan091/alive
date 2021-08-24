@@ -5,23 +5,25 @@ import alive.entity.Alive;
 import alive.entity.genome.Gene;
 import alive.entity.genome.Genome;
 import org.springframework.stereotype.Component;
+import java.util.Random;
 
 
-public final class Photosynthesis implements Gene {
+public record Rotate(int key) implements Gene {
 
     @Override
     public void affect(Alive owner, Genome genome) {
-        owner.repaint(c -> c.remix(-10, 20, -10));
-        owner.heal(20);
+        owner.rotate(key);
         genome.incrementGeneIndex(1);
     }
 
     @Component
     public static final class GeneFactory implements Factory<Gene> {
 
+        private final Random random = new Random();
+
         @Override
         public Gene create() {
-            return new Photosynthesis();
+            return new Rotate(random.nextInt(8) + 1);
         }
     }
 }

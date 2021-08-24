@@ -60,7 +60,7 @@ public final class FieldMatrix implements Field {
         private final Color color;
 
         public Empty() {
-            this(new ColorRGB(0, 0, 0));
+            this(new ColorDefault(0, 0, 0));
         }
 
         public Empty(Color color) {

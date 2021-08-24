@@ -2,6 +2,7 @@ package alive.entity.cell;
 
 import alive.entity.*;
 import alive.entity.genome.Genome;
+import java.util.Optional;
 import java.util.function.UnaryOperator;
 
 
@@ -16,7 +17,7 @@ public final class Cell implements Alive {
     private int health;
 
     public Cell(int health, Navigator navigator, Genome genome) {
-        this(health, navigator, genome, new ColorRGB(255, 255, 255));
+        this(health, navigator, genome, new ColorDefault(255, 255, 255));
     }
 
     public Cell(int health, Navigator navigator, Genome genome, Color color) {
@@ -33,13 +34,13 @@ public final class Cell implements Alive {
     }
 
     @Override
-    public void accept(Visitor visitor) {
-        visitor.visit(this);
+    public boolean isStatic() {
+        return !navigator.isRegistered(this);
     }
 
     @Override
-    public boolean isStatic() {
-        return !navigator.isRegistered(this);
+    public void accept(Visitor visitor) {
+        visitor.visit(this);
     }
 
     @Override
@@ -50,8 +51,8 @@ public final class Cell implements Alive {
     }
 
     @Override
-    public void die() {
-        new CellDeadBody(health, navigator).register();
+    public int health() {
+        return health;
     }
 
     @Override
@@ -62,22 +63,12 @@ public final class Cell implements Alive {
             return;
         }
         health >>= 2;
-        new Cell(health, newNavigator.get(), genome.replicate()).register();
+        new Cell(health, newNavigator.get(), genome.replicate(), color.replicate()).register();
     }
 
     @Override
-    public void register() {
-        navigator.register(this);
-    }
-
-    @Override
-    public void unregister() {
-        navigator.unregister();
-    }
-
-    @Override
-    public int health() {
-        return health;
+    public void die() {
+        new CellDeadBody(health, navigator).register();
     }
 
     @Override
@@ -91,6 +82,16 @@ public final class Cell implements Alive {
     }
 
     @Override
+    public void register() {
+        navigator.register(this);
+    }
+
+    @Override
+    public void unregister() {
+        navigator.unregister();
+    }
+
+    @Override
     public void goAhead() {
         navigator.goAhead(this);
     }
@@ -98,6 +99,11 @@ public final class Cell implements Alive {
     @Override
     public void rotate(int step) {
         navigator.rotate(step);
+    }
+
+    @Override
+    public Optional<Entity> look() {
+        return navigator.look();
     }
 
     private static class CellDeadBody implements Organic {
@@ -109,7 +115,7 @@ public final class Cell implements Alive {
         public int health;
 
         public CellDeadBody(int health, Navigator navigator) {
-            this(health, navigator, new ColorRGB(100, 100, 100));
+            this(health, navigator, new ColorDefault(100, 100, 100));
         }
 
         public CellDeadBody(int health, Navigator navigator, Color color) {
@@ -130,11 +136,6 @@ public final class Cell implements Alive {
         }
 
         @Override
-        public void unregister() {
-            navigator.unregister();
-        }
-
-        @Override
         public void repaint(UnaryOperator<Color> modifier) {
             modifier.apply(color);
         }
@@ -147,6 +148,11 @@ public final class Cell implements Alive {
         @Override
         public void register() {
             navigator.register(this);
+        }
+
+        @Override
+        public void unregister() {
+            navigator.unregister();
         }
 
         @Override

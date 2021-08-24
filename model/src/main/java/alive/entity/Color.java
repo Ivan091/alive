@@ -8,6 +8,8 @@ public interface Color {
 
     Color reset(int r, int g, int b);
 
+    Color replicate();
+
     int r();
 
     int g();

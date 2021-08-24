@@ -11,9 +11,9 @@ import java.util.Random;
 public record IndexJump(int key) implements Gene {
 
     @Override
-    public void affect(Alive alive, Genome genome) {
+    public void affect(Alive owner, Genome genome) {
         genome.incrementGeneIndex(key);
-        genome.affect(alive);
+        genome.affect(owner);
     }
 
     @Component
