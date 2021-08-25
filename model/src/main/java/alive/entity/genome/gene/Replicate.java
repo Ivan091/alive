@@ -7,12 +7,11 @@ import alive.entity.genome.Genome;
 import org.springframework.stereotype.Component;
 
 
-public final class Photosynthesis implements Gene {
+public class Replicate implements Gene {
 
     @Override
     public void affect(Alive owner, Genome genome) {
-        owner.repaint(c -> c.remix(-20, 40, -20));
-        owner.heal(25);
+        owner.replicate();
         genome.incrementGeneIndex(1);
     }
 
@@ -21,7 +20,7 @@ public final class Photosynthesis implements Gene {
 
         @Override
         public Gene create() {
-            return new Photosynthesis();
+            return new Replicate();
         }
     }
 }

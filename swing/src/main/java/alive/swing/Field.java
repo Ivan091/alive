@@ -11,11 +11,13 @@ import java.util.concurrent.TimeUnit;
 @Component
 public class Field extends Canvas {
 
-    private static final int W = 317;
+    private static final int MULTIPLIER = 1;
 
-    private static final int H = 165;
+    private static final int W = 317 / MULTIPLIER;
 
-    private static final int SIZE = 6;
+    private static final int H = 165 / MULTIPLIER;
+
+    private static final int SIZE = 6 * MULTIPLIER;
 
     private final Simulation simulation;
 
@@ -26,9 +28,9 @@ public class Field extends Canvas {
     }
 
     public void startGame() {
-        Executors.newScheduledThreadPool(1).scheduleWithFixedDelay(() ->
-                paint(getGraphics()), 0, 32, TimeUnit.MILLISECONDS);
-        Executors.newScheduledThreadPool(1).scheduleWithFixedDelay(simulation::update, 1000000, 10, TimeUnit.MICROSECONDS);
+        Executors.newScheduledThreadPool(4).scheduleAtFixedRate(() ->
+                paint(getGraphics()), 0, 25, TimeUnit.MILLISECONDS);
+        Executors.newScheduledThreadPool(4).scheduleAtFixedRate(simulation::update, 1000000, 5, TimeUnit.MICROSECONDS);
     }
 
     @Override

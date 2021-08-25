@@ -25,13 +25,13 @@ public final class MatrixNavigator implements Navigator {
     private int dirIdx;
 
     public MatrixNavigator(Field field, Position pos) {
-        this(field, pos, 0);
+        this(field, pos, 2);
     }
 
     public MatrixNavigator(Field field, Position pos, int dirIdx) {
         this.field = field;
         this.pos = pos;
-        this.dirIdx = dirIdx;
+        this.dirIdx = Math.floorMod(dirIdx, possibleDirs.size());
     }
 
     @Override
@@ -86,7 +86,7 @@ public final class MatrixNavigator implements Navigator {
         if (possAround.isEmpty()) {
             return Optional.empty();
         } else {
-            return Optional.of(new MatrixNavigator(field, possAround.get(new Random().nextInt(possAround.size()))));
+            return Optional.of(new MatrixNavigator(field, possAround.get(new Random().nextInt(possAround.size())), dirIdx + 4));
         }
     }
 }

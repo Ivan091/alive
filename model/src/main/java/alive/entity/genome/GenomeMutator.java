@@ -18,11 +18,11 @@ public final class GenomeMutator implements Mutator<Gene[]> {
 
     @Override
     public Gene[] mutate(Gene[] mutated) {
-        if (r.nextInt(100) > 50) {
+        if (r.nextInt(100) > 25) {
             return mutated;
         }
-        var mutatedIdx = r.nextInt(mutated.length);
         var newGenes = Arrays.copyOf(mutated, mutated.length);
+        var mutatedIdx = r.nextInt(mutated.length);
         newGenes[mutatedIdx] = factories.get(r.nextInt(factories.size())).create();
         return newGenes;
     }

@@ -12,18 +12,19 @@ public record IndexJump(int key) implements Gene {
 
     @Override
     public void affect(Alive owner, Genome genome) {
-        owner.heal(-1);
-        if (!owner.isRegistered()) {
-            return;
-        }
         genome.incrementGeneIndex(key);
+        owner.heal(-key);
         genome.affect(owner);
     }
 
     @Component
     public static final class GeneFactory implements Factory<Gene> {
 
-        private final Random random = new Random();
+        private final Random random;
+
+        public GeneFactory(Random random) {
+            this.random = random;
+        }
 
         @Override
         public Gene create() {

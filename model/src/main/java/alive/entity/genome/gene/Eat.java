@@ -11,11 +11,8 @@ public final class Eat implements Gene {
 
     @Override
     public void affect(Alive owner, Genome genome) {
-        owner.heal(-1);
-        if (!owner.isRegistered()) {
-            return;
-        }
-        owner.look().ifPresent(other -> new HealthVisitor(owner).visit(other));
+        owner.look().ifPresent(other -> other.accept(new HealthVisitor(owner)));
+        owner.heal(-21);
         genome.incrementGeneIndex(1);
     }
 
@@ -28,9 +25,18 @@ public final class Eat implements Gene {
 
         @Override
         public void visit(Organic organic) {
-            owner.heal(organic.health() / 2);
-            owner.repaint(c -> c.reset(255, 0, 0));
-            organic.heal(-organic.health());
+            var dHealth = organic.health() / 8;
+            owner.heal(dHealth);
+            owner.repaint(c -> c.reset(50, -25, -25));
+            organic.unregister();
+        }
+
+        @Override
+        public void visit(Alive alive) {
+            if (owner.isFriendly(alive)) {
+                return;
+            }
+            visit((Organic) alive);
         }
     }
 

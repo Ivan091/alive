@@ -41,7 +41,7 @@ public final class Cell implements Alive {
     @Override
     public void heal(int healIncrement) {
         health += healIncrement;
-        if (health < 0) die();
+        if (health < 1) die();
         if (health > 1000) replicate();
     }
 
@@ -57,7 +57,7 @@ public final class Cell implements Alive {
             die();
             return;
         }
-        health >>= 2;
+        health >>= 4;
         new Cell(health, newNavigator.get(), genome.replicate(), color.replicate()).register();
     }
 

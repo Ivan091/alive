@@ -21,11 +21,26 @@ public final class SimulationLive implements Simulation {
 
     @Override
     public void update() {
-        olds.forEach(Movable::makeAMove);
-        newcomers.forEach(Movable::makeAMove);
-        olds.addAll(newcomers);
-        olds.removeIf(x -> !x.isRegistered());
-        newcomers.clear();
+        try {
+            var oldsIt = olds.iterator();
+            while (oldsIt.hasNext()) {
+                var curEntity = oldsIt.next();
+                if (curEntity.isRegistered()) {
+                    curEntity.makeAMove();
+                } else {
+                    oldsIt.remove();
+                }
+            }
+            while (!newcomers.isEmpty()) {
+                var curEntity = newcomers.remove(newcomers.size() - 1);
+                if (curEntity.isRegistered()) {
+                    curEntity.makeAMove();
+                    olds.add(curEntity);
+                }
+            }
+        } catch (Throwable t) {
+            t.printStackTrace();
+        }
     }
 
     @Override

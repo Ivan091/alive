@@ -8,6 +8,8 @@ public final class SequentialGenome implements Genome {
 
     private final Gene[] genes;
 
+    private int healthIncrement = -2;
+
     private int currentGeneIdx;
 
     public SequentialGenome(Gene[] genes) {
@@ -21,10 +23,12 @@ public final class SequentialGenome implements Genome {
 
     @Override
     public void affect(Alive alive) {
-        alive.heal(-5);
+        alive.heal(healthIncrement);
         if (alive.isRegistered()) {
+            healthIncrement *= 3;
             genes[currentGeneIdx].affect(alive, this);
         }
+        healthIncrement = -2;
     }
 
     @Override
@@ -35,13 +39,13 @@ public final class SequentialGenome implements Genome {
     @Override
     public boolean isFriendly(Genome genome) {
         if (genome instanceof SequentialGenome other) {
-            int difCount = 0;
-            for (int i = 0; i < genes.length; i++) {
-                if (!other.genes[i].equals(this.genes[i])) {
-                    difCount++;
+            var diffs = 0;
+            for (var i = 0; i < genes.length; i++) {
+                if (!genes[i].equals(other.genes[i])) {
+                    diffs++;
                 }
             }
-            return difCount > 3;
+            return diffs < genes.length / 4;
         }
         return false;
     }

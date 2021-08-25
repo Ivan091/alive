@@ -11,12 +11,9 @@ public final class Go implements Gene {
 
     @Override
     public void affect(Alive owner, Genome genome) {
-        owner.heal(-20);
-        if (!owner.isRegistered()) {
-            return;
-        }
         owner.goAhead();
         owner.repaint(c -> c.remix(-20, -20, 40));
+        owner.heal(-51);
         genome.incrementGeneIndex(1);
     }
 
