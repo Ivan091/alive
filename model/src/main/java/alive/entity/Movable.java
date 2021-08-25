@@ -1,8 +1,6 @@
 package alive.entity;
 
-public interface Movable extends Entity {
+public interface Movable extends Organic {
 
     void makeAMove();
-
-    boolean isStatic();
 }

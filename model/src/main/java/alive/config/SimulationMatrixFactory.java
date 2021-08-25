@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 public class SimulationMatrixFactory implements SimulationFactory {
 
     private Genome createDefaultGenome() {
-        var genes = new Gene[64];
+        var genes = new Gene[16];
         for (int i = 0; i < genes.length; i++) {
             genes[i] = new Photosynthesis();
         }

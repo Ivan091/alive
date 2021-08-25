@@ -34,11 +34,6 @@ public final class Cell implements Alive {
     }
 
     @Override
-    public boolean isStatic() {
-        return !navigator.isRegistered(this);
-    }
-
-    @Override
     public void accept(Visitor visitor) {
         visitor.visit(this);
     }
@@ -72,6 +67,14 @@ public final class Cell implements Alive {
     }
 
     @Override
+    public boolean isFriendly(Alive other) {
+        if (other instanceof Cell cell) {
+            return genome.isFriendly(cell.genome);
+        }
+        return false;
+    }
+
+    @Override
     public void repaint(UnaryOperator<Color> modifier) {
         modifier.apply(color);
     }
@@ -89,6 +92,11 @@ public final class Cell implements Alive {
     @Override
     public void unregister() {
         navigator.unregister();
+    }
+
+    @Override
+    public boolean isRegistered() {
+        return navigator.isRegistered(this);
     }
 
     @Override
@@ -153,6 +161,11 @@ public final class Cell implements Alive {
         @Override
         public void unregister() {
             navigator.unregister();
+        }
+
+        @Override
+        public boolean isRegistered() {
+            return navigator.isRegistered(this);
         }
 
         @Override

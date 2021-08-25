@@ -6,7 +6,6 @@ import org.springframework.stereotype.Component;
 import java.awt.*;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
-import java.util.stream.IntStream;
 
 
 @Component
@@ -27,10 +26,9 @@ public class Field extends Canvas {
     }
 
     public void startGame() {
-        Executors.newScheduledThreadPool(4).scheduleAtFixedRate(() ->
+        Executors.newScheduledThreadPool(1).scheduleWithFixedDelay(() ->
                 paint(getGraphics()), 0, 32, TimeUnit.MILLISECONDS);
-        Executors.newScheduledThreadPool(4).scheduleWithFixedDelay(() ->
-                IntStream.range(0, 100000).forEach(i -> simulation.update()), 1000, 1, TimeUnit.MILLISECONDS);
+        Executors.newScheduledThreadPool(1).scheduleWithFixedDelay(simulation::update, 1000000, 10, TimeUnit.MICROSECONDS);
     }
 
     @Override

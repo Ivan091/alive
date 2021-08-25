@@ -24,7 +24,7 @@ public final class SimulationLive implements Simulation {
         olds.forEach(Movable::makeAMove);
         newcomers.forEach(Movable::makeAMove);
         olds.addAll(newcomers);
-        olds.removeIf(Movable::isStatic);
+        olds.removeIf(x -> !x.isRegistered());
         newcomers.clear();
     }
 
@@ -68,7 +68,7 @@ public final class SimulationLive implements Simulation {
 
         @Override
         public void visit(Movable movable) {
-            if (!movable.isStatic()) {
+            if (movable.isRegistered()) {
                 newcomers.add(movable);
             }
         }

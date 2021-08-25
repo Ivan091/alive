@@ -12,4 +12,6 @@ public interface Entity extends Visitable {
     void register();
 
     void unregister();
+
+    boolean isRegistered();
 }

@@ -5,29 +5,27 @@ import alive.entity.Alive;
 import alive.entity.genome.Gene;
 import alive.entity.genome.Genome;
 import org.springframework.stereotype.Component;
-import java.util.Random;
 
 
-public record IndexJump(int key) implements Gene {
+public final class Go implements Gene {
 
     @Override
     public void affect(Alive owner, Genome genome) {
-        owner.heal(-1);
+        owner.heal(-20);
         if (!owner.isRegistered()) {
             return;
         }
-        genome.incrementGeneIndex(key);
-        genome.affect(owner);
+        owner.goAhead();
+        owner.repaint(c -> c.remix(-20, -20, 40));
+        genome.incrementGeneIndex(1);
     }
 
     @Component
     public static final class GeneFactory implements Factory<Gene> {
 
-        private final Random random = new Random();
-
         @Override
         public Gene create() {
-            return new IndexJump(random.nextInt(8) + 1);
+            return new Go();
         }
     }
 }

@@ -10,4 +10,6 @@ public interface Genome {
     void affect(Alive alive);
 
     void incrementGeneIndex(int increment);
+
+    boolean isFriendly(Genome genome);
 }

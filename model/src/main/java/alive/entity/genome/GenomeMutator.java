@@ -18,7 +18,7 @@ public final class GenomeMutator implements Mutator<Gene[]> {
 
     @Override
     public Gene[] mutate(Gene[] mutated) {
-        if (r.nextInt(100) > 40) {
+        if (r.nextInt(100) > 50) {
             return mutated;
         }
         var mutatedIdx = r.nextInt(mutated.length);

@@ -9,15 +9,15 @@ public interface Visitor {
         visit((Visitable) entity);
     }
 
+    default void visit(Organic organic) {
+        visit((Entity) organic);
+    }
+
     default void visit(Movable movable) {
-        visit((Entity) movable);
+        visit((Organic) movable);
     }
 
     default void visit(Alive alive) {
         visit((Movable) alive);
-    }
-
-    default void visit(Organic organic) {
-        visit((Entity) organic);
     }
 }

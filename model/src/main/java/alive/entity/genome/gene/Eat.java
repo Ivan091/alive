@@ -11,10 +11,11 @@ public final class Eat implements Gene {
 
     @Override
     public void affect(Alive owner, Genome genome) {
-        owner.look().ifPresent(other -> {
-            new HealthVisitor(owner).visit(other);
-            owner.repaint(c -> c.remix(100, -50, -50));
-        });
+        owner.heal(-1);
+        if (!owner.isRegistered()) {
+            return;
+        }
+        owner.look().ifPresent(other -> new HealthVisitor(owner).visit(other));
         genome.incrementGeneIndex(1);
     }
 
@@ -26,20 +27,15 @@ public final class Eat implements Gene {
         }
 
         @Override
-        public void visit(Alive organic) {
-            owner.heal(organic.health());
-            organic.heal(organic.health());
-        }
-
-        @Override
         public void visit(Organic organic) {
-            owner.heal(organic.health());
-            organic.heal(organic.health());
+            owner.heal(organic.health() / 2);
+            owner.repaint(c -> c.reset(255, 0, 0));
+            organic.heal(-organic.health());
         }
     }
 
     @Component
-    public static class GeneFactory implements Factory<Gene> {
+    public static final class GeneFactory implements Factory<Gene> {
 
         @Override
         public Gene create() {

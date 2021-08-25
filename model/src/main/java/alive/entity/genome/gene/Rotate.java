@@ -12,8 +12,14 @@ public record Rotate(int key) implements Gene {
 
     @Override
     public void affect(Alive owner, Genome genome) {
+        owner.heal(-1);
+        if (!owner.isRegistered()) {
+            return;
+        }
         owner.rotate(key);
+        owner.repaint(c -> c.remix(-20, -20, 40));
         genome.incrementGeneIndex(1);
+        genome.affect(owner);
     }
 
     @Component
@@ -23,7 +29,7 @@ public record Rotate(int key) implements Gene {
 
         @Override
         public Gene create() {
-            return new Rotate(random.nextInt(8) + 1);
+            return new Rotate(random.nextInt(7) + 1);
         }
     }
 }

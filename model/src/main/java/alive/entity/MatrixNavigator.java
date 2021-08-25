@@ -38,9 +38,8 @@ public final class MatrixNavigator implements Navigator {
     public void goAhead(Entity entity) {
         var newPos = possibleDirs.get(dirIdx).apply(pos);
         if (field.isEmpty(newPos)) {
-            unregister();
+            field.relocate(pos, newPos);
             pos = newPos;
-            register(entity);
         }
     }
 
