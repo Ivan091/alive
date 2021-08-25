@@ -25,9 +25,9 @@ public final class Eat implements Gene {
 
         @Override
         public void visit(Organic organic) {
-            var dHealth = organic.health() / 8;
+            var dHealth = organic.health();
             owner.heal(dHealth);
-            owner.repaint(c -> c.reset(50, -25, -25));
+            owner.repaint(c -> c.reset(dHealth >> 3, -dHealth >> 4, -dHealth >> 4));
             organic.unregister();
         }
 

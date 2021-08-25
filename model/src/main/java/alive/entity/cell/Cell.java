@@ -57,7 +57,7 @@ public final class Cell implements Alive {
             die();
             return;
         }
-        health >>= 4;
+        health /= 16;
         new Cell(health, newNavigator.get(), genome.replicate(), color.replicate()).register();
     }
 
