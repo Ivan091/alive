@@ -28,8 +28,7 @@ public class Field extends Canvas {
     }
 
     public void startGame() {
-        Executors.newScheduledThreadPool(4).scheduleAtFixedRate(() ->
-                paint(getGraphics()), 0, 25, TimeUnit.MILLISECONDS);
+        Executors.newScheduledThreadPool(4).scheduleAtFixedRate(() -> paint(getGraphics()), 0, 25, TimeUnit.MILLISECONDS);
         Executors.newScheduledThreadPool(4).scheduleAtFixedRate(simulation::update, 1000000, 5, TimeUnit.MICROSECONDS);
     }
 
