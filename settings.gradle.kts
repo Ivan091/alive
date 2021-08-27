@@ -1,4 +1,4 @@
 rootProject.name = "alive"
 include(":model")
 include(":api")
-include("swing")
+include("fx")
