@@ -67,6 +67,6 @@ public final class ColorDefault implements Color {
     }
 
     private int makeInRange(int x) {
-        return Math.min(Math.max(x, 0), 255);
+        return Math.min(Math.max(x, 0), 225);
     }
 }
