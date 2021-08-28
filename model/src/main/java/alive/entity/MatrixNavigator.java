@@ -1,5 +1,6 @@
 package alive.entity;
 
+import alive.common.ArrayUtils;
 import alive.simulation.*;
 import java.util.*;
 import java.util.function.Function;
@@ -31,7 +32,7 @@ public final class MatrixNavigator implements Navigator {
     public MatrixNavigator(Field field, Position pos, int dirIdx) {
         this.field = field;
         this.pos = pos;
-        this.dirIdx = Math.floorMod(dirIdx, possibleDirs.size());
+        this.dirIdx = ArrayUtils.makeInside(dirIdx, possibleDirs.size());
     }
 
     @Override
