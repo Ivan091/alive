@@ -16,8 +16,8 @@ public final class ColorDefault implements Color {
     }
 
     @Override
-    public String toHex() {
-        return String.format("#%02X%02X%02X", r, g, b);
+    public int toRGB() {
+        return r << 24 + g << 16 + b << 8 + 0xFF;
     }
 
     @Override

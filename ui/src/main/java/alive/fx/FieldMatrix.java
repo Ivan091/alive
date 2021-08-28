@@ -40,7 +40,7 @@ public class FieldMatrix extends Canvas {
         for (var i = 0; i < state.length; i++) {
             for (var j = 0; j < state[i].length; j++) {
                 var entityColor = state[i][j].color();
-                gc.setFill(Color.hsb(entityColor.hue(), entityColor.saturation(), entityColor.brightness()));
+                gc.setFill(Color.rgb(entityColor.r(), entityColor.g(), entityColor.b()));
                 gc.fillRect(j * SIZE, i * SIZE, SIZE, SIZE);
             }
         }

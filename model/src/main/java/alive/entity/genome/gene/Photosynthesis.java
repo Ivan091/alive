@@ -13,7 +13,7 @@ public final class Photosynthesis implements Gene {
 
     @Override
     public void affect(Alive owner, Genome genome) {
-        owner.repaint(c -> c.reHue(120, HEAL / 1000f));
+        owner.repaint(c -> c.remix(-HEAL / 128, HEAL / 60, -HEAL / 128));
         owner.heal(HEAL);
         genome.incrementGeneIndex(1);
     }

@@ -17,7 +17,7 @@ public final class Cell implements Alive {
     private int health;
 
     public Cell(int health, Navigator navigator, Genome genome) {
-        this(health, navigator, genome, new ColorDefault(120, 0.8f, 0.9f));
+        this(health, navigator, genome, new ColorDefault(255, 255, 255));
     }
 
     public Cell(int health, Navigator navigator, Genome genome, Color color) {
@@ -123,7 +123,7 @@ public final class Cell implements Alive {
         public int health;
 
         public CellDeadBody(int health, Navigator navigator) {
-            this(health, navigator, new ColorDefault(0, 0, 0.3f));
+            this(health, navigator, new ColorDefault(100, 100, 100));
         }
 
         public CellDeadBody(int health, Navigator navigator, Color color) {

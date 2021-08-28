@@ -2,7 +2,7 @@ package alive.entity;
 
 public interface Color {
 
-    String toHex();
+    int toRGB();
 
     Color remix(int dR, int dG, int dB);
 

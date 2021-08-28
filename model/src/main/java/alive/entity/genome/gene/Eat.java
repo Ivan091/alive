@@ -27,7 +27,7 @@ public final class Eat implements Gene {
         public void visit(Organic organic) {
             var dHealth = organic.health();
             owner.heal(dHealth);
-            owner.repaint(c -> c.reHue(0f, dHealth / 1000f));
+            owner.repaint(c -> c.remix(dHealth / 60, -dHealth / 128, -dHealth / 128));
             organic.unregister();
         }
 
