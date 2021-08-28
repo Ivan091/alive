@@ -13,7 +13,7 @@ public record IndexJump(int key) implements Gene {
     @Override
     public void affect(Alive owner, Genome genome) {
         genome.incrementGeneIndex(key);
-        owner.heal(-key);
+        owner.heal(-key * 10);
         genome.affect(owner);
     }
 

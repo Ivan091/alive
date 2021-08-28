@@ -12,7 +12,7 @@ public final class Go implements Gene {
     @Override
     public void affect(Alive owner, Genome genome) {
         owner.goAhead();
-        owner.heal(-51);
+        owner.heal(-510);
         genome.incrementGeneIndex(1);
     }
 

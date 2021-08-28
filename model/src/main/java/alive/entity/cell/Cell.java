@@ -17,7 +17,7 @@ public final class Cell implements Alive {
     private int health;
 
     public Cell(int health, Navigator navigator, Genome genome) {
-        this(health, navigator, genome, new ColorDefault(255, 255, 255));
+        this(health, navigator, genome, new ColorDefault(120, 0.8f, 0.9f));
     }
 
     public Cell(int health, Navigator navigator, Genome genome, Color color) {
@@ -29,7 +29,7 @@ public final class Cell implements Alive {
 
     @Override
     public void makeAMove() {
-        heal(-10);
+        heal(-100);
         genome.affect(this);
     }
 
@@ -41,8 +41,8 @@ public final class Cell implements Alive {
     @Override
     public void heal(int healIncrement) {
         health += healIncrement;
-        if (health < 1) die();
-        if (health > 1000) replicate();
+        if (health <= 0) die();
+        if (health > 10000) replicate();
     }
 
     @Override
@@ -123,7 +123,7 @@ public final class Cell implements Alive {
         public int health;
 
         public CellDeadBody(int health, Navigator navigator) {
-            this(health, navigator, new ColorDefault(100, 100, 100));
+            this(health, navigator, new ColorDefault(0, 0, 0.3f));
         }
 
         public CellDeadBody(int health, Navigator navigator, Color color) {

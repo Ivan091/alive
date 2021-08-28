@@ -10,12 +10,12 @@ public class ColorDefaultTest {
     @Test
     void toHexWorksCyan() {
         var a = new ColorDefault(0, 255, 255);
-        assertEquals("#00FFFF", a.toHex());
+        assertEquals("#00FFFF", a.toRGB());
     }
 
     @Test
     void toHexWorksWhite() {
         var a = new ColorDefault(255, 255, 255);
-        assertEquals("#FFFFFF", a.toHex());
+        assertEquals("#FFFFFF", a.toRGB());
     }
 }

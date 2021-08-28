@@ -9,11 +9,11 @@ import org.springframework.stereotype.Component;
 
 public final class Photosynthesis implements Gene {
 
-    private static final int HEAL = 25;
+    private static final int HEAL = 250;
 
     @Override
     public void affect(Alive owner, Genome genome) {
-        owner.repaint(c -> c.remix(-HEAL >> 4, HEAL >> 3, -HEAL >> 4));
+        owner.repaint(c -> c.reHue(120, HEAL / 1000f));
         owner.heal(HEAL);
         genome.incrementGeneIndex(1);
     }

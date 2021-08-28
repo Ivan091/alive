@@ -13,7 +13,7 @@ public record Rotate(int key) implements Gene {
     @Override
     public void affect(Alive owner, Genome genome) {
         owner.rotate(key);
-        owner.heal(-key * 4);
+        owner.heal(-key * 40);
         genome.incrementGeneIndex(1);
         genome.affect(owner);
     }

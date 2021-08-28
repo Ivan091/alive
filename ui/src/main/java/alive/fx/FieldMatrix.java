@@ -32,7 +32,7 @@ public class FieldMatrix extends Canvas {
     public void simulate() {
         var gc = getGraphicsContext2D();
         Executors.newScheduledThreadPool(6).scheduleAtFixedRate(simulation::update, 1000, 4, TimeUnit.MICROSECONDS);
-        createCanvasUpdateCycle(20).play();
+        createCanvasUpdateCycle().play();
     }
 
     private void mapStateToCanvas(Entity[][] state) {
@@ -40,13 +40,13 @@ public class FieldMatrix extends Canvas {
         for (var i = 0; i < state.length; i++) {
             for (var j = 0; j < state[i].length; j++) {
                 var entityColor = state[i][j].color();
-                gc.setFill(Color.rgb(entityColor.r(), entityColor.g(), entityColor.b()));
+                gc.setFill(Color.hsb(entityColor.hue(), entityColor.saturation(), entityColor.brightness()));
                 gc.fillRect(j * SIZE, i * SIZE, SIZE, SIZE);
             }
         }
     }
 
-    private PauseTransition createCanvasUpdateCycle(int interval) {
+    private PauseTransition createCanvasUpdateCycle() {
         PauseTransition pause = new PauseTransition(Duration.millis(20));
         pause.setOnFinished(
                 e -> {

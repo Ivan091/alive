@@ -13,6 +13,6 @@ public class EntitySerializer extends JsonSerializer<Entity> {
 
     @Override
     public void serialize(Entity entity, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
-        jsonGenerator.writeString(entity.color().toHex());
+        jsonGenerator.writeNumber(entity.color().toRGB());
     }
 }

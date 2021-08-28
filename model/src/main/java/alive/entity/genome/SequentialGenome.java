@@ -8,7 +8,7 @@ public final class SequentialGenome implements Genome {
 
     private final Gene[] genes;
 
-    private int healthIncrement = -2;
+    private int healthIncrement = -20;
 
     private int currentGeneIdx;
 
@@ -28,7 +28,7 @@ public final class SequentialGenome implements Genome {
             healthIncrement *= 3;
             genes[currentGeneIdx].affect(alive, this);
         }
-        healthIncrement = -2;
+        healthIncrement = -20;
     }
 
     @Override

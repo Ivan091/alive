@@ -21,7 +21,7 @@ public class SimulationMatrixFactory implements SimulationFactory {
 
     private Movable createAdam(Field field, Genome genome, Position position) {
         return new Cell(
-                200,
+                5000,
                 new MatrixNavigator(
                         field,
                         position

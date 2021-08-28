@@ -12,7 +12,7 @@ public final class Eat implements Gene {
     @Override
     public void affect(Alive owner, Genome genome) {
         owner.look().ifPresent(other -> other.accept(new HealthVisitor(owner)));
-        owner.heal(-21);
+        owner.heal(-210);
         genome.incrementGeneIndex(1);
     }
 
@@ -27,7 +27,7 @@ public final class Eat implements Gene {
         public void visit(Organic organic) {
             var dHealth = organic.health();
             owner.heal(dHealth);
-            owner.repaint(c -> c.remix(dHealth >> 3, -dHealth >> 4, -dHealth >> 4));
+            owner.repaint(c -> c.reHue(0f, dHealth / 1000f));
             organic.unregister();
         }
 
