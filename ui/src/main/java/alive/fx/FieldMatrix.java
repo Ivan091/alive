@@ -31,7 +31,7 @@ public class FieldMatrix extends Canvas {
 
     public void simulate() {
         var gc = getGraphicsContext2D();
-        Executors.newScheduledThreadPool(6).scheduleAtFixedRate(simulation::update, 1000, 4, TimeUnit.MICROSECONDS);
+        Executors.newScheduledThreadPool(4).scheduleAtFixedRate(simulation::update, 1000, 4, TimeUnit.MICROSECONDS);
         createCanvasUpdateCycle().play();
     }
 

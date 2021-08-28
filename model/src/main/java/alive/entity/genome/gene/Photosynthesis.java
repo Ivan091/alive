@@ -7,23 +7,23 @@ import alive.entity.genome.Genome;
 import org.springframework.stereotype.Component;
 
 
-public final class Photosynthesis implements Gene {
-
-    private static final int HEAL = 250;
+public record Photosynthesis(int heal) implements Gene {
 
     @Override
     public void affect(Alive owner, Genome genome) {
-        owner.repaint(c -> c.remix(-HEAL / 128, HEAL / 60, -HEAL / 128));
-        owner.heal(HEAL);
+        owner.repaint(c -> c.remix(-heal / 128, heal / 60, -heal / 128));
+        owner.heal(heal);
         genome.incrementGeneIndex(1);
     }
 
     @Component
     public static final class GeneFactory implements Factory<Gene> {
 
+        private final Gene gene = new Photosynthesis(250);
+
         @Override
         public Gene create() {
-            return new Photosynthesis();
+            return gene;
         }
     }
 }

@@ -18,9 +18,11 @@ public class Replicate implements Gene {
     @Component
     public static final class GeneFactory implements Factory<Gene> {
 
+        private final Gene replicate = new Replicate();
+
         @Override
         public Gene create() {
-            return new Replicate();
+            return replicate;
         }
     }
 }

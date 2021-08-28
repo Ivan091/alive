@@ -8,27 +8,24 @@ import org.springframework.stereotype.Component;
 import java.util.Random;
 
 
-public record IndexJump(int key) implements Gene {
+public record IndexJump(int key, int heal) implements Gene {
 
     @Override
     public void affect(Alive owner, Genome genome) {
+        owner.heal(heal);
         genome.incrementGeneIndex(key);
-        owner.heal(-key * 10);
         genome.affect(owner);
     }
 
     @Component
     public static final class GeneFactory implements Factory<Gene> {
 
-        private final Random random;
-
-        public GeneFactory(Random random) {
-            this.random = random;
-        }
+        private final Random random = new Random();
 
         @Override
         public Gene create() {
-            return new IndexJump(random.nextInt(8) + 1);
+            var key = random.nextInt(8) + 1;
+            return new IndexJump(key, -key * 10);
         }
     }
 }

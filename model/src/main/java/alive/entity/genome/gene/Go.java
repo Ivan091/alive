@@ -19,9 +19,11 @@ public final class Go implements Gene {
     @Component
     public static final class GeneFactory implements Factory<Gene> {
 
+        private final Gene go = new Go();
+
         @Override
         public Gene create() {
-            return new Go();
+            return go;
         }
     }
 }

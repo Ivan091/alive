@@ -8,12 +8,12 @@ import org.springframework.stereotype.Component;
 import java.util.Random;
 
 
-public record Rotate(int key) implements Gene {
+public record Rotate(int key, int heal) implements Gene {
 
     @Override
     public void affect(Alive owner, Genome genome) {
         owner.rotate(key);
-        owner.heal(-key * 40);
+        owner.heal(heal);
         genome.incrementGeneIndex(1);
         genome.affect(owner);
     }
@@ -21,15 +21,12 @@ public record Rotate(int key) implements Gene {
     @Component
     public static final class GeneFactory implements Factory<Gene> {
 
-        private final Random random;
-
-        public GeneFactory(Random random) {
-            this.random = random;
-        }
+        private final Random random = new Random();
 
         @Override
         public Gene create() {
-            return new Rotate(random.nextInt(8) - 3);
+            var key = random.nextInt(8) - 3;
+            return new Rotate(key, -key * 40);
         }
     }
 }

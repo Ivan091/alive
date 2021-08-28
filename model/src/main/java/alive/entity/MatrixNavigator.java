@@ -32,7 +32,7 @@ public final class MatrixNavigator implements Navigator {
     public MatrixNavigator(Field field, Position pos, int dirIdx) {
         this.field = field;
         this.pos = pos;
-        this.dirIdx = ArrayUtils.makeInside(dirIdx, possibleDirs.size());
+        this.dirIdx = ArrayUtils.makeLoopedInside(dirIdx, possibleDirs.size());
     }
 
     @Override

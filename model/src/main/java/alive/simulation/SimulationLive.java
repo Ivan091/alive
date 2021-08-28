@@ -1,17 +1,16 @@
 package alive.simulation;
 
 import alive.entity.*;
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.*;
 
 
 public final class SimulationLive implements Simulation {
 
     private final Field field;
 
-    private final Queue<Movable> olds = new LinkedList<>();
+    private final List<Movable> olds = new LinkedList<>();
 
-    private final Queue<Movable> newcomers = new LinkedList<>();
+    private final List<Movable> newcomers = new ArrayList<>();
 
     private final Visitor visitor = new AliveNewcomersVisitor(newcomers);
 
@@ -22,24 +21,19 @@ public final class SimulationLive implements Simulation {
     @Override
     public void update() {
         try {
-            var oldsIt = olds.iterator();
-            while (oldsIt.hasNext()) {
-                var curEntity = oldsIt.next();
-                if (curEntity.isRegistered()) {
-                    curEntity.makeAMove();
+            for (var it = olds.iterator(); it.hasNext(); ) {
+                var movable = it.next();
+                if (movable.isRegistered()) {
+                    movable.makeAMove();
                 } else {
-                    oldsIt.remove();
+                    it.remove();
                 }
             }
-            while (!newcomers.isEmpty()) {
-                var curEntity = newcomers.poll();
-                if (curEntity.isRegistered()) {
-                    curEntity.makeAMove();
-                    olds.add(curEntity);
-                }
-            }
+            olds.addAll(newcomers);
+            newcomers.clear();
         } catch (Throwable t) {
             t.printStackTrace();
+            throw t;
         }
     }
 
@@ -79,12 +73,12 @@ public final class SimulationLive implements Simulation {
         return field.state();
     }
 
-    private record AliveNewcomersVisitor(Queue<Movable> newcomers) implements Visitor {
+    private record AliveNewcomersVisitor(Collection<Movable> list) implements Visitor {
 
         @Override
         public void visit(Movable movable) {
             if (movable.isRegistered()) {
-                newcomers.add(movable);
+                list.add(movable);
             }
         }
     }

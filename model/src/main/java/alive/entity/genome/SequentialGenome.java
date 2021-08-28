@@ -34,7 +34,7 @@ public final class SequentialGenome implements Genome {
 
     @Override
     public void incrementGeneIndex(int increment) {
-        currentGeneIdx = ArrayUtils.makeInside(currentGeneIdx + increment, genes);
+        currentGeneIdx = ArrayUtils.makeLoopedInside(currentGeneIdx + increment, genes);
     }
 
     @Override
@@ -46,7 +46,7 @@ public final class SequentialGenome implements Genome {
                     diffs++;
                 }
             }
-            return diffs < genes.length / 4;
+            return diffs < genes.length / 10;
         }
         return false;
     }

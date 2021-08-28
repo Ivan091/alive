@@ -7,12 +7,12 @@ import alive.entity.genome.Genome;
 import org.springframework.stereotype.Component;
 
 
-public final class Eat implements Gene {
+public record Eat(int heal) implements Gene {
 
     @Override
     public void affect(Alive owner, Genome genome) {
         owner.look().ifPresent(other -> other.accept(new HealthVisitor(owner)));
-        owner.heal(-210);
+        owner.heal(heal);
         genome.incrementGeneIndex(1);
     }
 
@@ -43,9 +43,11 @@ public final class Eat implements Gene {
     @Component
     public static final class GeneFactory implements Factory<Gene> {
 
+        private final Gene gene = new Eat(-210);
+
         @Override
         public Gene create() {
-            return new Eat();
+            return gene;
         }
     }
 }

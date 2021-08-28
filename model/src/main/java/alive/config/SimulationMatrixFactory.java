@@ -13,9 +13,15 @@ import java.util.Arrays;
 @Component
 public class SimulationMatrixFactory implements SimulationFactory {
 
+    private final Photosynthesis.GeneFactory photoFactory;
+
+    public SimulationMatrixFactory(Photosynthesis.GeneFactory photoFactory) {
+        this.photoFactory = photoFactory;
+    }
+
     private Genome createDefaultGenome() {
         var genes = new Gene[20];
-        Arrays.fill(genes, new Photosynthesis());
+        Arrays.fill(genes, photoFactory.create());
         return new SequentialGenome(genes);
     }
 
