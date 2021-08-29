@@ -3,51 +3,55 @@ package alive.entity.genome.gene;
 import alive.common.Factory;
 import alive.entity.*;
 import alive.entity.genome.Gene;
-import alive.entity.genome.Genome;
+import alive.entity.genome.gene.command.*;
 import org.springframework.stereotype.Component;
+import java.util.function.Consumer;
+import java.util.function.Function;
 
 
-public record Eat(int heal) implements Gene {
+@Component
+public final class Eat implements Factory<Gene> {
+
+    private final Gene gene = new GeneSequence(
+            o -> o.look().ifPresent(other -> other.accept(
+                    new HealthVisitor(
+                            Entity::unregister,
+                            organic -> {
+                                var dHealth = organic.health();
+                                new MoveSequence(
+                                        new Heal(dHealth),
+                                        new Paint(c -> c.remix(dHealth / 60, -dHealth / 128, -dHealth / 128))
+                                ).affect(o);
+                                organic.unregister();
+                            },
+                            o::isFriendly
+                    ))),
+            new Heal(-210),
+            new IndexIncrement(1)
+    );
 
     @Override
-    public void affect(Alive owner, Genome genome) {
-        owner.look().ifPresent(other -> other.accept(new HealthVisitor(owner)));
-        owner.heal(heal);
-        genome.incrementGeneIndex(1);
+    public Gene create() {
+        return gene;
     }
 
-    private static record HealthVisitor(Alive owner) implements Visitor {
+    private static record HealthVisitor(Consumer<Entity> ifEntity, Consumer<Organic> ifOrganic, Function<Alive, Boolean> ifAlive) implements Visitor {
 
         @Override
         public void visit(Entity entity) {
-            entity.unregister();
+            ifEntity.accept(entity);
         }
 
         @Override
         public void visit(Organic organic) {
-            var dHealth = organic.health();
-            owner.heal(dHealth);
-            owner.repaint(c -> c.remix(dHealth / 60, -dHealth / 128, -dHealth / 128));
-            organic.unregister();
+            ifOrganic.accept(organic);
         }
 
         @Override
         public void visit(Alive alive) {
-            if (owner.isFriendly(alive)) {
-                return;
+            if (!ifAlive.apply(alive)) {
+                visit((Organic) alive);
             }
-            visit((Organic) alive);
-        }
-    }
-
-    @Component
-    public static final class GeneFactory implements Factory<Gene> {
-
-        private final Gene gene = new Eat(-210);
-
-        @Override
-        public Gene create() {
-            return gene;
         }
     }
 }

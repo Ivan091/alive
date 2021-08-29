@@ -3,7 +3,9 @@ package alive.entity.genome;
 import alive.entity.Alive;
 
 
-public interface Gene {
+public interface Gene extends Move {
 
-    void affect(Alive owner, Genome genome);
+    default void affect(Alive owner, Genome genome) {
+        affect(owner);
+    }
 }

@@ -3,26 +3,21 @@ package alive.entity.genome.gene;
 import alive.common.Factory;
 import alive.entity.Alive;
 import alive.entity.genome.Gene;
-import alive.entity.genome.Genome;
+import alive.entity.genome.gene.command.GeneSequence;
+import alive.entity.genome.gene.command.IndexIncrement;
 import org.springframework.stereotype.Component;
 
 
-public class Replicate implements Gene {
+@Component
+public final class Replicate implements Factory<Gene> {
+
+    private final Gene replicate = new GeneSequence(
+            Alive::replicate,
+            new IndexIncrement(1)
+    );
 
     @Override
-    public void affect(Alive owner, Genome genome) {
-        owner.replicate();
-        genome.incrementGeneIndex(1);
-    }
-
-    @Component
-    public static final class GeneFactory implements Factory<Gene> {
-
-        private final Gene replicate = new Replicate();
-
-        @Override
-        public Gene create() {
-            return replicate;
-        }
+    public Gene create() {
+        return replicate;
     }
 }

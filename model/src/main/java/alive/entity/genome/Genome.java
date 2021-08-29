@@ -1,13 +1,8 @@
 package alive.entity.genome;
 
-import alive.entity.Alive;
-
-
-public interface Genome {
+public interface Genome extends Move {
 
     Genome replicate();
-
-    void affect(Alive alive);
 
     void incrementGeneIndex(int increment);
 

@@ -13,9 +13,9 @@ import java.util.Arrays;
 @Component
 public class SimulationMatrixFactory implements SimulationFactory {
 
-    private final Photosynthesis.GeneFactory photoFactory;
+    private final Photosynthesis photoFactory;
 
-    public SimulationMatrixFactory(Photosynthesis.GeneFactory photoFactory) {
+    public SimulationMatrixFactory(Photosynthesis photoFactory) {
         this.photoFactory = photoFactory;
     }
 

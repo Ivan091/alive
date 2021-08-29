@@ -1,29 +1,24 @@
 package alive.entity.genome.gene;
 
 import alive.common.Factory;
-import alive.entity.Alive;
+import alive.entity.Positionable;
 import alive.entity.genome.Gene;
-import alive.entity.genome.Genome;
+import alive.entity.genome.gene.command.*;
 import org.springframework.stereotype.Component;
 
 
-public final class Go implements Gene {
+@Component
+public final class Go implements Factory<Gene> {
 
     @Override
-    public void affect(Alive owner, Genome genome) {
-        owner.goAhead();
-        owner.heal(-510);
-        genome.incrementGeneIndex(1);
-    }
-
-    @Component
-    public static final class GeneFactory implements Factory<Gene> {
-
-        private final Gene go = new Go();
-
-        @Override
-        public Gene create() {
-            return go;
-        }
+    public Gene create() {
+        return new GeneSequence(
+                Positionable::goAhead,
+                new Heal(-510),
+                new IfThen(
+                        true,
+                        new ReAffect()
+                )
+        );
     }
 }

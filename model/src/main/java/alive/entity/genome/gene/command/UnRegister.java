@@ -4,10 +4,10 @@ import alive.entity.Alive;
 import alive.entity.genome.Gene;
 
 
-public record Heal(int heal) implements Gene {
+public class UnRegister implements Gene {
 
     @Override
     public void affect(Alive owner) {
-        owner.heal(heal);
+        owner.unregister();
     }
 }
