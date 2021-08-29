@@ -15,8 +15,6 @@ public record Sequence(Collection<Gene> genes) implements Gene {
 
     @Override
     public void affect(Alive owner, Genome genome) {
-        for (var gene : genes) {
-            gene.affect(owner, genome);
-        }
+        genes.forEach(x -> x.affect(owner, genome));
     }
 }
