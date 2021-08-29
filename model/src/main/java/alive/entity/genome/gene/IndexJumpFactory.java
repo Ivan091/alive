@@ -15,7 +15,7 @@ public class IndexJumpFactory implements Factory<Gene> {
 
     private final Random random = new Random();
 
-    @Bean("IndexJump")
+    @Bean("indexJump")
     @Scope(SCOPE_PROTOTYPE)
     @Override
     public Gene create() {

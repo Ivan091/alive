@@ -24,7 +24,7 @@ public record Rotate(int key) implements Gene {
 
         private final Random random = new Random();
 
-        @Bean("Rotate")
+        @Bean("rotate")
         @Scope(SCOPE_PROTOTYPE)
         @Override
         public Gene create() {

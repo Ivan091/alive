@@ -20,7 +20,7 @@ public record Go() implements Gene {
     @Configuration
     public static class GeneFactory implements Factory<Gene> {
 
-        @Bean("Go")
+        @Bean("go")
         @Override
         public Gene create() {
             return new Sequence(

@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class PhotosynthesisFactory implements Factory<Gene> {
 
-    @Bean("Photosynthesis")
+    @Bean("photosynthesis")
     @Override
     public Gene create() {
         var heal = 250;

@@ -45,7 +45,7 @@ public record Eat() implements Gene {
     @Configuration
     public static class GeneFactory implements Factory<Gene> {
 
-        @Bean("Eat")
+        @Bean("eat")
         @Override
         public Gene create() {
             return new Sequence(
