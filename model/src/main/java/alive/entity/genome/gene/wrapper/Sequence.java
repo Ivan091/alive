@@ -15,6 +15,11 @@ public record Sequence(Collection<Gene> genes) implements Gene {
 
     @Override
     public void affect(Alive owner, Genome genome) {
-        genes.forEach(x -> x.affect(owner, genome));
+        for (var gene : genes) {
+            if (!owner.isRegistered()) {
+                return;
+            }
+            gene.affect(owner, genome);
+        }
     }
 }

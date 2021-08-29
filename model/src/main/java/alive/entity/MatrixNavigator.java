@@ -46,7 +46,7 @@ public final class MatrixNavigator implements Navigator {
 
     @Override
     public void rotate(int step) {
-        dirIdx = Math.floorMod(dirIdx + step, possibleDirs.size());
+        dirIdx = ArrayUtils.makeLoopedInside(dirIdx + step, possibleDirs.size());
     }
 
     @Override
