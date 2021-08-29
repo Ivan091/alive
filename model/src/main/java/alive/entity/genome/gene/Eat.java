@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 
-public final class Eat implements Gene {
+public record Eat() implements Gene {
 
     @Override
     public void affect(Alive owner, Genome genome) {
