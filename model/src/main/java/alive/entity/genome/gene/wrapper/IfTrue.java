@@ -1,4 +1,4 @@
-package alive.entity.genome.gene.command;
+package alive.entity.genome.gene.wrapper;
 
 import alive.entity.Alive;
 import alive.entity.genome.Gene;
