@@ -11,7 +11,7 @@ public record IfTrue(boolean condition, Gene gene) implements Gene {
     public IfTrue(boolean condition, Gene... genes) {
         this(condition, new Sequence(genes));
     }
-
+    
     public IfTrue(boolean condition, Collection<Gene> genes) {
         this(condition, new Sequence(genes));
     }
