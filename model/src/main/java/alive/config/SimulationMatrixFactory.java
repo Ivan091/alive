@@ -4,7 +4,7 @@ import alive.entity.MatrixNavigator;
 import alive.entity.Movable;
 import alive.entity.cell.Cell;
 import alive.entity.genome.*;
-import alive.entity.genome.gene.PhotosynthesisFactory;
+import alive.entity.genome.gene.factory.PhotosynthesisFactory;
 import alive.simulation.*;
 import org.springframework.stereotype.Component;
 import java.util.Arrays;

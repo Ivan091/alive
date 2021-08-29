@@ -5,7 +5,7 @@ import alive.entity.genome.Gene;
 import alive.entity.genome.Genome;
 
 
-public record Increment(int increment) implements Gene {
+public record IndexJump(int increment) implements Gene {
 
     @Override
     public void affect(Alive owner, Genome genome) {

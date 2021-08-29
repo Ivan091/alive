@@ -1,14 +1,8 @@
-package alive.entity.genome.gene;
+package alive.entity.genome.gene.command;
 
-import alive.common.Factory;
 import alive.entity.*;
 import alive.entity.genome.Gene;
 import alive.entity.genome.Genome;
-import alive.entity.genome.gene.command.Heal;
-import alive.entity.genome.gene.command.Increment;
-import alive.entity.genome.gene.wrapper.Sequence;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 
 public record Eat() implements Gene {
@@ -39,20 +33,6 @@ public record Eat() implements Gene {
                 return;
             }
             visit((Organic) alive);
-        }
-    }
-
-    @Configuration
-    public static class GeneFactory implements Factory<Gene> {
-
-        @Bean("eat")
-        @Override
-        public Gene create() {
-            return new Sequence(
-                    new Eat(),
-                    new Heal(-210),
-                    new Increment(1)
-            );
         }
     }
 }

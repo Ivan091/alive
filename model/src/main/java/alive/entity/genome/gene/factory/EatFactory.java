@@ -1,4 +1,4 @@
-package alive.entity.genome.gene;
+package alive.entity.genome.gene.factory;
 
 import alive.common.Factory;
 import alive.entity.genome.Gene;
@@ -9,16 +9,15 @@ import org.springframework.context.annotation.Configuration;
 
 
 @Configuration
-public class PhotosynthesisFactory implements Factory<Gene> {
+public class EatFactory implements Factory<Gene> {
 
-    @Bean("photosynthesis")
+    @Bean("eat")
     @Override
     public Gene create() {
-        var heal = 250;
         return new Sequence(
-                new Paint(c -> c.remix(-heal / 128, heal / 60, -heal / 128)),
-                new Heal(heal),
-                new Increment(1)
+                new Eat(),
+                new Heal(-210),
+                new IndexJump(1)
         );
     }
 }

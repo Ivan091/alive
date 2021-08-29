@@ -1,4 +1,4 @@
-package alive.entity.genome.gene;
+package alive.entity.genome.gene.factory;
 
 import alive.common.Factory;
 import alive.entity.genome.Gene;
@@ -11,20 +11,20 @@ import static org.springframework.beans.factory.config.ConfigurableBeanFactory.S
 
 
 @Configuration
-public class IndexJumpFactory implements Factory<Gene> {
+public class RotateFactory implements Factory<Gene> {
 
     private final Random random = new Random();
 
-    @Bean("indexJump")
+    @Bean("rotate")
     @Scope(SCOPE_PROTOTYPE)
     @Override
     public Gene create() {
-        var key = random.nextInt(8) + 1;
+        var key = random.nextInt(8) - 3;
         return new Sequence(
-                new Heal(-key * 10),
-                new Increment(key),
+                new Rotate(key),
+                new Heal(-key * 40),
+                new IndexJump(1),
                 new ReAffect()
         );
     }
 }
-
