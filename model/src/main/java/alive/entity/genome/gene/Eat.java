@@ -4,16 +4,18 @@ import alive.common.Factory;
 import alive.entity.*;
 import alive.entity.genome.Gene;
 import alive.entity.genome.Genome;
-import org.springframework.stereotype.Component;
+import alive.entity.genome.gene.command.Heal;
+import alive.entity.genome.gene.command.Increment;
+import alive.entity.genome.gene.wrapper.Sequence;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 
-public record Eat(int heal) implements Gene {
+public final class Eat implements Gene {
 
     @Override
     public void affect(Alive owner, Genome genome) {
         owner.look().ifPresent(other -> other.accept(new HealthVisitor(owner)));
-        owner.heal(heal);
-        genome.incrementGeneIndex(1);
     }
 
     private static record HealthVisitor(Alive owner) implements Visitor {
@@ -40,14 +42,17 @@ public record Eat(int heal) implements Gene {
         }
     }
 
-    @Component
-    public static final class GeneFactory implements Factory<Gene> {
+    @Configuration
+    public static class GeneFactory implements Factory<Gene> {
 
-        private final Gene gene = new Eat(-210);
-
+        @Bean("Eat")
         @Override
         public Gene create() {
-            return gene;
+            return new Sequence(
+                    new Eat(),
+                    new Heal(-210),
+                    new Increment(1)
+            );
         }
     }
 }

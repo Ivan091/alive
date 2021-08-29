@@ -4,26 +4,31 @@ import alive.common.Factory;
 import alive.entity.Alive;
 import alive.entity.genome.Gene;
 import alive.entity.genome.Genome;
-import org.springframework.stereotype.Component;
+import alive.entity.genome.gene.command.*;
+import alive.entity.genome.gene.wrapper.Sequence;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 
-public final class Go implements Gene {
+public record Go() implements Gene {
 
     @Override
     public void affect(Alive owner, Genome genome) {
         owner.goAhead();
-        owner.heal(-510);
-        genome.incrementGeneIndex(1);
     }
 
-    @Component
-    public static final class GeneFactory implements Factory<Gene> {
+    @Configuration
+    public static class GeneFactory implements Factory<Gene> {
 
-        private final Gene go = new Go();
-
+        @Bean("Go")
         @Override
         public Gene create() {
-            return go;
+            return new Sequence(
+                    new Go(),
+                    new Heal(-510),
+                    new Increment(1),
+                    new ReAffect()
+            );
         }
     }
 }

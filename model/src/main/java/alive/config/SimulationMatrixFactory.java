@@ -4,7 +4,7 @@ import alive.entity.MatrixNavigator;
 import alive.entity.Movable;
 import alive.entity.cell.Cell;
 import alive.entity.genome.*;
-import alive.entity.genome.gene.Photosynthesis;
+import alive.entity.genome.gene.PhotosynthesisFactory;
 import alive.simulation.*;
 import org.springframework.stereotype.Component;
 import java.util.Arrays;
@@ -13,9 +13,9 @@ import java.util.Arrays;
 @Component
 public class SimulationMatrixFactory implements SimulationFactory {
 
-    private final Photosynthesis.GeneFactory photoFactory;
+    private final PhotosynthesisFactory photoFactory;
 
-    public SimulationMatrixFactory(Photosynthesis.GeneFactory photoFactory) {
+    public SimulationMatrixFactory(PhotosynthesisFactory photoFactory) {
         this.photoFactory = photoFactory;
     }
 

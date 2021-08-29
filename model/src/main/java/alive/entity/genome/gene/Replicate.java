@@ -4,25 +4,29 @@ import alive.common.Factory;
 import alive.entity.Alive;
 import alive.entity.genome.Gene;
 import alive.entity.genome.Genome;
-import org.springframework.stereotype.Component;
+import alive.entity.genome.gene.command.Increment;
+import alive.entity.genome.gene.wrapper.Sequence;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 
-public class Replicate implements Gene {
+public record Replicate() implements Gene {
 
     @Override
     public void affect(Alive owner, Genome genome) {
         owner.replicate();
-        genome.incrementGeneIndex(1);
     }
 
-    @Component
-    public static final class GeneFactory implements Factory<Gene> {
+    @Configuration
+    public static class GeneFactory implements Factory<Gene> {
 
-        private final Gene replicate = new Replicate();
-
+        @Bean("Replicate")
         @Override
         public Gene create() {
-            return replicate;
+            return new Sequence(
+                    new Replicate(),
+                    new Increment(1)
+            );
         }
     }
 }
