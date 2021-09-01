@@ -1,28 +1,28 @@
 package alive.controller;
 
-import alive.config.SimulationFactory;
 import alive.entity.Entity;
 import alive.simulation.Simulation;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.web.bind.annotation.*;
+import java.util.function.BiFunction;
 
 
 @RestController
 @RequestMapping("/api/simulation")
 public class SimulationController {
 
-    private final SimulationFactory simulationFactory;
+    private final BiFunction<Integer, Integer, Simulation> simulationFactory;
 
     private Simulation simulation;
 
-    public SimulationController(SimulationFactory simulationFactory) {
+    public SimulationController(BiFunction<Integer, Integer, Simulation> simulationFactory) {
         this.simulationFactory = simulationFactory;
     }
 
     @PostMapping
     public void create(@RequestParam Integer width, @RequestParam Integer height) {
-        this.simulation = simulationFactory.create(width, height);
+        this.simulation = simulationFactory.apply(width, height);
     }
 
     @PutMapping

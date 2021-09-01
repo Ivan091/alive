@@ -1,6 +1,5 @@
 package alive.fx;
 
-import alive.config.SimulationFactory;
 import alive.entity.Entity;
 import alive.simulation.Simulation;
 import javafx.animation.PauseTransition;
@@ -10,6 +9,7 @@ import javafx.util.Duration;
 import org.springframework.stereotype.Component;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+import java.util.function.BiFunction;
 
 
 @Component
@@ -23,8 +23,8 @@ public class FieldMatrix extends Canvas {
 
     private final Simulation simulation;
 
-    public FieldMatrix(SimulationFactory simulationFactory) {
-        simulation = simulationFactory.create(W, H);
+    public FieldMatrix(BiFunction<Integer, Integer, Simulation> simulationFactory) {
+        simulation = simulationFactory.apply(W, H);
         setWidth(W * SIZE);
         setHeight(H * SIZE);
     }

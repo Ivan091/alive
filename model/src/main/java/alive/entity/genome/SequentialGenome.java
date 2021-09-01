@@ -2,12 +2,13 @@ package alive.entity.genome;
 
 import alive.common.CollectionUtils;
 import alive.entity.Alive;
-import org.springframework.stereotype.Component;
 
 
 public final class SequentialGenome implements Genome {
 
     private final Gene[] genes;
+
+    private final Mutator<Gene[]> genomeMutator;
 
     private final int healthIncrementDefault = -20;
 
@@ -15,13 +16,14 @@ public final class SequentialGenome implements Genome {
 
     private int currentGeneIdx;
 
-    public SequentialGenome(Gene[] genes) {
+    public SequentialGenome(Gene[] genes, Mutator<Gene[]> genomeMutator) {
         this.genes = genes;
+        this.genomeMutator = genomeMutator;
     }
 
     @Override
     public Genome replicate() {
-        return new SequentialGenome(MutatorProvider.mutator.mutate(genes));
+        return new SequentialGenome(genomeMutator.mutate(genes), genomeMutator);
     }
 
     @Override
@@ -46,20 +48,13 @@ public final class SequentialGenome implements Genome {
             for (var i = 0; i < genes.length; i++) {
                 if (!genes[i].equals(other.genes[i])) {
                     diffs++;
+                    if (diffs >= genes.length / 10) {
+                        return false;
+                    }
                 }
             }
-            return diffs < genes.length / 10;
+            return true;
         }
         return false;
-    }
-
-    @Component
-    public static class MutatorProvider {
-
-        private static Mutator<Gene[]> mutator;
-
-        public MutatorProvider(Mutator<Gene[]> mutator) {
-            MutatorProvider.mutator = mutator;
-        }
     }
 }
