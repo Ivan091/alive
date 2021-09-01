@@ -1,18 +1,18 @@
 package alive.entity.genome;
 
-import alive.common.Factory;
 import org.springframework.stereotype.Component;
 import java.util.*;
+import java.util.function.Supplier;
 
 
 @Component
 public final class GenomeMutator implements Mutator<Gene[]> {
 
-    private final List<Factory<Gene>> factories;
+    private final List<Supplier<Gene>> factories;
 
     private final Random r = new Random();
 
-    public GenomeMutator(List<Factory<Gene>> factories) {
+    public GenomeMutator(List<Supplier<Gene>> factories) {
         this.factories = factories;
     }
 
@@ -23,7 +23,7 @@ public final class GenomeMutator implements Mutator<Gene[]> {
         }
         var newGenes = Arrays.copyOf(mutated, mutated.length);
         var mutatedIdx = r.nextInt(mutated.length);
-        newGenes[mutatedIdx] = factories.get(r.nextInt(factories.size())).create();
+        newGenes[mutatedIdx] = factories.get(r.nextInt(factories.size())).get();
         return newGenes;
     }
 }

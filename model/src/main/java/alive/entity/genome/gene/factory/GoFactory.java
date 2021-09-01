@@ -1,19 +1,19 @@
 package alive.entity.genome.gene.factory;
 
-import alive.common.Factory;
 import alive.entity.genome.Gene;
 import alive.entity.genome.gene.command.*;
 import alive.entity.genome.gene.wrapper.Sequence;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import java.util.function.Supplier;
 
 
 @Configuration
-public class GoFactory implements Factory<Gene> {
+public class GoFactory implements Supplier<Gene> {
 
     @Bean("go")
     @Override
-    public Gene create() {
+    public Gene get() {
         return new Sequence(
                 new Go(),
                 new Heal(-510),

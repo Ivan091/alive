@@ -1,6 +1,6 @@
 package alive.entity;
 
-import alive.common.ArrayUtils;
+import alive.common.CollectionUtils;
 import alive.simulation.*;
 import java.util.*;
 import java.util.function.Function;
@@ -32,7 +32,7 @@ public final class MatrixNavigator implements Navigator {
     public MatrixNavigator(Field field, Position pos, int dirIdx) {
         this.field = field;
         this.pos = pos;
-        this.dirIdx = ArrayUtils.makeLoopedInside(dirIdx, possibleDirs.size());
+        this.dirIdx = CollectionUtils.makeLoopedInside(dirIdx, possibleDirs.size());
     }
 
     @Override
@@ -46,7 +46,7 @@ public final class MatrixNavigator implements Navigator {
 
     @Override
     public void rotate(int step) {
-        dirIdx = ArrayUtils.makeLoopedInside(dirIdx + step, possibleDirs.size());
+        dirIdx = CollectionUtils.makeLoopedInside(dirIdx + step, possibleDirs.size());
     }
 
     @Override

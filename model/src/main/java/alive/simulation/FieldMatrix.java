@@ -1,6 +1,6 @@
 package alive.simulation;
 
-import alive.common.ArrayUtils;
+import alive.common.CollectionUtils;
 import alive.entity.*;
 import java.util.Arrays;
 import java.util.Objects;
@@ -23,12 +23,12 @@ public final class FieldMatrix implements Field {
 
     @Override
     public void place(Entity entity, Position pos) {
-        matrix[pos.y()][ArrayUtils.makeLoopedInside(pos.x(), matrix[0])] = entity;
+        matrix[pos.y()][CollectionUtils.makeLoopedInside(pos.x(), matrix[0])] = entity;
     }
 
     @Override
     public Entity search(Position pos) {
-        return matrix[pos.y()][ArrayUtils.makeLoopedInside(pos.x(), matrix[0])];
+        return matrix[pos.y()][CollectionUtils.makeLoopedInside(pos.x(), matrix[0])];
     }
 
     @Override

@@ -1,6 +1,6 @@
 package alive.entity.genome;
 
-import alive.common.ArrayUtils;
+import alive.common.CollectionUtils;
 import alive.entity.Alive;
 import org.springframework.stereotype.Component;
 
@@ -36,7 +36,7 @@ public final class SequentialGenome implements Genome {
 
     @Override
     public void incrementGeneIndex(int increment) {
-        currentGeneIdx = ArrayUtils.makeLoopedInside(currentGeneIdx + increment, genes);
+        currentGeneIdx = CollectionUtils.makeLoopedInside(currentGeneIdx + increment, genes);
     }
 
     @Override

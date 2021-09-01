@@ -21,7 +21,7 @@ public class SimulationMatrixFactory implements SimulationFactory {
 
     private Genome createDefaultGenome() {
         var genes = new Gene[20];
-        Arrays.fill(genes, photoFactory.create());
+        Arrays.fill(genes, photoFactory.get());
         return new SequentialGenome(genes);
     }
 
