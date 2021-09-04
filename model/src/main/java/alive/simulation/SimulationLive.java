@@ -31,7 +31,7 @@ public final class SimulationLive implements Simulation {
             }
             olds.addAll(newcomers);
             newcomers.clear();
-        } catch (Throwable t) {
+        } catch (Exception t) {
             t.printStackTrace();
             throw t;
         }
