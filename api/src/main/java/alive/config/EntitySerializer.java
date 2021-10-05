@@ -13,6 +13,7 @@ public class EntitySerializer extends JsonSerializer<Entity> {
 
     @Override
     public void serialize(Entity entity, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
-        jsonGenerator.writeNumber(entity.color().toRGB());
+        var c = entity.color();
+        jsonGenerator.writeString(String.format("#%02X%02X%02X", c.r(), c.g(), c.b()));
     }
 }

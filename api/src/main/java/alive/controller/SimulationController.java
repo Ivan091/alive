@@ -3,7 +3,7 @@ package alive.controller;
 import alive.entity.Entity;
 import alive.simulation.Simulation;
 import org.springframework.messaging.handler.annotation.MessageMapping;
-import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.messaging.simp.annotation.SendToUser;
 import org.springframework.web.bind.annotation.*;
 import java.util.function.BiFunction;
 
@@ -30,7 +30,7 @@ public class SimulationController {
         return update_socket(count);
     }
 
-    @SendTo("/topic/simulation")
+    @SendToUser("/topic/simulation")
     @MessageMapping("/app/simulation")
     public Entity[][] update_socket(Integer count) {
         count = Math.max(count, 0);

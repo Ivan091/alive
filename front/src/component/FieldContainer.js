@@ -12,13 +12,10 @@ const axInstance = axios.create(
     }
 )
 
-
-const height = 19
-const width = 40
+const height = 38
+const width = 80
 
 const sock = Stomp.over(new SockJS(url + 'ws'))
-sock.debug = () => {
-}
 
 const FieldContainer = () => {
     function create(width, height) {
@@ -31,7 +28,7 @@ const FieldContainer = () => {
     }
 
     sock.connect({}, () => {
-        sock.subscribe('/topic/simulation', (frame) => {
+        sock.subscribe('/user/topic/simulation', (frame) => {
             setField(JSON.parse(frame.body))
         })
     })
