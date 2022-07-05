@@ -1,3 +1,2 @@
 # Alive
-
 Live simulation
